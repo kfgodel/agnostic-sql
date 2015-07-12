@@ -7,7 +7,9 @@ import ar.com.kfgodel.asql.api.AStatement;
 import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.AsqlBuilder;
 import ar.com.kfgodel.asql.impl.AsqlBuilderImpl;
-import com.google.common.collect.Lists;
+import ar.com.kfgodel.asql.impl.tree.ColumnAssignmentNode;
+import ar.com.kfgodel.asql.impl.tree.PredicateNode;
+import ar.com.kfgodel.asql.impl.tree.UpdateNode;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.TemplateLoader;
@@ -17,8 +19,6 @@ import freemarker.template.TemplateExceptionHandler;
 import org.junit.runner.RunWith;
 
 import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -52,28 +52,19 @@ public class AsqlShowcaseTest extends JavaSpec<TestContext> {
         /* You usually do these for MULTIPLE TIMES in the application life-cycle:   */
 
         /* Create a data-model */
-                Map root = new HashMap();
-                root.put("tableName", "Nombre de tabla");
-                Map assignment1 = new HashMap();
-                assignment1.put("columnName", "colA");
-                Map assignment2 = new HashMap();
-                assignment2.put("columnName", "colB");
-                root.put("columnAssignments", Lists.newArrayList(assignment1, assignment2));
-                root.put("conditioned", true);
 
-                Map predicate1 = new HashMap();
-                predicate1.put("leftSideOperand", "colC");
-                predicate1.put("operator", "<=");
-                predicate1.put("rightSideOperand", "2");
-                root.put("predicate", predicate1);
+                UpdateNode update = UpdateNode.create("Nombre de tabla");
+                update.addAssignment(ColumnAssignmentNode.create("colA", "3"));
+                update.addAssignment(ColumnAssignmentNode.create("colB", "4"));
+                update.setWherePredicate(PredicateNode.create("colC", "<=", "2"));
 
         /* Get the template (uses cache internally) */
-                Template temp = cfg.getTemplate("update.ftl");
+                Template template = cfg.getTemplate("update.ftl");
 
         /* Merge data-model with template */
                 StringWriter writer = new StringWriter();
-                temp.process(root, writer);
-                assertThat(writer.toString()).isEqualTo("UPDATE Nombre de tabla SET colA = 1, colB = 1 WHERE colC <= 2");
+                template.process(update, writer);
+                assertThat(writer.toString()).isEqualTo("UPDATE Nombre de tabla SET colA = 3, colB = 4 WHERE colC <= 2");
                 // Note: Depending on what `out` is, you may need to call `out.close()`.
                 // This is usually the case for file output, but not for servlet output.
             }catch (Exception e){
