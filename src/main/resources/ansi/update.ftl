@@ -1,0 +1,1 @@
+UPDATE ${tableName} SET <#list columnAssignments as columnAssignment><#include "_columnAssignment.ftl"><#sep>, </#list><#if conditioned> WHERE <#include "_restrictionList.ftl"></#if>

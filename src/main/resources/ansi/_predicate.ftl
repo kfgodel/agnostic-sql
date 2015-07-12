@@ -1,0 +1,1 @@
+${predicate.columnName} ${predicate.operator} ${predicate.restrictedValue}

@@ -1,0 +1,1 @@
+<#list predicates as predicate><#include "_predicate.ftl"><#sep> AND </#list>
