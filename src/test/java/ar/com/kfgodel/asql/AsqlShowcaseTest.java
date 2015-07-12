@@ -62,10 +62,10 @@ public class AsqlShowcaseTest extends JavaSpec<TestContext> {
                 root.put("conditioned", true);
 
                 Map predicate1 = new HashMap();
-                predicate1.put("columnName", "colC");
+                predicate1.put("leftSideOperand", "colC");
                 predicate1.put("operator", "<=");
-                predicate1.put("restrictedValue", "2");
-                root.put("predicates", Lists.newArrayList(predicate1));
+                predicate1.put("rightSideOperand", "2");
+                root.put("predicate", predicate1);
 
         /* Get the template (uses cache internally) */
                 Template temp = cfg.getTemplate("update.ftl");
