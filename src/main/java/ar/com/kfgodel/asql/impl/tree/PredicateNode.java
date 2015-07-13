@@ -4,7 +4,7 @@ package ar.com.kfgodel.asql.impl.tree;
  * This type represents a predicate condition node in the statement tree
  * Created by kfgodel on 12/07/15.
  */
-public class PredicateNode {
+public class PredicateNode implements TemplateUsable {
 
     private Object leftSideOperand;
     private String operator;

@@ -1,6 +1,6 @@
 package ar.com.kfgodel.asql.impl.templating;
 
-import ar.com.kfgodel.asql.impl.tree.TempletableNode;
+import ar.com.kfgodel.asql.impl.tree.TemplateUsable;
 
 /**
  * This type represents the knowledge of what template applies to which type
@@ -13,5 +13,5 @@ public interface TypeToTemplateMapper {
      * @param templateModel The model to represent
      * @return The name identifying the template
      */
-    String getTemplateNameFor(TempletableNode templateModel);
+    String getTemplateNameFor(TemplateUsable templateModel);
 }

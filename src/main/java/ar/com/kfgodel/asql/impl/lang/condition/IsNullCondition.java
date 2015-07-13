@@ -12,15 +12,14 @@ public class IsNullCondition implements QueryCondition {
 
     private NamedColumnImpl namedColumn;
 
-    @Override
-    public PredicateNode getPredicateNode() {
-        return PredicateNode.create(ColumnReference.create(namedColumn.getColumnName()), "IS", NullOperand.create());
-    }
-
     public static IsNullCondition create(NamedColumnImpl namedColumn) {
         IsNullCondition condition = new IsNullCondition();
         condition.namedColumn = namedColumn;
         return condition;
     }
 
+    @Override
+    public PredicateNode getRepresentationNode() {
+        return PredicateNode.create(ColumnReference.create(namedColumn.getColumnName()), "IS", NullOperand.create());
+    }
 }

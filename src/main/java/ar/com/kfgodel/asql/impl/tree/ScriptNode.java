@@ -7,7 +7,7 @@ import java.util.List;
  * This type represents a node for sql scripts
  * Created by kfgodel on 12/07/15.
  */
-public class ScriptNode implements TempletableNode {
+public class ScriptNode implements TemplateUsable {
 
     private List<String> statements;
 

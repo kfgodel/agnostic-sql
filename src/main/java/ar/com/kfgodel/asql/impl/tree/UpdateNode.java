@@ -7,7 +7,7 @@ import java.util.List;
  * This type represents a tree node for an update statement containing its state
  * Created by kfgodel on 12/07/15.
  */
-public class UpdateNode implements TempletableNode {
+public class UpdateNode implements TemplateUsable {
 
     private String tableName;
 

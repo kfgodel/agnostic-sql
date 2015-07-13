@@ -12,15 +12,14 @@ public class NotNullCondition implements QueryCondition {
 
     private NamedColumnImpl namedColumn;
 
-    @Override
-    public PredicateNode getPredicateNode() {
-        return PredicateNode.create(ColumnReference.create(namedColumn.getColumnName()), "IS NOT", NullOperand.create());
-    }
-
     public static NotNullCondition create(NamedColumnImpl namedColumn) {
         NotNullCondition condition = new NotNullCondition();
         condition.namedColumn = namedColumn;
         return condition;
     }
 
+    @Override
+    public PredicateNode getRepresentationNode() {
+        return PredicateNode.create(ColumnReference.create(namedColumn.getColumnName()), "IS NOT", NullOperand.create());
+    }
 }

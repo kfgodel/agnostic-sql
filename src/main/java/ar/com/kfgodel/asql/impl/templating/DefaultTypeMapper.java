@@ -2,7 +2,7 @@ package ar.com.kfgodel.asql.impl.templating;
 
 import ar.com.kfgodel.asql.api.AsqlException;
 import ar.com.kfgodel.asql.impl.tree.ScriptNode;
-import ar.com.kfgodel.asql.impl.tree.TempletableNode;
+import ar.com.kfgodel.asql.impl.tree.TemplateUsable;
 import ar.com.kfgodel.asql.impl.tree.UpdateNode;
 
 import java.util.LinkedHashMap;
@@ -13,7 +13,7 @@ import java.util.LinkedHashMap;
  */
 public class DefaultTypeMapper implements TypeToTemplateMapper {
 
-    private LinkedHashMap<Class<? extends TempletableNode>, String> templateNamePerType;
+    private LinkedHashMap<Class<? extends TemplateUsable>, String> templateNamePerType;
 
     private void initialize(){
         templateNamePerType.put(ScriptNode.class, "script.ftl");
@@ -28,7 +28,7 @@ public class DefaultTypeMapper implements TypeToTemplateMapper {
     }
 
     @Override
-    public String getTemplateNameFor(TempletableNode templateModel) {
+    public String getTemplateNameFor(TemplateUsable templateModel) {
         if(templateModel == null){
             throw new AsqlException("The model cannot be null. There's no template for null");
         }

@@ -28,37 +28,26 @@ public class AsqlShowcaseTest extends JavaSpec<TestContext> {
                 it("can express an unrestricted update",()->{
                     AsqlBuilder asql = AsqlBuilderImpl.create();
 
-                    AStatement statement = asql.update("POSA_EMPLEADOS").set("CATEGORIA_ID").to(1);
+                    AStatement statement = asql.update("POSA_EMPLEADOS").set(asql.column("CATEGORIA_ID").to(1), asql.column("CATEGORIA_VAL").to("AA"));
 
                     String generatedSql = Asql.sqlserver().translate(statement);
 
-                    assertThat(generatedSql).isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID = 1");
+                    assertThat(generatedSql).isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID = 1 , CATEGORIA_VAL = 'AA'");
 
                 });
 
-                it("can be used in multiple statements",()->{
+                it("can be used in multiple statements", () -> {
                     AsqlBuilder asql = AsqlBuilderImpl.create();
 
                     TableDefinedUpdate updateEmpleados = asql.update("POSA_EMPLEADOS");
 
-                    AStatement firstStatement = updateEmpleados.set("CATEGORIA_ID").to(1).where(asql.column("CATEGORIA_ID").isNull());
-                    AStatement secondStatement = updateEmpleados.set("NOMBRE").to("Pepe").where(asql.column("CATEGORIA_ID").isNotNull());
+                    AStatement firstStatement = updateEmpleados.set(asql.column("CATEGORIA_ID").to(1)).where(asql.column("CATEGORIA_ID").isNull());
+                    AStatement secondStatement = updateEmpleados.set(asql.column("NOMBRE").to("Pepe")).where(asql.column("CATEGORIA_ID").isNotNull());
 
                     String generatedSql = Asql.sqlserver().translate(Lists.newArrayList(firstStatement, secondStatement));
 
                     assertThat(generatedSql).isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID = 1 WHERE CATEGORIA_ID IS NULL;\n" +
                             "UPDATE POSA_EMPLEADOS SET NOMBRE = 'Pepe' WHERE CATEGORIA_ID IS NOT NULL");
-                });
-
-                it("can be used for sqlserver", () -> {
-
-                    AsqlBuilder asql = AsqlBuilderImpl.create();
-
-                    AStatement statement = asql.update("POSA_EMPLEADOS").set("CATEGORIA_ID").to(1).where(asql.column("CATEGORIA_ID").isNull());
-
-                    String generatedSql = Asql.sqlserver().translate(statement);
-
-                    assertThat(generatedSql).isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID = 1 WHERE CATEGORIA_ID IS NULL");
                 });
 
             });

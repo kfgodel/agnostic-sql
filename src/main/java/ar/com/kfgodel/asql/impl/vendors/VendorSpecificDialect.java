@@ -6,7 +6,7 @@ import ar.com.kfgodel.asql.impl.templating.DefaultTypeMapper;
 import ar.com.kfgodel.asql.impl.templating.FreemarkerEngine;
 import ar.com.kfgodel.asql.impl.templating.TemplateEngine;
 import ar.com.kfgodel.asql.impl.tree.ScriptNode;
-import ar.com.kfgodel.asql.impl.tree.TempletableNode;
+import ar.com.kfgodel.asql.impl.tree.TemplateUsable;
 
 import java.util.List;
 
@@ -20,11 +20,11 @@ public class VendorSpecificDialect implements VendorDialect {
 
     @Override
     public String translate(AStatement statement) {
-        TempletableNode representationNode =  statement.getRepresentationNode();
+        TemplateUsable representationNode =  statement.getRepresentationNode();
         return translateWithTemplate(representationNode);
     }
 
-    private String translateWithTemplate(TempletableNode node) {
+    private String translateWithTemplate(TemplateUsable node) {
         return templating.process(node);
     }
 

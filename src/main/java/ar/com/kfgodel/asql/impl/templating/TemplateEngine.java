@@ -1,7 +1,7 @@
 package ar.com.kfgodel.asql.impl.templating;
 
 import ar.com.kfgodel.asql.api.AsqlException;
-import ar.com.kfgodel.asql.impl.tree.TempletableNode;
+import ar.com.kfgodel.asql.impl.tree.TemplateUsable;
 
 /**
  * This type represents the interface with the underlying template engine
@@ -17,5 +17,5 @@ public interface TemplateEngine {
      * @return The generated text
      * @throws AsqlException If the engine found an error processing the template
      */
-    String process(TempletableNode templateModel) throws AsqlException;
+    String process(TemplateUsable templateModel) throws AsqlException;
 }

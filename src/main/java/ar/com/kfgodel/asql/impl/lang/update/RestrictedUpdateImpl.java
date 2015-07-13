@@ -2,7 +2,7 @@ package ar.com.kfgodel.asql.impl.lang.update;
 
 import ar.com.kfgodel.asql.api.condition.QueryCondition;
 import ar.com.kfgodel.asql.api.update.RestrictedUpdate;
-import ar.com.kfgodel.asql.impl.tree.TempletableNode;
+import ar.com.kfgodel.asql.impl.tree.TemplateUsable;
 import ar.com.kfgodel.asql.impl.tree.UpdateNode;
 
 /**
@@ -14,9 +14,9 @@ public class RestrictedUpdateImpl implements RestrictedUpdate {
     private QueryCondition condition;
 
     @Override
-    public TempletableNode getRepresentationNode() {
+    public TemplateUsable getRepresentationNode() {
         UpdateNode updateNode = unrestrictedUpdate.getRepresentationNode();
-        updateNode.setWherePredicate(condition.getPredicateNode());
+        updateNode.setWherePredicate(condition.getRepresentationNode());
         return updateNode;
     }
 

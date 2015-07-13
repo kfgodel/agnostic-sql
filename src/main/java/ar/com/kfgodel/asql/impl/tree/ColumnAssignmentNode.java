@@ -4,7 +4,7 @@ package ar.com.kfgodel.asql.impl.tree;
  * This type represents a node in a statement tree for a columna assignment
  * Created by kfgodel on 12/07/15.
  */
-public class ColumnAssignmentNode {
+public class ColumnAssignmentNode implements TemplateUsable {
 
     private String columnName;
     private Object assignedValue;

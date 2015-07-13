@@ -1,18 +1,20 @@
 package ar.com.kfgodel.asql.impl.lang.update;
 
 import ar.com.kfgodel.asql.api.condition.QueryCondition;
+import ar.com.kfgodel.asql.api.update.ColumnAssignment;
 import ar.com.kfgodel.asql.api.update.RestrictedUpdate;
 import ar.com.kfgodel.asql.api.update.UnrestrictedUpdate;
-import ar.com.kfgodel.asql.impl.tree.ColumnAssignmentNode;
 import ar.com.kfgodel.asql.impl.tree.UpdateNode;
+
+import java.util.List;
 
 /**
  * Created by kfgodel on 12/07/15.
  */
 public class UnrestrictedUpdateImpl implements UnrestrictedUpdate {
 
-    private PartialUpdateSetImpl partialUpdateSet;
-    private Object value;
+    private TableDefinedUpdateImpl tableUpdate;
+    private List<ColumnAssignment> assignments;
 
     @Override
     public RestrictedUpdate where(QueryCondition condition) {
@@ -21,18 +23,17 @@ public class UnrestrictedUpdateImpl implements UnrestrictedUpdate {
 
     @Override
     public UpdateNode getRepresentationNode() {
-        UpdateNode updateNode = partialUpdateSet.getRepresentationNode();
-        String columnName = partialUpdateSet.getColumnName();
-
-        ColumnAssignmentNode columnAssignment = ColumnAssignmentNode.create(columnName, value);
-        updateNode.addAssignment(columnAssignment);
+        UpdateNode updateNode = tableUpdate.getRepresentationNode();
+        for (ColumnAssignment columnAssignment : assignments) {
+            updateNode.addAssignment(columnAssignment.getRepresentationNode());
+        }
         return updateNode;
     }
 
-    public static UnrestrictedUpdateImpl create(PartialUpdateSetImpl partialUpdateSet, Object value) {
+    public static UnrestrictedUpdateImpl create(TableDefinedUpdateImpl tableUpdate, List<ColumnAssignment> assignments) {
         UnrestrictedUpdateImpl unconditionedUpdate = new UnrestrictedUpdateImpl();
-        unconditionedUpdate.partialUpdateSet = partialUpdateSet;
-        unconditionedUpdate.value = value;
+        unconditionedUpdate.tableUpdate = tableUpdate;
+        unconditionedUpdate.assignments = assignments;
         return unconditionedUpdate;
     }
 
