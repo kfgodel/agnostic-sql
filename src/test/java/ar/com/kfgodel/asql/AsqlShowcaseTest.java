@@ -47,7 +47,7 @@ public class AsqlShowcaseTest extends JavaSpec<TestContext> {
 
                     String generatedSql = Asql.sqlserver().translate(statement);
 
-                    assertThat(generatedSql).isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID=1 WHERE CATEGORIA_ID IS NULL");
+                    assertThat(generatedSql).isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID = 1 WHERE CATEGORIA_ID IS NULL");
                 });
 
             });
