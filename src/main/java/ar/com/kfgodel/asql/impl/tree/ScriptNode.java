@@ -1,5 +1,7 @@
 package ar.com.kfgodel.asql.impl.tree;
 
+import ar.com.kfgodel.asql.impl.templating.TemplateReferable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,7 @@ import java.util.List;
  * This type represents a node for sql scripts
  * Created by kfgodel on 12/07/15.
  */
-public class ScriptNode implements TemplateUsable {
+public class ScriptNode implements TemplateReferable {
 
     private List<String> statements;
 

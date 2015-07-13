@@ -4,7 +4,7 @@ package ar.com.kfgodel.asql.impl.value;
  * This type represents an explicit sql reference to a column
  * Created by kfgodel on 12/07/15.
  */
-public class ColumnReference implements ExplicitOperand {
+public class ColumnReferenceModel implements ExplicitOperand {
 
     private String columnName;
 
@@ -23,8 +23,8 @@ public class ColumnReference implements ExplicitOperand {
         return columnName;
     }
 
-    public static ColumnReference create(String columnName) {
-        ColumnReference reference = new ColumnReference();
+    public static ColumnReferenceModel create(String columnName) {
+        ColumnReferenceModel reference = new ColumnReferenceModel();
         reference.columnName = columnName;
         return reference;
     }

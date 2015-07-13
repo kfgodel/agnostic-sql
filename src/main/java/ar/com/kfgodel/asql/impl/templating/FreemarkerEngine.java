@@ -1,7 +1,6 @@
 package ar.com.kfgodel.asql.impl.templating;
 
 import ar.com.kfgodel.asql.api.AsqlException;
-import ar.com.kfgodel.asql.impl.tree.TemplateUsable;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.TemplateLoader;
@@ -50,7 +49,7 @@ public class FreemarkerEngine implements TemplateEngine {
     }
 
     @Override
-    public String process(TemplateUsable templateModel) throws AsqlException {
+    public String process(TemplateReferable templateModel) throws AsqlException {
         try {
             Template template = loadTemplateFor(templateModel);
 
@@ -64,7 +63,7 @@ public class FreemarkerEngine implements TemplateEngine {
         }
     }
 
-    private Template loadTemplateFor(TemplateUsable templateModel) throws IOException {
+    private Template loadTemplateFor(TemplateReferable templateModel) throws IOException {
         String templateName = typeMapper.getTemplateNameFor(templateModel);
         try {
             return freemarkerConfig.getTemplate(templateName);

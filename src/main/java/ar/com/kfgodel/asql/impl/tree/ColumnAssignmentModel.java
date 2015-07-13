@@ -4,7 +4,7 @@ package ar.com.kfgodel.asql.impl.tree;
  * This type represents a node in a statement tree for a columna assignment
  * Created by kfgodel on 12/07/15.
  */
-public class ColumnAssignmentNode implements TemplateUsable {
+public class ColumnAssignmentModel implements AgnosticModel {
 
     private String columnName;
     private Object assignedValue;
@@ -25,8 +25,8 @@ public class ColumnAssignmentNode implements TemplateUsable {
         this.assignedValue = assignedValue;
     }
 
-    public static ColumnAssignmentNode create(String columnName, Object value) {
-        ColumnAssignmentNode assignmentNode = new ColumnAssignmentNode();
+    public static ColumnAssignmentModel create(String columnName, Object value) {
+        ColumnAssignmentModel assignmentNode = new ColumnAssignmentModel();
         assignmentNode.columnName = columnName;
         assignmentNode.assignedValue = value;
         return assignmentNode;

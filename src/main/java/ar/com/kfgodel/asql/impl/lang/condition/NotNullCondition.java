@@ -1,8 +1,8 @@
 package ar.com.kfgodel.asql.impl.lang.condition;
 
 import ar.com.kfgodel.asql.api.condition.QueryCondition;
-import ar.com.kfgodel.asql.impl.tree.PredicateNode;
-import ar.com.kfgodel.asql.impl.value.ColumnReference;
+import ar.com.kfgodel.asql.impl.tree.PredicateModel;
+import ar.com.kfgodel.asql.impl.value.ColumnReferenceModel;
 import ar.com.kfgodel.asql.impl.value.NullOperand;
 
 /**
@@ -19,7 +19,7 @@ public class NotNullCondition implements QueryCondition {
     }
 
     @Override
-    public PredicateNode getRepresentationNode() {
-        return PredicateNode.create(ColumnReference.create(namedColumn.getColumnName()), "IS NOT", NullOperand.create());
+    public PredicateModel parseModel() {
+        return PredicateModel.create(ColumnReferenceModel.create(namedColumn.getColumnName()), "IS NOT", NullOperand.create());
     }
 }

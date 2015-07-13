@@ -3,7 +3,7 @@ package ar.com.kfgodel.asql;
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.dgarcia.javaspec.api.TestContext;
-import ar.com.kfgodel.asql.api.AStatement;
+import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.AsqlBuilder;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
@@ -28,7 +28,7 @@ public class AsqlShowcaseTest extends JavaSpec<TestContext> {
                 it("can express an unrestricted update",()->{
                     AsqlBuilder asql = AsqlBuilderImpl.create();
 
-                    AStatement statement = asql.update("POSA_EMPLEADOS").set(asql.column("CATEGORIA_ID").to(1), asql.column("CATEGORIA_VAL").to("AA"));
+                    AgnosticStatement statement = asql.update("POSA_EMPLEADOS").set(asql.column("CATEGORIA_ID").to(1), asql.column("CATEGORIA_VAL").to("AA"));
 
                     String generatedSql = Asql.sqlserver().translate(statement);
 
@@ -41,8 +41,8 @@ public class AsqlShowcaseTest extends JavaSpec<TestContext> {
 
                     TableDefinedUpdate updateEmpleados = asql.update("POSA_EMPLEADOS");
 
-                    AStatement firstStatement = updateEmpleados.set(asql.column("CATEGORIA_ID").to(1)).where(asql.column("CATEGORIA_ID").isNull());
-                    AStatement secondStatement = updateEmpleados.set(asql.column("NOMBRE").to("Pepe")).where(asql.column("CATEGORIA_ID").isNotNull());
+                    AgnosticStatement firstStatement = updateEmpleados.set(asql.column("CATEGORIA_ID").to(1)).where(asql.column("CATEGORIA_ID").isNull());
+                    AgnosticStatement secondStatement = updateEmpleados.set(asql.column("NOMBRE").to("Pepe")).where(asql.column("CATEGORIA_ID").isNotNull());
 
                     String generatedSql = Asql.sqlserver().translate(Lists.newArrayList(firstStatement, secondStatement));
 

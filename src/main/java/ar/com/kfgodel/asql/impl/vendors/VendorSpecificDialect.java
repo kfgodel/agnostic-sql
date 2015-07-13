@@ -1,12 +1,12 @@
 package ar.com.kfgodel.asql.impl.vendors;
 
-import ar.com.kfgodel.asql.api.AStatement;
+import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.VendorDialect;
 import ar.com.kfgodel.asql.impl.templating.DefaultTypeMapper;
 import ar.com.kfgodel.asql.impl.templating.FreemarkerEngine;
 import ar.com.kfgodel.asql.impl.templating.TemplateEngine;
 import ar.com.kfgodel.asql.impl.tree.ScriptNode;
-import ar.com.kfgodel.asql.impl.tree.TemplateUsable;
+import ar.com.kfgodel.asql.impl.templating.TemplateReferable;
 
 import java.util.List;
 
@@ -19,17 +19,17 @@ public class VendorSpecificDialect implements VendorDialect {
     private TemplateEngine templating;
 
     @Override
-    public String translate(AStatement statement) {
-        TemplateUsable representationNode =  statement.getRepresentationNode();
+    public String translate(AgnosticStatement statement) {
+        TemplateReferable representationNode =  statement.parseModel();
         return translateWithTemplate(representationNode);
     }
 
-    private String translateWithTemplate(TemplateUsable node) {
+    private String translateWithTemplate(TemplateReferable node) {
         return templating.process(node);
     }
 
     @Override
-    public String translate(List<AStatement> statements) {
+    public String translate(List<AgnosticStatement> statements) {
         ScriptNode scriptNode = groupStatementsInAScriptNode(statements);
         return translateWithTemplate(scriptNode);
     }
@@ -39,10 +39,10 @@ public class VendorSpecificDialect implements VendorDialect {
      * @param statements The statements to group
      * @return The node representing a script
      */
-    private ScriptNode groupStatementsInAScriptNode(List<AStatement> statements) {
+    private ScriptNode groupStatementsInAScriptNode(List<AgnosticStatement> statements) {
         ScriptNode scriptNode = ScriptNode.create();
-        for (AStatement aStatement : statements) {
-            String translated = this.translate(aStatement);
+        for (AgnosticStatement agnosticStatement : statements) {
+            String translated = this.translate(agnosticStatement);
             scriptNode.addStatement(translated);
         }
         return scriptNode;

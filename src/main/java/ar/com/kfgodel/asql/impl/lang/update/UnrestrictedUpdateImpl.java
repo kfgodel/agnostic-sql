@@ -4,7 +4,7 @@ import ar.com.kfgodel.asql.api.condition.QueryCondition;
 import ar.com.kfgodel.asql.api.update.ColumnAssignment;
 import ar.com.kfgodel.asql.api.update.RestrictedUpdate;
 import ar.com.kfgodel.asql.api.update.UnrestrictedUpdate;
-import ar.com.kfgodel.asql.impl.tree.UpdateNode;
+import ar.com.kfgodel.asql.impl.tree.UpdateModel;
 
 import java.util.List;
 
@@ -22,12 +22,12 @@ public class UnrestrictedUpdateImpl implements UnrestrictedUpdate {
     }
 
     @Override
-    public UpdateNode getRepresentationNode() {
-        UpdateNode updateNode = tableUpdate.getRepresentationNode();
+    public UpdateModel parseModel() {
+        UpdateModel updateModel = tableUpdate.parseModel();
         for (ColumnAssignment columnAssignment : assignments) {
-            updateNode.addAssignment(columnAssignment.getRepresentationNode());
+            updateModel.addAssignment(columnAssignment.parseModel());
         }
-        return updateNode;
+        return updateModel;
     }
 
     public static UnrestrictedUpdateImpl create(TableDefinedUpdateImpl tableUpdate, List<ColumnAssignment> assignments) {

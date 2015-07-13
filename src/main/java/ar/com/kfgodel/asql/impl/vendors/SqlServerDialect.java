@@ -1,6 +1,6 @@
 package ar.com.kfgodel.asql.impl.vendors;
 
-import ar.com.kfgodel.asql.api.AStatement;
+import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.VendorDialect;
 
 import java.util.List;
@@ -14,12 +14,12 @@ public class SqlServerDialect implements VendorDialect {
     private VendorSpecificDialect ownDialect;
 
     @Override
-    public String translate(AStatement statement) {
+    public String translate(AgnosticStatement statement) {
         return ownDialect.translate(statement);
     }
 
     @Override
-    public String translate(List<AStatement> statements) {
+    public String translate(List<AgnosticStatement> statements) {
         return ownDialect.translate(statements);
     }
 

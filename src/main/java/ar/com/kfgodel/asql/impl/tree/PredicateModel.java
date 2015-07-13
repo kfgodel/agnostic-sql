@@ -4,7 +4,7 @@ package ar.com.kfgodel.asql.impl.tree;
  * This type represents a predicate condition node in the statement tree
  * Created by kfgodel on 12/07/15.
  */
-public class PredicateNode implements TemplateUsable {
+public class PredicateModel implements AgnosticModel {
 
     private Object leftSideOperand;
     private String operator;
@@ -34,8 +34,8 @@ public class PredicateNode implements TemplateUsable {
         this.rightSideOperand = rightSideOperand;
     }
 
-    public static PredicateNode create(Object left, String operator, Object right) {
-        PredicateNode node = new PredicateNode();
+    public static PredicateModel create(Object left, String operator, Object right) {
+        PredicateModel node = new PredicateModel();
         node.leftSideOperand = left;
         node.operator = operator;
         node.rightSideOperand = right;
