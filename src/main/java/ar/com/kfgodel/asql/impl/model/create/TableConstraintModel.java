@@ -4,7 +4,7 @@ package ar.com.kfgodel.asql.impl.model.create;
  * This type represents the abstract model of a constraint delcared with the table
  * Created by kfgodel on 13/07/15.
  */
-public class TableConstraintModel {
+public class TableConstraintModel implements TablePartModel {
     private String declaration;
 
     public String getDeclaration() {
@@ -21,4 +21,8 @@ public class TableConstraintModel {
         return model;
     }
 
+    @Override
+    public boolean isColumnDeclaration() {
+        return false;
+    }
 }

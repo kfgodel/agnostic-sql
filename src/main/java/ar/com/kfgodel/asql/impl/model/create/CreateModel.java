@@ -57,4 +57,11 @@ public class CreateModel implements AgnosticModel {
     public void addConstraint(TableConstraintModel constraint) {
         this.getTableConstraints().add(constraint);
     }
+
+    public List<TablePartModel> getTableParts(){
+        ArrayList<TablePartModel> parts = new ArrayList<>();
+        parts.addAll(getColumnDeclarations());
+        parts.addAll(getTableConstraints());
+        return parts;
+    }
 }
