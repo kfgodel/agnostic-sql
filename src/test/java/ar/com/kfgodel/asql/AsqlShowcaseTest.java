@@ -25,6 +25,17 @@ public class AsqlShowcaseTest extends JavaSpec<TestContext> {
 
             describe("for updating rows", () -> {
 
+                it("can express an unrestricted update",()->{
+                    AsqlBuilder asql = AsqlBuilderImpl.create();
+
+                    AStatement statement = asql.update("POSA_EMPLEADOS").set("CATEGORIA_ID").to(1);
+
+                    String generatedSql = Asql.sqlserver().translate(statement);
+
+                    assertThat(generatedSql).isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID = 1");
+
+                });
+
                 it("can be used in multiple statements",()->{
                     AsqlBuilder asql = AsqlBuilderImpl.create();
 
