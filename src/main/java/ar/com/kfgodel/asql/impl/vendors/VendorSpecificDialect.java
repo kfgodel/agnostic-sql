@@ -5,7 +5,7 @@ import ar.com.kfgodel.asql.api.VendorDialect;
 import ar.com.kfgodel.asql.impl.templating.DefaultTypeMapper;
 import ar.com.kfgodel.asql.impl.templating.FreemarkerEngine;
 import ar.com.kfgodel.asql.impl.templating.TemplateEngine;
-import ar.com.kfgodel.asql.impl.tree.ScriptNode;
+import ar.com.kfgodel.asql.impl.tree.ScriptModel;
 import ar.com.kfgodel.asql.impl.templating.TemplateReferable;
 
 import java.util.List;
@@ -30,8 +30,8 @@ public class VendorSpecificDialect implements VendorDialect {
 
     @Override
     public String translate(List<AgnosticStatement> statements) {
-        ScriptNode scriptNode = groupStatementsInAScriptNode(statements);
-        return translateWithTemplate(scriptNode);
+        ScriptModel scriptModel = groupStatementsInAScriptNode(statements);
+        return translateWithTemplate(scriptModel);
     }
 
     /**
@@ -39,13 +39,13 @@ public class VendorSpecificDialect implements VendorDialect {
      * @param statements The statements to group
      * @return The node representing a script
      */
-    private ScriptNode groupStatementsInAScriptNode(List<AgnosticStatement> statements) {
-        ScriptNode scriptNode = ScriptNode.create();
+    private ScriptModel groupStatementsInAScriptNode(List<AgnosticStatement> statements) {
+        ScriptModel scriptModel = ScriptModel.create();
         for (AgnosticStatement agnosticStatement : statements) {
             String translated = this.translate(agnosticStatement);
-            scriptNode.addStatement(translated);
+            scriptModel.addStatement(translated);
         }
-        return scriptNode;
+        return scriptModel;
     }
 
     public static VendorSpecificDialect create(String vendorSpecificDir) {

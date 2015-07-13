@@ -2,6 +2,8 @@ package ar.com.kfgodel.asql.api.interpreter;
 
 import ar.com.kfgodel.asql.impl.tree.AgnosticModel;
 
+import java.util.List;
+
 /**
  * This type represents the translator of agnostic statements to vendor specific sql
  * Created by kfgodel on 13/07/15.
@@ -14,4 +16,6 @@ public interface VendorInterpreter {
      * @return The vendor specific sql
      */
     String translate(AgnosticModel updateModel);
+
+    String translate(List<AgnosticModel> modelList);
 }

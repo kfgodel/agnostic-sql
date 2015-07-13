@@ -4,10 +4,11 @@ import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.dgarcia.javaspec.api.TestContext;
 import ar.com.kfgodel.asql.api.AgnosticStatement;
-import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.AsqlBuilder;
+import ar.com.kfgodel.asql.api.Vendor;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.impl.AsqlBuilderImpl;
+import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
 import com.google.common.collect.Lists;
 import org.junit.runner.RunWith;
 
@@ -30,7 +31,7 @@ public class AsqlShowcaseTest extends JavaSpec<TestContext> {
 
                     AgnosticStatement statement = asql.update("POSA_EMPLEADOS").set(asql.column("CATEGORIA_ID").to(1), asql.column("CATEGORIA_VAL").to("AA"));
 
-                    String generatedSql = Asql.sqlserver().translate(statement);
+                    String generatedSql = TemplateInterpreter.create(Vendor.ansi()).translate(statement.parseModel());
 
                     assertThat(generatedSql).isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID = 1 , CATEGORIA_VAL = 'AA'");
 
@@ -44,7 +45,7 @@ public class AsqlShowcaseTest extends JavaSpec<TestContext> {
                     AgnosticStatement firstStatement = updateEmpleados.set(asql.column("CATEGORIA_ID").to(1)).where(asql.column("CATEGORIA_ID").isNull());
                     AgnosticStatement secondStatement = updateEmpleados.set(asql.column("NOMBRE").to("Pepe")).where(asql.column("CATEGORIA_ID").isNotNull());
 
-                    String generatedSql = Asql.sqlserver().translate(Lists.newArrayList(firstStatement, secondStatement));
+                    String generatedSql = TemplateInterpreter.create(Vendor.ansi()).translate(Lists.newArrayList(firstStatement.parseModel(), secondStatement.parseModel()));
 
                     assertThat(generatedSql).isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID = 1 WHERE CATEGORIA_ID IS NULL;\n" +
                             "UPDATE POSA_EMPLEADOS SET NOMBRE = 'Pepe' WHERE CATEGORIA_ID IS NOT NULL");

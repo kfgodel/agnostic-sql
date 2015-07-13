@@ -12,6 +12,12 @@ public interface Vendor {
     static Vendor ansi() {
         return VendorImpl.create("ansi");
     }
+    static Vendor sqlserver() {
+        return VendorImpl.create("sqlserver");
+    }
+    static Vendor hsqldb() {
+        return VendorImpl.create("hsqldb");
+    }
 
     /**
      * @return The classpath directory where vendor templates are located
