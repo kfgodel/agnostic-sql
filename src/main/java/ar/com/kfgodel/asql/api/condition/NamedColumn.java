@@ -6,4 +6,6 @@ package ar.com.kfgodel.asql.api.condition;
 public interface NamedColumn {
 
     QueryCondition isNull();
+
+    QueryCondition isNotNull();
 }

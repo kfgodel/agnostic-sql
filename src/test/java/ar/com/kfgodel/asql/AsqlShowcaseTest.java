@@ -6,10 +6,12 @@ import ar.com.dgarcia.javaspec.api.TestContext;
 import ar.com.kfgodel.asql.api.AStatement;
 import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.AsqlBuilder;
+import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.impl.AsqlBuilderImpl;
 import ar.com.kfgodel.asql.impl.tree.ColumnAssignmentNode;
 import ar.com.kfgodel.asql.impl.tree.PredicateNode;
 import ar.com.kfgodel.asql.impl.tree.UpdateNode;
+import com.google.common.collect.Lists;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.TemplateLoader;
@@ -76,6 +78,20 @@ public class AsqlShowcaseTest extends JavaSpec<TestContext> {
 
             describe("for updating rows", () -> {
 
+                it("can be used in multiple statements",()->{
+                    AsqlBuilder asql = AsqlBuilderImpl.create();
+
+                    TableDefinedUpdate updateEmpleados = asql.update("POSA_EMPLEADOS");
+
+                    AStatement firstStatement = updateEmpleados.set("CATEGORIA_ID").to(1).where(asql.column("CATEGORIA_ID").isNull());
+                    AStatement secondStatement = updateEmpleados.set("NOMBRE").to("Pepe").where(asql.column("CATEGORIA_ID").isNotNull());
+
+                    String generatedSql = Asql.sqlserver().translate(Lists.newArrayList(firstStatement, secondStatement));
+
+                    assertThat(generatedSql).isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID=1 WHERE CATEGORIA_ID IS NULL;\n" +
+                            "UPDATE POSA_EMPLEADOS SET NOMBRE='Pepe' WHERE CATEGORIA_ID IS NOT NULL");
+                });
+
                 it("can be used for sqlserver", () -> {
 
                     AsqlBuilder asql = AsqlBuilderImpl.create();
@@ -85,7 +101,6 @@ public class AsqlShowcaseTest extends JavaSpec<TestContext> {
                     String generatedSql = Asql.sqlserver().translate(statement);
 
                     assertThat(generatedSql).isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID=1 WHERE CATEGORIA_ID IS NULL");
-
                 });
 
             });

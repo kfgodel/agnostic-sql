@@ -2,6 +2,7 @@ package ar.com.kfgodel.asql.api;
 
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.impl.AsqlBuilderImpl;
+import ar.com.kfgodel.asql.impl.vendors.SqlServerDialect;
 
 /**
  * This type serves as the entry point of the asql api
@@ -13,6 +14,6 @@ public interface Asql {
     }
 
     static VendorDialect sqlserver() {
-        return null;
+        return SqlServerDialect.create();
     }
 }

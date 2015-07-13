@@ -6,6 +6,6 @@ import ar.com.kfgodel.asql.api.condition.QueryCondition;
 /**
  * Created by kfgodel on 11/07/15.
  */
-public interface UnconditionedUpdate {
-    AStatement where(QueryCondition condition);
+public interface UnrestrictedUpdate extends AStatement {
+    RestrictedUpdate where(QueryCondition condition);
 }
