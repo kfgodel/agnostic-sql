@@ -1,11 +1,12 @@
 package ar.com.kfgodel.asql.impl.interpreter;
 
+import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.Vendor;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.impl.templating.DefaultTypeMapper;
 import ar.com.kfgodel.asql.impl.templating.FreemarkerEngine;
-import ar.com.kfgodel.asql.impl.tree.AgnosticModel;
-import ar.com.kfgodel.asql.impl.tree.ScriptModel;
+import ar.com.kfgodel.asql.impl.model.AgnosticModel;
+import ar.com.kfgodel.asql.impl.model.ScriptModel;
 
 import java.util.List;
 
@@ -35,6 +36,11 @@ public class TemplateInterpreter implements VendorInterpreter {
     public String translate(List<AgnosticModel> modelList) {
         ScriptModel scriptModel = groupStatementsInAScriptNode(modelList);
         return translate(scriptModel);
+    }
+
+    @Override
+    public String translate(AgnosticStatement statement) {
+        return translate(statement.parseModel());
     }
 
     /**

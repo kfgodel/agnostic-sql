@@ -1,7 +1,7 @@
 package ar.com.kfgodel.asql.impl.lang.update;
 
 import ar.com.kfgodel.asql.api.update.ColumnAssignment;
-import ar.com.kfgodel.asql.impl.tree.ColumnAssignmentModel;
+import ar.com.kfgodel.asql.impl.model.update.ColumnAssignmentModel;
 import ar.com.kfgodel.asql.impl.value.ExplicitValueModel;
 
 /**

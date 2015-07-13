@@ -5,9 +5,9 @@ import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.api.Vendor;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
-import ar.com.kfgodel.asql.impl.tree.ColumnAssignmentModel;
-import ar.com.kfgodel.asql.impl.tree.PredicateModel;
-import ar.com.kfgodel.asql.impl.tree.UpdateModel;
+import ar.com.kfgodel.asql.impl.model.update.ColumnAssignmentModel;
+import ar.com.kfgodel.asql.impl.model.where.PredicateModel;
+import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 import ar.com.kfgodel.asql.impl.value.ColumnReferenceModel;
 import ar.com.kfgodel.asql.impl.value.ExplicitValueModel;
 import org.junit.runner.RunWith;
@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UpdateModelTest extends JavaSpec<AsqlTestContext> {
     @Override
     public void define() {
-        describe("an update statement agnostic model", () -> {
+        describe("an agnostic update statement model", () -> {
 
             context().updateModel(() -> {
                 UpdateModel updateModel = UpdateModel.create("tableName");

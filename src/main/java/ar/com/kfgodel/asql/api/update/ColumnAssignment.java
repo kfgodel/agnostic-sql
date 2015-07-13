@@ -1,7 +1,7 @@
 package ar.com.kfgodel.asql.api.update;
 
-import ar.com.kfgodel.asql.impl.tree.ColumnAssignmentModel;
-import ar.com.kfgodel.asql.impl.tree.Parseable;
+import ar.com.kfgodel.asql.impl.model.update.ColumnAssignmentModel;
+import ar.com.kfgodel.asql.impl.lang.Parseable;
 
 /**
  * This type represents the definition of a column assignment

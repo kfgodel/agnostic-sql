@@ -1,4 +1,6 @@
-package ar.com.kfgodel.asql.impl.tree;
+package ar.com.kfgodel.asql.impl.lang;
+
+import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 
 /**
  * This type represents an agnostic language piece that can be parsed into an agnostic model

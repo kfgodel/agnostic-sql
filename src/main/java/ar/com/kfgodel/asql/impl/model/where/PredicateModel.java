@@ -1,4 +1,6 @@
-package ar.com.kfgodel.asql.impl.tree;
+package ar.com.kfgodel.asql.impl.model.where;
+
+import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 
 /**
  * This type represents a predicate condition node in the statement tree

@@ -5,8 +5,8 @@ import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.api.AsqlBuilder;
 import ar.com.kfgodel.asql.api.update.UnrestrictedUpdate;
 import ar.com.kfgodel.asql.impl.AsqlBuilderImpl;
-import ar.com.kfgodel.asql.impl.tree.ColumnAssignmentModel;
-import ar.com.kfgodel.asql.impl.tree.UpdateModel;
+import ar.com.kfgodel.asql.impl.model.update.ColumnAssignmentModel;
+import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 import ar.com.kfgodel.asql.impl.value.ExplicitValueModel;
 import org.junit.runner.RunWith;
 

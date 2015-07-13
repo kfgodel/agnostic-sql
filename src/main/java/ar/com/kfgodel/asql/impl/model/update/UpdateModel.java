@@ -1,4 +1,7 @@
-package ar.com.kfgodel.asql.impl.tree;
+package ar.com.kfgodel.asql.impl.model.update;
+
+import ar.com.kfgodel.asql.impl.model.AgnosticModel;
+import ar.com.kfgodel.asql.impl.model.where.PredicateModel;
 
 import java.util.ArrayList;
 import java.util.List;

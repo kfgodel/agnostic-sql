@@ -1,4 +1,6 @@
-package ar.com.kfgodel.asql.impl.tree;
+package ar.com.kfgodel.asql.impl.model.update;
+
+import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 
 /**
  * This type represents a node in a statement tree for a columna assignment

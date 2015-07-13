@@ -38,7 +38,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
                         AgnosticStatement statement = asql.update("POSA_EMPLEADOS").set(asql.column("CATEGORIA_ID").to(1), asql.column("CATEGORIA_VAL").to("AA"));
 
-                        String generatedSql = context().interpreter().translate(statement.parseModel());
+                        String generatedSql = context().interpreter().translate(statement);
 
                         assertThat(generatedSql).isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID = 1 , CATEGORIA_VAL = 'AA'");
                     });

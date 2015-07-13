@@ -1,7 +1,7 @@
 package ar.com.kfgodel.asql.api;
 
-import ar.com.kfgodel.asql.impl.tree.AgnosticModel;
-import ar.com.kfgodel.asql.impl.tree.Parseable;
+import ar.com.kfgodel.asql.impl.model.AgnosticModel;
+import ar.com.kfgodel.asql.impl.lang.Parseable;
 
 /**
  * This type represents a vendor agnostic sql statement

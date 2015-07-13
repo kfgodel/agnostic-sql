@@ -4,7 +4,7 @@ import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.update.ColumnAssignment;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.api.update.UnrestrictedUpdate;
-import ar.com.kfgodel.asql.impl.tree.UpdateModel;
+import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 import com.google.common.collect.Lists;
 
 import java.util.List;

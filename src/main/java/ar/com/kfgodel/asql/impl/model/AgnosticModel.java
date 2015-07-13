@@ -1,4 +1,4 @@
-package ar.com.kfgodel.asql.impl.tree;
+package ar.com.kfgodel.asql.impl.model;
 
 import ar.com.kfgodel.asql.impl.templating.TemplateReferable;
 

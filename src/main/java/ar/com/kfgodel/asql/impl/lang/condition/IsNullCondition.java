@@ -1,7 +1,7 @@
 package ar.com.kfgodel.asql.impl.lang.condition;
 
 import ar.com.kfgodel.asql.api.condition.QueryCondition;
-import ar.com.kfgodel.asql.impl.tree.PredicateModel;
+import ar.com.kfgodel.asql.impl.model.where.PredicateModel;
 import ar.com.kfgodel.asql.impl.value.ColumnReferenceModel;
 import ar.com.kfgodel.asql.impl.value.NullOperand;
 

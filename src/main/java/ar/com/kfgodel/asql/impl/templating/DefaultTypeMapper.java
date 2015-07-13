@@ -1,8 +1,9 @@
 package ar.com.kfgodel.asql.impl.templating;
 
 import ar.com.kfgodel.asql.api.AsqlException;
-import ar.com.kfgodel.asql.impl.tree.ScriptModel;
-import ar.com.kfgodel.asql.impl.tree.UpdateModel;
+import ar.com.kfgodel.asql.impl.model.ScriptModel;
+import ar.com.kfgodel.asql.impl.model.create.CreateModel;
+import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 
 import java.util.LinkedHashMap;
 
@@ -17,6 +18,7 @@ public class DefaultTypeMapper implements TypeToTemplateMapper {
     private void initialize(){
         templateNamePerType.put(ScriptModel.class, "script.ftl");
         templateNamePerType.put(UpdateModel.class, "update.ftl");
+        templateNamePerType.put(CreateModel.class, "create.ftl");
     }
 
     public static DefaultTypeMapper create() {

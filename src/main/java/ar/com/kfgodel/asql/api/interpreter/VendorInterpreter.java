@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.api.interpreter;
 
-import ar.com.kfgodel.asql.impl.tree.AgnosticModel;
+import ar.com.kfgodel.asql.api.AgnosticStatement;
+import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 
 import java.util.List;
 
@@ -18,4 +19,7 @@ public interface VendorInterpreter {
     String translate(AgnosticModel updateModel);
 
     String translate(List<AgnosticModel> modelList);
+
+    String translate(AgnosticStatement statement);
+
 }
