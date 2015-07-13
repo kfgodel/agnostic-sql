@@ -1,5 +1,7 @@
-<#if isSubquery??>
-  subquery
+<#if operand.subquery>
+subquery
+<#elseif operand.string>
+'${operand.value}'
 <#else>
-${operand}
+${operand.value}
 </#if>

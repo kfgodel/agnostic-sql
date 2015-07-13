@@ -4,6 +4,7 @@ import ar.com.kfgodel.asql.api.AStatement;
 import ar.com.kfgodel.asql.api.update.PartialUpdateSet;
 import ar.com.kfgodel.asql.api.update.UnrestrictedUpdate;
 import ar.com.kfgodel.asql.impl.tree.UpdateNode;
+import ar.com.kfgodel.asql.impl.value.ExplicitDirectOperand;
 
 /**
  * Created by kfgodel on 12/07/15.
@@ -15,7 +16,7 @@ public class PartialUpdateSetImpl implements PartialUpdateSet, AStatement {
 
     @Override
     public UnrestrictedUpdate to(Object value) {
-        return UnrestrictedUpdateImpl.create(this, value);
+        return UnrestrictedUpdateImpl.create(this, ExplicitDirectOperand.create(value));
     }
 
     public String getColumnName(){
