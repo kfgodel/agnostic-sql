@@ -1,4 +1,4 @@
-${columnDeclaration.columnName} ${columnDeclaration.columnType}
+${columnDeclaration.columnName} <#assign type=columnDeclaration.columnType><#include "_columnType.ftl"/>
 <#if columnDeclaration.nullity??>
 ${columnDeclaration.nullity}
 </#if>

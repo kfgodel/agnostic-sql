@@ -1,5 +1,7 @@
 package ar.com.kfgodel.asql.impl.model.create;
 
+import ar.com.kfgodel.asql.api.DataType;
+
 /**
  * This type represents the abstract model of a column declaration
  * Created by kfgodel on 13/07/15.
@@ -7,7 +9,7 @@ package ar.com.kfgodel.asql.impl.model.create;
 public class ColumnDeclarationModel implements TablePartModel{
 
     private String columnName;
-    private String columnType;
+    private DataType columnType;
     private String nullity;
     private Object defaultValue;
 
@@ -19,11 +21,11 @@ public class ColumnDeclarationModel implements TablePartModel{
         this.columnName = columnName;
     }
 
-    public String getColumnType() {
+    public DataType getColumnType() {
         return columnType;
     }
 
-    public void setColumnType(String columnType) {
+    public void setColumnType(DataType columnType) {
         this.columnType = columnType;
     }
 
@@ -43,7 +45,7 @@ public class ColumnDeclarationModel implements TablePartModel{
         this.defaultValue = defaultValue;
     }
 
-    public static ColumnDeclarationModel create(String columnName, String columnType) {
+    public static ColumnDeclarationModel create(String columnName, DataType columnType) {
         ColumnDeclarationModel model = new ColumnDeclarationModel();
         model.columnName = columnName;
         model.columnType = columnType;
