@@ -33,11 +33,12 @@ public class CreateModelTest extends JavaSpec<AsqlTestContext> {
                 createModel.addDeclaration(ColumnDeclarationModel.create("diasPorLiquidar", DataType.integer()).withNullity("NOT NULL"));
                 createModel.addDeclaration(ColumnDeclarationModel.create("cantidad",DataType.integer()).withNullity("NOT NULL").withDefaultValue(ExplicitValueModel.create(0)));
                 createModel.addDeclaration(ColumnDeclarationModel.create("otra_id", DataType.fk()));
+                createModel.addDeclaration(ColumnDeclarationModel.create("estado", DataType.shortString()));
                 createModel.addConstraint(TableConstraintModel.create("primary key (id)"));
                 return createModel;
             });
 
-            it("can be translated to a vendor specific statement",()->{
+            it("can be translated to a vendor specific statement", () -> {
 
                 VendorInterpreter interpreter = TemplateInterpreter.create(Vendor.ansi());
 
@@ -51,9 +52,28 @@ public class CreateModelTest extends JavaSpec<AsqlTestContext> {
                         "diasPorLiquidar integer NOT NULL, \n" +
                         "cantidad integer NOT NULL DEFAULT 0, \n" +
                         "otra_id bigint, \n" +
+                        "estado VARCHAR(255), \n" +
                         "primary key (id)\n" +
                         ")");
             });
+            
+            it("can be translated to another vendor specific statement",()->{
+                VendorInterpreter interpreter = TemplateInterpreter.create(Vendor.sqlserver());
+
+                String translatedSql = interpreter.translate(context().createModel());
+
+                assertThat(translatedSql).isEqualTo("CREATE TABLE POSA_ESTADO_DE_LIQUIDACION (\n" +
+                        "id numeric(19,0) identity, \n" +
+                        "momentoDeCreacion datetime, \n" +
+                        "momentoDeUltimaModificacion datetime, \n" +
+                        "persistenceVersion numeric(19,0), \n" +
+                        "diasPorLiquidar numeric(19,0) NOT NULL, \n" +
+                        "cantidad numeric(19,0) NOT NULL DEFAULT 0, \n" +
+                        "otra_id numeric(19,0), \n" +
+                        "estado VARCHAR(255), \n" +
+                        "primary key (id)\n" +
+                        ")");
+            });   
 
         });
 

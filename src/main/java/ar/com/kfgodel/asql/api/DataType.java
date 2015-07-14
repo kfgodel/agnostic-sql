@@ -29,4 +29,8 @@ public interface DataType {
     static DataType pk() {
         return DataTypeImpl.create("pk");
     }
+
+    static DataType shortString() {
+        return DataTypeImpl.create("shortstring");
+    }
 }
