@@ -15,7 +15,7 @@ public class ColumnDefinedCreateImpl implements ColumnDefinedCreate {
     private ColumnDeclaration[] columns;
 
     @Override
-    public ColumnDefinedCreate with(ColumnDeclaration... declarations) {
+    public ColumnDefinedCreate adding(ColumnDeclaration... declarations) {
         return ColumnDefinedCreateImpl.create(this, declarations);
     }
 

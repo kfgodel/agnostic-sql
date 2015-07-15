@@ -10,6 +10,6 @@ public interface ColumnDefinedCreate extends CreateStatement {
      * @param declarations The column declarations
      * @return The new table definition
      */
-    ColumnDefinedCreate with(ColumnDeclaration... declarations);
+    ColumnDefinedCreate adding(ColumnDeclaration... declarations);
 
 }

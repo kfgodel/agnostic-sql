@@ -15,7 +15,7 @@ public class PkDefinedCreateImpl implements ColumnDefinedCreate {
     private CreateStatement previous;
 
     @Override
-    public ColumnDefinedCreate with(ColumnDeclaration... declarations) {
+    public ColumnDefinedCreate adding(ColumnDeclaration... declarations) {
         return ColumnDefinedCreateImpl.create(this, declarations);
     }
 
