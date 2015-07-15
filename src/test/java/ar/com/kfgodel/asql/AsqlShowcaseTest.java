@@ -3,7 +3,6 @@ package ar.com.kfgodel.asql;
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.api.AgnosticStatement;
-import ar.com.kfgodel.asql.api.AsqlBuilder;
 import ar.com.kfgodel.asql.api.DataType;
 import ar.com.kfgodel.asql.api.Vendor;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
@@ -21,10 +20,40 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
     @Override
     public void define() {
+        // Declared here to avoid repetition on every tests.
+        AsqlBuilderImpl asql = AsqlBuilderImpl.create();
 
         describe("agnostic sql", () -> {
-            
-            it("expresses a sql statement that can be translated to different vendors", () -> {
+
+            describe("expresses an abstract sql statement that is vendor independent", () -> {
+
+                context().statement(() ->
+                            asql.alter("POSA_SEVERIDADES").adding(asql.column("estadoDeLiquidacion_id").typed(DataType.fk())
+                        ));
+
+                it("can be translated to ansi sql", () -> {
+                    TemplateInterpreter ansiInterpreter = TemplateInterpreter.create(Vendor.ansi());
+
+                    String translatedSql = ansiInterpreter.translate(context().statement());
+
+                    assertThat(translatedSql).isEqualTo("ALTER TABLE POSA_SEVERIDADES ADD estadoDeLiquidacion_id bigint");
+                });
+
+                it("can be translated to concrete hsqldb sql",()->{
+                    TemplateInterpreter ansiInterpreter = TemplateInterpreter.create(Vendor.hsqldb());
+
+                    String translatedSql = ansiInterpreter.translate(context().statement());
+
+                    assertThat(translatedSql).isEqualTo("ALTER TABLE POSA_SEVERIDADES ADD COLUMN estadoDeLiquidacion_id bigint");
+                });
+
+                it("can be translated to sqlserver vendor sql",()->{
+                    TemplateInterpreter ansiInterpreter = TemplateInterpreter.create(Vendor.sqlserver());
+
+                    String translatedSql = ansiInterpreter.translate(context().statement());
+
+                    assertThat(translatedSql).isEqualTo("ALTER TABLE POSA_SEVERIDADES ADD estadoDeLiquidacion_id numeric(19,0)");
+                });
 
             });
 
@@ -34,18 +63,14 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
                 describe("creates", () -> {
 
-                    context().statement(() -> {
-                        AsqlBuilderImpl asql = AsqlBuilderImpl.create();
-
-                        return asql.create("POSA_ESTADO_DE_LIQUIDACION")
-                                .withIdPk()
-                                .adding(asql.column("momentoDeCreacion").typed(DataType.timestamp()),
-                                        asql.column("momentoDeUltimaModificacion").typed(DataType.timestamp()),
-                                        asql.column("persistenceVersion").typed(DataType.bigint()),
-                                        asql.column("diasPorLiquidar").typed(DataType.integer()).nonNullable(),
-                                        asql.column("estado").typed(DataType.shortString())
-                                );
-                    });
+                    context().statement(() -> asql.create("POSA_ESTADO_DE_LIQUIDACION")
+                            .withIdPk()
+                            .adding(asql.column("momentoDeCreacion").typed(DataType.timestamp()),
+                                    asql.column("momentoDeUltimaModificacion").typed(DataType.timestamp()),
+                                    asql.column("persistenceVersion").typed(DataType.bigint()),
+                                    asql.column("diasPorLiquidar").typed(DataType.integer()).nonNullable(),
+                                    asql.column("estado").typed(DataType.shortString())
+                            ));
 
                     it("can be compactly expressed with unnecessary id details", () -> {
 
@@ -82,8 +107,6 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                 describe("updates", () -> {
 
                     it("without 'where' clause are expressed naturally ", () -> {
-                        AsqlBuilder asql = AsqlBuilderImpl.create();
-
                         AgnosticStatement statement = asql.update("POSA_EMPLEADOS").set(asql.column("CATEGORIA_ID").to(1), asql.column("CATEGORIA_VAL").to("AA"));
 
                         String generatedSql = context().interpreter().translate(statement);
@@ -92,8 +115,6 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     });
 
                     it("can be used in multiple statements", () -> {
-                        AsqlBuilder asql = AsqlBuilderImpl.create();
-
                         TableDefinedUpdate updateEmpleados = asql.update("POSA_EMPLEADOS");
 
                         AgnosticStatement firstStatement = updateEmpleados.set(asql.column("CATEGORIA_ID").to(1)).where(asql.column("CATEGORIA_ID").isNull());

@@ -4,6 +4,7 @@ import ar.com.dgarcia.javaspec.api.TestContext;
 import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.AsqlBuilder;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
+import ar.com.kfgodel.asql.impl.model.add.AddColumnModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 
@@ -29,5 +30,8 @@ public interface AsqlTestContext extends TestContext {
 
     AsqlBuilder asql();
     void asql(Supplier<AsqlBuilder> definition);
+
+    AddColumnModel addModel();
+    void addModel(Supplier<AddColumnModel> definition);
 
 }
