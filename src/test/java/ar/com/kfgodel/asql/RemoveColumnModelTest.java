@@ -2,10 +2,10 @@ package ar.com.kfgodel.asql;
 
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
-import ar.com.kfgodel.asql.api.Vendor;
+import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
-import ar.com.kfgodel.asql.impl.model.remove.RemoveColumnModel;
+import ar.com.kfgodel.asql.impl.model.alter.RemoveColumnModel;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;

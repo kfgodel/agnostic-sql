@@ -1,0 +1,1 @@
+${columnAssignment.columnName} = <#assign operand = columnAssignment.assignedValue /><#include "/restrictions/_operand.ftl"/>

@@ -1,8 +1,8 @@
 package ar.com.kfgodel.asql.impl.lang.alter;
 
 import ar.com.kfgodel.asql.api.alter.AddColumnStatement;
-import ar.com.kfgodel.asql.api.create.ColumnDeclaration;
-import ar.com.kfgodel.asql.impl.model.add.AddColumnModel;
+import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
+import ar.com.kfgodel.asql.impl.model.alter.AddColumnModel;
 
 /**
  * Created by kfgodel on 14/07/15.

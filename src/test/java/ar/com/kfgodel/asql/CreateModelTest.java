@@ -2,14 +2,14 @@ package ar.com.kfgodel.asql;
 
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
-import ar.com.kfgodel.asql.api.DataType;
-import ar.com.kfgodel.asql.api.Vendor;
+import ar.com.kfgodel.asql.api.types.DataType;
+import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
-import ar.com.kfgodel.asql.impl.model.create.ColumnDeclarationModel;
+import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
 import ar.com.kfgodel.asql.impl.model.create.TableConstraintModel;
-import ar.com.kfgodel.asql.impl.value.ExplicitValueModel;
+import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;

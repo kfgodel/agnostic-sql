@@ -1,6 +1,6 @@
 package ar.com.kfgodel.asql.impl.vendors;
 
-import ar.com.kfgodel.asql.api.Vendor;
+import ar.com.kfgodel.asql.api.vendors.Vendor;
 
 /**
  * This type implements the vendor behavior

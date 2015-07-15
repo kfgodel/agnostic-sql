@@ -1,9 +1,9 @@
 package ar.com.kfgodel.asql.impl.lang.column;
 
-import ar.com.kfgodel.asql.api.DataType;
-import ar.com.kfgodel.asql.api.create.ColumnDeclaration;
-import ar.com.kfgodel.asql.impl.lang.condition.NamedColumnImpl;
-import ar.com.kfgodel.asql.impl.model.create.ColumnDeclarationModel;
+import ar.com.kfgodel.asql.api.types.DataType;
+import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
+import ar.com.kfgodel.asql.impl.lang.restrictions.NamedColumnImpl;
+import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 
 /**
  * Created by kfgodel on 14/07/15.

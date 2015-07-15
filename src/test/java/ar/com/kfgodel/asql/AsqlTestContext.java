@@ -4,9 +4,9 @@ import ar.com.dgarcia.javaspec.api.TestContext;
 import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.AsqlBuilder;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
-import ar.com.kfgodel.asql.impl.model.add.AddColumnModel;
+import ar.com.kfgodel.asql.impl.model.alter.AddColumnModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
-import ar.com.kfgodel.asql.impl.model.remove.RemoveColumnModel;
+import ar.com.kfgodel.asql.impl.model.alter.RemoveColumnModel;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 
 import java.util.function.Supplier;

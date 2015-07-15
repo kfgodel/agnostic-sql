@@ -1,9 +1,9 @@
 package ar.com.kfgodel.asql.impl.interpreter;
 
 import ar.com.kfgodel.asql.api.AgnosticStatement;
-import ar.com.kfgodel.asql.api.Vendor;
+import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
-import ar.com.kfgodel.asql.impl.templating.DefaultTypeMapper;
+import ar.com.kfgodel.asql.impl.templating.mapper.DefaultTypeMapper;
 import ar.com.kfgodel.asql.impl.templating.FreemarkerEngine;
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 import ar.com.kfgodel.asql.impl.model.ScriptModel;

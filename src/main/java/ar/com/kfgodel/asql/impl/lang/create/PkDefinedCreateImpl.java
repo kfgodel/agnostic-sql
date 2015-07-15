@@ -1,10 +1,10 @@
 package ar.com.kfgodel.asql.impl.lang.create;
 
-import ar.com.kfgodel.asql.api.DataType;
-import ar.com.kfgodel.asql.api.create.ColumnDeclaration;
+import ar.com.kfgodel.asql.api.types.DataType;
+import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
 import ar.com.kfgodel.asql.api.create.ColumnDefinedCreate;
 import ar.com.kfgodel.asql.api.create.CreateStatement;
-import ar.com.kfgodel.asql.impl.model.create.ColumnDeclarationModel;
+import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
 import ar.com.kfgodel.asql.impl.model.create.TableConstraintModel;
 

@@ -1,7 +1,7 @@
 package ar.com.kfgodel.asql.impl.lang.alter;
 
 import ar.com.kfgodel.asql.api.alter.RemoveColumnStatement;
-import ar.com.kfgodel.asql.impl.model.remove.RemoveColumnModel;
+import ar.com.kfgodel.asql.impl.model.alter.RemoveColumnModel;
 
 /**
  * Created by kfgodel on 15/07/15.

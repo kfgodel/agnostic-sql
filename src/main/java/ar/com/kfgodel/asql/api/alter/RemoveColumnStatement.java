@@ -1,7 +1,7 @@
 package ar.com.kfgodel.asql.api.alter;
 
 import ar.com.kfgodel.asql.api.AgnosticStatement;
-import ar.com.kfgodel.asql.impl.model.remove.RemoveColumnModel;
+import ar.com.kfgodel.asql.impl.model.alter.RemoveColumnModel;
 
 /**
  * This type represents an agnostic remove column statement

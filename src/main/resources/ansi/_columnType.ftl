@@ -1,1 +1,0 @@
-<#include "types/${type.agnosticName}.ftl">

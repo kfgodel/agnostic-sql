@@ -1,6 +1,6 @@
 package ar.com.kfgodel.asql.impl.lang.update;
 
-import ar.com.kfgodel.asql.api.condition.QueryCondition;
+import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
 import ar.com.kfgodel.asql.api.update.RestrictedUpdate;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 

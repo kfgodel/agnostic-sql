@@ -1,7 +1,7 @@
 package ar.com.kfgodel.asql.impl.lang.update;
 
 import ar.com.kfgodel.asql.api.AgnosticStatement;
-import ar.com.kfgodel.asql.api.update.ColumnAssignment;
+import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.api.update.UnrestrictedUpdate;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;

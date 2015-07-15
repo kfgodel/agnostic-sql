@@ -1,7 +1,7 @@
 package ar.com.kfgodel.asql.api;
 
 import ar.com.kfgodel.asql.api.alter.TableDefinedAlter;
-import ar.com.kfgodel.asql.api.condition.NamedColumn;
+import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.api.create.TableDefinedCreate;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 

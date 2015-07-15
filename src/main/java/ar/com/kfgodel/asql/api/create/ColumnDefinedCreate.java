@@ -1,5 +1,7 @@
 package ar.com.kfgodel.asql.api.create;
 
+import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
+
 /**
  * Created by kfgodel on 14/07/15.
  */

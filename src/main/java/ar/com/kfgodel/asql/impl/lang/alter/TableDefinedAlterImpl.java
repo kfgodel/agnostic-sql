@@ -3,7 +3,7 @@ package ar.com.kfgodel.asql.impl.lang.alter;
 import ar.com.kfgodel.asql.api.alter.AddColumnStatement;
 import ar.com.kfgodel.asql.api.alter.RemoveColumnStatement;
 import ar.com.kfgodel.asql.api.alter.TableDefinedAlter;
-import ar.com.kfgodel.asql.api.create.ColumnDeclaration;
+import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
 
 /**
  * Created by kfgodel on 14/07/15.

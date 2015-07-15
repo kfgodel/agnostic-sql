@@ -1,7 +1,7 @@
 package ar.com.kfgodel.asql.api.alter;
 
 import ar.com.kfgodel.asql.api.AgnosticStatement;
-import ar.com.kfgodel.asql.impl.model.add.AddColumnModel;
+import ar.com.kfgodel.asql.impl.model.alter.AddColumnModel;
 
 /**
  * This type represents a columnd addition agnostic statement

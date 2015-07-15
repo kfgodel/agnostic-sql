@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.impl.model.create;
 
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
+import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 
 import java.util.ArrayList;
 import java.util.List;

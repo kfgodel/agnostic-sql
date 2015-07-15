@@ -1,6 +1,6 @@
 package ar.com.kfgodel.asql.impl.lang.create;
 
-import ar.com.kfgodel.asql.api.create.ColumnDeclaration;
+import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
 import ar.com.kfgodel.asql.api.create.ColumnDefinedCreate;
 import ar.com.kfgodel.asql.api.create.TableDefinedCreate;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;

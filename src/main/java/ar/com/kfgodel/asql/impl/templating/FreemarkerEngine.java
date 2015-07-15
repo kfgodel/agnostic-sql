@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.impl.templating;
 
 import ar.com.kfgodel.asql.api.AsqlException;
+import ar.com.kfgodel.asql.impl.templating.mapper.TypeToTemplateMapper;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.TemplateLoader;
