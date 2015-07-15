@@ -42,4 +42,7 @@ public interface DataType  {
         return DataTypeImpl.create("date");
     }
 
+    static DataType booleanic() {
+        return DataTypeImpl.create("booleanic");
+    }
 }
