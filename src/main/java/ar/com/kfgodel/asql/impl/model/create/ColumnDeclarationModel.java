@@ -1,12 +1,13 @@
 package ar.com.kfgodel.asql.impl.model.create;
 
 import ar.com.kfgodel.asql.api.DataType;
+import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 
 /**
  * This type represents the abstract model of a column declaration
  * Created by kfgodel on 13/07/15.
  */
-public class ColumnDeclarationModel implements TablePartModel{
+public class ColumnDeclarationModel implements TablePartModel, AgnosticModel{
 
     private String columnName;
     private DataType columnType;

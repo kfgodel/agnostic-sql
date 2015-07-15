@@ -1,5 +1,7 @@
 package ar.com.kfgodel.asql.api.condition;
 
+import ar.com.kfgodel.asql.api.DataType;
+import ar.com.kfgodel.asql.api.create.ColumnDeclaration;
 import ar.com.kfgodel.asql.api.update.ColumnAssignment;
 
 /**
@@ -12,4 +14,6 @@ public interface NamedColumn {
     QueryCondition isNotNull();
 
     ColumnAssignment to(Object value);
+
+    ColumnDeclaration typed(DataType dataType);
 }
