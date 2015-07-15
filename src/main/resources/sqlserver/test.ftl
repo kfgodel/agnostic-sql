@@ -1,1 +1,0 @@
-${columnAssignment.columnName} = 1

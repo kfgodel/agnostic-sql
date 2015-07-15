@@ -56,20 +56,20 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
                     AsqlBuilder asql = context().asql();
                     CreateStatement create = asql
                             .create("tableName")
-                            .with(asql.column("columnName").typed(DataType.bigint()));
+                            .with(asql.column("columnName").typed(DataType.bigInteger()));
 
                     CreateModel createModel = create.parseModel();
                     ColumnDeclarationModel columnModel = createModel.getColumnDeclarations().get(0);
 
                     assertThat(columnModel.getColumnName()).isEqualTo("columnName");
-                    assertThat(columnModel.getColumnType()).isEqualTo(DataType.bigint());
+                    assertThat(columnModel.getColumnType()).isEqualTo(DataType.bigInteger());
                 });
 
                 it("can declare a column nullity",()->{
                     AsqlBuilder asql = context().asql();
                     CreateStatement create = asql
                             .create("tableName")
-                            .with(asql.column("column1").typed(DataType.bigint()).nonNullable(),
+                            .with(asql.column("column1").typed(DataType.bigInteger()).nonNullable(),
                                     asql.column("column2").typed(DataType.shortString()).nullable());
 
                     CreateModel createModel = create.parseModel();
@@ -85,7 +85,7 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
                     AsqlBuilder asql = context().asql();
                     CreateStatement create = asql
                             .create("tableName")
-                            .with(asql.column("columnName").typed(DataType.bigint()).defaultedTo(4));
+                            .with(asql.column("columnName").typed(DataType.bigInteger()).defaultedTo(4));
 
                     CreateModel createModel = create.parseModel();
                     ColumnDeclarationModel columnModel = createModel.getColumnDeclarations().get(0);

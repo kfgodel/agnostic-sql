@@ -2,6 +2,7 @@ package ar.com.kfgodel.asql.impl.templating;
 
 import ar.com.kfgodel.asql.api.AsqlException;
 import ar.com.kfgodel.asql.impl.model.ScriptModel;
+import ar.com.kfgodel.asql.impl.model.TypeReference;
 import ar.com.kfgodel.asql.impl.model.add.AddColumnModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
@@ -21,6 +22,7 @@ public class DefaultTypeMapper implements TypeToTemplateMapper {
         templateNamePerType.put(UpdateModel.class, "update.ftl");
         templateNamePerType.put(CreateModel.class, "create.ftl");
         templateNamePerType.put(AddColumnModel.class, "add_column.ftl");
+        templateNamePerType.put(TypeReference.class, "_columnType.ftl");
     }
 
     public static DefaultTypeMapper create() {

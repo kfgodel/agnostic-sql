@@ -28,7 +28,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
             describe("expresses an abstract sql statement that is vendor independent", () -> {
 
                 context().statement(() ->
-                            asql.alter("POSA_SEVERIDADES").adding(asql.column("estadoDeLiquidacion_id").typed(DataType.fk())
+                        asql.alter("POSA_SEVERIDADES").adding(asql.column("estadoDeLiquidacion_id").typed(DataType.fk())
                         ));
 
                 it("can be translated to ansi sql", () -> {
@@ -39,7 +39,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     assertThat(translatedSql).isEqualTo("ALTER TABLE POSA_SEVERIDADES ADD estadoDeLiquidacion_id bigint");
                 });
 
-                it("can be translated to concrete hsqldb sql",()->{
+                it("can be translated to concrete hsqldb sql", () -> {
                     TemplateInterpreter ansiInterpreter = TemplateInterpreter.create(Vendor.hsqldb());
 
                     String translatedSql = ansiInterpreter.translate(context().statement());
@@ -47,7 +47,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     assertThat(translatedSql).isEqualTo("ALTER TABLE POSA_SEVERIDADES ADD COLUMN estadoDeLiquidacion_id bigint");
                 });
 
-                it("can be translated to sqlserver vendor sql",()->{
+                it("can be translated to sqlserver vendor sql", () -> {
                     TemplateInterpreter ansiInterpreter = TemplateInterpreter.create(Vendor.sqlserver());
 
                     String translatedSql = ansiInterpreter.translate(context().statement());
@@ -67,7 +67,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                             .withIdPk()
                             .adding(asql.column("momentoDeCreacion").typed(DataType.timestamp()),
                                     asql.column("momentoDeUltimaModificacion").typed(DataType.timestamp()),
-                                    asql.column("persistenceVersion").typed(DataType.bigint()),
+                                    asql.column("persistenceVersion").typed(DataType.bigInteger()),
                                     asql.column("diasPorLiquidar").typed(DataType.integer()).nonNullable(),
                                     asql.column("estado").typed(DataType.shortString())
                             ));
@@ -87,7 +87,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                                 ")");
                     });
 
-                    it("can be expressed for sqlserver",()->{
+                    it("can be expressed for sqlserver", () -> {
                         String generatedSql = TemplateInterpreter.create(Vendor.sqlserver()).translate(context().statement());
 
                         assertThat(generatedSql).isEqualTo("CREATE TABLE POSA_ESTADO_DE_LIQUIDACION (\n" +

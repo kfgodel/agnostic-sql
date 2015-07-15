@@ -1,16 +1,17 @@
 package ar.com.kfgodel.asql.api;
 
 import ar.com.kfgodel.asql.impl.DataTypeImpl;
+import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 
 /**
  * This type represents an agnostic data type that can be translated to a vendor specific type
  * Created by kfgodel on 13/07/15.
  */
-public interface DataType {
+public interface DataType extends AgnosticModel {
 
     String getAgnosticName();
 
-    static DataType bigint() {
+    static DataType bigInteger() {
         return DataTypeImpl.create("bigint");
     }
 
@@ -33,4 +34,13 @@ public interface DataType {
     static DataType shortString() {
         return DataTypeImpl.create("shortstring");
     }
+
+    static DataType largeText() {
+        return DataTypeImpl.create("largetext");
+    }
+
+    static DataType date() {
+        return DataTypeImpl.create("date");
+    }
+
 }

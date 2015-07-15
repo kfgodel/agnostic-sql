@@ -29,7 +29,7 @@ public class CreateModelTest extends JavaSpec<AsqlTestContext> {
                 createModel.addDeclaration(ColumnDeclarationModel.create("id",DataType.pk()));
                 createModel.addDeclaration(ColumnDeclarationModel.create("momentoDeCreacion",DataType.timestamp()));
                 createModel.addDeclaration(ColumnDeclarationModel.create("momentoDeUltimaModificacion",DataType.timestamp()));
-                createModel.addDeclaration(ColumnDeclarationModel.create("persistenceVersion", DataType.bigint()));
+                createModel.addDeclaration(ColumnDeclarationModel.create("persistenceVersion", DataType.bigInteger()));
                 createModel.addDeclaration(ColumnDeclarationModel.create("diasPorLiquidar", DataType.integer()).withNullity("NOT NULL"));
                 createModel.addDeclaration(ColumnDeclarationModel.create("cantidad",DataType.integer()).withNullity("NOT NULL").withDefaultValue(ExplicitValueModel.create(0)));
                 createModel.addDeclaration(ColumnDeclarationModel.create("otra_id", DataType.fk()));
