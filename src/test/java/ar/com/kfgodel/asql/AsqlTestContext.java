@@ -6,6 +6,7 @@ import ar.com.kfgodel.asql.api.AsqlBuilder;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.impl.model.add.AddColumnModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
+import ar.com.kfgodel.asql.impl.model.remove.RemoveColumnModel;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 
 import java.util.function.Supplier;
@@ -33,5 +34,8 @@ public interface AsqlTestContext extends TestContext {
 
     AddColumnModel addModel();
     void addModel(Supplier<AddColumnModel> definition);
+
+    RemoveColumnModel removeModel();
+    void removeModel(Supplier<RemoveColumnModel> definition);
 
 }

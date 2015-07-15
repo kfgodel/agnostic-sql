@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.impl.lang.alter;
 
 import ar.com.kfgodel.asql.api.alter.AddColumnStatement;
+import ar.com.kfgodel.asql.api.alter.RemoveColumnStatement;
 import ar.com.kfgodel.asql.api.alter.TableDefinedAlter;
 import ar.com.kfgodel.asql.api.create.ColumnDeclaration;
 
@@ -24,5 +25,10 @@ public class TableDefinedAlterImpl implements TableDefinedAlter {
     @Override
     public AddColumnStatement adding(ColumnDeclaration newColumnDeclaration) {
         return AddColumnStatementImpl.create(this, newColumnDeclaration);
+    }
+
+    @Override
+    public RemoveColumnStatement removing(String columnName) {
+        return RemoveColumnStatementImpl.create(this, columnName);
     }
 }

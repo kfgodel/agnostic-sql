@@ -5,6 +5,7 @@ import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.DataType;
 import ar.com.kfgodel.asql.api.Vendor;
+import ar.com.kfgodel.asql.api.alter.RemoveColumnStatement;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.impl.AsqlBuilderImpl;
 import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
@@ -56,6 +57,17 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                 });
 
             });
+
+            describe("drop column", () -> {
+                it("it is basically ansi for all vendors",()->{
+                    RemoveColumnStatement statement = asql.alter("tableName").removing("columnName");
+
+                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("ALTER TABLE tableName DROP COLUMN columnName");
+                    assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("ALTER TABLE tableName DROP COLUMN columnName");
+                    assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("ALTER TABLE tableName DROP COLUMN columnName");
+                });
+            });
+
 
             describe("with ansi as the base definition", () -> {
 

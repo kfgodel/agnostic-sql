@@ -8,4 +8,6 @@ import ar.com.kfgodel.asql.api.create.ColumnDeclaration;
 public interface TableDefinedAlter {
 
     AddColumnStatement adding(ColumnDeclaration newColumnDeclaration);
+
+    RemoveColumnStatement removing(String columnName);
 }
