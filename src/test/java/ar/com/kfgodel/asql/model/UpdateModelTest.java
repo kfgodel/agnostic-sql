@@ -1,7 +1,8 @@
-package ar.com.kfgodel.asql;
+package ar.com.kfgodel.asql.model;
 
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
+import ar.com.kfgodel.asql.AsqlTestContext;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;

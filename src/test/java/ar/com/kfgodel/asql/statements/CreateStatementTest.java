@@ -1,7 +1,8 @@
-package ar.com.kfgodel.asql;
+package ar.com.kfgodel.asql.statements;
 
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
+import ar.com.kfgodel.asql.AsqlTestContext;
 import ar.com.kfgodel.asql.api.AsqlBuilder;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.create.CreateStatement;
