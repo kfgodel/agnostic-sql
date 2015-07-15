@@ -7,6 +7,7 @@ import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.impl.model.alter.AddColumnModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
 import ar.com.kfgodel.asql.impl.model.alter.RemoveColumnModel;
+import ar.com.kfgodel.asql.impl.model.delete.DeleteModel;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 
 import java.util.function.Supplier;
@@ -37,5 +38,8 @@ public interface AsqlTestContext extends TestContext {
 
     RemoveColumnModel removeModel();
     void removeModel(Supplier<RemoveColumnModel> definition);
+
+    DeleteModel deleteModel();
+    void deleteModel(Supplier<DeleteModel> definition);
 
 }

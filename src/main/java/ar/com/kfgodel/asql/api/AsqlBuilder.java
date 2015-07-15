@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.api;
 
 import ar.com.kfgodel.asql.api.alter.TableDefinedAlter;
+import ar.com.kfgodel.asql.api.delete.DeleteStatement;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.api.create.TableDefinedCreate;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
@@ -17,4 +18,6 @@ public interface AsqlBuilder {
     TableDefinedCreate create(String tableName);
 
     TableDefinedAlter alter(String tableName);
+
+    DeleteStatement deleteFrom(String tableName);
 }

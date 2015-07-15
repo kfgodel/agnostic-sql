@@ -4,6 +4,7 @@ import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.alter.RemoveColumnStatement;
+import ar.com.kfgodel.asql.api.delete.DeleteStatement;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
@@ -41,17 +42,17 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                 });
 
                 it("can be translated to concrete hsqldb sql", () -> {
-                    TemplateInterpreter ansiInterpreter = TemplateInterpreter.create(Vendor.hsqldb());
+                    TemplateInterpreter hsqlInterpreter = TemplateInterpreter.create(Vendor.hsqldb());
 
-                    String translatedSql = ansiInterpreter.translate(context().statement());
+                    String translatedSql = hsqlInterpreter.translate(context().statement());
 
                     assertThat(translatedSql).isEqualTo("ALTER TABLE POSA_SEVERIDADES ADD COLUMN estadoDeLiquidacion_id bigint");
                 });
 
                 it("can be translated to sqlserver vendor sql", () -> {
-                    TemplateInterpreter ansiInterpreter = TemplateInterpreter.create(Vendor.sqlserver());
+                    TemplateInterpreter sqlserverInterpreter = TemplateInterpreter.create(Vendor.sqlserver());
 
-                    String translatedSql = ansiInterpreter.translate(context().statement());
+                    String translatedSql = sqlserverInterpreter.translate(context().statement());
 
                     assertThat(translatedSql).isEqualTo("ALTER TABLE POSA_SEVERIDADES ADD estadoDeLiquidacion_id numeric(19,0)");
                 });
@@ -138,6 +139,17 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                 });
 
             });
+
+            describe("deletes", () -> {
+                it("it is basically ansi for all vendors",()->{
+                    DeleteStatement statement = asql.deleteFrom("tableName");
+
+                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("DELETE FROM tableName");
+                    assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("DELETE FROM tableName");
+                    assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("DELETE FROM tableName");
+                });   
+            });
+
 
         });
 
