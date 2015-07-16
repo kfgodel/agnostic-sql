@@ -3,6 +3,7 @@ package ar.com.kfgodel.asql.api;
 import ar.com.kfgodel.asql.api.alter.TableDefinedAlter;
 import ar.com.kfgodel.asql.api.delete.DeleteStatement;
 import ar.com.kfgodel.asql.api.drop.DropStatement;
+import ar.com.kfgodel.asql.api.insert.TableDefinedInsert;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.api.create.TableDefinedCreate;
 import ar.com.kfgodel.asql.api.constraints.NamedConstraint;
@@ -26,4 +27,6 @@ public interface AsqlBuilder {
     DropStatement drop(String tableName);
 
     NamedConstraint constraint(String constraintName);
+
+    TableDefinedInsert insertInto(String tableName);
 }

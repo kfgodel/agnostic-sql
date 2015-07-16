@@ -7,6 +7,7 @@ import ar.com.kfgodel.asql.api.alter.ChangeColumnStatement;
 import ar.com.kfgodel.asql.api.alter.RemoveColumnStatement;
 import ar.com.kfgodel.asql.api.delete.DeleteStatement;
 import ar.com.kfgodel.asql.api.drop.DropStatement;
+import ar.com.kfgodel.asql.api.insert.InsertStatement;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
@@ -133,6 +134,19 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("DROP TABLE tableName");
                     assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("DROP TABLE tableName");
                 });
+            });
+
+
+            describe("inserts", () -> {
+                it("it is basically ansi for all vendors",()->{
+                    InsertStatement statement = asql.insertInto("tableName").setting(asql.column("column1").to(1),
+                            asql.column("column2").to("value2"));
+
+                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1 , 'value2' )");
+                    assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1 , 'value2' )");
+                    assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1 , 'value2' )");
+                });
+
             });
 
 

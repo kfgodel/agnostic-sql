@@ -5,6 +5,7 @@ import ar.com.kfgodel.asql.api.alter.TableDefinedAlter;
 import ar.com.kfgodel.asql.api.constraints.NamedConstraint;
 import ar.com.kfgodel.asql.api.delete.DeleteStatement;
 import ar.com.kfgodel.asql.api.drop.DropStatement;
+import ar.com.kfgodel.asql.api.insert.TableDefinedInsert;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.api.create.TableDefinedCreate;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
@@ -12,6 +13,7 @@ import ar.com.kfgodel.asql.impl.lang.alter.TableDefinedAlterImpl;
 import ar.com.kfgodel.asql.impl.lang.constraints.NamedConstraintImpl;
 import ar.com.kfgodel.asql.impl.lang.delete.DeleteStatementImpl;
 import ar.com.kfgodel.asql.impl.lang.drop.DropStatementImpl;
+import ar.com.kfgodel.asql.impl.lang.insert.TableDefinedInsertImpl;
 import ar.com.kfgodel.asql.impl.lang.restrictions.NamedColumnImpl;
 import ar.com.kfgodel.asql.impl.lang.create.TableDefinedCreateImpl;
 import ar.com.kfgodel.asql.impl.lang.update.TableDefinedUpdateImpl;
@@ -59,5 +61,10 @@ public class AsqlBuilderImpl implements AsqlBuilder {
     @Override
     public NamedConstraint constraint(String constraintName) {
         return NamedConstraintImpl.create(constraintName);
+    }
+
+    @Override
+    public TableDefinedInsert insertInto(String tableName) {
+        return TableDefinedInsertImpl.create(tableName);
     }
 }
