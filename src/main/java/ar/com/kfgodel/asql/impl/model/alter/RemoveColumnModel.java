@@ -1,23 +1,14 @@
 package ar.com.kfgodel.asql.impl.model.alter;
 
-import ar.com.kfgodel.asql.impl.model.AgnosticModel;
+import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
 
 /**
  * This type represents the state of an agnostic remove column statement
  * Created by kfgodel on 15/07/15.
  */
-public class RemoveColumnModel implements AgnosticModel{
+public class RemoveColumnModel extends TableCenteredModel{
 
-    private String tableName;
     private String columnName;
-
-    public String getTableName() {
-        return tableName;
-    }
-
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
 
     public String getColumnName() {
         return columnName;
@@ -29,7 +20,7 @@ public class RemoveColumnModel implements AgnosticModel{
 
     public static RemoveColumnModel create(String table, String column) {
         RemoveColumnModel model = new RemoveColumnModel();
-        model.tableName = table;
+        model.setTableName(table);
         model.columnName = column;
         return model;
     }

@@ -4,21 +4,16 @@ import ar.com.kfgodel.asql.api.alter.AddColumnStatement;
 import ar.com.kfgodel.asql.api.alter.RemoveColumnStatement;
 import ar.com.kfgodel.asql.api.alter.TableDefinedAlter;
 import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
+import ar.com.kfgodel.asql.impl.lang.support.TableCenteredStatement;
 
 /**
  * Created by kfgodel on 14/07/15.
  */
-public class TableDefinedAlterImpl implements TableDefinedAlter {
-
-    private String tableName;
-
-    public String getTableName() {
-        return tableName;
-    }
+public class TableDefinedAlterImpl extends TableCenteredStatement implements TableDefinedAlter {
 
     public static TableDefinedAlterImpl create(String tableName) {
         TableDefinedAlterImpl alter = new TableDefinedAlterImpl();
-        alter.tableName = tableName;
+        alter.setTableName(tableName);
         return alter;
     }
 

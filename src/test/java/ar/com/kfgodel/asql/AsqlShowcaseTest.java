@@ -5,6 +5,7 @@ import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.alter.RemoveColumnStatement;
 import ar.com.kfgodel.asql.api.delete.DeleteStatement;
+import ar.com.kfgodel.asql.api.drop.DropStatement;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
@@ -110,6 +111,16 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                             "PRIMARY KEY (id)\n" +
                             ")");
 
+                });
+            });
+
+            describe("drop table", () -> {
+                it("it is basically ansi for all vendors",()->{
+                    DropStatement statement = asql.drop("tableName");
+
+                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("DROP TABLE tableName");
+                    assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("DROP TABLE tableName");
+                    assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("DROP TABLE tableName");
                 });
             });
 

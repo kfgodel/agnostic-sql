@@ -1,8 +1,8 @@
 package ar.com.kfgodel.asql.impl.model.update;
 
-import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
 import ar.com.kfgodel.asql.impl.model.restrictions.PredicateModel;
+import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,21 +11,11 @@ import java.util.List;
  * This type represents a tree node for an update statement containing its state
  * Created by kfgodel on 12/07/15.
  */
-public class UpdateModel implements AgnosticModel {
-
-    private String tableName;
+public class UpdateModel extends TableCenteredModel {
 
     private List<ColumnAssignmentModel> columnAssignments;
 
     private PredicateModel wherePredicate;
-
-    public String getTableName() {
-        return tableName;
-    }
-
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
 
     public List<ColumnAssignmentModel> getColumnAssignments() {
         if (columnAssignments == null) {
@@ -48,7 +38,7 @@ public class UpdateModel implements AgnosticModel {
 
     public static UpdateModel create(String tableName) {
         UpdateModel updateModel = new UpdateModel();
-        updateModel.tableName = tableName;
+        updateModel.setTableName(tableName);
         return updateModel;
     }
 

@@ -3,6 +3,7 @@ package ar.com.kfgodel.asql.impl.templating.mapper;
 import ar.com.kfgodel.asql.api.AsqlException;
 import ar.com.kfgodel.asql.impl.model.ScriptModel;
 import ar.com.kfgodel.asql.impl.model.delete.DeleteModel;
+import ar.com.kfgodel.asql.impl.model.drop.DropModel;
 import ar.com.kfgodel.asql.impl.model.types.TypeReference;
 import ar.com.kfgodel.asql.impl.model.alter.AddColumnModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
@@ -28,6 +29,7 @@ public class DefaultTypeMapper implements TypeToTemplateMapper {
         templateNamePerType.put(RemoveColumnModel.class, "alter/remove_column.ftl");
         templateNamePerType.put(TypeReference.class, "columns/_columnType.ftl");
         templateNamePerType.put(DeleteModel.class, "delete/delete.ftl");
+        templateNamePerType.put(DropModel.class, "drop/drop.ftl");
     }
 
     public static DefaultTypeMapper create() {
