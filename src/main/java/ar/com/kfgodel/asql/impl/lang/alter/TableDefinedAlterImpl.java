@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.impl.lang.alter;
 
 import ar.com.kfgodel.asql.api.alter.AddColumnStatement;
+import ar.com.kfgodel.asql.api.alter.ChangeColumnStatement;
 import ar.com.kfgodel.asql.api.alter.RemoveColumnStatement;
 import ar.com.kfgodel.asql.api.alter.TableDefinedAlter;
 import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
@@ -25,5 +26,10 @@ public class TableDefinedAlterImpl extends TableCenteredStatement implements Tab
     @Override
     public RemoveColumnStatement removing(String columnName) {
         return RemoveColumnStatementImpl.create(this, columnName);
+    }
+
+    @Override
+    public ChangeColumnStatement changing(ColumnDeclaration columnChange) {
+        return ChangeColumnStatementImpl.create(this,columnChange);
     }
 }

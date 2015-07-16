@@ -3,6 +3,7 @@ package ar.com.kfgodel.asql;
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.api.AgnosticStatement;
+import ar.com.kfgodel.asql.api.alter.ChangeColumnStatement;
 import ar.com.kfgodel.asql.api.alter.RemoveColumnStatement;
 import ar.com.kfgodel.asql.api.delete.DeleteStatement;
 import ar.com.kfgodel.asql.api.drop.DropStatement;
@@ -67,6 +68,16 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("ALTER TABLE tableName DROP COLUMN columnName");
                     assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("ALTER TABLE tableName DROP COLUMN columnName");
                     assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("ALTER TABLE tableName DROP COLUMN columnName");
+                });
+            });
+
+            describe("alter column", () -> {
+                it("it is basically ansi for all vendors",()->{
+                    ChangeColumnStatement statement = asql.alter("tableName").changing(asql.column("columnName").typed(DataType.integer()));
+
+                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName integer");
+                    assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName numeric(19,0)");
+                    assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName integer");
                 });
             });
 

@@ -10,4 +10,6 @@ public interface TableDefinedAlter {
     AddColumnStatement adding(ColumnDeclaration newColumnDeclaration);
 
     RemoveColumnStatement removing(String columnName);
+
+    ChangeColumnStatement changing(ColumnDeclaration columnChange);
 }
