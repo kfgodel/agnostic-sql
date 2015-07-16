@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.impl.model.create;
 
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
+import ar.com.kfgodel.asql.impl.model.constraints.ConstraintDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.List;
  */
 public class CreateModel extends TableCenteredModel {
     private List<ColumnDeclarationModel> columnDeclarations;
-    private List<TableConstraintModel> tableConstraints;
+    private List<ConstraintDeclarationModel> tableConstraints;
 
     public List<ColumnDeclarationModel> getColumnDeclarations() {
         if (columnDeclarations == null) {
@@ -25,14 +26,14 @@ public class CreateModel extends TableCenteredModel {
         this.columnDeclarations = columnDeclarations;
     }
 
-    public List<TableConstraintModel> getTableConstraints() {
+    public List<ConstraintDeclarationModel> getTableConstraints() {
         if (tableConstraints == null) {
-            tableConstraints = new ArrayList<TableConstraintModel>();
+            tableConstraints = new ArrayList<ConstraintDeclarationModel>();
         }
         return tableConstraints;
     }
 
-    public void setTableConstraints(List<TableConstraintModel> tableConstraints) {
+    public void setTableConstraints(List<ConstraintDeclarationModel> tableConstraints) {
         this.tableConstraints = tableConstraints;
     }
 
@@ -46,7 +47,7 @@ public class CreateModel extends TableCenteredModel {
         this.getColumnDeclarations().add(declaration);
     }
 
-    public void addConstraint(TableConstraintModel constraint) {
+    public void addConstraint(ConstraintDeclarationModel constraint) {
         this.getTableConstraints().add(constraint);
     }
 

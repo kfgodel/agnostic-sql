@@ -2,12 +2,14 @@ package ar.com.kfgodel.asql.impl;
 
 import ar.com.kfgodel.asql.api.AsqlBuilder;
 import ar.com.kfgodel.asql.api.alter.TableDefinedAlter;
+import ar.com.kfgodel.asql.api.constraints.NamedConstraint;
 import ar.com.kfgodel.asql.api.delete.DeleteStatement;
 import ar.com.kfgodel.asql.api.drop.DropStatement;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.api.create.TableDefinedCreate;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.impl.lang.alter.TableDefinedAlterImpl;
+import ar.com.kfgodel.asql.impl.lang.constraints.NamedConstraintImpl;
 import ar.com.kfgodel.asql.impl.lang.delete.DeleteStatementImpl;
 import ar.com.kfgodel.asql.impl.lang.drop.DropStatementImpl;
 import ar.com.kfgodel.asql.impl.lang.restrictions.NamedColumnImpl;
@@ -52,5 +54,10 @@ public class AsqlBuilderImpl implements AsqlBuilder {
     @Override
     public DropStatement drop(String tableName) {
         return DropStatementImpl.create(tableName);
+    }
+
+    @Override
+    public NamedConstraint constraint(String constraintName) {
+        return NamedConstraintImpl.create(constraintName);
     }
 }

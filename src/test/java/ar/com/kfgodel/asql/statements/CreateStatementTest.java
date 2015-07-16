@@ -4,12 +4,12 @@ import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.AsqlTestContext;
 import ar.com.kfgodel.asql.api.AsqlBuilder;
-import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.create.CreateStatement;
+import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.impl.AsqlBuilderImpl;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
+import ar.com.kfgodel.asql.impl.model.constraints.ConstraintDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
-import ar.com.kfgodel.asql.impl.model.create.TableConstraintModel;
 import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
 import org.junit.runner.RunWith;
 
@@ -46,9 +46,9 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
                 assertThat(columnModel.getColumnName()).isEqualTo("id");
                 assertThat(columnModel.getColumnType()).isEqualTo(DataType.pk());
 
-                TableConstraintModel contraint = createModel.getTableConstraints().get(0);
-                assertThat(contraint.getDeclaration()).isEqualTo("PRIMARY KEY (id)");
-
+                ConstraintDeclarationModel contraint = createModel.getTableConstraints().get(0);
+                assertThat(contraint.getTypeName()).isEqualTo("PRIMARY KEY");
+                assertThat(contraint.getColumnNames().get(0)).isEqualTo("id");
             });
 
             describe("for extra columns", () -> {

@@ -105,7 +105,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                             "persistenceVersion bigint, \n" +
                             "diasPorLiquidar integer NOT NULL, \n" +
                             "estado VARCHAR(255), \n" +
-                            "PRIMARY KEY (id)\n" +
+                            "PRIMARY KEY ( id )\n" +
                             ")");
                 });
 
@@ -119,7 +119,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                             "persistenceVersion numeric(19,0), \n" +
                             "diasPorLiquidar numeric(19,0) NOT NULL, \n" +
                             "estado VARCHAR(255), \n" +
-                            "PRIMARY KEY (id)\n" +
+                            "PRIMARY KEY ( id )\n" +
                             ")");
 
                 });
@@ -170,6 +170,18 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("DELETE FROM tableName");
                     assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("DELETE FROM tableName");
                 });   
+            });
+
+            describe("foreign key", () -> {
+                it("aa",()->{
+                    AgnosticStatement statement = asql.alter("POSA_SEVERIDADES")
+                            .adding(asql.constraint("severidades_estadoDeLiquidacion_fk")
+                                    .fkFrom("estadoDeLiquidacion_id").to("POSA_ESTADO_DE_LIQUIDACION"));
+
+                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement))
+                            .isEqualTo("ALTER TABLE POSA_SEVERIDADES ADD CONSTRAINT severidades_estadoDeLiquidacion_fk FOREIGN KEY ( estadoDeLiquidacion_id ) REFERENCES POSA_ESTADO_DE_LIQUIDACION");
+
+                });
             });
 
 

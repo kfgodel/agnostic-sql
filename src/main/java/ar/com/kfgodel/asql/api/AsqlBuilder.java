@@ -5,6 +5,7 @@ import ar.com.kfgodel.asql.api.delete.DeleteStatement;
 import ar.com.kfgodel.asql.api.drop.DropStatement;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.api.create.TableDefinedCreate;
+import ar.com.kfgodel.asql.api.constraints.NamedConstraint;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 
 /**
@@ -23,4 +24,6 @@ public interface AsqlBuilder {
     DeleteStatement deleteFrom(String tableName);
 
     DropStatement drop(String tableName);
+
+    NamedConstraint constraint(String constraintName);
 }

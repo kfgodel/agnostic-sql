@@ -8,8 +8,8 @@ import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
+import ar.com.kfgodel.asql.impl.model.constraints.ConstraintDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
-import ar.com.kfgodel.asql.impl.model.create.TableConstraintModel;
 import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
 import org.junit.runner.RunWith;
 
@@ -35,7 +35,7 @@ public class CreateModelTest extends JavaSpec<AsqlTestContext> {
                 createModel.addDeclaration(ColumnDeclarationModel.create("cantidad",DataType.integer()).withNullity("NOT NULL").withDefaultValue(ExplicitValueModel.create(0)));
                 createModel.addDeclaration(ColumnDeclarationModel.create("otra_id", DataType.fk()));
                 createModel.addDeclaration(ColumnDeclarationModel.create("estado", DataType.shortString()));
-                createModel.addConstraint(TableConstraintModel.create("primary key (id)"));
+                createModel.addConstraint(ConstraintDeclarationModel.create("primary key").forColumns("id"));
                 return createModel;
             });
 
@@ -54,7 +54,7 @@ public class CreateModelTest extends JavaSpec<AsqlTestContext> {
                         "cantidad integer NOT NULL DEFAULT 0, \n" +
                         "otra_id bigint, \n" +
                         "estado VARCHAR(255), \n" +
-                        "primary key (id)\n" +
+                        "primary key ( id )\n" +
                         ")");
             });
             
@@ -72,7 +72,7 @@ public class CreateModelTest extends JavaSpec<AsqlTestContext> {
                         "cantidad numeric(19,0) NOT NULL DEFAULT 0, \n" +
                         "otra_id numeric(19,0), \n" +
                         "estado VARCHAR(255), \n" +
-                        "primary key (id)\n" +
+                        "primary key ( id )\n" +
                         ")");
             });   
 

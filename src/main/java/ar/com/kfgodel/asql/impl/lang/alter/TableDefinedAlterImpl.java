@@ -1,10 +1,8 @@
 package ar.com.kfgodel.asql.impl.lang.alter;
 
-import ar.com.kfgodel.asql.api.alter.AddColumnStatement;
-import ar.com.kfgodel.asql.api.alter.ChangeColumnStatement;
-import ar.com.kfgodel.asql.api.alter.RemoveColumnStatement;
-import ar.com.kfgodel.asql.api.alter.TableDefinedAlter;
+import ar.com.kfgodel.asql.api.alter.*;
 import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
+import ar.com.kfgodel.asql.api.constraints.NamedConstraintDeclaration;
 import ar.com.kfgodel.asql.impl.lang.support.TableCenteredStatement;
 
 /**
@@ -21,6 +19,11 @@ public class TableDefinedAlterImpl extends TableCenteredStatement implements Tab
     @Override
     public AddColumnStatement adding(ColumnDeclaration newColumnDeclaration) {
         return AddColumnStatementImpl.create(this, newColumnDeclaration);
+    }
+
+    @Override
+    public AddConstraintStatement adding(NamedConstraintDeclaration newConstraint) {
+        return AddConstraintStatementImpl.create(getTableName(), newConstraint);
     }
 
     @Override

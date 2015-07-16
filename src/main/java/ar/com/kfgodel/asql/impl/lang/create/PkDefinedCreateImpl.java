@@ -5,8 +5,8 @@ import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
 import ar.com.kfgodel.asql.api.create.ColumnDefinedCreate;
 import ar.com.kfgodel.asql.api.create.CreateStatement;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
+import ar.com.kfgodel.asql.impl.model.constraints.ConstraintDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
-import ar.com.kfgodel.asql.impl.model.create.TableConstraintModel;
 
 /**
  * Created by kfgodel on 14/07/15.
@@ -23,7 +23,7 @@ public class PkDefinedCreateImpl implements ColumnDefinedCreate {
     public CreateModel parseModel() {
         CreateModel createModel = previous.parseModel();
         createModel.addDeclaration(ColumnDeclarationModel.create("id", DataType.pk()));
-        createModel.addConstraint(TableConstraintModel.create("PRIMARY KEY (id)"));
+        createModel.addConstraint(ConstraintDeclarationModel.create("PRIMARY KEY").forColumns("id"));
         return createModel;
     }
 
