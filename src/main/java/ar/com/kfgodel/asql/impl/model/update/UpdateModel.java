@@ -2,6 +2,7 @@ package ar.com.kfgodel.asql.impl.model.update;
 
 import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
 import ar.com.kfgodel.asql.impl.model.restrictions.PredicateModel;
+import ar.com.kfgodel.asql.impl.model.restrictions.RowRestrictedModel;
 import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.List;
  * This type represents a tree node for an update statement containing its state
  * Created by kfgodel on 12/07/15.
  */
-public class UpdateModel extends TableCenteredModel {
+public class UpdateModel extends TableCenteredModel implements RowRestrictedModel {
 
     private List<ColumnAssignmentModel> columnAssignments;
 

@@ -1,7 +1,7 @@
 package ar.com.kfgodel.asql.api;
 
 import ar.com.kfgodel.asql.api.alter.TableDefinedAlter;
-import ar.com.kfgodel.asql.api.delete.DeleteStatement;
+import ar.com.kfgodel.asql.api.delete.UnrestrictedDeleteStatement;
 import ar.com.kfgodel.asql.api.drop.DropStatement;
 import ar.com.kfgodel.asql.api.insert.TableDefinedInsert;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
@@ -22,7 +22,7 @@ public interface Asql {
 
     TableDefinedAlter alter(String tableName);
 
-    DeleteStatement deleteFrom(String tableName);
+    UnrestrictedDeleteStatement deleteFrom(String tableName);
 
     DropStatement drop(String tableName);
 

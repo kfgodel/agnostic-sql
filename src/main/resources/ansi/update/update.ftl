@@ -4,8 +4,5 @@ SET <#list columnAssignments as columnAssignment>
   <#include "/columns/_columnAssignment.ftl">
   <#sep>, </#sep>
 </#list>
-<#if wherePredicate??>
-<#assign predicate=wherePredicate />
-${" "}WHERE <#include "/restrictions/_predicate.ftl">
-</#if>
+<#include "/restrictions/_wherePredicate.ftl" />
 </@compress>

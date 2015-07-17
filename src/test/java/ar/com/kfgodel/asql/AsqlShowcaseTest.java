@@ -6,7 +6,7 @@ import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.alter.ChangeColumnStatement;
 import ar.com.kfgodel.asql.api.alter.RemoveColumnStatement;
-import ar.com.kfgodel.asql.api.delete.DeleteStatement;
+import ar.com.kfgodel.asql.api.delete.RestrictedDeleteStatement;
 import ar.com.kfgodel.asql.api.drop.DropStatement;
 import ar.com.kfgodel.asql.api.functions.Function;
 import ar.com.kfgodel.asql.api.insert.InsertStatement;
@@ -185,11 +185,11 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
             describe("deletes", () -> {
                 it("it is basically ansi for all vendors",()->{
-                    DeleteStatement statement = asql.deleteFrom("tableName");
+                    RestrictedDeleteStatement statement = asql.deleteFrom("tableName").where(asql.column("column1").isNull());
 
-                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("DELETE FROM tableName");
-                    assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("DELETE FROM tableName");
-                    assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("DELETE FROM tableName");
+                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL");
+                    assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL");
+                    assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL");
                 });   
             });
 

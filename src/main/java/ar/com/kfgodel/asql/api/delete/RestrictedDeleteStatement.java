@@ -4,10 +4,9 @@ import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.impl.model.delete.DeleteModel;
 
 /**
- * This type represents an agnostic delete statemente
- * Created by kfgodel on 15/07/15.
+ * Created by kfgodel on 16/07/15.
  */
-public interface DeleteStatement extends AgnosticStatement {
+public interface RestrictedDeleteStatement extends AgnosticStatement {
 
     @Override
     DeleteModel parseModel();
