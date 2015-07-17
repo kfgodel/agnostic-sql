@@ -7,6 +7,6 @@ import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
  */
 public interface TableDefinedUpdate {
 
-    UnrestrictedUpdate set(ColumnAssignment... assignments);
+    UnrestrictedUpdate setting(ColumnAssignment... assignments);
 
 }

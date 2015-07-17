@@ -22,7 +22,7 @@ public class TableDefinedUpdateImpl extends TableCenteredStatement implements Ta
     }
 
     @Override
-    public UnrestrictedUpdate set(ColumnAssignment... assignments) {
+    public UnrestrictedUpdate setting(ColumnAssignment... assignments) {
         if(assignments == null || assignments.length == 0){
             throw new IllegalArgumentException("At least one assignment needed");
         }

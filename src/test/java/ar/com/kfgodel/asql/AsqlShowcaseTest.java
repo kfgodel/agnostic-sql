@@ -162,7 +162,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                 context().interpreter(() -> TemplateInterpreter.create(Vendor.ansi()));
 
                 it("without 'where' clause are expressed naturally ", () -> {
-                    AgnosticStatement statement = asql.update("POSA_EMPLEADOS").set(asql.column("CATEGORIA_ID").to(1), asql.column("CATEGORIA_VAL").to("AA"));
+                    AgnosticStatement statement = asql.update("POSA_EMPLEADOS").setting(asql.column("CATEGORIA_ID").to(1), asql.column("CATEGORIA_VAL").to("AA"));
 
                     String generatedSql = context().interpreter().translate(statement);
 
@@ -172,8 +172,8 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                 it("can be used in multiple statements", () -> {
                     TableDefinedUpdate updateEmpleados = asql.update("POSA_EMPLEADOS");
 
-                    AgnosticStatement firstStatement = updateEmpleados.set(asql.column("CATEGORIA_ID").to(1)).where(asql.column("CATEGORIA_ID").isNull());
-                    AgnosticStatement secondStatement = updateEmpleados.set(asql.column("NOMBRE").to("Pepe")).where(asql.column("CATEGORIA_ID").isNotNull());
+                    AgnosticStatement firstStatement = updateEmpleados.setting(asql.column("CATEGORIA_ID").to(1)).where(asql.column("CATEGORIA_ID").isNull());
+                    AgnosticStatement secondStatement = updateEmpleados.setting(asql.column("NOMBRE").to("Pepe")).where(asql.column("CATEGORIA_ID").isNotNull());
 
                     String generatedSql = context().interpreter().translate(Lists.newArrayList(firstStatement.parseModel(), secondStatement.parseModel()));
 

@@ -25,7 +25,7 @@ public class UpdateStatementTest extends JavaSpec<AsqlTestContext> {
              it("can express a simple update", () -> {
                  Asql asql = AsqlBuilder.create();
 
-                 UnrestrictedUpdate updateStatement = asql.update("tableName").set(asql.column("columnName").to("value1"));
+                 UnrestrictedUpdate updateStatement = asql.update("tableName").setting(asql.column("columnName").to("value1"));
                  UpdateModel updateModel = updateStatement.parseModel();
 
                  assertThat(updateModel.getTableName()).isEqualTo("tableName");
