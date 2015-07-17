@@ -3,10 +3,10 @@ package ar.com.kfgodel.asql.statements;
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.AsqlTestContext;
-import ar.com.kfgodel.asql.api.AsqlBuilder;
+import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.create.CreateStatement;
 import ar.com.kfgodel.asql.api.types.DataType;
-import ar.com.kfgodel.asql.impl.AsqlBuilderImpl;
+import ar.com.kfgodel.asql.impl.AsqlBuilder;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.constraints.ConstraintDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
@@ -25,7 +25,7 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
     public void define() {
         describe("an agnostic create statement", () -> {
 
-            context().asql(AsqlBuilderImpl::create);
+            context().asql(AsqlBuilder::create);
 
             it("can generate the simplest create model", () -> {
 
@@ -54,7 +54,7 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
             describe("for extra columns", () -> {
 
                 it("can declare the column type",()->{
-                    AsqlBuilder asql = context().asql();
+                    Asql asql = context().asql();
                     CreateStatement create = asql
                             .create("tableName")
                             .with(asql.column("columnName").typed(DataType.bigInteger()));
@@ -67,7 +67,7 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
                 });
 
                 it("can declare a column nullity",()->{
-                    AsqlBuilder asql = context().asql();
+                    Asql asql = context().asql();
                     CreateStatement create = asql
                             .create("tableName")
                             .with(asql.column("column1").typed(DataType.bigInteger()).nonNullable(),
@@ -83,7 +83,7 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
                 });
 
                 it("can declare a column default value",()->{
-                    AsqlBuilder asql = context().asql();
+                    Asql asql = context().asql();
                     CreateStatement create = asql
                             .create("tableName")
                             .with(asql.column("columnName").typed(DataType.bigInteger()).defaultedTo(4));

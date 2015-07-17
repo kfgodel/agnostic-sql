@@ -1,7 +1,9 @@
 package ar.com.kfgodel.asql.impl.lang.update;
 
 import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
+import ar.com.kfgodel.asql.api.functions.Function;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
+import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
 import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
 
 /**
@@ -14,7 +16,14 @@ public class ColumnAssignmentImpl implements ColumnAssignment {
 
     @Override
     public ColumnAssignmentModel parseModel() {
-        return ColumnAssignmentModel.create(columnName, ExplicitValueModel.create(columnValue));
+        ExplicitOperand value;
+        if(columnValue instanceof Function){
+            // Functions are already an operand
+            value = (Function) columnValue;
+        }else {
+            value = ExplicitValueModel.create(columnValue);
+        }
+        return ColumnAssignmentModel.create(columnName, value);
     }
 
     public static ColumnAssignmentImpl create(String columnName, Object columnValue) {

@@ -1,6 +1,6 @@
 package ar.com.kfgodel.asql.impl;
 
-import ar.com.kfgodel.asql.api.AsqlBuilder;
+import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.alter.TableDefinedAlter;
 import ar.com.kfgodel.asql.api.constraints.NamedConstraint;
 import ar.com.kfgodel.asql.api.delete.DeleteStatement;
@@ -21,10 +21,10 @@ import ar.com.kfgodel.asql.impl.lang.update.TableDefinedUpdateImpl;
 /**
  * Created by kfgodel on 11/07/15.
  */
-public class AsqlBuilderImpl implements AsqlBuilder {
+public class AsqlBuilder implements Asql {
 
-    public static AsqlBuilderImpl create() {
-        AsqlBuilderImpl builder = new AsqlBuilderImpl();
+    public static AsqlBuilder create() {
+        AsqlBuilder builder = new AsqlBuilder();
         return builder;
     }
 

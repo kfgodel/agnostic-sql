@@ -14,6 +14,11 @@ public class ColumnReferenceModel implements ExplicitOperand {
     }
 
     @Override
+    public boolean isFunction() {
+        return false;
+    }
+
+    @Override
     public boolean isSubquery() {
         return false;
     }

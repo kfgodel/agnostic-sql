@@ -3,15 +3,17 @@ package ar.com.kfgodel.asql;
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.api.AgnosticStatement;
+import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.alter.ChangeColumnStatement;
 import ar.com.kfgodel.asql.api.alter.RemoveColumnStatement;
 import ar.com.kfgodel.asql.api.delete.DeleteStatement;
 import ar.com.kfgodel.asql.api.drop.DropStatement;
+import ar.com.kfgodel.asql.api.functions.Function;
 import ar.com.kfgodel.asql.api.insert.InsertStatement;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
-import ar.com.kfgodel.asql.impl.AsqlBuilderImpl;
+import ar.com.kfgodel.asql.impl.AsqlBuilder;
 import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
 import com.google.common.collect.Lists;
 import org.junit.runner.RunWith;
@@ -26,7 +28,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
     @Override
     public void define() {
         // Declared here to avoid repetition on every tests.
-        AsqlBuilderImpl asql = AsqlBuilderImpl.create();
+        Asql asql = AsqlBuilder.create();
 
         describe("agnostic sql", () -> {
 
@@ -140,13 +142,18 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
             describe("inserts", () -> {
                 it("it is basically ansi for all vendors",()->{
                     InsertStatement statement = asql.insertInto("tableName").setting(asql.column("column1").to(1),
-                            asql.column("column2").to("value2"));
+                            asql.column("column2").to(Function.currentDate()));
 
-                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1 , 'value2' )");
-                    assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1 , 'value2' )");
-                    assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1 , 'value2' )");
+                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1 , CURRENT_DATE )");
+                    assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1 , getDate() )");
+                    assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1 , CURRENT_DATE )");
                 });
 
+                it("it has an alternative traditional form",()->{
+                    InsertStatement statement = asql.insertInto("tableName").set("column1", "column2").to(1, Function.currentDate());
+
+                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1 , CURRENT_DATE )");
+                });
             });
 
 

@@ -12,7 +12,7 @@ import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 /**
  * Created by kfgodel on 11/07/15.
  */
-public interface AsqlBuilder {
+public interface Asql {
 
     TableDefinedUpdate update(String tableName);
 

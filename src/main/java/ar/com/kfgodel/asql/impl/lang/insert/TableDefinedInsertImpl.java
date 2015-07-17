@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.impl.lang.insert;
 
 import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
+import ar.com.kfgodel.asql.api.insert.ColumnDefinedInsert;
 import ar.com.kfgodel.asql.api.insert.InsertStatement;
 import ar.com.kfgodel.asql.api.insert.TableDefinedInsert;
 import ar.com.kfgodel.asql.impl.lang.support.TableCenteredStatement;
@@ -15,6 +16,11 @@ public class TableDefinedInsertImpl extends TableCenteredStatement implements Ta
     @Override
     public InsertStatement setting(ColumnAssignment... columnAssignments) {
         return InsertStatementImpl.create(this, Arrays.asList(columnAssignments));
+    }
+
+    @Override
+    public ColumnDefinedInsert set(String... columnNames) {
+        return ColumnDefinedInsertImpl.create(this, Arrays.asList(columnNames));
     }
 
     public static TableDefinedInsertImpl create(String tableName) {

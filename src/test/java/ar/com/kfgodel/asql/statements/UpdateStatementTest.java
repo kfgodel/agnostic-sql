@@ -3,9 +3,9 @@ package ar.com.kfgodel.asql.statements;
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.AsqlTestContext;
-import ar.com.kfgodel.asql.api.AsqlBuilder;
+import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.update.UnrestrictedUpdate;
-import ar.com.kfgodel.asql.impl.AsqlBuilderImpl;
+import ar.com.kfgodel.asql.impl.AsqlBuilder;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
@@ -23,7 +23,7 @@ public class UpdateStatementTest extends JavaSpec<AsqlTestContext> {
         describe("an agnostic update statement", () -> {
 
              it("can express a simple update", () -> {
-                 AsqlBuilder asql = AsqlBuilderImpl.create();
+                 Asql asql = AsqlBuilder.create();
 
                  UnrestrictedUpdate updateStatement = asql.update("tableName").set(asql.column("columnName").to("value1"));
                  UpdateModel updateModel = updateStatement.parseModel();

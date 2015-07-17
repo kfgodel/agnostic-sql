@@ -8,4 +8,6 @@ import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
 public interface TableDefinedInsert {
 
     InsertStatement setting(ColumnAssignment... columnAssignments);
+
+    ColumnDefinedInsert set(String... columnNames);
 }

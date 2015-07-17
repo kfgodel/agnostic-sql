@@ -7,6 +7,7 @@ package ar.com.kfgodel.asql.impl.model.value;
 public interface ExplicitOperand {
 
     boolean isString();
+    boolean isFunction();
     boolean isSubquery();
 
     Object getValue();

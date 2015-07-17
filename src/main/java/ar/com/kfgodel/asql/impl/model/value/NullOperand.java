@@ -12,6 +12,11 @@ public class NullOperand implements ExplicitOperand {
     }
 
     @Override
+    public boolean isFunction() {
+        return false;
+    }
+
+    @Override
     public boolean isSubquery() {
         return false;
     }
