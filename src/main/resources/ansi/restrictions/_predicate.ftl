@@ -1,3 +1,2 @@
-<#assign operand = predicate.leftSideOperand /><#include "_operand.ftl"/>
-${" "}${predicate.operator}${" "}
-<#assign operand = predicate.rightSideOperand /><#include "_operand.ftl"/>
+<#include "_restrictionMacros.ftl"/>
+<@renderPredicate predicate=predicate />

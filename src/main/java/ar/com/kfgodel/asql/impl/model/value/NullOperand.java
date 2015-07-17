@@ -22,6 +22,11 @@ public class NullOperand implements ExplicitOperand {
     }
 
     @Override
+    public boolean isPredicate() {
+        return false;
+    }
+
+    @Override
     public Object getValue() {
         return "NULL";
     }

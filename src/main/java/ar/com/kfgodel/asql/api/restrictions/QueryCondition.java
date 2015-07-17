@@ -11,4 +11,8 @@ public interface QueryCondition extends Parseable {
 
     @Override
     PredicateModel parseModel();
+
+    QueryCondition and(QueryCondition anotherCondition);
+
+    QueryCondition or(QueryCondition anotherCondition);
 }

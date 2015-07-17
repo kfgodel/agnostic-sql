@@ -26,6 +26,11 @@ public class FunctionImpl implements Function {
     }
 
     @Override
+    public boolean isPredicate() {
+        return false;
+    }
+
+    @Override
     public String getAgnosticName() {
         return agnosticName;
     }

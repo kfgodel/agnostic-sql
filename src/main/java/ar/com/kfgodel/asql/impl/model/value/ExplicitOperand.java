@@ -9,6 +9,7 @@ public interface ExplicitOperand {
     boolean isString();
     boolean isFunction();
     boolean isSubquery();
+    boolean isPredicate();
 
     Object getValue();
 }

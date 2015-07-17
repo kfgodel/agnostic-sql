@@ -185,11 +185,12 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
             describe("deletes", () -> {
                 it("it is basically ansi for all vendors",()->{
-                    RestrictedDeleteStatement statement = asql.deleteFrom("tableName").where(asql.column("column1").isNull());
+                    RestrictedDeleteStatement statement = asql.deleteFrom("tableName")
+                            .where(asql.column("column1").isNull().and(asql.column("column2").isNotNull()).or(asql.column("column3").isNotNull()));
 
-                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL");
-                    assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL");
-                    assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL");
+                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL AND column2 IS NOT NULL OR column3 IS NOT NULL");
+                    assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL AND column2 IS NOT NULL OR column3 IS NOT NULL");
+                    assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL AND column2 IS NOT NULL OR column3 IS NOT NULL");
                 });   
             });
 

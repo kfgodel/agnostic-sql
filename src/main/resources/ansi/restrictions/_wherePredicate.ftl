@@ -1,3 +1,4 @@
+<#include "_restrictionMacros.ftl"/>
 <#if wherePredicate??>
-<#assign predicate=wherePredicate />${" "}WHERE <#include "/restrictions/_predicate.ftl">
+${" "}WHERE <@renderPredicate predicate=wherePredicate />
 </#if>

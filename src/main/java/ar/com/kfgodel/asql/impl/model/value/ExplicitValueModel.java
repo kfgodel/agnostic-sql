@@ -23,6 +23,11 @@ public class ExplicitValueModel implements ExplicitOperand {
     }
 
     @Override
+    public boolean isPredicate() {
+        return false;
+    }
+
+    @Override
     public Object getValue() {
         return value;
     }

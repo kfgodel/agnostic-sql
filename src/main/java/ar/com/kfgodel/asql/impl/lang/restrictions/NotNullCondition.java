@@ -22,4 +22,14 @@ public class NotNullCondition implements QueryCondition {
     public PredicateModel parseModel() {
         return PredicateModel.create(ColumnReferenceModel.create(namedColumn.getColumnName()), "IS NOT", NullOperand.create());
     }
+
+    @Override
+    public QueryCondition and(QueryCondition anotherCondition) {
+        return AndCondition.create(this, anotherCondition);
+    }
+
+    @Override
+    public QueryCondition or(QueryCondition anotherCondition) {
+        return OrCondition.create(this, anotherCondition);
+    }
 }

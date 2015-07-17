@@ -24,6 +24,11 @@ public class ColumnReferenceModel implements ExplicitOperand {
     }
 
     @Override
+    public boolean isPredicate() {
+        return false;
+    }
+
+    @Override
     public Object getValue() {
         return columnName;
     }
