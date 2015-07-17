@@ -1,19 +1,20 @@
-<#macro renderOperand operand>
+<#macro expandOperand operand>
 <#if operand.subquery>
 subquery
 <#elseif operand.function>
   <#include "/functions/${operand.agnosticName}.ftl"/>
 <#elseif operand.predicate>
-  <@renderPredicate predicate=operand />
+  <@expandPredicate predicate=operand />
 <#elseif operand.string>
 '${operand.value}'
 <#else>
 ${operand.value}
 </#if>
 </#macro>
-<#macro renderPredicate predicate>
-<@renderOperand operand = predicate.leftSideOperand/>
+
+<#macro expandPredicate predicate>
+<@expandOperand operand = predicate.leftSideOperand/>
 ${" "}${predicate.operator}${" "}
-<@renderOperand operand = predicate.rightSideOperand/>
+<@expandOperand operand = predicate.rightSideOperand/>
 </#macro>
 

@@ -1,1 +1,2 @@
-${columnAssignment.columnName} = <#assign operand = columnAssignment.assignedValue /><#include "/restrictions/_operand.ftl"/>
+<#include "/restrictions/_restrictionMacros.ftl" />
+${columnAssignment.columnName} = <@expandOperand operand = columnAssignment.assignedValue />
