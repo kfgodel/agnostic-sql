@@ -1,7 +1,6 @@
 package ar.com.kfgodel.asql.impl.templating;
 
 import ar.com.kfgodel.asql.api.AsqlException;
-import ar.com.kfgodel.asql.impl.templating.mapper.TypeToTemplateMapper;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.TemplateLoader;
@@ -20,13 +19,11 @@ import java.io.StringWriter;
  */
 public class FreemarkerEngine implements TemplateEngine {
 
-    private TypeToTemplateMapper typeMapper;
     private Configuration freemarkerConfig;
 
-    public static FreemarkerEngine create(String vendorSepcificDir, TypeToTemplateMapper typeMapper) {
+    public static FreemarkerEngine create(String vendorSpecificDir) {
         FreemarkerEngine engine = new FreemarkerEngine();
-        engine.typeMapper = typeMapper;
-        engine.initializeFor(vendorSepcificDir);
+        engine.initializeFor(vendorSpecificDir);
         return engine;
     }
 
@@ -50,7 +47,7 @@ public class FreemarkerEngine implements TemplateEngine {
     }
 
     @Override
-    public String process(TemplateReferable templateModel) throws AsqlException {
+    public String process(TemplateModel templateModel) throws AsqlException {
         try {
             Template template = loadTemplateFor(templateModel);
 
@@ -64,8 +61,8 @@ public class FreemarkerEngine implements TemplateEngine {
         }
     }
 
-    private Template loadTemplateFor(TemplateReferable templateModel) throws IOException {
-        String templateName = typeMapper.getTemplateNameFor(templateModel);
+    private Template loadTemplateFor(TemplateModel templateModel) throws IOException {
+        String templateName = templateModel.getTemplatePath();
         try {
             return freemarkerConfig.getTemplate(templateName);
         } catch (TemplateNotFoundException e) {

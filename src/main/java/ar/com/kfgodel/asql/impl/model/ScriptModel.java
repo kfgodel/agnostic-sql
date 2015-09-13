@@ -26,4 +26,9 @@ public class ScriptModel implements AgnosticModel {
     public void addStatement(String newStatement) {
         this.getStatements().add(newStatement);
     }
+
+    @Override
+    public String getTemplatePath() {
+        return "script.ftl";
+    }
 }

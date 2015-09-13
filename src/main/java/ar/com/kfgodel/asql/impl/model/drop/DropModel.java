@@ -13,4 +13,8 @@ public class DropModel extends TableCenteredModel {
         return model;
     }
 
+    @Override
+    public String getTemplatePath() {
+        return "drop/drop.ftl";
+    }
 }

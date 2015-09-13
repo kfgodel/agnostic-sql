@@ -27,4 +27,9 @@ public class DeleteModel extends TableCenteredModel implements RowRestrictedMode
     public void setWherePredicate(PredicateModel wherePredicate) {
         this.wherePredicate = wherePredicate;
     }
+
+    @Override
+    public String getTemplatePath() {
+        return "delete/delete.ftl";
+    }
 }

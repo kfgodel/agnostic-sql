@@ -34,4 +34,9 @@ public class InsertModel extends TableCenteredModel implements AgnosticModel {
     public void addAssignment(ColumnAssignmentModel newAssignment){
         this.getColumnAssignments().add(newAssignment);
     }
+
+    @Override
+    public String getTemplatePath() {
+        return "insert/insert.ftl";
+    }
 }

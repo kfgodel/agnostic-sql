@@ -23,4 +23,8 @@ public class TypeReference implements AgnosticModel {
         return testType;
     }
 
+    @Override
+    public String getTemplatePath() {
+        return "columns/_columnType.ftl";
+    }
 }

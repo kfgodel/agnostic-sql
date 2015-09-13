@@ -69,4 +69,9 @@ public class PredicateModel implements AgnosticModel, ExplicitOperand {
     public Object getValue() {
         return null;
     }
+
+    @Override
+    public String getTemplatePath() {
+        throw new UnsupportedOperationException("Template not defined");
+    }
 }

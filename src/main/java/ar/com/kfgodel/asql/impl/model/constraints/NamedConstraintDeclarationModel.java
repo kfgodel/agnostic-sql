@@ -33,4 +33,8 @@ public class NamedConstraintDeclarationModel implements AgnosticModel {
         return model;
     }
 
+    @Override
+    public String getTemplatePath() {
+        return "create/_tableConstraint.ftl";
+    }
 }

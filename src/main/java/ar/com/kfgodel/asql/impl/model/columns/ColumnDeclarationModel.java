@@ -68,4 +68,9 @@ public class ColumnDeclarationModel implements TablePartModel, AgnosticModel{
     public boolean isColumnDeclaration() {
         return true;
     }
+
+    @Override
+    public String getTemplatePath() {
+        return "columns/_columnDeclaration.ftl";
+    }
 }

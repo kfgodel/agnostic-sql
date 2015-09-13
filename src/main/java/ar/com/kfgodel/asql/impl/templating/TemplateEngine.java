@@ -16,5 +16,5 @@ public interface TemplateEngine {
      * @return The generated text
      * @throws AsqlException If the engine found an error processing the template
      */
-    String process(TemplateReferable templateModel) throws AsqlException;
+    String process(TemplateModel templateModel) throws AsqlException;
 }

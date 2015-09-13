@@ -34,4 +34,8 @@ public class ColumnAssignmentModel implements AgnosticModel {
         return assignmentNode;
     }
 
+    @Override
+    public String getTemplatePath() {
+        return "columns/_columnAssignment.ftl";
+    }
 }

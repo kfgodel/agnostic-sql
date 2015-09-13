@@ -64,4 +64,9 @@ public class ConstraintDeclarationModel implements AgnosticModel, TablePartModel
     public boolean isColumnDeclaration() {
         return false;
     }
+
+    @Override
+    public String getTemplatePath() {
+        return "constraints/_contraintDeclaration.ftl";
+    }
 }

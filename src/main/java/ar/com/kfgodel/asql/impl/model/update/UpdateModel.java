@@ -46,4 +46,9 @@ public class UpdateModel extends TableCenteredModel implements RowRestrictedMode
     public void addAssignment(ColumnAssignmentModel assignmentNode) {
         getColumnAssignments().add(assignmentNode);
     }
+
+    @Override
+    public String getTemplatePath() {
+        return "update/update.ftl";
+    }
 }

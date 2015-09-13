@@ -57,4 +57,9 @@ public class CreateModel extends TableCenteredModel {
         parts.addAll(getTableConstraints());
         return parts;
     }
+
+    @Override
+    public String getTemplatePath() {
+        return "create/create.ftl";
+    }
 }
