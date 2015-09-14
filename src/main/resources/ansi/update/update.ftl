@@ -1,11 +1,11 @@
 <#include "/macros/_renderAsModel.ftl">
 <@compress single_line=true>
-UPDATE ${tableName}
-SET <#list columnAssignments as columnAssignment>
+UPDATE ${model.tableName}
+SET <#list model.columnAssignments as columnAssignment>
   <@renderAsModel model=columnAssignment />
   <#sep>, </#sep>
 </#list>
-<#if whereClause.defined>
-${" "}<@renderAsModel model=whereClause/>
+<#if model.whereClause.defined>
+${" "}<@renderAsModel model=model.whereClause/>
 </#if>
 </@compress>

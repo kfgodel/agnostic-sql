@@ -27,6 +27,6 @@ public class RemoveColumnModel extends TableCenteredModel{
 
     @Override
     public String getTemplatePath() {
-        return "alter/remove_column.ftl";
+        return "/alter/remove_column.ftl";
     }
 }

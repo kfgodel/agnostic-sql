@@ -15,6 +15,7 @@ import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.impl.AsqlBuilder;
 import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
+import ar.com.kfgodel.asql.impl.model.ScriptModel;
 import com.google.common.collect.Lists;
 import org.junit.runner.RunWith;
 
@@ -175,7 +176,9 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     AgnosticStatement firstStatement = updateEmpleados.setting(asql.column("CATEGORIA_ID").to(1)).where(asql.column("CATEGORIA_ID").isNull());
                     AgnosticStatement secondStatement = updateEmpleados.setting(asql.column("NOMBRE").to("Pepe")).where(asql.column("CATEGORIA_ID").isNotNull());
 
-                    String generatedSql = context().interpreter().translate(Lists.newArrayList(firstStatement.parseModel(), secondStatement.parseModel()));
+                    String generatedSql = context().interpreter().translate(ScriptModel.create(
+                            Lists.newArrayList(firstStatement.parseModel(), secondStatement.parseModel())
+                    ));
 
                     assertThat(generatedSql).isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID = 1 WHERE CATEGORIA_ID IS NULL;\n" +
                             "UPDATE POSA_EMPLEADOS SET NOMBRE = 'Pepe' WHERE CATEGORIA_ID IS NOT NULL");

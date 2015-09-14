@@ -28,6 +28,6 @@ public class AddColumnModel extends TableCenteredModel {
 
     @Override
     public String getTemplatePath() {
-        return "alter/add_column.ftl";
+        return "/alter/add_column.ftl";
     }
 }

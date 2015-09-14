@@ -21,7 +21,7 @@ public class DeleteModel extends TableCenteredModel implements WhereConstrainedM
 
     @Override
     public String getTemplatePath() {
-        return "delete/delete.ftl";
+        return "/delete/delete.ftl";
     }
 
     @Override

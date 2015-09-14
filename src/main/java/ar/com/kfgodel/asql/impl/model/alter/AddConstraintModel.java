@@ -28,6 +28,6 @@ public class AddConstraintModel extends TableCenteredModel implements AgnosticMo
 
     @Override
     public String getTemplatePath() {
-        return "alter/add_constraint.ftl";
+        return "/alter/add_constraint.ftl";
     }
 }

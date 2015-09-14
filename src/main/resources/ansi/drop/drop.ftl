@@ -1,1 +1,1 @@
-DROP TABLE ${tableName}
+DROP TABLE ${model.tableName}

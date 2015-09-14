@@ -27,6 +27,6 @@ public class ChangeColumnModel extends TableCenteredModel {
 
     @Override
     public String getTemplatePath() {
-        return "alter/change_column_type.ftl";
+        return "/alter/change_column_type.ftl";
     }
 }

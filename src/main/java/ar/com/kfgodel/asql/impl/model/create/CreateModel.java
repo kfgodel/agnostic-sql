@@ -60,6 +60,6 @@ public class CreateModel extends TableCenteredModel {
 
     @Override
     public String getTemplatePath() {
-        return "create/create.ftl";
+        return "/create/create.ftl";
     }
 }

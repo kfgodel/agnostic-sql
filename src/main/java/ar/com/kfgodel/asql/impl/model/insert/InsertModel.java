@@ -37,6 +37,6 @@ public class InsertModel extends TableCenteredModel implements AgnosticModel {
 
     @Override
     public String getTemplatePath() {
-        return "insert/insert.ftl";
+        return "/insert/insert.ftl";
     }
 }

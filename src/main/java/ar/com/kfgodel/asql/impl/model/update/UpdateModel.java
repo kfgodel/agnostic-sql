@@ -41,7 +41,7 @@ public class UpdateModel extends TableCenteredModel implements WhereConstrainedM
 
     @Override
     public String getTemplatePath() {
-        return "update/update.ftl";
+        return "/update/update.ftl";
     }
 
     public WhereModel getWhereClause() {

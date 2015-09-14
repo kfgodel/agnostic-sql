@@ -1,1 +1,1 @@
-ALTER TABLE ${tableName} DROP COLUMN ${columnName}
+ALTER TABLE ${model.tableName} DROP COLUMN ${model.columnName}

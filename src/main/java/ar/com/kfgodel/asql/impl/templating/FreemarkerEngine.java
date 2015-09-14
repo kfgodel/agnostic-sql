@@ -11,6 +11,8 @@ import freemarker.template.TemplateNotFoundException;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This type represents the templating engine implemented with Freemarker
@@ -52,13 +54,24 @@ public class FreemarkerEngine implements TemplateEngine {
             Template template = loadTemplateFor(templateModel);
 
             StringWriter writer = new StringWriter();
-            template.process(templateModel, writer);
+            template.process(asModel(templateModel), writer);
             return writer.toString();
         } catch (AsqlException e){
             throw e;
         } catch (Exception e) {
             throw new AsqlException("Unexpected error generating sql for["+templateModel+"]",e);
         }
+    }
+
+    /**
+     * Make the object available under the "model" variable (so it can nest with itself)
+     * @param templateModel The model to make available
+     * @return The new root template model, with a reference to actual the model
+     */
+    private Map<String,Object> asModel(TemplateModel templateModel) {
+        Map<String, Object> modelMap = new HashMap<>();
+        modelMap.put("model", templateModel);
+        return modelMap;
     }
 
     private Template loadTemplateFor(TemplateModel templateModel) throws IOException {
