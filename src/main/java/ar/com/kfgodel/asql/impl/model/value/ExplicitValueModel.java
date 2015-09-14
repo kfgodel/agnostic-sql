@@ -8,26 +8,6 @@ public class ExplicitValueModel implements ExplicitOperand {
     private Object value;
 
     @Override
-    public boolean isString() {
-        return value instanceof String;
-    }
-
-    @Override
-    public boolean isFunction() {
-        return false;
-    }
-
-    @Override
-    public boolean isSubquery() {
-        return false;
-    }
-
-    @Override
-    public boolean isPredicate() {
-        return false;
-    }
-
-    @Override
     public Object getValue() {
         return value;
     }
@@ -38,4 +18,11 @@ public class ExplicitValueModel implements ExplicitOperand {
         return directValue;
     }
 
+    @Override
+    public String getTemplatePath() {
+        if(value instanceof String){
+            return "/operands/_text.ftl";
+        }
+        return "/operands/_value.ftl";
+    }
 }

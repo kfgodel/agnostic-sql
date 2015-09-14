@@ -1,2 +1,1 @@
-<#include "/restrictions/_restrictionMacros.ftl"/>
-WHERE <@expandPredicate predicate=model.predicate />
+WHERE <@renderAsModel model=model.predicate />

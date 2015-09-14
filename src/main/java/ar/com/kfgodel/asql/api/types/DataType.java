@@ -1,12 +1,13 @@
 package ar.com.kfgodel.asql.api.types;
 
 import ar.com.kfgodel.asql.impl.lang.types.DataTypeImpl;
+import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 
 /**
  * This type represents an agnostic data type that can be translated to a vendor specific type
  * Created by kfgodel on 13/07/15.
  */
-public interface DataType  {
+public interface DataType extends AgnosticModel {
 
     String getAgnosticName();
 

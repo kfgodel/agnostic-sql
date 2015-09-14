@@ -1,5 +1,5 @@
-${constraintDeclaration.typeName} (
-<#list constraintDeclaration.columnNames as columnName>
+${model.typeName} (
+<#list model.columnNames as columnName>
 ${columnName}<#sep>, </#sep>
 </#list>
-) <#if constraintDeclaration.tail??>${constraintDeclaration.tail}</#if>
+) <#if model.tail??>${model.tail}</#if>

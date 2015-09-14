@@ -46,32 +46,12 @@ public class PredicateModel implements AgnosticModel, ExplicitOperand {
     }
 
     @Override
-    public boolean isString() {
-        return false;
-    }
-
-    @Override
-    public boolean isFunction() {
-        return false;
-    }
-
-    @Override
-    public boolean isSubquery() {
-        return false;
-    }
-
-    @Override
-    public boolean isPredicate() {
-        return true;
-    }
-
-    @Override
     public Object getValue() {
         return null;
     }
 
     @Override
     public String getTemplatePath() {
-        throw new UnsupportedOperationException("Template not defined");
+        return "/where/_predicate.ftl";
     }
 }

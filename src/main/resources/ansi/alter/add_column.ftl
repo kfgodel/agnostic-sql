@@ -1,3 +1,4 @@
+<#include "/macros/_renderAsModel.ftl"/>
 <@compress single_line=true>
-ALTER TABLE ${tableName} ADD <#include "/columns/_columnDeclaration.ftl"/>
+ALTER TABLE ${tableName} ADD <@renderAsModel model=columnDeclaration />
 </@compress>

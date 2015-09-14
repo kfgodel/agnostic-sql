@@ -67,6 +67,6 @@ public class ConstraintDeclarationModel implements AgnosticModel, TablePartModel
 
     @Override
     public String getTemplatePath() {
-        return "constraints/_contraintDeclaration.ftl";
+        return "/constraints/_constraintDeclaration.ftl";
     }
 }

@@ -71,6 +71,6 @@ public class ColumnDeclarationModel implements TablePartModel, AgnosticModel{
 
     @Override
     public String getTemplatePath() {
-        return "columns/_columnDeclaration.ftl";
+        return "/columns/_columnDeclaration.ftl";
     }
 }

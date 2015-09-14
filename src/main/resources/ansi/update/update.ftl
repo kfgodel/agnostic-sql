@@ -2,7 +2,7 @@
 <@compress single_line=true>
 UPDATE ${tableName}
 SET <#list columnAssignments as columnAssignment>
-  <#include "${columnAssignment.templatePath}">
+  <@renderAsModel model=columnAssignment />
   <#sep>, </#sep>
 </#list>
 <#if whereClause.defined>

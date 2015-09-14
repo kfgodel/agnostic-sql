@@ -9,26 +9,6 @@ public class ColumnReferenceModel implements ExplicitOperand {
     private String columnName;
 
     @Override
-    public boolean isString() {
-        return false;
-    }
-
-    @Override
-    public boolean isFunction() {
-        return false;
-    }
-
-    @Override
-    public boolean isSubquery() {
-        return false;
-    }
-
-    @Override
-    public boolean isPredicate() {
-        return false;
-    }
-
-    @Override
     public Object getValue() {
         return columnName;
     }
@@ -39,4 +19,8 @@ public class ColumnReferenceModel implements ExplicitOperand {
         return reference;
     }
 
+    @Override
+    public String getTemplatePath() {
+        return "/operands/_value.ftl";
+    }
 }

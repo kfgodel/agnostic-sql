@@ -1,1 +1,0 @@
-${tableConstraint.declaration}

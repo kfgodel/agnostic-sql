@@ -1,8 +1,7 @@
-<#include "/restrictions/_restrictionMacros.ftl" />
-${columnDeclaration.columnName} <#assign type=columnDeclaration.columnType><#include "/columns/_columnType.ftl"/>
-<#if columnDeclaration.nullity??>
-${columnDeclaration.nullity}
+${model.columnName} <@renderAsModel model=model.columnType />
+<#if model.nullity??>
+${model.nullity}
 </#if>
-<#if columnDeclaration.defaultValue??>
-DEFAULT <@expandOperand operand = columnDeclaration.defaultValue />
+<#if model.defaultValue??>
+DEFAULT <@renderAsModel model=model.defaultValue />
 </#if>

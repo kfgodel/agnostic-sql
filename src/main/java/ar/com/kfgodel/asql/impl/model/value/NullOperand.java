@@ -5,27 +5,6 @@ package ar.com.kfgodel.asql.impl.model.value;
  */
 public class NullOperand implements ExplicitOperand {
 
-
-    @Override
-    public boolean isString() {
-        return false;
-    }
-
-    @Override
-    public boolean isFunction() {
-        return false;
-    }
-
-    @Override
-    public boolean isSubquery() {
-        return false;
-    }
-
-    @Override
-    public boolean isPredicate() {
-        return false;
-    }
-
     @Override
     public Object getValue() {
         return "NULL";
@@ -36,4 +15,8 @@ public class NullOperand implements ExplicitOperand {
         return value;
     }
 
+    @Override
+    public String getTemplatePath() {
+        return "/operands/_value.ftl";
+    }
 }

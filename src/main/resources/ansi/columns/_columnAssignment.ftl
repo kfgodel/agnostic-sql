@@ -1,2 +1,1 @@
-<#include "/restrictions/_restrictionMacros.ftl" />
-${columnAssignment.columnName} = <@expandOperand operand = columnAssignment.assignedValue />
+${model.columnName} = <@renderAsModel model=model.assignedValue />

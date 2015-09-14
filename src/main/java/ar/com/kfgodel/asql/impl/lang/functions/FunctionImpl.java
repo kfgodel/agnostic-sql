@@ -7,46 +7,21 @@ import ar.com.kfgodel.asql.api.functions.Function;
  */
 public class FunctionImpl implements Function {
 
-    private String agnosticName;
-    private String value;
-
-    @Override
-    public boolean isString() {
-        return Function.super.isString();
-    }
-
-    @Override
-    public boolean isFunction() {
-        return Function.super.isFunction();
-    }
-
-    @Override
-    public boolean isSubquery() {
-        return Function.super.isSubquery();
-    }
-
-    @Override
-    public boolean isPredicate() {
-        return false;
-    }
-
-    @Override
-    public String getAgnosticName() {
-        return agnosticName;
-    }
+    private String templatePath;
 
     public static FunctionImpl create(String name) {
         FunctionImpl function = new FunctionImpl();
-        function.agnosticName = name;
+        function.templatePath = "/functions/"+name+".ftl";
         return function;
     }
 
     @Override
     public String getValue() {
-        return value;
+        return null;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    @Override
+    public String getTemplatePath() {
+        return templatePath;
     }
 }

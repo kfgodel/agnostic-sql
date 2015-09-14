@@ -34,4 +34,10 @@ public class DataTypeImpl implements DataType {
     public int hashCode() {
         return name != null ? name.hashCode() : 0;
     }
+
+    @Override
+    public String getTemplatePath() {
+        return "/types/" + getAgnosticName() + ".ftl";
+    }
+
 }

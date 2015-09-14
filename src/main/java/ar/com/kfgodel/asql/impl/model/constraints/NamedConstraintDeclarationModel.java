@@ -35,6 +35,6 @@ public class NamedConstraintDeclarationModel implements AgnosticModel {
 
     @Override
     public String getTemplatePath() {
-        return "create/_tableConstraint.ftl";
+        throw new UnsupportedOperationException("No template defined for this mnodel");
     }
 }

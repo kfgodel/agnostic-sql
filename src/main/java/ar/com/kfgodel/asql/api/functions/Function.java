@@ -9,23 +9,6 @@ import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
  */
 public interface Function extends ExplicitOperand {
 
-    String getAgnosticName();
-
-    @Override
-    default boolean isString() {
-        return false;
-    }
-
-    @Override
-    default boolean isFunction() {
-        return true;
-    }
-
-    @Override
-    default boolean isSubquery() {
-        return false;
-    }
-
     static Function currentDate() {
         return FunctionImpl.create("current_date");
     }
