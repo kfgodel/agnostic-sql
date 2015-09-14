@@ -1,3 +1,4 @@
+<#include "/macros/_renderAsModel.ftl">
 <@compress single_line=true>
 UPDATE ${tableName}
 SET <#list columnAssignments as columnAssignment>
@@ -5,6 +6,6 @@ SET <#list columnAssignments as columnAssignment>
   <#sep>, </#sep>
 </#list>
 <#if whereClause.defined>
-${" "}<#include "${whereClause.templatePath}" />
+${" "}<@renderAsModel model=whereClause/>
 </#if>
 </@compress>

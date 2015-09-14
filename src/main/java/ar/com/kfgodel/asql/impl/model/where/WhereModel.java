@@ -8,23 +8,23 @@ import ar.com.kfgodel.asql.impl.model.restrictions.PredicateModel;
  */
 public class WhereModel implements AgnosticModel {
 
-    private PredicateModel wherePredicate;
+    private PredicateModel predicate;
 
-    public PredicateModel getWherePredicate() {
-        return wherePredicate;
+    public PredicateModel getPredicate() {
+        return predicate;
     }
 
-    public void setWherePredicate(PredicateModel wherePredicate) {
-        this.wherePredicate = wherePredicate;
+    public void setPredicate(PredicateModel predicate) {
+        this.predicate = predicate;
     }
 
     public boolean getDefined(){
-        return wherePredicate != null;
+        return predicate != null;
     }
 
     @Override
     public String getTemplatePath() {
-        return "/where/_wherePredicate.ftl";
+        return "/where/_where.ftl";
     }
     
     public static WhereModel create(){

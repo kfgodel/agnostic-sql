@@ -47,4 +47,5 @@ public class UpdateModel extends TableCenteredModel implements WhereConstrainedM
     public WhereModel getWhereClause() {
         return whereClause;
     }
+
 }

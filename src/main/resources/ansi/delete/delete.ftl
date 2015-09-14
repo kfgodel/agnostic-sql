@@ -1,6 +1,7 @@
+<#include "/macros/_renderAsModel.ftl">
 <@compress single_line=true>
 DELETE FROM ${tableName}
 <#if whereClause.defined>
-${" "}<#include "${whereClause.templatePath}" />
+${" "}<@renderAsModel model=whereClause/>
 </#if>
 </@compress>

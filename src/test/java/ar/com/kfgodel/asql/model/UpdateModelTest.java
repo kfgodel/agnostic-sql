@@ -27,7 +27,7 @@ public class UpdateModelTest extends JavaSpec<AsqlTestContext> {
             context().updateModel(() -> {
                 UpdateModel updateModel = UpdateModel.create("tableName");
                 updateModel.addAssignment(ColumnAssignmentModel.create("column1", ExplicitValueModel.create("value1")));
-                updateModel.getWhereClause().setWherePredicate(PredicateModel.create(ColumnReferenceModel.create("column2"), "=", ExplicitValueModel.create(3)));
+                updateModel.getWhereClause().setPredicate(PredicateModel.create(ColumnReferenceModel.create("column2"), "=", ExplicitValueModel.create(3)));
                 return updateModel;
             });
 
@@ -41,10 +41,10 @@ public class UpdateModelTest extends JavaSpec<AsqlTestContext> {
                 ExplicitValueModel assignedValue = (ExplicitValueModel) updateTree.getColumnAssignments().get(0).getAssignedValue();
                 assertThat(assignedValue.getValue()).isEqualTo("value1");
 
-                ColumnReferenceModel leftSide = (ColumnReferenceModel) updateTree.getWhereClause().getWherePredicate().getLeftSideOperand();
+                ColumnReferenceModel leftSide = (ColumnReferenceModel) updateTree.getWhereClause().getPredicate().getLeftSideOperand();
                 assertThat(leftSide.getValue()).isEqualTo("column2");
-                assertThat(updateTree.getWhereClause().getWherePredicate().getOperator()).isEqualTo("=");
-                ExplicitValueModel rightSide = (ExplicitValueModel) updateTree.getWhereClause().getWherePredicate().getRightSideOperand();
+                assertThat(updateTree.getWhereClause().getPredicate().getOperator()).isEqualTo("=");
+                ExplicitValueModel rightSide = (ExplicitValueModel) updateTree.getWhereClause().getPredicate().getRightSideOperand();
                 assertThat(rightSide.getValue()).isEqualTo(3);
             });
 

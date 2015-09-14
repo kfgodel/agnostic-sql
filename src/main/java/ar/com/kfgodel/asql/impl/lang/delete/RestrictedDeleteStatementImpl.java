@@ -15,7 +15,7 @@ public class RestrictedDeleteStatementImpl implements RestrictedDeleteStatement 
     @Override
     public DeleteModel parseModel() {
         DeleteModel model = previousNode.parseModel();
-        model.getWhereClause().setWherePredicate(condition.parseModel());
+        model.getWhereClause().setPredicate(condition.parseModel());
         return model;
     }
 
