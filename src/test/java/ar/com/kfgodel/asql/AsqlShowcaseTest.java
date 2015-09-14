@@ -169,7 +169,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     assertThat(generatedSql).isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID = 1 , CATEGORIA_VAL = 'AA'");
                 });
 
-                it("can be partially 11used in multiple statements", () -> {
+                it("can be partially used in multiple statements", () -> {
                     TableDefinedUpdate updateEmpleados = asql.update("POSA_EMPLEADOS");
 
                     AgnosticStatement firstStatement = updateEmpleados.setting(asql.column("CATEGORIA_ID").to(1)).where(asql.column("CATEGORIA_ID").isNull());

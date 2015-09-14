@@ -15,7 +15,7 @@ public class RestrictedUpdateImpl implements RestrictedUpdate {
     @Override
     public UpdateModel parseModel() {
         UpdateModel updateModel = unrestrictedUpdate.parseModel();
-        updateModel.setWherePredicate(condition.parseModel());
+        updateModel.getWhereClause().setWherePredicate(condition.parseModel());
         return updateModel;
     }
 
