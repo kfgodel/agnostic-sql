@@ -2,7 +2,6 @@ package ar.com.kfgodel.asql.impl.lang.restrictions;
 
 import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
 import ar.com.kfgodel.asql.impl.model.restrictions.PredicateModel;
-import ar.com.kfgodel.asql.impl.model.value.ColumnReferenceModel;
 import ar.com.kfgodel.asql.impl.model.value.NullOperand;
 
 /**
@@ -20,7 +19,7 @@ public class IsNullCondition implements QueryCondition {
 
     @Override
     public PredicateModel parseModel() {
-        return PredicateModel.create(ColumnReferenceModel.create(namedColumn.getColumnName()), "IS", NullOperand.create());
+        return PredicateModel.create(namedColumn.parseModel(), "IS", NullOperand.create());
     }
 
     @Override

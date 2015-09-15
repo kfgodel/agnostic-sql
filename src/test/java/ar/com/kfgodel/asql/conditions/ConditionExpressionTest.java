@@ -45,6 +45,12 @@ public class ConditionExpressionTest extends JavaSpec<AsqlTestContext> {
                 assertThat(context().translated()).isEqualTo("columnName = 'text'");
             });
 
+            it("equal to another column", ()->{
+                context().condition(() -> asql.column("columnName").isEqualsToColumn("anotherColumn"));
+
+                assertThat(context().translated()).isEqualTo("columnName = anotherColumn");
+            });
+
         });
     }
 }

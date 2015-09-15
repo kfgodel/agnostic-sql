@@ -1,9 +1,8 @@
 package ar.com.kfgodel.asql.impl.lang.restrictions;
 
 import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
+import ar.com.kfgodel.asql.impl.lang.Parseable;
 import ar.com.kfgodel.asql.impl.model.restrictions.PredicateModel;
-import ar.com.kfgodel.asql.impl.model.value.ColumnReferenceModel;
-import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
 
 /**
  * This type represents a condition construct where the column is named as left had operator
@@ -12,11 +11,11 @@ import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
 public class ColumnDefinedEqualsCondition implements QueryCondition {
 
     private NamedColumnImpl namedColumn;
-    private Object operand;
+    private Parseable operand;
 
     @Override
     public PredicateModel parseModel() {
-        return PredicateModel.create(ColumnReferenceModel.create(namedColumn.getColumnName()), "=", ExplicitValueModel.create(operand));
+        return PredicateModel.create(namedColumn.parseModel(), "=", operand.parseModel());
     }
 
     @Override
@@ -29,7 +28,7 @@ public class ColumnDefinedEqualsCondition implements QueryCondition {
         return OrCondition.create(this, anotherCondition);
     }
     
-    public static ColumnDefinedEqualsCondition create(NamedColumnImpl namedColumn, Object operand){
+    public static ColumnDefinedEqualsCondition create(NamedColumnImpl namedColumn, Parseable operand){
         ColumnDefinedEqualsCondition condition = new ColumnDefinedEqualsCondition();
         condition.namedColumn = namedColumn;
         condition.operand = operand;

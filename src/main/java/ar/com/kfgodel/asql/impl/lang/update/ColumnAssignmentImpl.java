@@ -2,9 +2,8 @@ package ar.com.kfgodel.asql.impl.lang.update;
 
 import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
 import ar.com.kfgodel.asql.api.functions.Function;
+import ar.com.kfgodel.asql.impl.lang.references.LiteralReference;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
-import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
-import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
 
 /**
  * Created by kfgodel on 12/07/15.
@@ -16,14 +15,14 @@ public class ColumnAssignmentImpl implements ColumnAssignment {
 
     @Override
     public ColumnAssignmentModel parseModel() {
-        ExplicitOperand value;
+        Object operand;
         if(columnValue instanceof Function){
             // Functions are already an operand
-            value = (Function) columnValue;
+            operand = columnValue;
         }else {
-            value = ExplicitValueModel.create(columnValue);
+            operand = LiteralReference.create(columnValue).parseModel();
         }
-        return ColumnAssignmentModel.create(columnName, value);
+        return ColumnAssignmentModel.create(columnName, operand);
     }
 
     public static ColumnAssignmentImpl create(String columnName, Object columnValue) {

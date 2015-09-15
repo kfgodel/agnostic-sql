@@ -6,7 +6,10 @@ import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.impl.lang.column.MinimalColumnDeclaration;
+import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
+import ar.com.kfgodel.asql.impl.lang.references.LiteralReference;
 import ar.com.kfgodel.asql.impl.lang.update.ColumnAssignmentImpl;
+import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 
 /**
  * Created by kfgodel on 12/07/15.
@@ -41,7 +44,12 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isEqualsTo(Object operand) {
-        return ColumnDefinedEqualsCondition.create(this, operand);
+        return ColumnDefinedEqualsCondition.create(this, LiteralReference.create(operand));
+    }
+
+    @Override
+    public QueryCondition isEqualsToColumn(String aColumnName) {
+        return ColumnDefinedEqualsCondition.create(this, ColumnReference.create(aColumnName));
     }
 
     public static NamedColumnImpl create(String columnName) {
@@ -50,4 +58,8 @@ public class NamedColumnImpl implements NamedColumn {
         return named;
     }
 
+    @Override
+    public AgnosticModel parseModel() {
+        return ColumnReference.create(columnName).parseModel();
+    }
 }

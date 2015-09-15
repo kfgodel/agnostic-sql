@@ -1,7 +1,7 @@
 package ar.com.kfgodel.asql.impl.lang.column;
 
-import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
+import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.impl.lang.restrictions.NamedColumnImpl;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 
