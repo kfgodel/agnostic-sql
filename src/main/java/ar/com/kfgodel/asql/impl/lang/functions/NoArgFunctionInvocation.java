@@ -1,18 +1,19 @@
 package ar.com.kfgodel.asql.impl.lang.functions;
 
-import ar.com.kfgodel.asql.api.functions.Function;
+import ar.com.kfgodel.asql.api.functions.FunctionInvocation;
 import ar.com.kfgodel.asql.impl.model.references.SymbolModel;
 import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
 
 /**
+ * Implementation of function invocations without arguments
  * Created by kfgodel on 16/07/15.
  */
-public class FunctionImpl implements Function {
+public class NoArgFunctionInvocation implements FunctionInvocation {
 
     private String name;
 
-    public static FunctionImpl create(String name) {
-        FunctionImpl function = new FunctionImpl();
+    public static NoArgFunctionInvocation create(String name) {
+        NoArgFunctionInvocation function = new NoArgFunctionInvocation();
         function.name = name;
         return function;
     }

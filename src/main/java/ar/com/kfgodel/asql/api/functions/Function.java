@@ -1,19 +1,18 @@
 package ar.com.kfgodel.asql.api.functions;
 
-import ar.com.kfgodel.asql.impl.lang.functions.FunctionImpl;
-import ar.com.kfgodel.asql.impl.lang.operands.ParseableOperand;
+import ar.com.kfgodel.asql.impl.lang.functions.NoArgFunctionInvocation;
 
 /**
  * This type represents an agnostic sql function
  * Created by kfgodel on 16/07/15.
  */
-public interface Function extends ParseableOperand {
+public interface Function {
 
-    static Function currentDate() {
-        return FunctionImpl.create("current_date");
+    static FunctionInvocation currentDate() {
+        return NoArgFunctionInvocation.create("current_date");
     }
 
-    static Function currentTime() {
-        return FunctionImpl.create("current_time");
+    static FunctionInvocation currentTime() {
+        return NoArgFunctionInvocation.create("current_time");
     }
 }
