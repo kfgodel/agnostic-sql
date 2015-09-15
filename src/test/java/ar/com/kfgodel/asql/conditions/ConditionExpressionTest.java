@@ -22,21 +22,27 @@ public class ConditionExpressionTest extends JavaSpec<AsqlTestContext> {
     public void define() {
         Asql asql = AsqlBuilder.create();
 
-        describe("sql predicate conditions", ()->{
+        describe("sql predicate conditions includes", ()->{
 
             context().interpreter(() -> TemplateInterpreter.create(Vendor.ansi()));
             context().translated(() -> context().interpreter().translate(context().condition().parseModel()));
 
-            it("includes IS NULL", () -> {
+            it("IS NULL", () -> {
                 context().condition(() -> asql.column("columnName").isNull());
 
                 assertThat(context().translated()).isEqualTo("columnName IS NULL");
             });
 
-            it("includes IS NOT NULL", () -> {
+            it("IS NOT NULL", () -> {
                 context().condition(() -> asql.column("columnName").isNotNull());
 
                 assertThat(context().translated()).isEqualTo("columnName IS NOT NULL");
+            });
+
+            it("equal to a value", () -> {
+                context().condition(() -> asql.column("columnName").isEqualsTo("text"));
+
+                assertThat(context().translated()).isEqualTo("columnName = 'text'");
             });
 
         });

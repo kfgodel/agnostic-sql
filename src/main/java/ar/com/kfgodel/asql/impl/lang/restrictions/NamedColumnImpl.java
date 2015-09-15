@@ -1,10 +1,10 @@
 package ar.com.kfgodel.asql.impl.lang.restrictions;
 
-import ar.com.kfgodel.asql.api.types.DataType;
+import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
+import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
-import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
-import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
+import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.impl.lang.column.MinimalColumnDeclaration;
 import ar.com.kfgodel.asql.impl.lang.update.ColumnAssignmentImpl;
 
@@ -37,6 +37,11 @@ public class NamedColumnImpl implements NamedColumn {
     @Override
     public ColumnDeclaration typed(DataType dataType) {
         return MinimalColumnDeclaration.create(this, dataType);
+    }
+
+    @Override
+    public QueryCondition isEqualsTo(Object operand) {
+        return ColumnDefinedEqualsCondition.create(this, operand);
     }
 
     public static NamedColumnImpl create(String columnName) {
