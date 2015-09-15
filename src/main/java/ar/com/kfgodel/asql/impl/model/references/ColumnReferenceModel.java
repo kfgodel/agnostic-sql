@@ -1,6 +1,7 @@
-package ar.com.kfgodel.asql.impl.model.value;
+package ar.com.kfgodel.asql.impl.model.references;
 
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
+import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
 
 /**
  * This type represents an explicit sql reference to a column

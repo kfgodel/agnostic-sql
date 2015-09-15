@@ -2,7 +2,7 @@ package ar.com.kfgodel.asql.impl.lang.references;
 
 import ar.com.kfgodel.asql.impl.lang.Parseable;
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
-import ar.com.kfgodel.asql.impl.model.value.ColumnReferenceModel;
+import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 
 /**
  * This type represents a language reference to a column name

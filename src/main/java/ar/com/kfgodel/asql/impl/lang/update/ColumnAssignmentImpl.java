@@ -4,6 +4,7 @@ import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
 import ar.com.kfgodel.asql.api.functions.Function;
 import ar.com.kfgodel.asql.impl.lang.references.LiteralReference;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
+import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
 
 /**
  * Created by kfgodel on 12/07/15.
@@ -15,10 +16,11 @@ public class ColumnAssignmentImpl implements ColumnAssignment {
 
     @Override
     public ColumnAssignmentModel parseModel() {
-        Object operand;
+        ExplicitOperand operand;
         if(columnValue instanceof Function){
             // Functions are already an operand
-            operand = columnValue;
+            Function function = (Function) this.columnValue;
+            operand = function.parseModel();
         }else {
             operand = LiteralReference.create(columnValue).parseModel();
         }

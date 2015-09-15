@@ -7,9 +7,9 @@ import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
+import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 import ar.com.kfgodel.asql.impl.model.restrictions.PredicateModel;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
-import ar.com.kfgodel.asql.impl.model.value.ColumnReferenceModel;
 import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
 import org.junit.runner.RunWith;
 

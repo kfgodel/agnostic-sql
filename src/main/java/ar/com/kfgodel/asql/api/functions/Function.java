@@ -1,13 +1,13 @@
 package ar.com.kfgodel.asql.api.functions;
 
 import ar.com.kfgodel.asql.impl.lang.functions.FunctionImpl;
-import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
+import ar.com.kfgodel.asql.impl.lang.operands.ParseableOperand;
 
 /**
  * This type represents an agnostic sql function
  * Created by kfgodel on 16/07/15.
  */
-public interface Function extends ExplicitOperand {
+public interface Function extends ParseableOperand {
 
     static Function currentDate() {
         return FunctionImpl.create("current_date");
