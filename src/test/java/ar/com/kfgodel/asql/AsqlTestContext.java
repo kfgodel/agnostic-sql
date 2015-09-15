@@ -4,6 +4,7 @@ import ar.com.dgarcia.javaspec.api.TestContext;
 import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
+import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 import ar.com.kfgodel.asql.impl.model.alter.AddColumnModel;
 import ar.com.kfgodel.asql.impl.model.alter.RemoveColumnModel;
@@ -42,4 +43,9 @@ public interface AsqlTestContext extends TestContext {
     AgnosticModel model();
     void model(Supplier<AgnosticModel> definition);
 
+    QueryCondition condition();
+    void condition(Supplier<QueryCondition> definition);
+
+    String translated();
+    void translated(Supplier<String> definition);
 }
