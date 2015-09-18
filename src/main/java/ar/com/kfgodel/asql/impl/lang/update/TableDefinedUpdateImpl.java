@@ -1,11 +1,9 @@
 package ar.com.kfgodel.asql.impl.lang.update;
 
-import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.api.update.UnrestrictedUpdate;
 import ar.com.kfgodel.asql.impl.lang.support.TableCenteredStatement;
-import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 import com.google.common.collect.Lists;
 
 import java.util.List;
@@ -13,7 +11,7 @@ import java.util.List;
 /**
  * Created by kfgodel on 12/07/15.
  */
-public class TableDefinedUpdateImpl extends TableCenteredStatement implements TableDefinedUpdate, AgnosticStatement {
+public class TableDefinedUpdateImpl extends TableCenteredStatement implements TableDefinedUpdate {
 
     public static TableDefinedUpdateImpl create(String tableName) {
         TableDefinedUpdateImpl update = new TableDefinedUpdateImpl();
@@ -30,8 +28,4 @@ public class TableDefinedUpdateImpl extends TableCenteredStatement implements Ta
         return UnrestrictedUpdateImpl.create(this, list);
     }
 
-    @Override
-    public UpdateModel parseModel() {
-        return UpdateModel.create(getTableName());
-    }
 }

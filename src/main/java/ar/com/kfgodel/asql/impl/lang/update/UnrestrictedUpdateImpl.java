@@ -1,12 +1,14 @@
 package ar.com.kfgodel.asql.impl.lang.update;
 
-import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
 import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
+import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
 import ar.com.kfgodel.asql.api.update.RestrictedUpdate;
 import ar.com.kfgodel.asql.api.update.UnrestrictedUpdate;
+import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by kfgodel on 12/07/15.
@@ -23,11 +25,14 @@ public class UnrestrictedUpdateImpl implements UnrestrictedUpdate {
 
     @Override
     public UpdateModel parseModel() {
-        UpdateModel updateModel = tableUpdate.parseModel();
-        for (ColumnAssignment columnAssignment : assignments) {
-            updateModel.addAssignment(columnAssignment.parseModel());
-        }
-        return updateModel;
+        return UpdateModel.create(tableUpdate.getTableName(), parseColumnAssignmentModels());
+    }
+
+    private List<ColumnAssignmentModel> parseColumnAssignmentModels() {
+        List<ColumnAssignmentModel> parsedAssignments = assignments.stream()
+                .map(ColumnAssignment::parseModel)
+                .collect(Collectors.toList());
+        return parsedAssignments;
     }
 
     public static UnrestrictedUpdateImpl create(TableDefinedUpdateImpl tableUpdate, List<ColumnAssignment> assignments) {

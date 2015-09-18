@@ -11,9 +11,11 @@ import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 import ar.com.kfgodel.asql.impl.model.restrictions.PredicateModel;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
+import com.google.common.collect.Lists;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 
 /**
  * Created by kfgodel on 12/07/15.
@@ -24,11 +26,20 @@ public class UpdateModelTest extends JavaSpec<AsqlTestContext> {
     public void define() {
         describe("an agnostic update statement model", () -> {
 
+
             context().updateModel(() -> {
-                UpdateModel updateModel = UpdateModel.create("tableName");
-                updateModel.addAssignment(ColumnAssignmentModel.create("column1", ExplicitValueModel.create("value1")));
+                UpdateModel updateModel = UpdateModel.create("tableName", Lists.newArrayList(ColumnAssignmentModel.create("column1", ExplicitValueModel.create("value1"))));
                 updateModel.getWhereClause().setPredicate(PredicateModel.create(ColumnReferenceModel.create("column2"), "=", ExplicitValueModel.create(3)));
                 return updateModel;
+            });
+
+            it("throws an error if no assignment defined", ()->{
+                try{
+                    UpdateModel.create("aTableName", Lists.newArrayList());
+                    failBecauseExceptionWasNotThrown(IllegalArgumentException.class);
+                }catch (IllegalArgumentException e){
+                    assertThat(e).hasMessage("At least one assignment needed");
+                }
             });
 
             it("represents the abstract state of an agnostic sql update statement", () -> {
@@ -48,7 +59,7 @@ public class UpdateModelTest extends JavaSpec<AsqlTestContext> {
                 assertThat(rightSide.getValue()).isEqualTo(3);
             });
 
-            it("can be translated to a vendor specific statement",()->{
+            it("can be translated to a vendor specific statement", () -> {
 
                 VendorInterpreter interpreter = TemplateInterpreter.create(Vendor.ansi());
 
