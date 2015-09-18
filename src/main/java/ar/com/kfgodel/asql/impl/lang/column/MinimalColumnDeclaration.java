@@ -31,7 +31,7 @@ public class MinimalColumnDeclaration implements ColumnDeclaration {
 
     @Override
     public ColumnDeclarationModel parseModel() {
-        return ColumnDeclarationModel.create(namedColumn.getColumnName(), columnType);
+        return ColumnDeclarationModel.create(namedColumn.parseModel(), columnType.parseModel());
     }
 
     public static MinimalColumnDeclaration create(NamedColumnImpl namedColumn, DataType columnType) {

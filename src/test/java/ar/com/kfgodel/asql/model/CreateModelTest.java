@@ -3,13 +3,14 @@ package ar.com.kfgodel.asql.model;
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.AsqlTestContext;
+import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
-import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.constraints.ConstraintDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
+import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
 import org.junit.runner.RunWith;
 
@@ -27,14 +28,14 @@ public class CreateModelTest extends JavaSpec<AsqlTestContext> {
 
             context().createModel(()->{
                 CreateModel createModel = CreateModel.create("POSA_ESTADO_DE_LIQUIDACION");
-                createModel.addDeclaration(ColumnDeclarationModel.create("id",DataType.pk()));
-                createModel.addDeclaration(ColumnDeclarationModel.create("momentoDeCreacion",DataType.timestamp()));
-                createModel.addDeclaration(ColumnDeclarationModel.create("momentoDeUltimaModificacion",DataType.timestamp()));
-                createModel.addDeclaration(ColumnDeclarationModel.create("persistenceVersion", DataType.bigInteger()));
-                createModel.addDeclaration(ColumnDeclarationModel.create("diasPorLiquidar", DataType.integer()).withNullity("NOT NULL"));
-                createModel.addDeclaration(ColumnDeclarationModel.create("cantidad",DataType.integer()).withNullity("NOT NULL").withDefaultValue(ExplicitValueModel.create(0)));
-                createModel.addDeclaration(ColumnDeclarationModel.create("otra_id", DataType.fk()));
-                createModel.addDeclaration(ColumnDeclarationModel.create("estado", DataType.shortString()));
+                createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("id"),DataType.pk().parseModel()));
+                createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("momentoDeCreacion"),DataType.timestamp().parseModel()));
+                createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("momentoDeUltimaModificacion"),DataType.timestamp().parseModel()));
+                createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("persistenceVersion"), DataType.bigInteger().parseModel()));
+                createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("diasPorLiquidar"), DataType.integer().parseModel()).withNullity("NOT NULL"));
+                createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("cantidad"), DataType.integer().parseModel()).withNullity("NOT NULL").withDefaultValue(ExplicitValueModel.create(0)));
+                createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("otra_id"), DataType.fk().parseModel()));
+                createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("estado"), DataType.shortString().parseModel()));
                 createModel.addConstraint(ConstraintDeclarationModel.create("primary key").forColumns("id"));
                 return createModel;
             });

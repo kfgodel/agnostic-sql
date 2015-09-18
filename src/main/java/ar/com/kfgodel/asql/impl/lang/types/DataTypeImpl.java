@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.impl.lang.types;
 
 import ar.com.kfgodel.asql.api.types.DataType;
+import ar.com.kfgodel.asql.impl.model.references.SymbolModel;
 
 /**
  * Created by kfgodel on 13/07/15.
@@ -9,7 +10,6 @@ public class DataTypeImpl implements DataType {
 
     private String name;
 
-    @Override
     public String getAgnosticName() {
         return name;
     }
@@ -36,8 +36,8 @@ public class DataTypeImpl implements DataType {
     }
 
     @Override
-    public String getTemplatePath() {
-        return "/types/" + getAgnosticName() + ".ftl";
+    public SymbolModel parseModel() {
+        String templatePath = "/types/" + getAgnosticName() + ".ftl";
+        return SymbolModel.create(templatePath);
     }
-
 }
