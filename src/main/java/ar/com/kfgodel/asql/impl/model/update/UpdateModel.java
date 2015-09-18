@@ -28,15 +28,15 @@ public class UpdateModel extends TableCenteredModel implements WhereConstrainedM
     public void setColumnAssignments(List<ColumnAssignmentModel> columnAssignments) {
         this.columnAssignments = columnAssignments;
     }
-    public static UpdateModel create(String tableName) {
+    public static UpdateModel create(String tableName, List<ColumnAssignmentModel> columnAssignments) {
+        if(columnAssignments.isEmpty()){
+            throw new IllegalArgumentException("At least one assignment needed");
+        }
         UpdateModel updateModel = new UpdateModel();
         updateModel.whereClause = WhereModel.create();
         updateModel.setTableName(tableName);
+        updateModel.setColumnAssignments(columnAssignments);
         return updateModel;
-    }
-
-    public void addAssignment(ColumnAssignmentModel assignmentNode) {
-        getColumnAssignments().add(assignmentNode);
     }
 
     @Override
