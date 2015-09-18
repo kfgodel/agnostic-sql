@@ -21,4 +21,12 @@ public interface NamedColumn extends AgnosticConstruct {
     QueryCondition isEqualsTo(Object operand);
 
     QueryCondition isEqualsToColumn(String aColumnName);
+
+    QueryCondition isLessThan(Object value);
+
+    QueryCondition isLessThanColumn(String otherColumn);
+
+    QueryCondition isMoreThan(Object value);
+
+    QueryCondition isMoreThanColumn(String otherColumn);
 }

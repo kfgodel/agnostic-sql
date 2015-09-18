@@ -10,6 +10,7 @@ import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
 import ar.com.kfgodel.asql.impl.lang.references.LiteralReference;
 import ar.com.kfgodel.asql.impl.lang.update.ColumnAssignmentImpl;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
+import ar.com.kfgodel.asql.impl.model.value.NullOperand;
 
 /**
  * Created by kfgodel on 12/07/15.
@@ -24,12 +25,12 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isNull() {
-        return IsNullCondition.create(this);
+        return BinaryOperatorCondition.create(this, "IS", NullOperand.create());
     }
 
     @Override
     public QueryCondition isNotNull() {
-        return NotNullCondition.create(this);
+        return BinaryOperatorCondition.create(this,"IS NOT", NullOperand.create());
     }
 
     @Override
@@ -44,12 +45,32 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isEqualsTo(Object operand) {
-        return ColumnDefinedEqualsCondition.create(this, LiteralReference.create(operand));
+        return BinaryOperatorCondition.create(this, "=", LiteralReference.create(operand));
     }
 
     @Override
     public QueryCondition isEqualsToColumn(String aColumnName) {
-        return ColumnDefinedEqualsCondition.create(this, ColumnReference.create(aColumnName));
+        return BinaryOperatorCondition.create(this, "=", ColumnReference.create(aColumnName));
+    }
+
+    @Override
+    public QueryCondition isLessThan(Object value) {
+        return BinaryOperatorCondition.create(this, "<", LiteralReference.create(value));
+    }
+
+    @Override
+    public QueryCondition isLessThanColumn(String otherColumn) {
+        return BinaryOperatorCondition.create(this, "<", ColumnReference.create(otherColumn));
+    }
+
+    @Override
+    public QueryCondition isMoreThan(Object value) {
+        return BinaryOperatorCondition.create(this, ">", LiteralReference.create(value));
+    }
+
+    @Override
+    public QueryCondition isMoreThanColumn(String otherColumn) {
+        return BinaryOperatorCondition.create(this, ">", ColumnReference.create(otherColumn));
     }
 
     public static NamedColumnImpl create(String columnName) {
