@@ -4,7 +4,6 @@ import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
-import ar.com.kfgodel.asql.impl.AsqlBuilder;
 import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
 import org.junit.runner.RunWith;
 
@@ -17,7 +16,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DataTypeTest extends JavaSpec<AsqlTestContext> {
     @Override
     public void define() {
-        AsqlBuilder asql = AsqlBuilder.create();
 
         describe("agnostic data types", () -> {
             it("have ansi translations", () -> {

@@ -1,8 +1,8 @@
 package ar.com.kfgodel.asql.impl.model.columns;
 
-import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 import ar.com.kfgodel.asql.impl.model.create.TablePartModel;
+import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 
 /**
  * This type represents the abstract model of a column declaration
@@ -10,24 +10,24 @@ import ar.com.kfgodel.asql.impl.model.create.TablePartModel;
  */
 public class ColumnDeclarationModel implements TablePartModel, AgnosticModel{
 
-    private String columnName;
-    private DataType columnType;
+    private ColumnReferenceModel columnName;
+    private AgnosticModel columnType;
     private String nullity;
     private Object defaultValue;
 
-    public String getColumnName() {
+    public ColumnReferenceModel getColumnName() {
         return columnName;
     }
 
-    public void setColumnName(String columnName) {
+    public void setColumnName(ColumnReferenceModel columnName) {
         this.columnName = columnName;
     }
 
-    public DataType getColumnType() {
+    public AgnosticModel getColumnType() {
         return columnType;
     }
 
-    public void setColumnType(DataType columnType) {
+    public void setColumnType(AgnosticModel columnType) {
         this.columnType = columnType;
     }
 
@@ -47,9 +47,9 @@ public class ColumnDeclarationModel implements TablePartModel, AgnosticModel{
         this.defaultValue = defaultValue;
     }
 
-    public static ColumnDeclarationModel create(String columnName, DataType columnType) {
+    public static ColumnDeclarationModel create(ColumnReferenceModel columnReference, AgnosticModel columnType) {
         ColumnDeclarationModel model = new ColumnDeclarationModel();
-        model.columnName = columnName;
+        model.columnName = columnReference;
         model.columnType = columnType;
         return model;
     }

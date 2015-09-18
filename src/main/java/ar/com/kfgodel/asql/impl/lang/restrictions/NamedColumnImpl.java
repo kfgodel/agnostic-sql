@@ -9,7 +9,7 @@ import ar.com.kfgodel.asql.impl.lang.column.MinimalColumnDeclaration;
 import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
 import ar.com.kfgodel.asql.impl.lang.references.LiteralReference;
 import ar.com.kfgodel.asql.impl.lang.update.ColumnAssignmentImpl;
-import ar.com.kfgodel.asql.impl.model.AgnosticModel;
+import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 
 /**
  * Created by kfgodel on 12/07/15.
@@ -59,7 +59,7 @@ public class NamedColumnImpl implements NamedColumn {
     }
 
     @Override
-    public AgnosticModel parseModel() {
+    public ColumnReferenceModel parseModel() {
         return ColumnReference.create(columnName).parseModel();
     }
 }

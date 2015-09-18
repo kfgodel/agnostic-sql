@@ -1,6 +1,6 @@
 package ar.com.kfgodel.asql.api.interpreter;
 
-import ar.com.kfgodel.asql.api.AgnosticStatement;
+import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 
 /**
@@ -16,6 +16,12 @@ public interface VendorInterpreter {
      */
     String translate(AgnosticModel updateModel);
 
-    String translate(AgnosticStatement statement);
+    /**
+     * Facility method that translates the agnostic construction into this vendor specific
+     * language
+     * @param construct The agnostically expressed language construct
+     * @return The vendor specific equivalent
+     */
+    String translate(AgnosticConstruct construct);
 
 }

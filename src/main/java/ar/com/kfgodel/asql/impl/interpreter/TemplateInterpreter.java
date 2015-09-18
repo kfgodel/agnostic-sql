@@ -1,6 +1,6 @@
 package ar.com.kfgodel.asql.impl.interpreter;
 
-import ar.com.kfgodel.asql.api.AgnosticStatement;
+import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
@@ -29,7 +29,7 @@ public class TemplateInterpreter implements VendorInterpreter {
     }
 
     @Override
-    public String translate(AgnosticStatement statement) {
-        return translate(statement.parseModel());
+    public String translate(AgnosticConstruct construct) {
+        return translate(construct.parseModel());
     }
 }
