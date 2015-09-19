@@ -46,22 +46,23 @@ public interface NamedColumn extends AgnosticConstruct {
 
     QueryCondition isLike(String pattern);
 
+    QueryCondition isNotLike(String pattern);
+
     QueryCondition startsWith(String prefix);
+
+    QueryCondition doesNotStartWith(String prefix);
 
     QueryCondition endsWith(String suffix);
 
+    QueryCondition doesNotEndWith(String suffix);
+
     QueryCondition contains(String substring);
+
+    QueryCondition doesNotContain(String substring);
 
     QueryCondition isIn(Collection<?> values);
 
     QueryCondition isNotIn(Collection<?> values);
 
-    QueryCondition isNotLike(String pattern);
-
-    QueryCondition doesNotContain(String substring);
-
-    QueryCondition doesNotEndWith(String suffix);
-
-    QueryCondition doesNotStartWith(String prefix);
 
 }
