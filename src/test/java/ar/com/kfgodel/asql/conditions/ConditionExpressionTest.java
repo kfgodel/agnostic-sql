@@ -57,24 +57,47 @@ public class ConditionExpressionTest extends JavaSpec<AsqlTestContext> {
                 assertThat(context().translated()).isEqualTo("columnName < 1.2");
             });
 
+            it("less or equal than a value", ()->{
+                context().condition(() -> asql.column("columnName").isLessOrEqualThan(1.2));
+
+                assertThat(context().translated()).isEqualTo("columnName <= 1.2");
+            });
+
             it("less than a column", ()->{
                 context().condition(() -> asql.column("columnName").isLessThanColumn("otherColumn"));
 
                 assertThat(context().translated()).isEqualTo("columnName < otherColumn");
             });
 
-            it("more than a value", ()->{
-                context().condition(() -> asql.column("columnName").isMoreThan(1.2));
+            it("less or equal than a column", ()->{
+                context().condition(() -> asql.column("columnName").isLessThanOrEqualColumn("otherColumn"));
+
+                assertThat(context().translated()).isEqualTo("columnName <= otherColumn");
+            });
+
+            it("greater than a value", ()->{
+                context().condition(() -> asql.column("columnName").isGreaterThan(1.2));
 
                 assertThat(context().translated()).isEqualTo("columnName > 1.2");
             });
 
-            it("more than a column", ()->{
-                context().condition(() -> asql.column("columnName").isMoreThanColumn("otherColumn"));
+            it("greater or equal than a value", ()->{
+                context().condition(() -> asql.column("columnName").isGreaterOrEqualThan(1.2));
+
+                assertThat(context().translated()).isEqualTo("columnName >= 1.2");
+            });
+
+            it("greater than a column", ()->{
+                context().condition(() -> asql.column("columnName").isGreaterThanColumn("otherColumn"));
 
                 assertThat(context().translated()).isEqualTo("columnName > otherColumn");
             });
 
+            it("greater or equal than a column", ()->{
+                context().condition(() -> asql.column("columnName").isGreaterOrEqualThanColumn("otherColumn"));
+
+                assertThat(context().translated()).isEqualTo("columnName >= otherColumn");
+            });
 
         });
     }

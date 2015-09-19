@@ -59,18 +59,38 @@ public class NamedColumnImpl implements NamedColumn {
     }
 
     @Override
-    public QueryCondition isLessThanColumn(String otherColumn) {
-        return BinaryOperatorCondition.create(this, "<", ColumnReference.create(otherColumn));
+    public QueryCondition isLessThanColumn(String aColumnName) {
+        return BinaryOperatorCondition.create(this, "<", ColumnReference.create(aColumnName));
     }
 
     @Override
-    public QueryCondition isMoreThan(Object value) {
+    public QueryCondition isGreaterThan(Object value) {
         return BinaryOperatorCondition.create(this, ">", LiteralReference.create(value));
     }
 
     @Override
-    public QueryCondition isMoreThanColumn(String otherColumn) {
-        return BinaryOperatorCondition.create(this, ">", ColumnReference.create(otherColumn));
+    public QueryCondition isGreaterThanColumn(String aColumnName) {
+        return BinaryOperatorCondition.create(this, ">", ColumnReference.create(aColumnName));
+    }
+
+    @Override
+    public QueryCondition isLessOrEqualThan(Object value) {
+        return BinaryOperatorCondition.create(this, "<=", LiteralReference.create(value));
+    }
+
+    @Override
+    public QueryCondition isLessThanOrEqualColumn(String aColumnName) {
+        return BinaryOperatorCondition.create(this, "<=", ColumnReference.create(aColumnName));
+    }
+
+    @Override
+    public QueryCondition isGreaterOrEqualThan(Object value) {
+        return BinaryOperatorCondition.create(this, ">=", LiteralReference.create(value));
+    }
+
+    @Override
+    public QueryCondition isGreaterOrEqualThanColumn(String aColumnName) {
+        return BinaryOperatorCondition.create(this, ">=", ColumnReference.create(aColumnName));
     }
 
     public static NamedColumnImpl create(String columnName) {
