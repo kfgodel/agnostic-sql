@@ -52,6 +52,18 @@ public class ConditionExpressionTest extends JavaSpec<AsqlTestContext> {
                 assertThat(context().translated()).isEqualTo("columnName = anotherColumn");
             });
 
+            it("NOT equal to a value", () -> {
+                context().condition(() -> asql.column("columnName").isNotEqualsTo("text"));
+
+                assertThat(context().translated()).isEqualTo("columnName <> 'text'");
+            });
+
+            it("NOT equal to another column", () -> {
+                context().condition(() -> asql.column("columnName").isNotEqualsToColumn("anotherColumn"));
+
+                assertThat(context().translated()).isEqualTo("columnName <> anotherColumn");
+            });
+
             it("less than a value", () -> {
                 context().condition(() -> asql.column("columnName").isLessThan(1.2));
 
@@ -106,10 +118,22 @@ public class ConditionExpressionTest extends JavaSpec<AsqlTestContext> {
                 assertThat(context().translated()).isEqualTo("columnName LIKE '%middle%'");
             });
 
+            it("NOT LIKE a value", ()->{
+                context().condition(() -> asql.column("columnName").isNotLike("%middle%"));
+
+                assertThat(context().translated()).isEqualTo("columnName NOT LIKE '%middle%'");
+            });
+
             it("starts with a value", ()->{
                 context().condition(() -> asql.column("columnName").startsWith("prefix"));
 
                 assertThat(context().translated()).isEqualTo("columnName LIKE 'prefix%'");
+            });
+
+            it("does not start with a value", ()->{
+                context().condition(() -> asql.column("columnName").doesNotStartWith("prefix"));
+
+                assertThat(context().translated()).isEqualTo("columnName NOT LIKE 'prefix%'");
             });
 
             it("ends with a value", ()->{
@@ -118,18 +142,35 @@ public class ConditionExpressionTest extends JavaSpec<AsqlTestContext> {
                 assertThat(context().translated()).isEqualTo("columnName LIKE '%suffix'");
             });
 
+            it("does not end with a value", ()->{
+                context().condition(() -> asql.column("columnName").doesNotEndWith("suffix"));
+
+                assertThat(context().translated()).isEqualTo("columnName NOT LIKE '%suffix'");
+            });
+
             it("contains a value", ()->{
                 context().condition(() -> asql.column("columnName").contains("middle"));
 
                 assertThat(context().translated()).isEqualTo("columnName LIKE '%middle%'");
             });
 
+            it("does not contain a value", ()->{
+                context().condition(() -> asql.column("columnName").doesNotContain("middle"));
+
+                assertThat(context().translated()).isEqualTo("columnName NOT LIKE '%middle%'");
+            });
+
             it("IN a collection of values", ()->{
-                context().condition(() -> asql.column("columnName").isIn(Lists.newArrayList(1,"text")));
+                context().condition(() -> asql.column("columnName").isIn(Lists.newArrayList(1, "text")));
 
                 assertThat(context().translated()).isEqualTo("columnName IN (1, 'text')");
             });
 
+            it("NOT IN a collection of values", ()->{
+                context().condition(() -> asql.column("columnName").isNotIn(Lists.newArrayList(1, "text")));
+
+                assertThat(context().translated()).isEqualTo("columnName NOT IN (1, 'text')");
+            });
 
         });
     }
