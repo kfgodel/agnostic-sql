@@ -57,6 +57,18 @@ public class NamedColumnImpl implements NamedColumn {
     }
 
     @Override
+    public QueryCondition isNotEqualsTo(Object value) {
+        return BinaryOperatorCondition.create(this, "<>", LiteralReference.create(value));
+    }
+
+    @Override
+    public QueryCondition isNotEqualsToColumn(String aColumnName) {
+        return BinaryOperatorCondition.create(this, "<>", ColumnReference.create(aColumnName));
+    }
+
+
+
+    @Override
     public QueryCondition isLessThan(Object value) {
         return BinaryOperatorCondition.create(this, "<", LiteralReference.create(value));
     }
@@ -102,6 +114,26 @@ public class NamedColumnImpl implements NamedColumn {
     }
 
     @Override
+    public QueryCondition isNotLike(String pattern) {
+        return BinaryOperatorCondition.create(this, "NOT LIKE", LiteralReference.create(pattern));
+    }
+
+    @Override
+    public QueryCondition doesNotContain(String substring) {
+        return isNotLike("%" + substring + "%");
+    }
+
+    @Override
+    public QueryCondition doesNotEndWith(String suffix) {
+        return isNotLike("%" + suffix);
+    }
+
+    @Override
+    public QueryCondition doesNotStartWith(String prefix) {
+        return isNotLike(prefix + "%");
+    }
+
+    @Override
     public QueryCondition startsWith(String prefix) {
         return isLike(prefix + "%");
     }
@@ -112,13 +144,18 @@ public class NamedColumnImpl implements NamedColumn {
     }
 
     @Override
-    public QueryCondition contains(String part) {
-        return isLike("%" + part + "%");
+    public QueryCondition contains(String substring) {
+        return isLike("%" + substring + "%");
     }
 
     @Override
     public QueryCondition isIn(Collection<?> values) {
         return BinaryOperatorCondition.create(this, "IN", ListLiteralReference.create(values));
+    }
+
+    @Override
+    public QueryCondition isNotIn(Collection<?> values) {
+        return BinaryOperatorCondition.create(this, "NOT IN", ListLiteralReference.create(values));
     }
 
     public static NamedColumnImpl create(String columnName) {

@@ -24,6 +24,10 @@ public interface NamedColumn extends AgnosticConstruct {
 
     QueryCondition isEqualsToColumn(String aColumnName);
 
+    QueryCondition isNotEqualsTo(Object value);
+
+    QueryCondition isNotEqualsToColumn(String aColumnName);
+
     QueryCondition isLessThan(Object value);
 
     QueryCondition isLessThanColumn(String aColumnName);
@@ -42,11 +46,23 @@ public interface NamedColumn extends AgnosticConstruct {
 
     QueryCondition isLike(String pattern);
 
+    QueryCondition isNotLike(String pattern);
+
     QueryCondition startsWith(String prefix);
+
+    QueryCondition doesNotStartWith(String prefix);
 
     QueryCondition endsWith(String suffix);
 
-    QueryCondition contains(String part);
+    QueryCondition doesNotEndWith(String suffix);
+
+    QueryCondition contains(String substring);
+
+    QueryCondition doesNotContain(String substring);
 
     QueryCondition isIn(Collection<?> values);
+
+    QueryCondition isNotIn(Collection<?> values);
+
+
 }
