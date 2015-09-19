@@ -7,6 +7,7 @@ import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.impl.AsqlBuilder;
 import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
+import com.google.common.collect.Lists;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,13 +46,13 @@ public class ConditionExpressionTest extends JavaSpec<AsqlTestContext> {
                 assertThat(context().translated()).isEqualTo("columnName = 'text'");
             });
 
-            it("equal to another column", ()->{
+            it("equal to another column", () -> {
                 context().condition(() -> asql.column("columnName").isEqualsToColumn("anotherColumn"));
 
                 assertThat(context().translated()).isEqualTo("columnName = anotherColumn");
             });
 
-            it("less than a value", ()->{
+            it("less than a value", () -> {
                 context().condition(() -> asql.column("columnName").isLessThan(1.2));
 
                 assertThat(context().translated()).isEqualTo("columnName < 1.2");
@@ -122,6 +123,13 @@ public class ConditionExpressionTest extends JavaSpec<AsqlTestContext> {
 
                 assertThat(context().translated()).isEqualTo("columnName LIKE '%middle%'");
             });
+
+            it("IN a collection of values", ()->{
+                context().condition(() -> asql.column("columnName").isIn(Lists.newArrayList(1,"text")));
+
+                assertThat(context().translated()).isEqualTo("columnName IN (1, 'text')");
+            });
+
 
         });
     }
