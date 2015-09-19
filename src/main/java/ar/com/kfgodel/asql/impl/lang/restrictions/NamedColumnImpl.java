@@ -9,9 +9,9 @@ import ar.com.kfgodel.asql.impl.lang.column.MinimalColumnDeclaration;
 import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
 import ar.com.kfgodel.asql.impl.lang.references.ListLiteralReference;
 import ar.com.kfgodel.asql.impl.lang.references.LiteralReference;
+import ar.com.kfgodel.asql.impl.lang.references.NullReference;
 import ar.com.kfgodel.asql.impl.lang.update.ColumnAssignmentImpl;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
-import ar.com.kfgodel.asql.impl.model.value.NullOperand;
 
 import java.util.Collection;
 
@@ -28,12 +28,12 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isNull() {
-        return BinaryOperatorCondition.create(this, "IS", NullOperand.create());
+        return BinaryOperatorCondition.create(this, "IS", NullReference.create());
     }
 
     @Override
     public QueryCondition isNotNull() {
-        return BinaryOperatorCondition.create(this,"IS NOT", NullOperand.create());
+        return BinaryOperatorCondition.create(this,"IS NOT", NullReference.create());
     }
 
     @Override
