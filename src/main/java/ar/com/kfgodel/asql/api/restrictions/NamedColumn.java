@@ -37,4 +37,12 @@ public interface NamedColumn extends AgnosticConstruct {
     QueryCondition isGreaterOrEqualThan(Object value);
 
     QueryCondition isGreaterOrEqualThanColumn(String aColumnName);
+
+    QueryCondition isLike(String pattern);
+
+    QueryCondition startsWith(String prefix);
+
+    QueryCondition endsWith(String suffix);
+
+    QueryCondition contains(String part);
 }
