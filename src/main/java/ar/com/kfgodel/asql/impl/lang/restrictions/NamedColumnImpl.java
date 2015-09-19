@@ -7,10 +7,13 @@ import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.impl.lang.column.MinimalColumnDeclaration;
 import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
+import ar.com.kfgodel.asql.impl.lang.references.ListLiteralReference;
 import ar.com.kfgodel.asql.impl.lang.references.LiteralReference;
 import ar.com.kfgodel.asql.impl.lang.update.ColumnAssignmentImpl;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 import ar.com.kfgodel.asql.impl.model.value.NullOperand;
+
+import java.util.Collection;
 
 /**
  * Created by kfgodel on 12/07/15.
@@ -111,6 +114,11 @@ public class NamedColumnImpl implements NamedColumn {
     @Override
     public QueryCondition contains(String part) {
         return isLike("%" + part + "%");
+    }
+
+    @Override
+    public QueryCondition isIn(Collection<?> values) {
+        return BinaryOperatorCondition.create(this, "IN", ListLiteralReference.create(values));
     }
 
     public static NamedColumnImpl create(String columnName) {

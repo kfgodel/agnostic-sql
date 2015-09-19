@@ -5,6 +5,8 @@ import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
 import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
 import ar.com.kfgodel.asql.api.types.DataType;
 
+import java.util.Collection;
+
 /**
  * Created by kfgodel on 11/07/15.
  */
@@ -45,4 +47,6 @@ public interface NamedColumn extends AgnosticConstruct {
     QueryCondition endsWith(String suffix);
 
     QueryCondition contains(String part);
+
+    QueryCondition isIn(Collection<?> values);
 }
