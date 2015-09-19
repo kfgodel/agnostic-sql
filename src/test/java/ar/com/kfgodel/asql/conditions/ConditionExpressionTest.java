@@ -99,6 +99,30 @@ public class ConditionExpressionTest extends JavaSpec<AsqlTestContext> {
                 assertThat(context().translated()).isEqualTo("columnName >= otherColumn");
             });
 
+            it("LIKE a value", ()->{
+                context().condition(() -> asql.column("columnName").isLike("%middle%"));
+
+                assertThat(context().translated()).isEqualTo("columnName LIKE '%middle%'");
+            });
+
+            it("starts with a value", ()->{
+                context().condition(() -> asql.column("columnName").startsWith("prefix"));
+
+                assertThat(context().translated()).isEqualTo("columnName LIKE 'prefix%'");
+            });
+
+            it("ends with a value", ()->{
+                context().condition(() -> asql.column("columnName").endsWith("suffix"));
+
+                assertThat(context().translated()).isEqualTo("columnName LIKE '%suffix'");
+            });
+
+            it("contains a value", ()->{
+                context().condition(() -> asql.column("columnName").contains("middle"));
+
+                assertThat(context().translated()).isEqualTo("columnName LIKE '%middle%'");
+            });
+
         });
     }
 }

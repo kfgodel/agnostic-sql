@@ -93,6 +93,26 @@ public class NamedColumnImpl implements NamedColumn {
         return BinaryOperatorCondition.create(this, ">=", ColumnReference.create(aColumnName));
     }
 
+    @Override
+    public QueryCondition isLike(String pattern) {
+        return BinaryOperatorCondition.create(this, "LIKE", LiteralReference.create(pattern));
+    }
+
+    @Override
+    public QueryCondition startsWith(String prefix) {
+        return isLike(prefix + "%");
+    }
+
+    @Override
+    public QueryCondition endsWith(String suffix) {
+        return isLike("%" + suffix);
+    }
+
+    @Override
+    public QueryCondition contains(String part) {
+        return isLike("%" + part + "%");
+    }
+
     public static NamedColumnImpl create(String columnName) {
         NamedColumnImpl named = new NamedColumnImpl();
         named.columnName = columnName;
