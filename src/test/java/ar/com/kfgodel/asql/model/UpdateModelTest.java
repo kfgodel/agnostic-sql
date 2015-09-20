@@ -6,6 +6,7 @@ import ar.com.kfgodel.asql.AsqlTestContext;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
+import ar.com.kfgodel.asql.impl.lang.operators.Operator;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 import ar.com.kfgodel.asql.impl.model.restrictions.PredicateModel;
@@ -29,7 +30,7 @@ public class UpdateModelTest extends JavaSpec<AsqlTestContext> {
 
             context().updateModel(() -> {
                 UpdateModel updateModel = UpdateModel.create("tableName", Lists.newArrayList(ColumnAssignmentModel.create("column1", ExplicitValueModel.create("value1"))));
-                updateModel.getWhereClause().setPredicate(PredicateModel.create(ColumnReferenceModel.create("column2"), "=", ExplicitValueModel.create(3)));
+                updateModel.getWhereClause().setPredicate(PredicateModel.create(ColumnReferenceModel.create("column2"), Operator.equal().parseModel(), ExplicitValueModel.create(3)));
                 return updateModel;
             });
 
@@ -54,7 +55,7 @@ public class UpdateModelTest extends JavaSpec<AsqlTestContext> {
 
                 ColumnReferenceModel leftSide = (ColumnReferenceModel) updateTree.getWhereClause().getPredicate().getLeftSideOperand();
                 assertThat(leftSide.getValue()).isEqualTo("column2");
-                assertThat(updateTree.getWhereClause().getPredicate().getOperator()).isEqualTo("=");
+                assertThat(updateTree.getWhereClause().getPredicate().getOperator()).isEqualTo(Operator.equal().parseModel());
                 ExplicitValueModel rightSide = (ExplicitValueModel) updateTree.getWhereClause().getPredicate().getRightSideOperand();
                 assertThat(rightSide.getValue()).isEqualTo(3);
             });

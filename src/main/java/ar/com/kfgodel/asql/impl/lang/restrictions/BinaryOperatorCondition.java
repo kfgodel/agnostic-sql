@@ -12,18 +12,18 @@ import ar.com.kfgodel.asql.impl.model.restrictions.PredicateModel;
 public class BinaryOperatorCondition implements QueryCondition {
 
     private AgnosticConstruct leftOperand;
-    private String operatorSymbol;
+    private AgnosticConstruct operator;
     private AgnosticConstruct rightOperand;
 
     @Override
     public PredicateModel parseModel() {
-        return PredicateModel.create(leftOperand.parseModel(), operatorSymbol, rightOperand.parseModel());
+        return PredicateModel.create(leftOperand.parseModel(), operator.parseModel(), rightOperand.parseModel());
     }
 
-    public static BinaryOperatorCondition create(AgnosticConstruct leftOperand, String operatorSymbol, AgnosticConstruct rightOperand){
+    public static BinaryOperatorCondition create(AgnosticConstruct leftOperand, AgnosticConstruct operator, AgnosticConstruct rightOperand){
         BinaryOperatorCondition lessCondition = new BinaryOperatorCondition();
         lessCondition.leftOperand = leftOperand;
-        lessCondition.operatorSymbol = operatorSymbol;
+        lessCondition.operator = operator;
         lessCondition.rightOperand = rightOperand;
         return lessCondition;
     }
