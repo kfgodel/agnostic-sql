@@ -34,7 +34,7 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isNotNull() {
-        return BinaryOperatorCondition.create(this,Operator.notAfter(Operator.is()), NullReference.create());
+        return BinaryOperatorCondition.create(this,Operator.isNot(), NullReference.create());
     }
 
     @Override
@@ -116,7 +116,7 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isNotLike(String pattern) {
-        return BinaryOperatorCondition.create(this, Operator.notBefore(Operator.like()), LiteralReference.create(pattern));
+        return BinaryOperatorCondition.create(this, Operator.notLike(), LiteralReference.create(pattern));
     }
 
     @Override
@@ -156,7 +156,7 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isNotIn(Collection<?> values) {
-        return BinaryOperatorCondition.create(this, Operator.notBefore(Operator.in()), ListLiteralReference.create(values));
+        return BinaryOperatorCondition.create(this, Operator.notIn(), ListLiteralReference.create(values));
     }
 
     public static NamedColumnImpl create(String columnName) {

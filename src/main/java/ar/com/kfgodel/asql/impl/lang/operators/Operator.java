@@ -62,4 +62,16 @@ public interface Operator {
     static AgnosticConstruct or() {
         return OperatorReference.create("or");
     }
+
+    static AgnosticConstruct isNot() {
+        return notAfter(is());
+    }
+
+    static AgnosticConstruct notLike() {
+        return notBefore(like());
+    }
+
+    static AgnosticConstruct notIn() {
+        return notBefore(in());
+    }
 }
