@@ -6,6 +6,7 @@ import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.impl.lang.column.MinimalColumnDeclaration;
+import ar.com.kfgodel.asql.impl.lang.operators.Operator;
 import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
 import ar.com.kfgodel.asql.impl.lang.references.ListLiteralReference;
 import ar.com.kfgodel.asql.impl.lang.references.LiteralReference;
@@ -28,12 +29,12 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isNull() {
-        return BinaryOperatorCondition.create(this, "IS", NullReference.create());
+        return BinaryOperatorCondition.create(this, Operator.is(), NullReference.create());
     }
 
     @Override
     public QueryCondition isNotNull() {
-        return BinaryOperatorCondition.create(this,"IS NOT", NullReference.create());
+        return BinaryOperatorCondition.create(this,Operator.isNot(), NullReference.create());
     }
 
     @Override
@@ -48,74 +49,74 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isEqualsTo(Object operand) {
-        return BinaryOperatorCondition.create(this, "=", LiteralReference.create(operand));
+        return BinaryOperatorCondition.create(this, Operator.equal(), LiteralReference.create(operand));
     }
 
     @Override
     public QueryCondition isEqualsToColumn(String aColumnName) {
-        return BinaryOperatorCondition.create(this, "=", ColumnReference.create(aColumnName));
+        return BinaryOperatorCondition.create(this, Operator.equal(), ColumnReference.create(aColumnName));
     }
 
     @Override
     public QueryCondition isNotEqualsTo(Object value) {
-        return BinaryOperatorCondition.create(this, "<>", LiteralReference.create(value));
+        return BinaryOperatorCondition.create(this, Operator.different(), LiteralReference.create(value));
     }
 
     @Override
     public QueryCondition isNotEqualsToColumn(String aColumnName) {
-        return BinaryOperatorCondition.create(this, "<>", ColumnReference.create(aColumnName));
+        return BinaryOperatorCondition.create(this, Operator.different(), ColumnReference.create(aColumnName));
     }
 
 
 
     @Override
     public QueryCondition isLessThan(Object value) {
-        return BinaryOperatorCondition.create(this, "<", LiteralReference.create(value));
+        return BinaryOperatorCondition.create(this, Operator.less(), LiteralReference.create(value));
     }
 
     @Override
     public QueryCondition isLessThanColumn(String aColumnName) {
-        return BinaryOperatorCondition.create(this, "<", ColumnReference.create(aColumnName));
+        return BinaryOperatorCondition.create(this, Operator.less(), ColumnReference.create(aColumnName));
     }
 
     @Override
     public QueryCondition isGreaterThan(Object value) {
-        return BinaryOperatorCondition.create(this, ">", LiteralReference.create(value));
+        return BinaryOperatorCondition.create(this, Operator.greater(), LiteralReference.create(value));
     }
 
     @Override
     public QueryCondition isGreaterThanColumn(String aColumnName) {
-        return BinaryOperatorCondition.create(this, ">", ColumnReference.create(aColumnName));
+        return BinaryOperatorCondition.create(this, Operator.greater(), ColumnReference.create(aColumnName));
     }
 
     @Override
     public QueryCondition isLessOrEqualThan(Object value) {
-        return BinaryOperatorCondition.create(this, "<=", LiteralReference.create(value));
+        return BinaryOperatorCondition.create(this, Operator.lessOrEqual(), LiteralReference.create(value));
     }
 
     @Override
     public QueryCondition isLessThanOrEqualColumn(String aColumnName) {
-        return BinaryOperatorCondition.create(this, "<=", ColumnReference.create(aColumnName));
+        return BinaryOperatorCondition.create(this, Operator.lessOrEqual(), ColumnReference.create(aColumnName));
     }
 
     @Override
     public QueryCondition isGreaterOrEqualThan(Object value) {
-        return BinaryOperatorCondition.create(this, ">=", LiteralReference.create(value));
+        return BinaryOperatorCondition.create(this, Operator.greaterOrEqual(), LiteralReference.create(value));
     }
 
     @Override
     public QueryCondition isGreaterOrEqualThanColumn(String aColumnName) {
-        return BinaryOperatorCondition.create(this, ">=", ColumnReference.create(aColumnName));
+        return BinaryOperatorCondition.create(this, Operator.greaterOrEqual(), ColumnReference.create(aColumnName));
     }
 
     @Override
     public QueryCondition isLike(String pattern) {
-        return BinaryOperatorCondition.create(this, "LIKE", LiteralReference.create(pattern));
+        return BinaryOperatorCondition.create(this, Operator.like(), LiteralReference.create(pattern));
     }
 
     @Override
     public QueryCondition isNotLike(String pattern) {
-        return BinaryOperatorCondition.create(this, "NOT LIKE", LiteralReference.create(pattern));
+        return BinaryOperatorCondition.create(this, Operator.notLike(), LiteralReference.create(pattern));
     }
 
     @Override
@@ -150,12 +151,12 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isIn(Collection<?> values) {
-        return BinaryOperatorCondition.create(this, "IN", ListLiteralReference.create(values));
+        return BinaryOperatorCondition.create(this, Operator.in(), ListLiteralReference.create(values));
     }
 
     @Override
     public QueryCondition isNotIn(Collection<?> values) {
-        return BinaryOperatorCondition.create(this, "NOT IN", ListLiteralReference.create(values));
+        return BinaryOperatorCondition.create(this, Operator.notIn(), ListLiteralReference.create(values));
     }
 
     public static NamedColumnImpl create(String columnName) {

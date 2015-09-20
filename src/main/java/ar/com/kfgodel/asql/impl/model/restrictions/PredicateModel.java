@@ -9,35 +9,35 @@ import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
  */
 public class PredicateModel implements AgnosticModel, ExplicitOperand {
 
-    private Object leftSideOperand;
-    private String operator;
-    private Object rightSideOperand;
+    private AgnosticModel leftSideOperand;
+    private AgnosticModel operator;
+    private AgnosticModel rightSideOperand;
 
-    public Object getLeftSideOperand() {
+    public AgnosticModel getLeftSideOperand() {
         return leftSideOperand;
     }
 
-    public void setLeftSideOperand(Object leftSideOperand) {
+    public void setLeftSideOperand(AgnosticModel leftSideOperand) {
         this.leftSideOperand = leftSideOperand;
     }
 
-    public String getOperator() {
+    public AgnosticModel getOperator() {
         return operator;
     }
 
-    public void setOperator(String operator) {
+    public void setOperator(AgnosticModel operator) {
         this.operator = operator;
     }
 
-    public Object getRightSideOperand() {
+    public AgnosticModel getRightSideOperand() {
         return rightSideOperand;
     }
 
-    public void setRightSideOperand(Object rightSideOperand) {
+    public void setRightSideOperand(AgnosticModel rightSideOperand) {
         this.rightSideOperand = rightSideOperand;
     }
 
-    public static PredicateModel create(Object left, String operator, Object right) {
+    public static PredicateModel create(AgnosticModel left, AgnosticModel operator, AgnosticModel right) {
         PredicateModel node = new PredicateModel();
         node.leftSideOperand = left;
         node.operator = operator;

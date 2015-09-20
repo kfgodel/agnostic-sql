@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.api.restrictions;
 
 import ar.com.kfgodel.asql.api.AgnosticConstruct;
+import ar.com.kfgodel.asql.impl.lang.operators.Operator;
 import ar.com.kfgodel.asql.impl.lang.restrictions.BinaryOperatorCondition;
 import ar.com.kfgodel.asql.impl.model.restrictions.PredicateModel;
 
@@ -14,10 +15,10 @@ public interface QueryCondition extends AgnosticConstruct {
     PredicateModel parseModel();
 
     default QueryCondition and(QueryCondition anotherCondition){
-        return BinaryOperatorCondition.create(this, "AND", anotherCondition);
+        return BinaryOperatorCondition.create(this, Operator.and(), anotherCondition);
     };
 
     default QueryCondition or(QueryCondition anotherCondition){
-        return BinaryOperatorCondition.create(this, "OR", anotherCondition);
+        return BinaryOperatorCondition.create(this, Operator.or(), anotherCondition);
     };
 }
