@@ -8,11 +8,6 @@ import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.column.MinimalColumnDeclaration;
 import ar.com.kfgodel.asql.impl.lang.operators.Operator;
-import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
-import ar.com.kfgodel.asql.impl.lang.references.ListLiteralReference;
-import ar.com.kfgodel.asql.impl.lang.references.LiteralReference;
-import ar.com.kfgodel.asql.impl.lang.references.NullReference;
-import ar.com.kfgodel.asql.impl.lang.update.ColumnAssignmentImpl;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 
 import java.util.Collection;
@@ -30,17 +25,17 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isNull() {
-        return BinaryOperatorCondition.create(this, Operator.is(), NullReference.create());
+        return Internal.binaryOp(this, Operator.is(), Internal.nullRef());
     }
 
     @Override
     public QueryCondition isNotNull() {
-        return BinaryOperatorCondition.create(this,Operator.isNot(), NullReference.create());
+        return Internal.binaryOp(this, Operator.isNot(), Internal.nullRef());
     }
 
     @Override
     public ColumnAssignment to(Object value) {
-        return ColumnAssignmentImpl.create(columnName, value);
+        return Internal.columnAssignment(columnName, value);
     }
 
     @Override
@@ -50,74 +45,74 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isEqualsTo(Object operand) {
-        return BinaryOperatorCondition.create(this, Operator.equal(), LiteralReference.create(operand));
+        return Internal.binaryOp(this, Operator.equal(), Internal.literal(operand));
     }
 
     @Override
     public QueryCondition isEqualsToColumn(String aColumnName) {
-        return BinaryOperatorCondition.create(this, Operator.equal(), ColumnReference.create(aColumnName));
+        return Internal.binaryOp(this, Operator.equal(), Internal.column(aColumnName));
     }
 
     @Override
     public QueryCondition isNotEqualsTo(Object value) {
-        return BinaryOperatorCondition.create(this, Operator.different(), LiteralReference.create(value));
+        return Internal.binaryOp(this, Operator.different(), Internal.literal(value));
     }
 
     @Override
     public QueryCondition isNotEqualsToColumn(String aColumnName) {
-        return BinaryOperatorCondition.create(this, Operator.different(), ColumnReference.create(aColumnName));
+        return Internal.binaryOp(this, Operator.different(), Internal.column(aColumnName));
     }
 
 
 
     @Override
     public QueryCondition isLessThan(Object value) {
-        return BinaryOperatorCondition.create(this, Operator.less(), LiteralReference.create(value));
+        return Internal.binaryOp(this, Operator.less(), Internal.literal(value));
     }
 
     @Override
     public QueryCondition isLessThanColumn(String aColumnName) {
-        return BinaryOperatorCondition.create(this, Operator.less(), ColumnReference.create(aColumnName));
+        return Internal.binaryOp(this, Operator.less(), Internal.column(aColumnName));
     }
 
     @Override
     public QueryCondition isGreaterThan(Object value) {
-        return BinaryOperatorCondition.create(this, Operator.greater(), LiteralReference.create(value));
+        return Internal.binaryOp(this, Operator.greater(), Internal.literal(value));
     }
 
     @Override
     public QueryCondition isGreaterThanColumn(String aColumnName) {
-        return BinaryOperatorCondition.create(this, Operator.greater(), ColumnReference.create(aColumnName));
+        return Internal.binaryOp(this, Operator.greater(), Internal.column(aColumnName));
     }
 
     @Override
     public QueryCondition isLessOrEqualThan(Object value) {
-        return BinaryOperatorCondition.create(this, Operator.lessOrEqual(), LiteralReference.create(value));
+        return Internal.binaryOp(this, Operator.lessOrEqual(), Internal.literal(value));
     }
 
     @Override
     public QueryCondition isLessThanOrEqualColumn(String aColumnName) {
-        return BinaryOperatorCondition.create(this, Operator.lessOrEqual(), ColumnReference.create(aColumnName));
+        return Internal.binaryOp(this, Operator.lessOrEqual(), Internal.column(aColumnName));
     }
 
     @Override
     public QueryCondition isGreaterOrEqualThan(Object value) {
-        return BinaryOperatorCondition.create(this, Operator.greaterOrEqual(), LiteralReference.create(value));
+        return Internal.binaryOp(this, Operator.greaterOrEqual(), Internal.literal(value));
     }
 
     @Override
     public QueryCondition isGreaterOrEqualThanColumn(String aColumnName) {
-        return BinaryOperatorCondition.create(this, Operator.greaterOrEqual(), ColumnReference.create(aColumnName));
+        return Internal.binaryOp(this, Operator.greaterOrEqual(), Internal.column(aColumnName));
     }
 
     @Override
     public QueryCondition isLike(String pattern) {
-        return BinaryOperatorCondition.create(this, Operator.like(), LiteralReference.create(pattern));
+        return Internal.binaryOp(this, Operator.like(), Internal.literal(pattern));
     }
 
     @Override
     public QueryCondition isNotLike(String pattern) {
-        return BinaryOperatorCondition.create(this, Operator.notLike(), LiteralReference.create(pattern));
+        return Internal.binaryOp(this, Operator.notLike(), Internal.literal(pattern));
     }
 
     @Override
@@ -152,12 +147,12 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isIn(Collection<?> values) {
-        return BinaryOperatorCondition.create(this, Operator.in(), ListLiteralReference.create(values));
+        return Internal.binaryOp(this, Operator.in(), Internal.list(values));
     }
 
     @Override
     public QueryCondition isNotIn(Collection<?> values) {
-        return BinaryOperatorCondition.create(this, Operator.notIn(), ListLiteralReference.create(values));
+        return Internal.binaryOp(this, Operator.notIn(), Internal.list(values));
     }
 
     public static NamedColumnImpl create(String columnName) {
@@ -168,6 +163,6 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public ColumnReferenceModel parseModel() {
-        return ColumnReference.create(columnName).parseModel();
+        return Internal.column(columnName).parseModel();
     }
 }
