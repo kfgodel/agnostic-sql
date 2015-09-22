@@ -31,10 +31,6 @@ public class ConstraintDeclarationModel implements AgnosticModel, TablePartModel
         return columns;
     }
 
-    public void setColumnNames(List<ColumnReferenceModel> columns) {
-        this.columns = columns;
-    }
-
     public String getTail() {
         return tail;
     }

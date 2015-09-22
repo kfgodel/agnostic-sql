@@ -54,7 +54,7 @@ public interface Internal {
 
     static List<ColumnReference> columns(String... columnNames) {
         return Arrays.stream(columnNames)
-                .map(ColumnReference::create)
+                .map(Internal::column)
                 .collect(Collectors.toList());
     }
 }
