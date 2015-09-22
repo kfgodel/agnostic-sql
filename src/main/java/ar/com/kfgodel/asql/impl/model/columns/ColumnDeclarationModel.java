@@ -10,17 +10,17 @@ import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
  */
 public class ColumnDeclarationModel implements TablePartModel, AgnosticModel{
 
-    private ColumnReferenceModel columnName;
+    private ColumnReferenceModel column;
     private AgnosticModel columnType;
     private String nullity;
     private Object defaultValue;
 
-    public ColumnReferenceModel getColumnName() {
-        return columnName;
+    public ColumnReferenceModel getColumn() {
+        return column;
     }
 
-    public void setColumnName(ColumnReferenceModel columnName) {
-        this.columnName = columnName;
+    public void setColumn(ColumnReferenceModel column) {
+        this.column = column;
     }
 
     public AgnosticModel getColumnType() {
@@ -49,7 +49,7 @@ public class ColumnDeclarationModel implements TablePartModel, AgnosticModel{
 
     public static ColumnDeclarationModel create(ColumnReferenceModel columnReference, AgnosticModel columnType) {
         ColumnDeclarationModel model = new ColumnDeclarationModel();
-        model.columnName = columnReference;
+        model.column = columnReference;
         model.columnType = columnType;
         return model;
     }

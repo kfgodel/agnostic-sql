@@ -3,6 +3,7 @@ package ar.com.kfgodel.asql.impl.lang.update;
 import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
 import ar.com.kfgodel.asql.api.functions.FunctionInvocation;
 import ar.com.kfgodel.asql.impl.lang.Internal;
+import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
 import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
 
@@ -11,7 +12,7 @@ import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
  */
 public class ColumnAssignmentImpl implements ColumnAssignment {
 
-    private String columnName;
+    private ColumnReference column;
     private Object columnValue;
 
     @Override
@@ -24,12 +25,12 @@ public class ColumnAssignmentImpl implements ColumnAssignment {
         }else {
             operand = Internal.literal(columnValue).parseModel();
         }
-        return ColumnAssignmentModel.create(columnName, operand);
+        return ColumnAssignmentModel.create(column.parseModel(), operand);
     }
 
-    public static ColumnAssignmentImpl create(String columnName, Object columnValue) {
+    public static ColumnAssignmentImpl create(ColumnReference column, Object columnValue) {
         ColumnAssignmentImpl assignment = new ColumnAssignmentImpl();
-        assignment.columnName = columnName;
+        assignment.column = column;
         assignment.columnValue = columnValue;
         return assignment;
     }

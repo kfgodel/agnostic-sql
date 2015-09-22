@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.impl.model.columns;
 
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
+import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
 
 /**
@@ -9,15 +10,15 @@ import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
  */
 public class ColumnAssignmentModel implements AgnosticModel {
 
-    private String columnName;
+    private ColumnReferenceModel column;
     private ExplicitOperand assignedValue;
 
-    public String getColumnName() {
-        return columnName;
+    public ColumnReferenceModel getColumn() {
+        return column;
     }
 
-    public void setColumnName(String columnName) {
-        this.columnName = columnName;
+    public void setColumn(ColumnReferenceModel column) {
+        this.column = column;
     }
 
     public ExplicitOperand getAssignedValue() {
@@ -28,9 +29,9 @@ public class ColumnAssignmentModel implements AgnosticModel {
         this.assignedValue = assignedValue;
     }
 
-    public static ColumnAssignmentModel create(String columnName, ExplicitOperand value) {
+    public static ColumnAssignmentModel create(ColumnReferenceModel column, ExplicitOperand value) {
         ColumnAssignmentModel assignmentNode = new ColumnAssignmentModel();
-        assignmentNode.columnName = columnName;
+        assignmentNode.column = column;
         assignmentNode.assignedValue = value;
         return assignmentNode;
     }

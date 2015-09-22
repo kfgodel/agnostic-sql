@@ -1,5 +1,6 @@
 package ar.com.kfgodel.asql.impl.model.alter;
 
+import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
 
@@ -9,20 +10,20 @@ import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
  */
 public class RemoveColumnModel extends TableCenteredModel{
 
-    private String columnName;
+    private ColumnReferenceModel column;
 
-    public String getColumnName() {
-        return columnName;
+    public ColumnReferenceModel getColumn() {
+        return column;
     }
 
-    public void setColumnName(String columnName) {
-        this.columnName = columnName;
+    public void setColumnName(ColumnReferenceModel column) {
+        this.column = column;
     }
 
-    public static RemoveColumnModel create(TableReferenceModel table, String column) {
+    public static RemoveColumnModel create(TableReferenceModel table, ColumnReferenceModel column) {
         RemoveColumnModel model = new RemoveColumnModel();
         model.setTable(table);
-        model.columnName = column;
+        model.column = column;
         return model;
     }
 

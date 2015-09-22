@@ -8,6 +8,7 @@ import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.column.MinimalColumnDeclaration;
 import ar.com.kfgodel.asql.impl.lang.operators.Operator;
+import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 
 import java.util.Collection;
@@ -17,10 +18,10 @@ import java.util.Collection;
  */
 public class NamedColumnImpl implements NamedColumn {
 
-    private String columnName;
+    private ColumnReference column;
 
-    public String getColumnName() {
-        return columnName;
+    public ColumnReference getColumn() {
+        return column;
     }
 
     @Override
@@ -35,7 +36,7 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public ColumnAssignment to(Object value) {
-        return Internal.columnAssignment(columnName, value);
+        return Internal.columnAssignment(column, value);
     }
 
     @Override
@@ -155,14 +156,14 @@ public class NamedColumnImpl implements NamedColumn {
         return Internal.binaryOp(this, Operator.notIn(), Internal.list(values));
     }
 
-    public static NamedColumnImpl create(String columnName) {
+    public static NamedColumnImpl create(ColumnReference column) {
         NamedColumnImpl named = new NamedColumnImpl();
-        named.columnName = columnName;
+        named.column = column;
         return named;
     }
 
     @Override
     public ColumnReferenceModel parseModel() {
-        return Internal.column(columnName).parseModel();
+        return column.parseModel();
     }
 }

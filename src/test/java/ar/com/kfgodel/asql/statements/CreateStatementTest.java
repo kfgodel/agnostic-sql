@@ -43,7 +43,7 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
                 CreateModel createModel = create.parseModel();
                 ColumnDeclarationModel columnModel = createModel.getColumnDeclarations().get(0);
 
-                assertThat(columnModel.getColumnName().getValue()).isEqualTo("id");
+                assertThat(columnModel.getColumn().getColumnName()).isEqualTo("id");
                 assertThat(columnModel.getColumnType()).isEqualTo(DataType.pk().parseModel());
 
                 ConstraintDeclarationModel contraint = createModel.getTableConstraints().get(0);
@@ -62,7 +62,7 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
                     CreateModel createModel = create.parseModel();
                     ColumnDeclarationModel columnModel = createModel.getColumnDeclarations().get(0);
 
-                    assertThat(columnModel.getColumnName().getValue()).isEqualTo("columnName");
+                    assertThat(columnModel.getColumn().getColumnName()).isEqualTo("columnName");
                     assertThat(columnModel.getColumnType()).isEqualTo(DataType.bigInteger().parseModel());
                 });
 

@@ -30,7 +30,7 @@ public class UpdateModelTest extends JavaSpec<AsqlTestContext> {
 
 
             context().updateModel(() -> {
-                UpdateModel updateModel = UpdateModel.create(TableReferenceModel.create("tableName"), Lists.newArrayList(ColumnAssignmentModel.create("column1", ExplicitValueModel.create("value1"))));
+                UpdateModel updateModel = UpdateModel.create(TableReferenceModel.create("tableName"), Lists.newArrayList(ColumnAssignmentModel.create(ColumnReferenceModel.create("column1"), ExplicitValueModel.create("value1"))));
                 updateModel.getWhereClause().setPredicate(PredicateModel.create(ColumnReferenceModel.create("column2"), Operator.equal().parseModel(), ExplicitValueModel.create(3)));
                 return updateModel;
             });
@@ -50,12 +50,12 @@ public class UpdateModelTest extends JavaSpec<AsqlTestContext> {
 
                 assertThat(updateTree.getTable().getTableName()).isEqualTo("tableName");
 
-                assertThat(updateTree.getColumnAssignments().get(0).getColumnName()).isEqualTo("column1");
+                assertThat(updateTree.getColumnAssignments().get(0).getColumn().getColumnName()).isEqualTo("column1");
                 ExplicitValueModel assignedValue = (ExplicitValueModel) updateTree.getColumnAssignments().get(0).getAssignedValue();
                 assertThat(assignedValue.getValue()).isEqualTo("value1");
 
                 ColumnReferenceModel leftSide = (ColumnReferenceModel) updateTree.getWhereClause().getPredicate().getLeftSideOperand();
-                assertThat(leftSide.getValue()).isEqualTo("column2");
+                assertThat(leftSide.getColumnName()).isEqualTo("column2");
                 assertThat(updateTree.getWhereClause().getPredicate().getOperator()).isEqualTo(Operator.equal().parseModel());
                 ExplicitValueModel rightSide = (ExplicitValueModel) updateTree.getWhereClause().getPredicate().getRightSideOperand();
                 assertThat(rightSide.getValue()).isEqualTo(3);

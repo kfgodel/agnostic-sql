@@ -1,18 +1,16 @@
 package ar.com.kfgodel.asql.impl.model.references;
 
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
-import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
 
 /**
  * This type represents an explicit sql reference to a column
  * Created by kfgodel on 12/07/15.
  */
-public class ColumnReferenceModel implements AgnosticModel, ExplicitOperand {
+public class ColumnReferenceModel implements AgnosticModel {
 
     private String columnName;
 
-    @Override
-    public Object getValue() {
+    public String getColumnName() {
         return columnName;
     }
 
@@ -24,6 +22,6 @@ public class ColumnReferenceModel implements AgnosticModel, ExplicitOperand {
 
     @Override
     public String getTemplatePath() {
-        return "/operands/_value.ftl";
+        return "/references/_column.ftl";
     }
 }

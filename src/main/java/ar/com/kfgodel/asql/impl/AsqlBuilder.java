@@ -36,7 +36,7 @@ public class AsqlBuilder implements Asql {
 
     @Override
     public NamedColumn column(String columnName) {
-        return NamedColumnImpl.create(columnName);
+        return NamedColumnImpl.create(Internal.column(columnName));
     }
 
     @Override

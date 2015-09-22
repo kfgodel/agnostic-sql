@@ -31,7 +31,7 @@ public class UpdateStatementTest extends JavaSpec<AsqlTestContext> {
                  assertThat(updateModel.getTable().getTableName()).isEqualTo("tableName");
 
                  ColumnAssignmentModel assignment = updateModel.getColumnAssignments().get(0);
-                 assertThat(assignment.getColumnName()).isEqualTo("columnName");
+                 assertThat(assignment.getColumn().getColumnName()).isEqualTo("columnName");
 
                  ExplicitValueModel assignedValue = (ExplicitValueModel) assignment.getAssignedValue();
                  assertThat(assignedValue.getValue()).isEqualTo("value1");

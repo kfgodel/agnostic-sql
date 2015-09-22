@@ -1,4 +1,4 @@
-<@renderAsModel model=model.columnName /> <@renderAsModel model=model.columnType />
+<@renderAsModel model=model.column /> <@renderAsModel model=model.columnType />
 <#if model.nullity??>
 ${model.nullity}
 </#if>

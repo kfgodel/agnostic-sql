@@ -11,6 +11,10 @@ public class ColumnReference implements AgnosticConstruct {
 
     private String columnName;
 
+    public String getColumnName() {
+        return columnName;
+    }
+
     @Override
     public ColumnReferenceModel parseModel() {
         return ColumnReferenceModel.create(columnName);

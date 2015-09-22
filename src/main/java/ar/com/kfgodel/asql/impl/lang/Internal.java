@@ -8,7 +8,10 @@ import ar.com.kfgodel.asql.impl.lang.references.*;
 import ar.com.kfgodel.asql.impl.lang.restrictions.BinaryOperatorCondition;
 import ar.com.kfgodel.asql.impl.lang.update.ColumnAssignmentImpl;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This interface serves as an access point to internal API objects
@@ -37,8 +40,8 @@ public interface Internal {
         return ListLiteralReference.create(values);
     }
 
-    static ColumnAssignment columnAssignment(String columnName, Object columnValue) {
-        return ColumnAssignmentImpl.create(columnName, columnValue);
+    static ColumnAssignment columnAssignment(ColumnReference column, Object columnValue) {
+        return ColumnAssignmentImpl.create(column, columnValue);
     }
 
     static BinaryOperatorCondition binaryOp(AgnosticConstruct leftOperand, AgnosticConstruct operator, AgnosticConstruct rightOperand) {
@@ -47,5 +50,11 @@ public interface Internal {
 
     static TableReference table(String tableName) {
         return TableReference.create(tableName);
+    }
+
+    static List<ColumnReference> columns(String... columnNames) {
+        return Arrays.stream(columnNames)
+                .map(ColumnReference::create)
+                .collect(Collectors.toList());
     }
 }
