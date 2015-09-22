@@ -3,7 +3,7 @@ package ar.com.kfgodel.asql.impl.lang.insert;
 import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
 import ar.com.kfgodel.asql.api.insert.ColumnDefinedInsert;
 import ar.com.kfgodel.asql.api.insert.InsertStatement;
-import ar.com.kfgodel.asql.impl.lang.update.ColumnAssignmentImpl;
+import ar.com.kfgodel.asql.impl.lang.Internal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +28,7 @@ public class ColumnDefinedInsertImpl implements ColumnDefinedInsert {
         for (int i = 0; i < columnCount; i++) {
             String columnName = columnNames.get(i);
             Object columnValue = columnValues.get(i);
-            columnAssignments.add(ColumnAssignmentImpl.create(columnName, columnValue));
+            columnAssignments.add(Internal.columnAssignment(columnName, columnValue));
         }
         return InsertStatementImpl.create(previousNode, columnAssignments);
     }

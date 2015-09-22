@@ -1,8 +1,8 @@
 package ar.com.kfgodel.asql.impl.lang.column;
 
 import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
+import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.Parseable;
-import ar.com.kfgodel.asql.impl.lang.references.LiteralReference;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 
 /**
@@ -37,7 +37,7 @@ public class DefaultedColumnDeclaration implements ColumnDeclaration {
     public static DefaultedColumnDeclaration create(ColumnDeclaration previousNode, Object value) {
         DefaultedColumnDeclaration declaration = new DefaultedColumnDeclaration();
         declaration.previousNode = previousNode;
-        declaration.defaultValue = LiteralReference.create(value);
+        declaration.defaultValue = Internal.literal(value);
         return declaration;
     }
 
