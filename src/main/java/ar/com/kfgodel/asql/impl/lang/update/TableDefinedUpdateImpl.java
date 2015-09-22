@@ -3,6 +3,7 @@ package ar.com.kfgodel.asql.impl.lang.update;
 import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.api.update.UnrestrictedUpdate;
+import ar.com.kfgodel.asql.impl.lang.references.TableReference;
 import ar.com.kfgodel.asql.impl.lang.support.TableCenteredStatement;
 import com.google.common.collect.Lists;
 
@@ -13,9 +14,9 @@ import java.util.List;
  */
 public class TableDefinedUpdateImpl extends TableCenteredStatement implements TableDefinedUpdate {
 
-    public static TableDefinedUpdateImpl create(String tableName) {
+    public static TableDefinedUpdateImpl create(TableReference table) {
         TableDefinedUpdateImpl update = new TableDefinedUpdateImpl();
-        update.setTableName(tableName);
+        update.setTable(table);
         return update;
     }
 

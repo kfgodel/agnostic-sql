@@ -33,7 +33,7 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
 
                 CreateModel createModel = create.parseModel();
 
-                assertThat(createModel.getTableName()).isEqualTo("tableName");
+                assertThat(createModel.getTable().getTableName()).isEqualTo("tableName");
             });
 
             it("can declare an id column used as pk",()->{

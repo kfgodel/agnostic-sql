@@ -4,10 +4,7 @@ import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
 import ar.com.kfgodel.asql.impl.lang.internal.PatternHelper;
 import ar.com.kfgodel.asql.impl.lang.internal.impl.PatternHelperImpl;
-import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
-import ar.com.kfgodel.asql.impl.lang.references.ListLiteralReference;
-import ar.com.kfgodel.asql.impl.lang.references.LiteralReference;
-import ar.com.kfgodel.asql.impl.lang.references.NullReference;
+import ar.com.kfgodel.asql.impl.lang.references.*;
 import ar.com.kfgodel.asql.impl.lang.restrictions.BinaryOperatorCondition;
 import ar.com.kfgodel.asql.impl.lang.update.ColumnAssignmentImpl;
 
@@ -46,5 +43,9 @@ public interface Internal {
 
     static BinaryOperatorCondition binaryOp(AgnosticConstruct leftOperand, AgnosticConstruct operator, AgnosticConstruct rightOperand) {
         return BinaryOperatorCondition.create(leftOperand, operator, rightOperand);
+    }
+
+    static TableReference table(String tableName) {
+        return TableReference.create(tableName);
     }
 }

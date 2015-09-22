@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.impl.model.alter;
 
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
+import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
 
 /**
@@ -19,9 +20,9 @@ public class AddColumnModel extends TableCenteredModel {
         this.columnDeclaration = columnDeclaration;
     }
 
-    public static AddColumnModel create(String tableName, ColumnDeclarationModel columnDeclaration) {
+    public static AddColumnModel create(TableReferenceModel table, ColumnDeclarationModel columnDeclaration) {
         AddColumnModel model = new AddColumnModel();
-        model.setTableName(tableName);
+        model.setTable(table);
         model.columnDeclaration = columnDeclaration;
         return model;
     }

@@ -1,18 +1,20 @@
 package ar.com.kfgodel.asql.impl.lang.support;
 
+import ar.com.kfgodel.asql.impl.lang.references.TableReference;
+
 /**
  * This type serves as a base class for statements that are centered around a table
  * Created by kfgodel on 15/07/15.
  */
 public abstract class TableCenteredStatement {
 
-    private String tableName;
+    private TableReference table;
 
-    public String getTableName() {
-        return tableName;
+    public TableReference getTable() {
+        return table;
     }
 
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
+    public void setTable(TableReference table) {
+        this.table = table;
     }
 }

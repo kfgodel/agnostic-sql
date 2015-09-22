@@ -3,10 +3,11 @@ package ar.com.kfgodel.asql.model;
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.AsqlTestContext;
-import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
+import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
 import ar.com.kfgodel.asql.impl.model.alter.RemoveColumnModel;
+import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +21,7 @@ public class RemoveColumnModelTest extends JavaSpec<AsqlTestContext> {
     public void define() {
         describe("an agnostic remove column statement", () -> {
 
-            context().removeModel(() -> RemoveColumnModel.create("tableName", "columnName"));
+            context().removeModel(() -> RemoveColumnModel.create(TableReferenceModel.create("tableName"), "columnName"));
 
             it("can be translated to a vendor specific statement", () -> {
                 VendorInterpreter interpreter = TemplateInterpreter.create(Vendor.ansi());

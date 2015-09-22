@@ -1,6 +1,6 @@
 <#include "/macros/_renderAsModel.ftl" />
 <@compress single_line=true>
-INSERT INTO ${model.tableName} (
+INSERT INTO <@renderAsModel model=model.table/> (
 <#list model.columnAssignments as columnAssignment>
 ${columnAssignment.columnName}<#sep>, </#sep>
 </#list>

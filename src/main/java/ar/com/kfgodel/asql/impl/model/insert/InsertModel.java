@@ -2,6 +2,7 @@ package ar.com.kfgodel.asql.impl.model.insert;
 
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
+import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
 
 import java.util.ArrayList;
@@ -25,9 +26,9 @@ public class InsertModel extends TableCenteredModel implements AgnosticModel {
         this.columnAssignments = columnAssignments;
     }
 
-    public static InsertModel create(String tableName) {
+    public static InsertModel create(TableReferenceModel table) {
         InsertModel model = new InsertModel();
-        model.setTableName(tableName);
+        model.setTable(table);
         return model;
     }
 

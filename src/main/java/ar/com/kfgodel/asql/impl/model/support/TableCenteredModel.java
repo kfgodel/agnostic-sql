@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.impl.model.support;
 
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
+import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 
 /**
  * This type serves as base clase for models that are centered around a table
@@ -8,13 +9,13 @@ import ar.com.kfgodel.asql.impl.model.AgnosticModel;
  */
 public abstract class TableCenteredModel implements AgnosticModel {
 
-    private String tableName;
+    private TableReferenceModel table;
 
-    public String getTableName() {
-        return tableName;
+    public TableReferenceModel getTable() {
+        return table;
     }
 
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
+    public void setTable(TableReferenceModel table) {
+        this.table = table;
     }
 }

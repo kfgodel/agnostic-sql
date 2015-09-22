@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.impl.model.update;
 
 import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
+import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 import ar.com.kfgodel.asql.impl.model.restrictions.WhereConstrainedModel;
 import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
 import ar.com.kfgodel.asql.impl.model.where.WhereModel;
@@ -28,13 +29,13 @@ public class UpdateModel extends TableCenteredModel implements WhereConstrainedM
     public void setColumnAssignments(List<ColumnAssignmentModel> columnAssignments) {
         this.columnAssignments = columnAssignments;
     }
-    public static UpdateModel create(String tableName, List<ColumnAssignmentModel> columnAssignments) {
+    public static UpdateModel create(TableReferenceModel table, List<ColumnAssignmentModel> columnAssignments) {
         if(columnAssignments.isEmpty()){
             throw new IllegalArgumentException("At least one assignment needed");
         }
         UpdateModel updateModel = new UpdateModel();
         updateModel.whereClause = WhereModel.create();
-        updateModel.setTableName(tableName);
+        updateModel.setTable(table);
         updateModel.setColumnAssignments(columnAssignments);
         return updateModel;
     }

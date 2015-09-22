@@ -25,7 +25,7 @@ public class UnrestrictedUpdateImpl implements UnrestrictedUpdate {
 
     @Override
     public UpdateModel parseModel() {
-        return UpdateModel.create(tableUpdate.getTableName(), parseColumnAssignmentModels());
+        return UpdateModel.create(tableUpdate.getTable().parseModel(), parseColumnAssignmentModels());
     }
 
     private List<ColumnAssignmentModel> parseColumnAssignmentModels() {

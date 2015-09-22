@@ -3,6 +3,7 @@ package ar.com.kfgodel.asql.impl.lang.delete;
 import ar.com.kfgodel.asql.api.delete.RestrictedDeleteStatement;
 import ar.com.kfgodel.asql.api.delete.UnrestrictedDeleteStatement;
 import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
+import ar.com.kfgodel.asql.impl.lang.references.TableReference;
 import ar.com.kfgodel.asql.impl.lang.support.TableCenteredStatement;
 import ar.com.kfgodel.asql.impl.model.delete.DeleteModel;
 
@@ -13,7 +14,7 @@ public class UnrestrictedDeleteStatementImpl extends TableCenteredStatement impl
 
     @Override
     public DeleteModel parseModel() {
-        return DeleteModel.create(getTableName());
+        return DeleteModel.create(getTable().parseModel());
     }
 
     @Override
@@ -21,9 +22,9 @@ public class UnrestrictedDeleteStatementImpl extends TableCenteredStatement impl
         return RestrictedDeleteStatementImpl.create(this,condition);
     }
 
-    public static UnrestrictedDeleteStatementImpl create(String tableName) {
+    public static UnrestrictedDeleteStatementImpl create(TableReference table) {
         UnrestrictedDeleteStatementImpl statement = new UnrestrictedDeleteStatementImpl();
-        statement.setTableName(tableName);
+        statement.setTable(table);
         return statement;
     }
 

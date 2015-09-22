@@ -14,7 +14,7 @@ public class AddColumnStatementImpl implements AddColumnStatement {
 
     @Override
     public AddColumnModel parseModel() {
-        return AddColumnModel.create(previousNode.getTableName(), column.parseModel());
+        return AddColumnModel.create(previousNode.getTable().parseModel(), column.parseModel());
     }
 
     public static AddColumnStatementImpl create(TableDefinedAlterImpl definedAlter, ColumnDeclaration columnDeclaration) {
