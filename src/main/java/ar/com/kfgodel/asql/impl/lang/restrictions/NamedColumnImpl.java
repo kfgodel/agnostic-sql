@@ -5,6 +5,7 @@ import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
 import ar.com.kfgodel.asql.api.types.DataType;
+import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.column.MinimalColumnDeclaration;
 import ar.com.kfgodel.asql.impl.lang.operators.Operator;
 import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
@@ -121,32 +122,32 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition doesNotContain(String substring) {
-        return isNotLike("%" + substring + "%");
+        return isNotLike(Internal.pattern().contains(substring));
     }
 
     @Override
     public QueryCondition doesNotEndWith(String suffix) {
-        return isNotLike("%" + suffix);
+        return isNotLike(Internal.pattern().endsWith(suffix));
     }
 
     @Override
     public QueryCondition doesNotStartWith(String prefix) {
-        return isNotLike(prefix + "%");
+        return isNotLike(Internal.pattern().startsWith(prefix));
     }
 
     @Override
     public QueryCondition startsWith(String prefix) {
-        return isLike(prefix + "%");
+        return isLike(Internal.pattern().startsWith(prefix));
     }
 
     @Override
     public QueryCondition endsWith(String suffix) {
-        return isLike("%" + suffix);
+        return isLike(Internal.pattern().endsWith(suffix));
     }
 
     @Override
     public QueryCondition contains(String substring) {
-        return isLike("%" + substring + "%");
+        return isLike(Internal.pattern().contains(substring));
     }
 
     @Override
