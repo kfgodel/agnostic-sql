@@ -1,5 +1,6 @@
 package ar.com.kfgodel.asql.impl.model.drop;
 
+import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
 
 /**
@@ -7,9 +8,9 @@ import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
  */
 public class DropModel extends TableCenteredModel {
 
-    public static DropModel create(String tableName) {
+    public static DropModel create(TableReferenceModel table) {
         DropModel model = new DropModel();
-        model.setTableName(tableName);
+        model.setTable(table);
         return model;
     }
 

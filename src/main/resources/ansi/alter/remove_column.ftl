@@ -1,1 +1,2 @@
-ALTER TABLE ${model.tableName} DROP COLUMN ${model.columnName}
+<#include "/macros/_renderAsModel.ftl" />
+ALTER TABLE <@renderAsModel model=model.table/> DROP COLUMN ${model.columnName}

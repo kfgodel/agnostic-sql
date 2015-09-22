@@ -2,6 +2,7 @@ package ar.com.kfgodel.asql.impl.model.alter;
 
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 import ar.com.kfgodel.asql.impl.model.constraints.NamedConstraintDeclarationModel;
+import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
 
 /**
@@ -19,9 +20,9 @@ public class AddConstraintModel extends TableCenteredModel implements AgnosticMo
         this.constraint = constraint;
     }
 
-    public static AddConstraintModel create(String tableName, NamedConstraintDeclarationModel constraintDeclaration) {
+    public static AddConstraintModel create(TableReferenceModel table, NamedConstraintDeclarationModel constraintDeclaration) {
         AddConstraintModel model = new AddConstraintModel();
-        model.setTableName(tableName);
+        model.setTable(table);
         model.constraint = constraintDeclaration;
         return model;
     }

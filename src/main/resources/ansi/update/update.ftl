@@ -1,6 +1,6 @@
 <#include "/macros/_renderAsModel.ftl">
 <@compress single_line=true>
-UPDATE ${model.tableName}
+UPDATE <@renderAsModel model=model.table/>
 SET <#list model.columnAssignments as columnAssignment>
   <@renderAsModel model=columnAssignment />
   <#sep>, </#sep>

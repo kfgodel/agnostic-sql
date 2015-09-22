@@ -13,7 +13,7 @@ public class RemoveColumnStatementImpl implements RemoveColumnStatement {
 
     @Override
     public RemoveColumnModel parseModel() {
-        return RemoveColumnModel.create(previousNode.getTableName(), columnName);
+        return RemoveColumnModel.create(previousNode.getTable().parseModel(), columnName);
     }
 
     public static RemoveColumnStatementImpl create(TableDefinedAlterImpl previous, String columnName) {

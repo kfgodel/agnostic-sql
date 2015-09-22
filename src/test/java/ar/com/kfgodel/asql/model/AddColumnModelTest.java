@@ -10,6 +10,7 @@ import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
 import ar.com.kfgodel.asql.impl.model.alter.AddColumnModel;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
+import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +24,7 @@ public class AddColumnModelTest extends JavaSpec<AsqlTestContext> {
     public void define() {
         describe("an agnostic add column model", () -> {
 
-            context().addModel(() -> AddColumnModel.create("tableName", ColumnDeclarationModel.create(ColumnReferenceModel.create("columnName"), DataType.integer().parseModel())));
+            context().addModel(() -> AddColumnModel.create(TableReferenceModel.create("tableName"), ColumnDeclarationModel.create(ColumnReferenceModel.create("columnName"), DataType.integer().parseModel())));
 
             it("can be translated to another vendor specific statement", () -> {
                 VendorInterpreter interpreter = TemplateInterpreter.create(Vendor.ansi());

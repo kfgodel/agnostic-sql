@@ -14,7 +14,7 @@ public class ChangeColumnStatementImpl implements ChangeColumnStatement {
 
     @Override
     public ChangeColumnModel parseModel() {
-        return ChangeColumnModel.create(previousNode.getTableName(), column.parseModel());
+        return ChangeColumnModel.create(previousNode.getTable().parseModel(), column.parseModel());
     }
 
     public static ChangeColumnStatementImpl create(TableDefinedAlterImpl previousNode, ColumnDeclaration column) {

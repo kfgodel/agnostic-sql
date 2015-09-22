@@ -2,6 +2,7 @@ package ar.com.kfgodel.asql.impl.model.create;
 
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.constraints.ConstraintDeclarationModel;
+import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
 
 import java.util.ArrayList;
@@ -37,9 +38,9 @@ public class CreateModel extends TableCenteredModel {
         this.tableConstraints = tableConstraints;
     }
 
-    public static CreateModel create(String tableName) {
+    public static CreateModel create(TableReferenceModel table) {
         CreateModel model = new CreateModel();
-        model.setTableName(tableName);
+        model.setTable(table);
         return model;
     }
 

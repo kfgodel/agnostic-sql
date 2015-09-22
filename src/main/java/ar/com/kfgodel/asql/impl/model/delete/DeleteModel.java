@@ -1,5 +1,6 @@
 package ar.com.kfgodel.asql.impl.model.delete;
 
+import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 import ar.com.kfgodel.asql.impl.model.restrictions.WhereConstrainedModel;
 import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
 import ar.com.kfgodel.asql.impl.model.where.WhereModel;
@@ -12,9 +13,9 @@ public class DeleteModel extends TableCenteredModel implements WhereConstrainedM
 
     private WhereModel whereClause;
 
-    public static DeleteModel create(String tableName) {
+    public static DeleteModel create(TableReferenceModel table) {
         DeleteModel model = new DeleteModel();
-        model.setTableName(tableName);
+        model.setTable(table);
         model.whereClause = WhereModel.create();
         return model;
     }

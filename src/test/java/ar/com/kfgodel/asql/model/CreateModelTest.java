@@ -11,6 +11,7 @@ import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.constraints.ConstraintDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
+import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
 import org.junit.runner.RunWith;
 
@@ -27,7 +28,7 @@ public class CreateModelTest extends JavaSpec<AsqlTestContext> {
         describe("an agnostic create statement model", () -> {
 
             context().createModel(()->{
-                CreateModel createModel = CreateModel.create("POSA_ESTADO_DE_LIQUIDACION");
+                CreateModel createModel = CreateModel.create(TableReferenceModel.create("POSA_ESTADO_DE_LIQUIDACION"));
                 createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("id"),DataType.pk().parseModel()));
                 createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("momentoDeCreacion"),DataType.timestamp().parseModel()));
                 createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("momentoDeUltimaModificacion"),DataType.timestamp().parseModel()));

@@ -3,6 +3,7 @@ package ar.com.kfgodel.asql.impl.lang.alter;
 import ar.com.kfgodel.asql.api.alter.*;
 import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
 import ar.com.kfgodel.asql.api.constraints.NamedConstraintDeclaration;
+import ar.com.kfgodel.asql.impl.lang.references.TableReference;
 import ar.com.kfgodel.asql.impl.lang.support.TableCenteredStatement;
 
 /**
@@ -10,9 +11,9 @@ import ar.com.kfgodel.asql.impl.lang.support.TableCenteredStatement;
  */
 public class TableDefinedAlterImpl extends TableCenteredStatement implements TableDefinedAlter {
 
-    public static TableDefinedAlterImpl create(String tableName) {
+    public static TableDefinedAlterImpl create(TableReference table) {
         TableDefinedAlterImpl alter = new TableDefinedAlterImpl();
-        alter.setTableName(tableName);
+        alter.setTable(table);
         return alter;
     }
 
@@ -23,7 +24,7 @@ public class TableDefinedAlterImpl extends TableCenteredStatement implements Tab
 
     @Override
     public AddConstraintStatement adding(NamedConstraintDeclaration newConstraint) {
-        return AddConstraintStatementImpl.create(getTableName(), newConstraint);
+        return AddConstraintStatementImpl.create(getTable(), newConstraint);
     }
 
     @Override

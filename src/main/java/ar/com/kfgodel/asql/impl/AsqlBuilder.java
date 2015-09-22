@@ -3,19 +3,20 @@ package ar.com.kfgodel.asql.impl;
 import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.alter.TableDefinedAlter;
 import ar.com.kfgodel.asql.api.constraints.NamedConstraint;
+import ar.com.kfgodel.asql.api.create.TableDefinedCreate;
 import ar.com.kfgodel.asql.api.delete.UnrestrictedDeleteStatement;
 import ar.com.kfgodel.asql.api.drop.DropStatement;
 import ar.com.kfgodel.asql.api.insert.TableDefinedInsert;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
-import ar.com.kfgodel.asql.api.create.TableDefinedCreate;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
+import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.alter.TableDefinedAlterImpl;
 import ar.com.kfgodel.asql.impl.lang.constraints.NamedConstraintImpl;
+import ar.com.kfgodel.asql.impl.lang.create.TableDefinedCreateImpl;
 import ar.com.kfgodel.asql.impl.lang.delete.UnrestrictedDeleteStatementImpl;
 import ar.com.kfgodel.asql.impl.lang.drop.DropStatementImpl;
 import ar.com.kfgodel.asql.impl.lang.insert.TableDefinedInsertImpl;
 import ar.com.kfgodel.asql.impl.lang.restrictions.NamedColumnImpl;
-import ar.com.kfgodel.asql.impl.lang.create.TableDefinedCreateImpl;
 import ar.com.kfgodel.asql.impl.lang.update.TableDefinedUpdateImpl;
 
 /**
@@ -30,7 +31,7 @@ public class AsqlBuilder implements Asql {
 
     @Override
     public TableDefinedUpdate update(String tableName) {
-        return TableDefinedUpdateImpl.create(tableName);
+        return TableDefinedUpdateImpl.create(Internal.table(tableName));
     }
 
     @Override
@@ -40,22 +41,22 @@ public class AsqlBuilder implements Asql {
 
     @Override
     public TableDefinedCreate create(String tableName) {
-        return TableDefinedCreateImpl.create(tableName);
+        return TableDefinedCreateImpl.create(Internal.table(tableName));
     }
 
     @Override
     public TableDefinedAlter alter(String tableName) {
-        return TableDefinedAlterImpl.create(tableName);
+        return TableDefinedAlterImpl.create(Internal.table(tableName));
     }
 
     @Override
     public UnrestrictedDeleteStatement deleteFrom(String tableName) {
-        return UnrestrictedDeleteStatementImpl.create(tableName);
+        return UnrestrictedDeleteStatementImpl.create(Internal.table(tableName));
     }
 
     @Override
     public DropStatement drop(String tableName) {
-        return DropStatementImpl.create(tableName);
+        return DropStatementImpl.create(Internal.table(tableName));
     }
 
     @Override
@@ -65,6 +66,6 @@ public class AsqlBuilder implements Asql {
 
     @Override
     public TableDefinedInsert insertInto(String tableName) {
-        return TableDefinedInsertImpl.create(tableName);
+        return TableDefinedInsertImpl.create(Internal.table(tableName));
     }
 }

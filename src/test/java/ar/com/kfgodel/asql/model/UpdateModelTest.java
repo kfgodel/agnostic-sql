@@ -9,6 +9,7 @@ import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
 import ar.com.kfgodel.asql.impl.lang.operators.Operator;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
+import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 import ar.com.kfgodel.asql.impl.model.restrictions.PredicateModel;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
@@ -29,14 +30,14 @@ public class UpdateModelTest extends JavaSpec<AsqlTestContext> {
 
 
             context().updateModel(() -> {
-                UpdateModel updateModel = UpdateModel.create("tableName", Lists.newArrayList(ColumnAssignmentModel.create("column1", ExplicitValueModel.create("value1"))));
+                UpdateModel updateModel = UpdateModel.create(TableReferenceModel.create("tableName"), Lists.newArrayList(ColumnAssignmentModel.create("column1", ExplicitValueModel.create("value1"))));
                 updateModel.getWhereClause().setPredicate(PredicateModel.create(ColumnReferenceModel.create("column2"), Operator.equal().parseModel(), ExplicitValueModel.create(3)));
                 return updateModel;
             });
 
             it("throws an error if no assignment defined", ()->{
                 try{
-                    UpdateModel.create("aTableName", Lists.newArrayList());
+                    UpdateModel.create(TableReferenceModel.create("aTableName"), Lists.newArrayList());
                     failBecauseExceptionWasNotThrown(IllegalArgumentException.class);
                 }catch (IllegalArgumentException e){
                     assertThat(e).hasMessage("At least one assignment needed");
@@ -47,7 +48,7 @@ public class UpdateModelTest extends JavaSpec<AsqlTestContext> {
 
                 UpdateModel updateTree = context().updateModel();
 
-                assertThat(updateTree.getTableName()).isEqualTo("tableName");
+                assertThat(updateTree.getTable().getTableName()).isEqualTo("tableName");
 
                 assertThat(updateTree.getColumnAssignments().get(0).getColumnName()).isEqualTo("column1");
                 ExplicitValueModel assignedValue = (ExplicitValueModel) updateTree.getColumnAssignments().get(0).getAssignedValue();

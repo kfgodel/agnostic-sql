@@ -16,7 +16,7 @@ public class InsertStatementImpl implements InsertStatement {
 
     @Override
     public InsertModel parseModel() {
-        InsertModel model = InsertModel.create(previousNode.getTableName());
+        InsertModel model = InsertModel.create(previousNode.getTable().parseModel());
         for (ColumnAssignment assignment : assignments) {
             model.addAssignment(assignment.parseModel());
         }

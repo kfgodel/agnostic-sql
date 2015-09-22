@@ -3,6 +3,7 @@ package ar.com.kfgodel.asql.impl.lang.create;
 import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
 import ar.com.kfgodel.asql.api.create.ColumnDefinedCreate;
 import ar.com.kfgodel.asql.api.create.TableDefinedCreate;
+import ar.com.kfgodel.asql.impl.lang.references.TableReference;
 import ar.com.kfgodel.asql.impl.lang.support.TableCenteredStatement;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
 
@@ -23,12 +24,12 @@ public class TableDefinedCreateImpl extends TableCenteredStatement implements Ta
 
     @Override
     public CreateModel parseModel() {
-        return CreateModel.create(getTableName());
+        return CreateModel.create(getTable().parseModel());
     }
 
-    public static TableDefinedCreateImpl create(String tableName) {
+    public static TableDefinedCreateImpl create(TableReference table) {
         TableDefinedCreateImpl create = new TableDefinedCreateImpl();
-        create.setTableName(tableName);
+        create.setTable(table);
         return create;
     }
 

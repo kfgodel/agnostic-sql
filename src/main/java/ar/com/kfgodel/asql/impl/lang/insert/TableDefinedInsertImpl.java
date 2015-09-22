@@ -4,6 +4,7 @@ import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
 import ar.com.kfgodel.asql.api.insert.ColumnDefinedInsert;
 import ar.com.kfgodel.asql.api.insert.InsertStatement;
 import ar.com.kfgodel.asql.api.insert.TableDefinedInsert;
+import ar.com.kfgodel.asql.impl.lang.references.TableReference;
 import ar.com.kfgodel.asql.impl.lang.support.TableCenteredStatement;
 
 import java.util.Arrays;
@@ -23,9 +24,9 @@ public class TableDefinedInsertImpl extends TableCenteredStatement implements Ta
         return ColumnDefinedInsertImpl.create(this, Arrays.asList(columnNames));
     }
 
-    public static TableDefinedInsertImpl create(String tableName) {
+    public static TableDefinedInsertImpl create(TableReference table) {
         TableDefinedInsertImpl insert = new TableDefinedInsertImpl();
-        insert.setTableName(tableName);
+        insert.setTable(table);
         return insert;
     }
 
