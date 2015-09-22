@@ -2,6 +2,7 @@ package ar.com.kfgodel.asql.impl.lang.constraints;
 
 import ar.com.kfgodel.asql.api.constraints.ColumnDefinedFk;
 import ar.com.kfgodel.asql.api.constraints.NamedConstraint;
+import ar.com.kfgodel.asql.impl.lang.Internal;
 
 /**
  * Created by kfgodel on 16/07/15.
@@ -16,7 +17,7 @@ public class NamedConstraintImpl implements NamedConstraint {
 
     @Override
     public ColumnDefinedFk fkFrom(String columnName) {
-        return ColumnDefinedFkImpl.create(this, columnName);
+        return ColumnDefinedFkImpl.create(this, Internal.column(columnName));
     }
 
     public static NamedConstraintImpl create(String contraintName) {

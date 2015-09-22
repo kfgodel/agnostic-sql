@@ -23,8 +23,9 @@ public class PkDefinedCreateImpl implements ColumnDefinedCreate {
     @Override
     public CreateModel parseModel() {
         CreateModel createModel = previous.parseModel();
-        createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("id"), DataType.pk().parseModel()));
-        createModel.addConstraint(ConstraintDeclarationModel.create("PRIMARY KEY").forColumns("id"));
+        ColumnReferenceModel pkColumn = ColumnReferenceModel.create("id");
+        createModel.addDeclaration(ColumnDeclarationModel.create(pkColumn, DataType.pk().parseModel()));
+        createModel.addConstraint(ConstraintDeclarationModel.create("PRIMARY KEY").forColumns(pkColumn));
         return createModel;
     }
 

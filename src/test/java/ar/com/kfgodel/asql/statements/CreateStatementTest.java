@@ -48,7 +48,7 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
 
                 ConstraintDeclarationModel contraint = createModel.getTableConstraints().get(0);
                 assertThat(contraint.getTypeName()).isEqualTo("PRIMARY KEY");
-                assertThat(contraint.getColumnNames().get(0)).isEqualTo("id");
+                assertThat(contraint.getColumns().get(0).getColumnName()).isEqualTo("id");
             });
 
             describe("for extra columns", () -> {

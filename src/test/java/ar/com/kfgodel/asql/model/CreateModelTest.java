@@ -37,7 +37,7 @@ public class CreateModelTest extends JavaSpec<AsqlTestContext> {
                 createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("cantidad"), DataType.integer().parseModel()).withNullity("NOT NULL").withDefaultValue(ExplicitValueModel.create(0)));
                 createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("otra_id"), DataType.fk().parseModel()));
                 createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("estado"), DataType.shortString().parseModel()));
-                createModel.addConstraint(ConstraintDeclarationModel.create("primary key").forColumns("id"));
+                createModel.addConstraint(ConstraintDeclarationModel.create("primary key").forColumns(ColumnReferenceModel.create("id")));
                 return createModel;
             });
 

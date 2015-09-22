@@ -16,7 +16,7 @@ public class FkConstraintDeclarationImpl implements FkConstraintDeclaration {
     @Override
     public NamedConstraintDeclarationModel parseModel() {
         ConstraintDeclarationModel model = ConstraintDeclarationModel.create("FOREIGN KEY");
-        model.addColumnName(previousNode.getSourceColumn());
+        model.addColumn(previousNode.getSourceColumn().parseModel());
         model.setTail("REFERENCES " + referencedTableName);
         return NamedConstraintDeclarationModel.create(previousNode.getConstraintName(), model);
     }

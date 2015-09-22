@@ -2,6 +2,7 @@ package ar.com.kfgodel.asql.impl.model.constraints;
 
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 import ar.com.kfgodel.asql.impl.model.create.TablePartModel;
+import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 public class ConstraintDeclarationModel implements AgnosticModel, TablePartModel {
 
     private String typeName;
-    private List<String> columnNames;
+    private List<ColumnReferenceModel> columns;
     private String tail;
 
     public String getTypeName() {
@@ -23,15 +24,15 @@ public class ConstraintDeclarationModel implements AgnosticModel, TablePartModel
         this.typeName = typeName;
     }
 
-    public List<String> getColumnNames() {
-        if (columnNames == null) {
-            columnNames = new ArrayList<String>();
+    public List<ColumnReferenceModel> getColumns() {
+        if (columns == null) {
+            columns = new ArrayList<>();
         }
-        return columnNames;
+        return columns;
     }
 
-    public void setColumnNames(List<String> columnNames) {
-        this.columnNames = columnNames;
+    public void setColumnNames(List<ColumnReferenceModel> columns) {
+        this.columns = columns;
     }
 
     public String getTail() {
@@ -49,13 +50,13 @@ public class ConstraintDeclarationModel implements AgnosticModel, TablePartModel
         return model;
     }
 
-    public void addColumnName(String columnName){
-        this.getColumnNames().add(columnName);
+    public void addColumn(ColumnReferenceModel column){
+        this.getColumns().add(column);
     }
 
-    public ConstraintDeclarationModel forColumns(String... columnNames){
-        for (String columnName : columnNames) {
-            this.addColumnName(columnName);
+    public ConstraintDeclarationModel forColumns(ColumnReferenceModel... columns){
+        for (ColumnReferenceModel column : columns) {
+            this.addColumn(column);
         }
         return this;
     }
