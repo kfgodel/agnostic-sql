@@ -25,7 +25,7 @@ public class TableDefinedAlterImpl extends TableCenteredStatement implements Tab
 
     @Override
     public AddConstraintStatement adding(NamedConstraintDeclaration newConstraint) {
-        return AddConstraintStatementImpl.create(getTable(), newConstraint);
+        return AddConstraintStatementImpl.create(this, newConstraint);
     }
 
     @Override

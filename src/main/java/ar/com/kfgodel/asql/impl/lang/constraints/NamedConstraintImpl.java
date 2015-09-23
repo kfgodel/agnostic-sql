@@ -3,16 +3,17 @@ package ar.com.kfgodel.asql.impl.lang.constraints;
 import ar.com.kfgodel.asql.api.constraints.ColumnDefinedFk;
 import ar.com.kfgodel.asql.api.constraints.NamedConstraint;
 import ar.com.kfgodel.asql.impl.lang.Internal;
+import ar.com.kfgodel.asql.impl.lang.references.ConstraintReference;
 
 /**
  * Created by kfgodel on 16/07/15.
  */
 public class NamedConstraintImpl implements NamedConstraint {
 
-    private String constraintName;
+    private ConstraintReference constraint;
 
-    public String getConstraintName() {
-        return constraintName;
+    public ConstraintReference getConstraint() {
+        return constraint;
     }
 
     @Override
@@ -20,10 +21,10 @@ public class NamedConstraintImpl implements NamedConstraint {
         return ColumnDefinedFkImpl.create(this, Internal.column(columnName));
     }
 
-    public static NamedConstraintImpl create(String contraintName) {
-        NamedConstraintImpl constraint = new NamedConstraintImpl();
-        constraint.constraintName = contraintName;
-        return constraint;
+    public static NamedConstraintImpl create(ConstraintReference constraint) {
+        NamedConstraintImpl named = new NamedConstraintImpl();
+        named.constraint = constraint;
+        return named;
     }
 
 }

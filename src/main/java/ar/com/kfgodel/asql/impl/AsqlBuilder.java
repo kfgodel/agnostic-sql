@@ -61,7 +61,7 @@ public class AsqlBuilder implements Asql {
 
     @Override
     public NamedConstraint constraint(String constraintName) {
-        return NamedConstraintImpl.create(constraintName);
+        return NamedConstraintImpl.create(Internal.constraint(constraintName));
     }
 
     @Override
