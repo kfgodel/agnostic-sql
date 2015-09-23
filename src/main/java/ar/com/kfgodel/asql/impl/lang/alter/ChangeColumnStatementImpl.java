@@ -10,17 +10,17 @@ import ar.com.kfgodel.asql.impl.model.alter.ChangeColumnModel;
 public class ChangeColumnStatementImpl implements ChangeColumnStatement {
 
     private TableDefinedAlterImpl previousNode;
-    private ColumnDeclaration column;
+    private ColumnDeclaration columnDeclaration;
 
     @Override
     public ChangeColumnModel parseModel() {
-        return ChangeColumnModel.create(previousNode.getTable().parseModel(), column.parseModel());
+        return ChangeColumnModel.create(previousNode.getTable().parseModel(), columnDeclaration.parseModel());
     }
 
     public static ChangeColumnStatementImpl create(TableDefinedAlterImpl previousNode, ColumnDeclaration column) {
         ChangeColumnStatementImpl statement = new ChangeColumnStatementImpl();
         statement.previousNode = previousNode;
-        statement.column = column;
+        statement.columnDeclaration = column;
         return statement;
     }
 
