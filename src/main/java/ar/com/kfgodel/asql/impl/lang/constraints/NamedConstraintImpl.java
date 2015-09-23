@@ -18,8 +18,8 @@ public class NamedConstraintImpl implements NamedConstraint {
     }
 
     @Override
-    public ColumnDefinedFk fkFrom(String columnName) {
-        return ColumnDefinedFkImpl.create(this, Internal.column(columnName));
+    public ColumnDefinedFk fkFrom(String... columnNames) {
+        return ColumnDefinedFkImpl.create(this, Internal.columns(columnNames));
     }
 
     @Override
@@ -28,8 +28,8 @@ public class NamedConstraintImpl implements NamedConstraint {
     }
 
     @Override
-    public ConstraintDeclaration pkFor(String columnName) {
-        return ColumnDefinedPkImpl.create(this, Internal.column(columnName));
+    public ConstraintDeclaration pkFor(String... columnNames) {
+        return ColumnDefinedPkImpl.create(this, Internal.columns(columnNames));
     }
 
     public static NamedConstraintImpl create(ConstraintReference constraint) {

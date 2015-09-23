@@ -202,10 +202,10 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     it("can be expressed naturally",()->{
                         AgnosticStatement statement = asql.alter("tableName")
                                 .adding(asql.constraint("constraintName")
-                                        .fkFrom("columnName").to("otherTableName"));
+                                        .fkFrom("columnName1", "columnName2").to("otherTableName"));
 
                         assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement))
-                                .isEqualTo("ALTER TABLE tableName ADD CONSTRAINT constraintName FOREIGN KEY ( columnName ) REFERENCES otherTableName");
+                                .isEqualTo("ALTER TABLE tableName ADD CONSTRAINT constraintName FOREIGN KEY ( columnName1, columnName2 ) REFERENCES otherTableName");
 
                     });
                 });
@@ -226,10 +226,10 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     it("can be expressed for a single column", () -> {
                         AgnosticStatement statement = asql.alter("tableName")
                                 .adding(asql.constraint("constraintName")
-                                        .pkFor("columnName"));
+                                        .pkFor("columnName1", "columnName2"));
 
                         assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement))
-                                .isEqualTo("ALTER TABLE tableName ADD CONSTRAINT constraintName PRIMARY KEY ( columnName )");
+                                .isEqualTo("ALTER TABLE tableName ADD CONSTRAINT constraintName PRIMARY KEY ( columnName1, columnName2 )");
 
                     });
                 });

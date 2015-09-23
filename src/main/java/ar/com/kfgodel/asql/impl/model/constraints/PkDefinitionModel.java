@@ -1,7 +1,6 @@
 package ar.com.kfgodel.asql.impl.model.constraints;
 
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
-import com.google.common.collect.Lists;
 
 import java.util.List;
 
@@ -16,9 +15,9 @@ public class PkDefinitionModel implements ConstraintDefinitionModel {
         return columns;
     }
     
-    public static PkDefinitionModel create(ColumnReferenceModel column){
+    public static PkDefinitionModel create(List<ColumnReferenceModel> columns){
         PkDefinitionModel model = new PkDefinitionModel();
-        model.columns = Lists.newArrayList(column);
+        model.columns = columns;
         return model;
     }
     

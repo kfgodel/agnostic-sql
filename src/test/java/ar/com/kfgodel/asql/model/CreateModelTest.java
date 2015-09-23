@@ -14,6 +14,7 @@ import ar.com.kfgodel.asql.impl.model.create.CreateModel;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
+import com.google.common.collect.Lists;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,7 +39,7 @@ public class CreateModelTest extends JavaSpec<AsqlTestContext> {
                 createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("cantidad"), DataType.integer().parseModel()).withNullity("NOT NULL").withDefaultValue(ExplicitValueModel.create(0)));
                 createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("otra_id"), DataType.fk().parseModel()));
                 createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("estado"), DataType.shortString().parseModel()));
-                createModel.addConstraint(ConstraintDeclarationModel.create(PkDefinitionModel.create(ColumnReferenceModel.create("id"))));
+                createModel.addConstraint(ConstraintDeclarationModel.create(PkDefinitionModel.create(Lists.newArrayList(ColumnReferenceModel.create("id")))));
                 return createModel;
             });
 

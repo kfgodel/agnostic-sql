@@ -9,6 +9,7 @@ import ar.com.kfgodel.asql.impl.model.constraints.ConstraintDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.constraints.PkDefinitionModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
+import com.google.common.collect.Lists;
 
 /**
  * Created by kfgodel on 14/07/15.
@@ -24,9 +25,12 @@ public class PkDefinedCreateImpl implements ColumnDefinedCreate {
     @Override
     public CreateModel parseModel() {
         CreateModel createModel = previous.parseModel();
+
         ColumnReferenceModel pkColumn = ColumnReferenceModel.create("id");
         createModel.addDeclaration(ColumnDeclarationModel.create(pkColumn, DataType.pk().parseModel()));
-        createModel.addConstraint(ConstraintDeclarationModel.create(PkDefinitionModel.create(pkColumn)));
+
+        PkDefinitionModel pkDefinitionModel = PkDefinitionModel.create(Lists.newArrayList(pkColumn));
+        createModel.addConstraint(ConstraintDeclarationModel.create(pkDefinitionModel));
         return createModel;
     }
 
