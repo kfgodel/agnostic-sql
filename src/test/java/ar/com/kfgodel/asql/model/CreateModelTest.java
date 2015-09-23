@@ -9,6 +9,7 @@ import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.constraints.ConstraintDeclarationModel;
+import ar.com.kfgodel.asql.impl.model.constraints.PkDefinitionModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
@@ -37,7 +38,7 @@ public class CreateModelTest extends JavaSpec<AsqlTestContext> {
                 createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("cantidad"), DataType.integer().parseModel()).withNullity("NOT NULL").withDefaultValue(ExplicitValueModel.create(0)));
                 createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("otra_id"), DataType.fk().parseModel()));
                 createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("estado"), DataType.shortString().parseModel()));
-                createModel.addConstraint(ConstraintDeclarationModel.create("primary key").forColumns(ColumnReferenceModel.create("id")));
+                createModel.addConstraint(ConstraintDeclarationModel.create(PkDefinitionModel.create(ColumnReferenceModel.create("id"))));
                 return createModel;
             });
 
@@ -56,7 +57,7 @@ public class CreateModelTest extends JavaSpec<AsqlTestContext> {
                         "cantidad integer NOT NULL DEFAULT 0, \n" +
                         "otra_id bigint, \n" +
                         "estado VARCHAR(255), \n" +
-                        "primary key ( id )\n" +
+                        "PRIMARY KEY ( id )\n" +
                         ")");
             });
             
@@ -74,7 +75,7 @@ public class CreateModelTest extends JavaSpec<AsqlTestContext> {
                         "cantidad numeric(19,0) NOT NULL DEFAULT 0, \n" +
                         "otra_id numeric(19,0), \n" +
                         "estado VARCHAR(255), \n" +
-                        "primary key ( id )\n" +
+                        "PRIMARY KEY ( id )\n" +
                         ")");
             });   
 

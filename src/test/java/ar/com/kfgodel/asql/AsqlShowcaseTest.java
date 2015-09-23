@@ -198,7 +198,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
             });
 
             describe("foreign key", () -> {
-                it("aa",()->{
+                it("can be expressed naturally",()->{
                     AgnosticStatement statement = asql.alter("tableName")
                             .adding(asql.constraint("constraintName")
                                     .fkFrom("columnName").to("otherTableName"));
@@ -209,6 +209,17 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                 });
             });
 
+            describe("unique key", () -> {
+                it("can be expressed",()->{
+                    AgnosticStatement statement = asql.alter("tableName")
+                            .adding(asql.constraint("constraintName")
+                                    .uniqueFor("columnName1", "columnName2"));
+
+                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement))
+                            .isEqualTo("ALTER TABLE tableName ADD CONSTRAINT constraintName UNIQUE ( columnName1, columnName2 )");
+
+                });
+            });
 
         });
 

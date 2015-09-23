@@ -6,7 +6,7 @@ import ar.com.kfgodel.asql.impl.model.constraints.ConstraintDeclarationModel;
 /**
  * Created by kfgodel on 16/07/15.
  */
-public interface NamedConstraintDeclaration extends AgnosticConstruct {
+public interface ConstraintDeclaration extends AgnosticConstruct {
 
     @Override
     ConstraintDeclarationModel parseModel();
