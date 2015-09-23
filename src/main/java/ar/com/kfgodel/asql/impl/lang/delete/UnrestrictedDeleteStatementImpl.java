@@ -19,7 +19,7 @@ public class UnrestrictedDeleteStatementImpl extends TableCenteredStatement impl
 
     @Override
     public RestrictedDeleteStatement where(QueryCondition condition) {
-        return RestrictedDeleteStatementImpl.create(this,condition);
+        return RestrictedDeleteStatementImpl.create(this, condition);
     }
 
     public static UnrestrictedDeleteStatementImpl create(TableReference table) {
