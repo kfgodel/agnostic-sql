@@ -11,6 +11,10 @@ public class TableReference implements AgnosticConstruct {
 
     private String tableName;
 
+    public String getTableName() {
+        return tableName;
+    }
+
     @Override
     public TableReferenceModel parseModel() {
         return TableReferenceModel.create(tableName);

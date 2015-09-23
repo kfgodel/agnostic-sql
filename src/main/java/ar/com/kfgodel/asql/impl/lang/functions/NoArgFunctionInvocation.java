@@ -2,7 +2,6 @@ package ar.com.kfgodel.asql.impl.lang.functions;
 
 import ar.com.kfgodel.asql.api.functions.FunctionInvocation;
 import ar.com.kfgodel.asql.impl.model.references.SymbolModel;
-import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
 
 /**
  * Implementation of function invocations without arguments
@@ -19,7 +18,7 @@ public class NoArgFunctionInvocation implements FunctionInvocation {
     }
 
     @Override
-    public ExplicitOperand parseModel() {
+    public SymbolModel parseModel() {
         return SymbolModel.create("/functions/"+name+".ftl");
     }
 }

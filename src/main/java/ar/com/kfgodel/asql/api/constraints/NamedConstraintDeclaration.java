@@ -1,7 +1,7 @@
 package ar.com.kfgodel.asql.api.constraints;
 
 import ar.com.kfgodel.asql.api.AgnosticConstruct;
-import ar.com.kfgodel.asql.impl.model.constraints.NamedConstraintDeclarationModel;
+import ar.com.kfgodel.asql.impl.model.constraints.ConstraintDeclarationModel;
 
 /**
  * Created by kfgodel on 16/07/15.
@@ -9,5 +9,5 @@ import ar.com.kfgodel.asql.impl.model.constraints.NamedConstraintDeclarationMode
 public interface NamedConstraintDeclaration extends AgnosticConstruct {
 
     @Override
-    NamedConstraintDeclarationModel parseModel();
+    ConstraintDeclarationModel parseModel();
 }

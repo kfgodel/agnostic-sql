@@ -5,5 +5,4 @@ package ar.com.kfgodel.asql.impl.model.create;
  * Created by kfgodel on 13/07/15.
  */
 public interface TablePartModel {
-    boolean isColumnDeclaration();
 }

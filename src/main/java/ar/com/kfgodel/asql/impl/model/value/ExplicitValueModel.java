@@ -6,10 +6,9 @@ import ar.com.kfgodel.asql.impl.model.AgnosticModel;
  * This type represents an explicit value that can be represente directly on the template
  * Created by kfgodel on 12/07/15.
  */
-public class ExplicitValueModel implements AgnosticModel, ExplicitOperand {
+public class ExplicitValueModel implements AgnosticModel {
     private Object value;
 
-    @Override
     public Object getValue() {
         return value;
     }

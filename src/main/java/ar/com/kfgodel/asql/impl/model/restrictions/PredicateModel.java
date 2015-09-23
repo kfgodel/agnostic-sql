@@ -1,13 +1,12 @@
 package ar.com.kfgodel.asql.impl.model.restrictions;
 
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
-import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
 
 /**
  * This type represents a predicate condition node in the statement tree
  * Created by kfgodel on 12/07/15.
  */
-public class PredicateModel implements AgnosticModel, ExplicitOperand {
+public class PredicateModel implements AgnosticModel {
 
     private AgnosticModel leftSideOperand;
     private AgnosticModel operator;
@@ -43,11 +42,6 @@ public class PredicateModel implements AgnosticModel, ExplicitOperand {
         node.operator = operator;
         node.rightSideOperand = right;
         return node;
-    }
-
-    @Override
-    public Object getValue() {
-        return null;
     }
 
     @Override

@@ -57,4 +57,8 @@ public interface Internal {
                 .map(Internal::column)
                 .collect(Collectors.toList());
     }
+
+    static ConstraintReference constraint(String constraintName) {
+        return ConstraintReference.create(constraintName);
+    }
 }

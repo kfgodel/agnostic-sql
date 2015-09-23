@@ -3,6 +3,7 @@ package ar.com.kfgodel.asql.impl.model.constraints;
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 import ar.com.kfgodel.asql.impl.model.create.TablePartModel;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
+import ar.com.kfgodel.asql.impl.model.references.ConstraintReferenceModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +13,18 @@ import java.util.List;
  */
 public class ConstraintDeclarationModel implements AgnosticModel, TablePartModel {
 
+    private ConstraintReferenceModel optionalName;
     private String typeName;
     private List<ColumnReferenceModel> columns;
     private String tail;
+
+    public ConstraintReferenceModel getOptionalName() {
+        return optionalName;
+    }
+
+    public void setOptionalName(ConstraintReferenceModel optionalName) {
+        this.optionalName = optionalName;
+    }
 
     public String getTypeName() {
         return typeName;
@@ -55,11 +65,6 @@ public class ConstraintDeclarationModel implements AgnosticModel, TablePartModel
             this.addColumn(column);
         }
         return this;
-    }
-
-    @Override
-    public boolean isColumnDeclaration() {
-        return false;
     }
 
     @Override
