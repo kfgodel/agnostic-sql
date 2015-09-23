@@ -6,21 +6,23 @@ import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
 import ar.com.kfgodel.asql.impl.lang.references.ConstraintReference;
 
+import java.util.List;
+
 /**
  * Created by kfgodel on 16/07/15.
  */
 public class ColumnDefinedFkImpl implements ColumnDefinedFk {
 
     private NamedConstraintImpl previousNode;
-    private ColumnReference sourceColumn;
+    private List<ColumnReference> sourceColumns;
 
 
     public ConstraintReference getConstraint(){
         return previousNode.getConstraint();
     }
 
-    public ColumnReference getSourceColumn() {
-        return sourceColumn;
+    public List<ColumnReference> getSourceColumns() {
+        return sourceColumns;
     }
 
     @Override
@@ -28,9 +30,9 @@ public class ColumnDefinedFkImpl implements ColumnDefinedFk {
         return FkConstraintDeclarationImpl.create(this, Internal.table(referencedTableName));
     }
 
-    public static ColumnDefinedFkImpl create(NamedConstraintImpl previousNode, ColumnReference sourceColumn) {
+    public static ColumnDefinedFkImpl create(NamedConstraintImpl previousNode, List<ColumnReference> sourceColumns) {
         ColumnDefinedFkImpl definedFk = new ColumnDefinedFkImpl();
-        definedFk.sourceColumn = sourceColumn;
+        definedFk.sourceColumns = sourceColumns;
         definedFk.previousNode = previousNode;
         return definedFk;
     }

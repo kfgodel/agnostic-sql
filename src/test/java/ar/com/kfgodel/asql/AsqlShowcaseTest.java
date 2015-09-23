@@ -187,7 +187,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
             });
 
             describe("deletes", () -> {
-                it("it is basically ansi for all vendors",()->{
+                it("it is basically ansi for all vendors", () -> {
                     RestrictedDeleteStatement statement = asql.deleteFrom("tableName")
                             .where(asql.column("column1").isNull().and(asql.column("column2").isNotNull()).or(asql.column("column3").isNotNull()));
 
@@ -197,18 +197,43 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                 });   
             });
 
-            describe("foreign key", () -> {
-                it("aa",()->{
-                    AgnosticStatement statement = asql.alter("tableName")
-                            .adding(asql.constraint("constraintName")
-                                    .fkFrom("columnName").to("otherTableName"));
+            describe("table constraints", ()->{
+                describe("foreign key", () -> {
+                    it("can be expressed naturally",()->{
+                        AgnosticStatement statement = asql.alter("tableName")
+                                .adding(asql.constraint("constraintName")
+                                        .fkFrom("columnName1", "columnName2").to("otherTableName"));
 
-                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement))
-                            .isEqualTo("ALTER TABLE tableName ADD CONSTRAINT constraintName FOREIGN KEY ( columnName ) REFERENCES otherTableName");
+                        assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement))
+                                .isEqualTo("ALTER TABLE tableName ADD CONSTRAINT constraintName FOREIGN KEY ( columnName1, columnName2 ) REFERENCES otherTableName");
 
+                    });
+                });
+
+                describe("unique key", () -> {
+                    it("can be expressed",()->{
+                        AgnosticStatement statement = asql.alter("tableName")
+                                .adding(asql.constraint("constraintName")
+                                        .uniqueFor("columnName1", "columnName2"));
+
+                        assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement))
+                                .isEqualTo("ALTER TABLE tableName ADD CONSTRAINT constraintName UNIQUE ( columnName1, columnName2 )");
+
+                    });
+                });
+
+                describe("primary key", () -> {
+                    it("can be expressed for a single column", () -> {
+                        AgnosticStatement statement = asql.alter("tableName")
+                                .adding(asql.constraint("constraintName")
+                                        .pkFor("columnName1", "columnName2"));
+
+                        assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement))
+                                .isEqualTo("ALTER TABLE tableName ADD CONSTRAINT constraintName PRIMARY KEY ( columnName1, columnName2 )");
+
+                    });
                 });
             });
-
 
         });
 

@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.impl.lang.constraints;
 
 import ar.com.kfgodel.asql.api.constraints.ColumnDefinedFk;
+import ar.com.kfgodel.asql.api.constraints.ConstraintDeclaration;
 import ar.com.kfgodel.asql.api.constraints.NamedConstraint;
 import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.references.ConstraintReference;
@@ -17,8 +18,18 @@ public class NamedConstraintImpl implements NamedConstraint {
     }
 
     @Override
-    public ColumnDefinedFk fkFrom(String columnName) {
-        return ColumnDefinedFkImpl.create(this, Internal.column(columnName));
+    public ColumnDefinedFk fkFrom(String... columnNames) {
+        return ColumnDefinedFkImpl.create(this, Internal.columns(columnNames));
+    }
+
+    @Override
+    public ConstraintDeclaration uniqueFor(String... columnNames) {
+        return ColumnDefinedUniqueImpl.create(this, Internal.columns(columnNames));
+    }
+
+    @Override
+    public ConstraintDeclaration pkFor(String... columnNames) {
+        return ColumnDefinedPkImpl.create(this, Internal.columns(columnNames));
     }
 
     public static NamedConstraintImpl create(ConstraintReference constraint) {

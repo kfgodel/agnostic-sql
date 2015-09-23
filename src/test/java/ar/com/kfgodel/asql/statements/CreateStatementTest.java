@@ -9,6 +9,7 @@ import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.impl.AsqlBuilder;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.constraints.ConstraintDeclarationModel;
+import ar.com.kfgodel.asql.impl.model.constraints.PkDefinitionModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
 import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
 import org.junit.runner.RunWith;
@@ -47,8 +48,9 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
                 assertThat(columnModel.getColumnType()).isEqualTo(DataType.pk().parseModel());
 
                 ConstraintDeclarationModel contraint = createModel.getTableConstraints().get(0);
-                assertThat(contraint.getTypeName()).isEqualTo("PRIMARY KEY");
-                assertThat(contraint.getColumns().get(0).getColumnName()).isEqualTo("id");
+                assertThat(contraint.getDefinition()).isInstanceOf(PkDefinitionModel.class);
+                PkDefinitionModel definition = (PkDefinitionModel) contraint.getDefinition();
+                assertThat(definition.getColumns().get(0).getColumnName()).isEqualTo("id");
             });
 
             describe("for extra columns", () -> {
