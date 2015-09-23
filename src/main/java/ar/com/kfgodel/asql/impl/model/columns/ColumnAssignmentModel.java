@@ -2,7 +2,6 @@ package ar.com.kfgodel.asql.impl.model.columns;
 
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
-import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
 
 /**
  * This type represents a node in a statement tree for a columna assignment
@@ -11,7 +10,7 @@ import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
 public class ColumnAssignmentModel implements AgnosticModel {
 
     private ColumnReferenceModel column;
-    private ExplicitOperand assignedValue;
+    private AgnosticModel assignedValue;
 
     public ColumnReferenceModel getColumn() {
         return column;
@@ -21,15 +20,15 @@ public class ColumnAssignmentModel implements AgnosticModel {
         this.column = column;
     }
 
-    public ExplicitOperand getAssignedValue() {
+    public AgnosticModel getAssignedValue() {
         return assignedValue;
     }
 
-    public void setAssignedValue(ExplicitOperand assignedValue) {
+    public void setAssignedValue(AgnosticModel assignedValue) {
         this.assignedValue = assignedValue;
     }
 
-    public static ColumnAssignmentModel create(ColumnReferenceModel column, ExplicitOperand value) {
+    public static ColumnAssignmentModel create(ColumnReferenceModel column, AgnosticModel value) {
         ColumnAssignmentModel assignmentNode = new ColumnAssignmentModel();
         assignmentNode.column = column;
         assignmentNode.assignedValue = value;

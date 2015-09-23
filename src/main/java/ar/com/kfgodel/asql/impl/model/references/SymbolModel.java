@@ -1,12 +1,12 @@
 package ar.com.kfgodel.asql.impl.model.references;
 
-import ar.com.kfgodel.asql.impl.model.value.ExplicitOperand;
+import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 
 /**
  * This type represents the model of a symbol literal
  * Created by tenpines on 14/09/15.
  */
-public class SymbolModel implements ExplicitOperand {
+public class SymbolModel implements AgnosticModel {
 
     private String templatePath;
 
@@ -19,11 +19,6 @@ public class SymbolModel implements ExplicitOperand {
         SymbolModel symbolModel = new SymbolModel();
         symbolModel.templatePath = templatePath;
         return symbolModel;
-    }
-
-    @Override
-    public Object getValue() {
-        throw new UnsupportedOperationException("Symbol["+ templatePath+"] doesn't have a value");
     }
 
     @Override
