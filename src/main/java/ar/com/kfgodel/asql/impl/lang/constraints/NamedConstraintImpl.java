@@ -27,6 +27,11 @@ public class NamedConstraintImpl implements NamedConstraint {
         return ColumnDefinedUniqueImpl.create(this, Internal.columns(columnNames));
     }
 
+    @Override
+    public ConstraintDeclaration pkFor(String columnName) {
+        return ColumnDefinedPkImpl.create(this, Internal.column(columnName));
+    }
+
     public static NamedConstraintImpl create(ConstraintReference constraint) {
         NamedConstraintImpl named = new NamedConstraintImpl();
         named.constraint = constraint;

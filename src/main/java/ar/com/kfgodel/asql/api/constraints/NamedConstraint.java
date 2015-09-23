@@ -9,4 +9,6 @@ public interface NamedConstraint {
     ColumnDefinedFk fkFrom(String columnName);
 
     ConstraintDeclaration uniqueFor(String... columnNames);
+
+    ConstraintDeclaration pkFor(String columnName);
 }
