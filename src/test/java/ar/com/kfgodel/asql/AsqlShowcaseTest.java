@@ -62,6 +62,18 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
             });
 
+            describe("select", ()->{
+                context().vendor(()->Vendor.ansi());
+
+                it("can have its minimum form", ()->{
+                    AgnosticStatement select = asql.select(1);
+
+                    String translated = context().vendor().translate(select);
+
+                    assertThat(translated).isEqualTo("SELECT 1");
+                });
+            });
+
             describe("drop column", () -> {
                 it("is basically ansi for all vendors",()->{
                     RemoveColumnStatement statement = asql.alter("tableName").removing("columnName");

@@ -2,6 +2,7 @@ package ar.com.kfgodel.asql.impl.lang;
 
 import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
+import ar.com.kfgodel.asql.api.functions.FunctionInvocation;
 import ar.com.kfgodel.asql.impl.lang.internal.PatternHelper;
 import ar.com.kfgodel.asql.impl.lang.internal.impl.PatternHelperImpl;
 import ar.com.kfgodel.asql.impl.lang.references.*;
@@ -41,7 +42,7 @@ public interface Internal {
     }
 
     static ColumnAssignment columnAssignment(ColumnReference column, Object columnValue) {
-        return ColumnAssignmentImpl.create(column, columnValue);
+        return ColumnAssignmentImpl.create(column, Internal.asConstruct(columnValue));
     }
 
     static BinaryOperatorCondition binaryOp(AgnosticConstruct leftOperand, AgnosticConstruct operator, AgnosticConstruct rightOperand) {
@@ -60,5 +61,12 @@ public interface Internal {
 
     static ConstraintReference constraint(String constraintName) {
         return ConstraintReference.create(constraintName);
+    }
+
+    static AgnosticConstruct asConstruct(Object expression) {
+        if(expression instanceof FunctionInvocation){
+            return (FunctionInvocation) expression;
+        }
+        return Internal.literal(expression);
     }
 }
