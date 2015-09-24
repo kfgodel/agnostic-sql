@@ -22,11 +22,14 @@ public class DataTypeImpl implements DataType {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof DataType)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof DataType)) {
+            return false;
+        }
 
         DataType that = (DataType) o;
-
         return this.getAgnosticName().equals(that.getAgnosticName());
     }
 

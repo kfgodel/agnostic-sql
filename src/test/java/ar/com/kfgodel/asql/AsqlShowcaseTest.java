@@ -33,7 +33,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
         describe("agnostic sql", () -> {
 
-            describe("expresses an abstract sql statement that is vendor independent", () -> {
+            describe("expresses sql statements vendor independently", () -> {
 
                 context().statement(() ->
                         asql.alter("tableName").adding(asql.column("columnName").typed(DataType.fk())

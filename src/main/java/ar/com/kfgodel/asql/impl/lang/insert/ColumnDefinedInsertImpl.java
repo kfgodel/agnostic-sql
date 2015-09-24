@@ -23,7 +23,7 @@ public class ColumnDefinedInsertImpl implements ColumnDefinedInsert {
         List<Object> columnValues = Arrays.asList(values);
         int columnCount = columns.size();
         if(columnCount != columnValues.size()){
-            throw new IllegalArgumentException("The column and values count don't match: " + columns + " " + columnValues);
+            throw new IllegalArgumentException("The column and value count don't match: " + columns + " " + columnValues);
         }
         List<ColumnAssignment> columnAssignments = new ArrayList<>(columnCount);
         for (int i = 0; i < columnCount; i++) {
