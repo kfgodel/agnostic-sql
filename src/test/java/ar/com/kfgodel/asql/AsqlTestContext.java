@@ -3,8 +3,8 @@ package ar.com.kfgodel.asql;
 import ar.com.dgarcia.javaspec.api.TestContext;
 import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.Asql;
-import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
+import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 import ar.com.kfgodel.asql.impl.model.alter.AddColumnModel;
 import ar.com.kfgodel.asql.impl.model.alter.RemoveColumnModel;
@@ -25,8 +25,8 @@ public interface AsqlTestContext extends TestContext {
     UpdateModel updateModel();
     void updateModel(Supplier<UpdateModel> definition);
 
-    VendorInterpreter interpreter();
-    void interpreter(Supplier<VendorInterpreter> definition);
+    Vendor vendor();
+    void vendor(Supplier<Vendor> definition);
 
     CreateModel createModel();
     void createModel(Supplier<CreateModel> definition);

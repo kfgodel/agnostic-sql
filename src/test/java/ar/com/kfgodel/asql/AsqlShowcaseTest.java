@@ -14,9 +14,6 @@ import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.impl.AsqlBuilder;
-import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
-import ar.com.kfgodel.asql.impl.model.ScriptModel;
-import com.google.common.collect.Lists;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,25 +37,25 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                         ));
 
                 it("can be translated to ansi sql", () -> {
-                    TemplateInterpreter ansiInterpreter = TemplateInterpreter.create(Vendor.ansi());
+                    Vendor ansi = Vendor.ansi();
 
-                    String translatedSql = ansiInterpreter.translate(context().statement());
+                    String translatedSql = ansi.translate(context().statement());
 
                     assertThat(translatedSql).isEqualTo("ALTER TABLE tableName ADD columnName bigint");
                 });
 
                 it("can be translated to hsqldb sql", () -> {
-                    TemplateInterpreter hsqlInterpreter = TemplateInterpreter.create(Vendor.hsqldb());
+                    Vendor hsqldb = Vendor.hsqldb();
 
-                    String translatedSql = hsqlInterpreter.translate(context().statement());
+                    String translatedSql = hsqldb.translate(context().statement());
 
                     assertThat(translatedSql).isEqualTo("ALTER TABLE tableName ADD COLUMN columnName bigint");
                 });
 
                 it("can be translated to sqlserver vendor sql", () -> {
-                    TemplateInterpreter sqlserverInterpreter = TemplateInterpreter.create(Vendor.sqlserver());
+                    Vendor sqlserver = Vendor.sqlserver();
 
-                    String translatedSql = sqlserverInterpreter.translate(context().statement());
+                    String translatedSql = sqlserver.translate(context().statement());
 
                     assertThat(translatedSql).isEqualTo("ALTER TABLE tableName ADD columnName numeric(19,0)");
                 });
@@ -69,9 +66,9 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                 it("is basically ansi for all vendors",()->{
                     RemoveColumnStatement statement = asql.alter("tableName").removing("columnName");
 
-                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("ALTER TABLE tableName DROP COLUMN columnName");
-                    assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("ALTER TABLE tableName DROP COLUMN columnName");
-                    assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("ALTER TABLE tableName DROP COLUMN columnName");
+                    assertThat(Vendor.ansi().translate(statement)).isEqualTo("ALTER TABLE tableName DROP COLUMN columnName");
+                    assertThat(Vendor.sqlserver().translate(statement)).isEqualTo("ALTER TABLE tableName DROP COLUMN columnName");
+                    assertThat(Vendor.hsqldb().translate(statement)).isEqualTo("ALTER TABLE tableName DROP COLUMN columnName");
                 });
             });
 
@@ -79,15 +76,15 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                 it("is basically ansi for all vendors",()->{
                     ChangeColumnStatement statement = asql.alter("tableName").changing(asql.column("columnName").typed(DataType.integer()));
 
-                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName integer");
-                    assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName numeric(19,0)");
-                    assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName integer");
+                    assertThat(Vendor.ansi().translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName integer");
+                    assertThat(Vendor.sqlserver().translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName numeric(19,0)");
+                    assertThat(Vendor.hsqldb().translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName integer");
                 });
             });
 
             describe("create table", () -> {
 
-                context().interpreter(() -> TemplateInterpreter.create(Vendor.ansi()));
+                context().vendor(() -> Vendor.ansi());
 
                 context().statement(() -> asql.create("tableName")
                         .withIdPk()
@@ -100,7 +97,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
                 it("can be expressed with default pk column definition", () -> {
 
-                    String generatedSql = context().interpreter().translate(context().statement());
+                    String generatedSql = context().vendor().translate(context().statement());
 
                     assertThat(generatedSql).isEqualTo("CREATE TABLE tableName (\n" +
                             "id bigint generated by default as identity (start with 1), \n" +
@@ -114,7 +111,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                 });
 
                 it("even for different vendor pk definition", () -> {
-                    String generatedSql = TemplateInterpreter.create(Vendor.sqlserver()).translate(context().statement());
+                    String generatedSql = Vendor.sqlserver().translate(context().statement());
 
                     assertThat(generatedSql).isEqualTo("CREATE TABLE tableName (\n" +
                             "id numeric(19,0) identity, \n" +
@@ -133,9 +130,9 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                 it("is basically ansi for all vendors",()->{
                     DropStatement statement = asql.drop("tableName");
 
-                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("DROP TABLE tableName");
-                    assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("DROP TABLE tableName");
-                    assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("DROP TABLE tableName");
+                    assertThat(Vendor.ansi().translate(statement)).isEqualTo("DROP TABLE tableName");
+                    assertThat(Vendor.sqlserver().translate(statement)).isEqualTo("DROP TABLE tableName");
+                    assertThat(Vendor.hsqldb().translate(statement)).isEqualTo("DROP TABLE tableName");
                 });
             });
 
@@ -145,27 +142,27 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     InsertStatement statement = asql.insertInto("tableName").setting(asql.column("column1").to(1),
                             asql.column("column2").to(Function.currentDate()));
 
-                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1, CURRENT_DATE )");
-                    assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1, getDate() )");
-                    assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1, CURRENT_DATE )");
+                    assertThat(Vendor.ansi().translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1, CURRENT_DATE )");
+                    assertThat(Vendor.sqlserver().translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1, getDate() )");
+                    assertThat(Vendor.hsqldb().translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1, CURRENT_DATE )");
                 });
 
                 it("has an alternative traditional form",()->{
                     InsertStatement statement = asql.insertInto("tableName").set("column1", "column2").to(1, Function.currentTime());
 
-                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1, CURRENT_TIME )");
+                    assertThat(Vendor.ansi().translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1, CURRENT_TIME )");
                 });
             });
 
 
             describe("updates", () -> {
 
-                context().interpreter(() -> TemplateInterpreter.create(Vendor.ansi()));
+                context().vendor(() -> Vendor.ansi());
 
                 it("without 'where' clause are expressed naturally ", () -> {
                     AgnosticStatement statement = asql.update("POSA_EMPLEADOS").setting(asql.column("CATEGORIA_ID").to(1), asql.column("CATEGORIA_VAL").to("AA"));
 
-                    String generatedSql = context().interpreter().translate(statement);
+                    String generatedSql = context().vendor().translate(statement);
 
                     assertThat(generatedSql).isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID = 1 , CATEGORIA_VAL = 'AA'");
                 });
@@ -176,12 +173,14 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     AgnosticStatement firstStatement = updateEmpleados.setting(asql.column("CATEGORIA_ID").to(1)).where(asql.column("CATEGORIA_ID").isNull());
                     AgnosticStatement secondStatement = updateEmpleados.setting(asql.column("NOMBRE").to("Pepe")).where(asql.column("CATEGORIA_ID").isNotNull());
 
-                    String generatedSql = context().interpreter().translate(ScriptModel.create(
-                            Lists.newArrayList(firstStatement.parseModel(), secondStatement.parseModel())
+                    String generatedSql = context().vendor().translate(asql.asScript(
+                            firstStatement,
+                            secondStatement
                     ));
 
-                    assertThat(generatedSql).isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID = 1 WHERE CATEGORIA_ID IS NULL;\n" +
-                            "UPDATE POSA_EMPLEADOS SET NOMBRE = 'Pepe' WHERE CATEGORIA_ID IS NOT NULL");
+                    assertThat(generatedSql)
+                            .isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID = 1 WHERE CATEGORIA_ID IS NULL;\n" +
+                                    "UPDATE POSA_EMPLEADOS SET NOMBRE = 'Pepe' WHERE CATEGORIA_ID IS NOT NULL");
                 });
 
             });
@@ -191,9 +190,9 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     RestrictedDeleteStatement statement = asql.deleteFrom("tableName")
                             .where(asql.column("column1").isNull().and(asql.column("column2").isNotNull()).or(asql.column("column3").isNotNull()));
 
-                    assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL AND column2 IS NOT NULL OR column3 IS NOT NULL");
-                    assertThat(TemplateInterpreter.create(Vendor.sqlserver()).translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL AND column2 IS NOT NULL OR column3 IS NOT NULL");
-                    assertThat(TemplateInterpreter.create(Vendor.hsqldb()).translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL AND column2 IS NOT NULL OR column3 IS NOT NULL");
+                    assertThat(Vendor.ansi().translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL AND column2 IS NOT NULL OR column3 IS NOT NULL");
+                    assertThat(Vendor.sqlserver().translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL AND column2 IS NOT NULL OR column3 IS NOT NULL");
+                    assertThat(Vendor.hsqldb().translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL AND column2 IS NOT NULL OR column3 IS NOT NULL");
                 });   
             });
 
@@ -204,7 +203,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                                 .adding(asql.constraint("constraintName")
                                         .fkFrom("columnName1", "columnName2").to("otherTableName"));
 
-                        assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement))
+                        assertThat(Vendor.ansi().translate(statement))
                                 .isEqualTo("ALTER TABLE tableName ADD CONSTRAINT constraintName FOREIGN KEY ( columnName1, columnName2 ) REFERENCES otherTableName");
 
                     });
@@ -216,7 +215,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                                 .adding(asql.constraint("constraintName")
                                         .uniqueFor("columnName1", "columnName2"));
 
-                        assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement))
+                        assertThat(Vendor.ansi().translate(statement))
                                 .isEqualTo("ALTER TABLE tableName ADD CONSTRAINT constraintName UNIQUE ( columnName1, columnName2 )");
 
                     });
@@ -228,7 +227,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                                 .adding(asql.constraint("constraintName")
                                         .pkFor("columnName1", "columnName2"));
 
-                        assertThat(TemplateInterpreter.create(Vendor.ansi()).translate(statement))
+                        assertThat(Vendor.ansi().translate(statement))
                                 .isEqualTo("ALTER TABLE tableName ADD CONSTRAINT constraintName PRIMARY KEY ( columnName1, columnName2 )");
 
                     });

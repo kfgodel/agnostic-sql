@@ -1,5 +1,6 @@
 package ar.com.kfgodel.asql.impl;
 
+import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.alter.TableDefinedAlter;
 import ar.com.kfgodel.asql.api.constraints.NamedConstraint;
@@ -8,6 +9,7 @@ import ar.com.kfgodel.asql.api.delete.UnrestrictedDeleteStatement;
 import ar.com.kfgodel.asql.api.drop.DropStatement;
 import ar.com.kfgodel.asql.api.insert.TableDefinedInsert;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
+import ar.com.kfgodel.asql.api.scripts.AgnosticScript;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.alter.TableDefinedAlterImpl;
@@ -17,7 +19,12 @@ import ar.com.kfgodel.asql.impl.lang.delete.UnrestrictedDeleteStatementImpl;
 import ar.com.kfgodel.asql.impl.lang.drop.DropStatementImpl;
 import ar.com.kfgodel.asql.impl.lang.insert.TableDefinedInsertImpl;
 import ar.com.kfgodel.asql.impl.lang.restrictions.NamedColumnImpl;
+import ar.com.kfgodel.asql.impl.lang.scripts.AgnosticScriptImpl;
 import ar.com.kfgodel.asql.impl.lang.update.TableDefinedUpdateImpl;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by kfgodel on 11/07/15.
@@ -67,5 +74,11 @@ public class AsqlBuilder implements Asql {
     @Override
     public TableDefinedInsert insertInto(String tableName) {
         return TableDefinedInsertImpl.create(Internal.table(tableName));
+    }
+
+    @Override
+    public AgnosticScript asScript(AgnosticStatement... statements) {
+        List<AgnosticStatement> statementList = Arrays.stream(statements).collect(Collectors.toList());
+        return AgnosticScriptImpl.create(statementList);
     }
 }
