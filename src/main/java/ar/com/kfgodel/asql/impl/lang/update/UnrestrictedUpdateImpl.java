@@ -1,9 +1,9 @@
 package ar.com.kfgodel.asql.impl.lang.update;
 
 import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
-import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
 import ar.com.kfgodel.asql.api.update.RestrictedUpdate;
 import ar.com.kfgodel.asql.api.update.UnrestrictedUpdate;
+import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 
@@ -19,8 +19,8 @@ public class UnrestrictedUpdateImpl implements UnrestrictedUpdate {
     private List<ColumnAssignment> assignments;
 
     @Override
-    public RestrictedUpdate where(QueryCondition condition) {
-        return RestrictedUpdateImpl.create(this, condition);
+    public RestrictedUpdate where(Object condition) {
+        return RestrictedUpdateImpl.create(this, Internal.asConstruct(condition));
     }
 
     @Override

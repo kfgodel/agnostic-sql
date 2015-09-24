@@ -63,7 +63,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
             });
 
             describe("select", ()->{
-                context().vendor(()->Vendor.ansi());
+                context().vendor(() -> Vendor.ansi());
 
                 it("can have its minimum form", ()->{
                     AgnosticStatement select = asql.select(1);
@@ -205,12 +205,22 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     assertThat(Vendor.ansi().translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL AND column2 IS NOT NULL OR column3 IS NOT NULL");
                     assertThat(Vendor.sqlserver().translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL AND column2 IS NOT NULL OR column3 IS NOT NULL");
                     assertThat(Vendor.hsqldb().translate(statement)).isEqualTo("DELETE FROM tableName WHERE column1 IS NULL AND column2 IS NOT NULL OR column3 IS NOT NULL");
-                });   
+                });
+
+                it("can be restricted with a suquery", ()->{
+                    RestrictedDeleteStatement statement = asql.deleteFrom("tableName")
+                            .where(asql.select(true));
+
+                    String translated = Vendor.ansi().translate(statement);
+
+                    assertThat(translated)
+                            .isEqualTo("DELETE FROM tableName WHERE ( SELECT TRUE )");
+                });
             });
 
             describe("table constraints", ()->{
                 describe("foreign key", () -> {
-                    it("can be expressed naturally",()->{
+                    it("can be expressed naturally", () -> {
                         AgnosticStatement statement = asql.alter("tableName")
                                 .adding(asql.constraint("constraintName")
                                         .fkFrom("columnName1", "columnName2").to("otherTableName"));
@@ -222,7 +232,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                 });
 
                 describe("unique key", () -> {
-                    it("can be expressed",()->{
+                    it("can be expressed", () -> {
                         AgnosticStatement statement = asql.alter("tableName")
                                 .adding(asql.constraint("constraintName")
                                         .uniqueFor("columnName1", "columnName2"));

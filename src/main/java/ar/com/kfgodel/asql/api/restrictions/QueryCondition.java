@@ -3,7 +3,7 @@ package ar.com.kfgodel.asql.api.restrictions;
 import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.operators.Operator;
-import ar.com.kfgodel.asql.impl.model.restrictions.PredicateModel;
+import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 
 /**
  * This type represents the definition of an agnostic restriction/condition
@@ -12,13 +12,13 @@ import ar.com.kfgodel.asql.impl.model.restrictions.PredicateModel;
 public interface QueryCondition extends AgnosticConstruct {
 
     @Override
-    PredicateModel parseModel();
+    AgnosticModel parseModel();
 
     default QueryCondition and(QueryCondition anotherCondition){
         return Internal.binaryOp(this, Operator.and(), anotherCondition);
-    };
+    }
 
     default QueryCondition or(QueryCondition anotherCondition){
         return Internal.binaryOp(this, Operator.or(), anotherCondition);
-    };
+    }
 }

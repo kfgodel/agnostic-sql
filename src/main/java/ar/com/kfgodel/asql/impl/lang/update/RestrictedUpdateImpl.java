@@ -1,6 +1,6 @@
 package ar.com.kfgodel.asql.impl.lang.update;
 
-import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
+import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.api.update.RestrictedUpdate;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 
@@ -10,7 +10,7 @@ import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 public class RestrictedUpdateImpl implements RestrictedUpdate {
 
     private UnrestrictedUpdateImpl unrestrictedUpdate;
-    private QueryCondition condition;
+    private AgnosticConstruct condition;
 
     @Override
     public UpdateModel parseModel() {
@@ -19,7 +19,7 @@ public class RestrictedUpdateImpl implements RestrictedUpdate {
         return updateModel;
     }
 
-    public static RestrictedUpdateImpl create(UnrestrictedUpdateImpl unrestrictedUpdate, QueryCondition condition) {
+    public static RestrictedUpdateImpl create(UnrestrictedUpdateImpl unrestrictedUpdate, AgnosticConstruct condition) {
         RestrictedUpdateImpl update = new RestrictedUpdateImpl();
         update.condition = condition;
         update.unrestrictedUpdate = unrestrictedUpdate;
