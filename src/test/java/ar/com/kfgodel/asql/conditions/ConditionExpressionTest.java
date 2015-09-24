@@ -6,7 +6,6 @@ import ar.com.kfgodel.asql.AsqlTestContext;
 import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.impl.AsqlBuilder;
-import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
 import com.google.common.collect.Lists;
 import org.junit.runner.RunWith;
 
@@ -25,8 +24,8 @@ public class ConditionExpressionTest extends JavaSpec<AsqlTestContext> {
 
         describe("sql predicate conditions includes", ()->{
 
-            context().interpreter(() -> TemplateInterpreter.create(Vendor.ansi()));
-            context().translated(() -> context().interpreter().translate(context().condition().parseModel()));
+            context().vendor(() -> Vendor.ansi());
+            context().translated(() -> context().vendor().translate(context().condition()));
 
             it("IS NULL", () -> {
                 context().condition(() -> asql.column("columnName").isNull());
