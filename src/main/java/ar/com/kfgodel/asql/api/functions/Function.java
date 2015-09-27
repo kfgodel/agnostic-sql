@@ -15,4 +15,8 @@ public interface Function {
     static FunctionInvocation currentTime() {
         return NoArgFunctionInvocation.create("current_time");
     }
+
+    static FunctionInvocation count() {
+        return NoArgFunctionInvocation.create("count_all");
+    }
 }

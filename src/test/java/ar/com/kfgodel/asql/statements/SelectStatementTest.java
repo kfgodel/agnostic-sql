@@ -5,6 +5,7 @@ import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.AsqlTestContext;
 import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.Asql;
+import ar.com.kfgodel.asql.api.functions.Function;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.impl.AsqlBuilder;
 import org.junit.runner.RunWith;
@@ -52,6 +53,19 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
                 String translated = context().vendor().translate(select);
 
                 assertThat(translated).isEqualTo("SELECT column1 FROM table1 WHERE column1 = 2");
+            });
+
+            describe("projections include", ()->{
+
+                it("count(*)", ()->{
+                    AgnosticStatement select = asql.select(Function.count())
+                            .from("table1");
+
+                    String translated = context().vendor().translate(select);
+
+                    assertThat(translated).isEqualTo("SELECT COUNT(*) FROM table1");
+                });
+
             });
         });
     }
