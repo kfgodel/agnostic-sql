@@ -75,6 +75,43 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
                     assertThat(translated).isEqualTo("SELECT COUNT(column1) FROM table1");
                 });
 
+                it("maximum of a column", ()->{
+                    AgnosticStatement select = asql.select(Function.max(asql.column("column1")))
+                            .from("table1");
+
+                    String translated = context().vendor().translate(select);
+
+                    assertThat(translated).isEqualTo("SELECT MAX(column1) FROM table1");
+                });
+
+                it("minimum of a column", ()->{
+                    AgnosticStatement select = asql.select(Function.min(asql.column("column1")))
+                            .from("table1");
+
+                    String translated = context().vendor().translate(select);
+
+                    assertThat(translated).isEqualTo("SELECT MIN(column1) FROM table1");
+                });
+
+                it("sum of a column", ()->{
+                    AgnosticStatement select = asql.select(Function.sum(asql.column("column1")))
+                            .from("table1");
+
+                    String translated = context().vendor().translate(select);
+
+                    assertThat(translated).isEqualTo("SELECT SUM(column1) FROM table1");
+                });
+
+                it("average of a column", ()->{
+                    AgnosticStatement select = asql.select(Function.avg(asql.column("column1")))
+                            .from("table1");
+
+                    String translated = context().vendor().translate(select);
+
+                    assertThat(translated).isEqualTo("SELECT AVG(column1) FROM table1");
+                });
+
+
             });
         });
     }

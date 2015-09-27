@@ -25,4 +25,19 @@ public interface Function {
     static FunctionInvocation count(NamedColumn countedColumn) {
         return MonoArgInvocation.create("count_column", countedColumn);
     }
+
+    static FunctionInvocation max(NamedColumn maxedColumn) {
+        return MonoArgInvocation.create("max", maxedColumn);
+    }
+    static FunctionInvocation min(NamedColumn maxedColumn) {
+        return MonoArgInvocation.create("min", maxedColumn);
+    }
+    static FunctionInvocation sum(NamedColumn maxedColumn) {
+        return MonoArgInvocation.create("sum", maxedColumn);
+    }
+    static FunctionInvocation avg(NamedColumn maxedColumn) {
+        return MonoArgInvocation.create("avg", maxedColumn);
+    }
+
+
 }
