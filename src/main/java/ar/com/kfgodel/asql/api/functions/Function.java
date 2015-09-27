@@ -1,5 +1,7 @@
 package ar.com.kfgodel.asql.api.functions;
 
+import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
+import ar.com.kfgodel.asql.impl.lang.functions.MonoArgInvocation;
 import ar.com.kfgodel.asql.impl.lang.functions.NoArgFunctionInvocation;
 
 /**
@@ -14,5 +16,13 @@ public interface Function {
 
     static FunctionInvocation currentTime() {
         return NoArgFunctionInvocation.create("current_time");
+    }
+
+    static FunctionInvocation count() {
+        return NoArgFunctionInvocation.create("count_all");
+    }
+
+    static FunctionInvocation count(NamedColumn countedColumn) {
+        return MonoArgInvocation.create("count_column", countedColumn);
     }
 }
