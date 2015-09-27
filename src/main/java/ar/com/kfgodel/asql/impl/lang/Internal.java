@@ -2,11 +2,13 @@ package ar.com.kfgodel.asql.impl.lang;
 
 import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
+import ar.com.kfgodel.asql.api.select.SelectStatement;
 import ar.com.kfgodel.asql.impl.lang.internal.PatternHelper;
 import ar.com.kfgodel.asql.impl.lang.internal.impl.PatternHelperImpl;
 import ar.com.kfgodel.asql.impl.lang.references.*;
 import ar.com.kfgodel.asql.impl.lang.restrictions.BinaryOperatorCondition;
 import ar.com.kfgodel.asql.impl.lang.update.ColumnAssignmentImpl;
+import ar.com.kfgodel.asql.impl.model.references.BooleanReference;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -41,7 +43,7 @@ public interface Internal {
     }
 
     static ColumnAssignment columnAssignment(ColumnReference column, Object columnValue) {
-        return ColumnAssignmentImpl.create(column, columnValue);
+        return ColumnAssignmentImpl.create(column, Internal.asConstruct(columnValue));
     }
 
     static BinaryOperatorCondition binaryOp(AgnosticConstruct leftOperand, AgnosticConstruct operator, AgnosticConstruct rightOperand) {
@@ -60,5 +62,24 @@ public interface Internal {
 
     static ConstraintReference constraint(String constraintName) {
         return ConstraintReference.create(constraintName);
+    }
+
+    static AgnosticConstruct asConstruct(Object expression) {
+        if(expression instanceof SelectStatement){
+            return SubqueryReference.create((SelectStatement) expression);
+        }
+        if(expression instanceof AgnosticConstruct){
+            // No need for conversion
+            return (AgnosticConstruct) expression;
+        }
+        if(expression instanceof Boolean){
+            Boolean asBoolean = (Boolean) expression;
+            return boolRef(asBoolean);
+        }
+        return Internal.literal(expression);
+    }
+
+    static AgnosticConstruct boolRef(boolean value) {
+        return BooleanReference.create(value);
     }
 }

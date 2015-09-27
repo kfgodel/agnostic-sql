@@ -2,7 +2,7 @@ package ar.com.kfgodel.asql.impl.lang.delete;
 
 import ar.com.kfgodel.asql.api.delete.RestrictedDeleteStatement;
 import ar.com.kfgodel.asql.api.delete.UnrestrictedDeleteStatement;
-import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
+import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.references.TableReference;
 import ar.com.kfgodel.asql.impl.lang.support.TableCenteredStatement;
 import ar.com.kfgodel.asql.impl.model.delete.DeleteModel;
@@ -18,8 +18,8 @@ public class UnrestrictedDeleteStatementImpl extends TableCenteredStatement impl
     }
 
     @Override
-    public RestrictedDeleteStatement where(QueryCondition condition) {
-        return RestrictedDeleteStatementImpl.create(this, condition);
+    public RestrictedDeleteStatement where(Object condition) {
+        return RestrictedDeleteStatementImpl.create(this, Internal.asConstruct(condition));
     }
 
     public static UnrestrictedDeleteStatementImpl create(TableReference table) {

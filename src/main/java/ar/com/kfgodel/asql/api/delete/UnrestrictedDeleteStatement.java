@@ -1,7 +1,6 @@
 package ar.com.kfgodel.asql.api.delete;
 
 import ar.com.kfgodel.asql.api.AgnosticStatement;
-import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
 import ar.com.kfgodel.asql.impl.model.delete.DeleteModel;
 
 /**
@@ -13,5 +12,5 @@ public interface UnrestrictedDeleteStatement extends AgnosticStatement {
     @Override
     DeleteModel parseModel();
 
-    RestrictedDeleteStatement where(QueryCondition column1);
+    RestrictedDeleteStatement where(Object condition);
 }

@@ -8,6 +8,7 @@ import ar.com.kfgodel.asql.api.drop.DropStatement;
 import ar.com.kfgodel.asql.api.insert.TableDefinedInsert;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.api.scripts.AgnosticScript;
+import ar.com.kfgodel.asql.api.select.ProjectionDefinedSelect;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 
 /**
@@ -32,4 +33,6 @@ public interface Asql {
     TableDefinedInsert insertInto(String tableName);
 
     AgnosticScript asScript(AgnosticStatement... statements);
+
+    ProjectionDefinedSelect select(Object... expressions);
 }

@@ -1,5 +1,6 @@
 package ar.com.kfgodel.asql.impl;
 
+import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.alter.TableDefinedAlter;
@@ -10,6 +11,7 @@ import ar.com.kfgodel.asql.api.drop.DropStatement;
 import ar.com.kfgodel.asql.api.insert.TableDefinedInsert;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.api.scripts.AgnosticScript;
+import ar.com.kfgodel.asql.api.select.ProjectionDefinedSelect;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.alter.TableDefinedAlterImpl;
@@ -20,6 +22,7 @@ import ar.com.kfgodel.asql.impl.lang.drop.DropStatementImpl;
 import ar.com.kfgodel.asql.impl.lang.insert.TableDefinedInsertImpl;
 import ar.com.kfgodel.asql.impl.lang.restrictions.NamedColumnImpl;
 import ar.com.kfgodel.asql.impl.lang.scripts.AgnosticScriptImpl;
+import ar.com.kfgodel.asql.impl.lang.select.ProjectionDefinedSelectImpl;
 import ar.com.kfgodel.asql.impl.lang.update.TableDefinedUpdateImpl;
 
 import java.util.Arrays;
@@ -80,5 +83,13 @@ public class AsqlBuilder implements Asql {
     public AgnosticScript asScript(AgnosticStatement... statements) {
         List<AgnosticStatement> statementList = Arrays.stream(statements).collect(Collectors.toList());
         return AgnosticScriptImpl.create(statementList);
+    }
+
+    @Override
+    public ProjectionDefinedSelect select(Object... projections) {
+        List<AgnosticConstruct> projectionConstructs = Arrays.stream(projections)
+                .map(Internal::asConstruct)
+                .collect(Collectors.toList());
+        return ProjectionDefinedSelectImpl.create(projectionConstructs);
     }
 }

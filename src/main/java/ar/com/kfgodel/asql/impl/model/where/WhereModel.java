@@ -1,20 +1,19 @@
 package ar.com.kfgodel.asql.impl.model.where;
 
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
-import ar.com.kfgodel.asql.impl.model.restrictions.PredicateModel;
 
 /**
  * Created by tenpines on 13/09/15.
  */
 public class WhereModel implements AgnosticModel {
 
-    private PredicateModel predicate;
+    private AgnosticModel predicate;
 
-    public PredicateModel getPredicate() {
+    public AgnosticModel getPredicate() {
         return predicate;
     }
 
-    public void setPredicate(PredicateModel predicate) {
+    public void setPredicate(AgnosticModel predicate) {
         this.predicate = predicate;
     }
 

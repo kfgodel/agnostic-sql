@@ -1,7 +1,6 @@
 package ar.com.kfgodel.asql.api.update;
 
 import ar.com.kfgodel.asql.api.AgnosticStatement;
-import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 
 /**
@@ -9,7 +8,7 @@ import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
  */
 public interface UnrestrictedUpdate extends AgnosticStatement {
 
-    RestrictedUpdate where(QueryCondition condition);
+    RestrictedUpdate where(Object condition);
 
     @Override
     UpdateModel parseModel();

@@ -25,11 +25,18 @@ public class TemplateInterpreter implements VendorInterpreter {
 
     @Override
     public String translate(AgnosticModel model) {
+        if(model == null){
+            throw new IllegalArgumentException("Need a model to translate, got null instead");
+        }
         return templateEngine.process(model);
     }
 
     @Override
     public String translate(AgnosticConstruct construct) {
-        return translate(construct.parseModel());
+        AgnosticModel model = construct.parseModel();
+        if(model == null){
+            throw new IllegalArgumentException("Parsed model can't be null. Generated from construct["+construct+"]");
+        }
+        return translate(model);
     }
 }

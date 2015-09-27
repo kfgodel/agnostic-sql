@@ -1,7 +1,7 @@
 package ar.com.kfgodel.asql.impl.lang.delete;
 
+import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.api.delete.RestrictedDeleteStatement;
-import ar.com.kfgodel.asql.api.restrictions.QueryCondition;
 import ar.com.kfgodel.asql.impl.model.delete.DeleteModel;
 
 /**
@@ -10,7 +10,7 @@ import ar.com.kfgodel.asql.impl.model.delete.DeleteModel;
 public class RestrictedDeleteStatementImpl implements RestrictedDeleteStatement {
 
     private UnrestrictedDeleteStatementImpl previousNode;
-    private QueryCondition condition;
+    private AgnosticConstruct condition;
 
     @Override
     public DeleteModel parseModel() {
@@ -19,7 +19,7 @@ public class RestrictedDeleteStatementImpl implements RestrictedDeleteStatement 
         return model;
     }
 
-    public static RestrictedDeleteStatementImpl create(UnrestrictedDeleteStatementImpl previousNode, QueryCondition condition) {
+    public static RestrictedDeleteStatementImpl create(UnrestrictedDeleteStatementImpl previousNode, AgnosticConstruct condition) {
         RestrictedDeleteStatementImpl statement = new RestrictedDeleteStatementImpl();
         statement.previousNode = previousNode;
         statement.condition = condition;

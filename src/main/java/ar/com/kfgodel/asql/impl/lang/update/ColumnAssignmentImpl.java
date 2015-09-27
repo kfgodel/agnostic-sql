@@ -1,10 +1,8 @@
 package ar.com.kfgodel.asql.impl.lang.update;
 
+import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
-import ar.com.kfgodel.asql.api.functions.FunctionInvocation;
-import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
-import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
 
 /**
@@ -13,22 +11,14 @@ import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
 public class ColumnAssignmentImpl implements ColumnAssignment {
 
     private ColumnReference column;
-    private Object columnValue;
+    private AgnosticConstruct columnValue;
 
     @Override
     public ColumnAssignmentModel parseModel() {
-        AgnosticModel operand;
-        if(columnValue instanceof FunctionInvocation){
-            // Functions are already an operand
-            FunctionInvocation function = (FunctionInvocation) this.columnValue;
-            operand = function.parseModel();
-        }else {
-            operand = Internal.literal(columnValue).parseModel();
-        }
-        return ColumnAssignmentModel.create(column.parseModel(), operand);
+        return ColumnAssignmentModel.create(column.parseModel(), columnValue.parseModel());
     }
 
-    public static ColumnAssignmentImpl create(ColumnReference column, Object columnValue) {
+    public static ColumnAssignmentImpl create(ColumnReference column, AgnosticConstruct columnValue) {
         ColumnAssignmentImpl assignment = new ColumnAssignmentImpl();
         assignment.column = column;
         assignment.columnValue = columnValue;
