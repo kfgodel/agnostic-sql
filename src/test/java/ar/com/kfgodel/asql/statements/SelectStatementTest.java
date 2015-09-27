@@ -57,6 +57,15 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
 
             describe("projections include", ()->{
 
+                it("distinct columns", ()->{
+                    AgnosticStatement select = asql.select(Function.distinct(asql.column("column1"), asql.column("column2")))
+                            .from("table1");
+
+                    String translated = context().vendor().translate(select);
+
+                    assertThat(translated).isEqualTo("SELECT DISTINCT column1, column2 FROM table1");
+                });
+
                 it("count(*)", ()->{
                     AgnosticStatement select = asql.select(Function.count())
                             .from("table1");
