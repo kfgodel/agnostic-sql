@@ -42,8 +42,6 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
                     assertThat(translated).isEqualTo("SELECT column1 FROM table1, table2");
                 });
 
-                it("can join tables on conditions");
-
             });
 
             it("has a where clause to express predicates", ()->{

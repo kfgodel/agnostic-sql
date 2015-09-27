@@ -1,11 +1,10 @@
 package ar.com.kfgodel.asql.impl.model.insert;
 
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
-import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
+import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,27 +12,30 @@ import java.util.List;
  */
 public class InsertModel extends TableCenteredModel implements AgnosticModel {
 
-    private List<ColumnAssignmentModel> columnAssignments;
+    private AgnosticModel valueDefinition;
+    private List<ColumnReferenceModel> columnList;
 
-    public List<ColumnAssignmentModel> getColumnAssignments() {
-        if (columnAssignments == null) {
-            columnAssignments = new ArrayList<ColumnAssignmentModel>();
-        }
-        return columnAssignments;
+    public boolean getHasColumnList(){
+        return columnList != null;
     }
 
-    public void setColumnAssignments(List<ColumnAssignmentModel> columnAssignments) {
-        this.columnAssignments = columnAssignments;
+    public List<ColumnReferenceModel> getColumnList() {
+        return columnList;
     }
 
-    public static InsertModel create(TableReferenceModel table) {
+    public void setColumnList(List<ColumnReferenceModel> columnList) {
+        this.columnList = columnList;
+    }
+
+    public AgnosticModel getValueDefinition() {
+        return valueDefinition;
+    }
+
+    public static InsertModel create(TableReferenceModel table, AgnosticModel valueDefinition) {
         InsertModel model = new InsertModel();
         model.setTable(table);
+        model.valueDefinition = valueDefinition;
         return model;
-    }
-
-    public void addAssignment(ColumnAssignmentModel newAssignment){
-        this.getColumnAssignments().add(newAssignment);
     }
 
     @Override

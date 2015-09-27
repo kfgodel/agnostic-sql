@@ -162,13 +162,13 @@ public class ConditionExpressionTest extends JavaSpec<AsqlTestContext> {
             it("IN a collection of values", ()->{
                 context().condition(() -> asql.column("columnName").isIn(Lists.newArrayList(1, "text")));
 
-                assertThat(context().translated()).isEqualTo("columnName IN (1, 'text')");
+                assertThat(context().translated()).isEqualTo("columnName IN ( 1, 'text' )");
             });
 
             it("NOT IN a collection of values", ()->{
                 context().condition(() -> asql.column("columnName").isNotIn(Lists.newArrayList(1, "text")));
 
-                assertThat(context().translated()).isEqualTo("columnName NOT IN (1, 'text')");
+                assertThat(context().translated()).isEqualTo("columnName NOT IN ( 1, 'text' )");
             });
 
         });

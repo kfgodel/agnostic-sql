@@ -18,6 +18,16 @@ public class ColumnAssignmentImpl implements ColumnAssignment {
         return ColumnAssignmentModel.create(column.parseModel(), columnValue.parseModel());
     }
 
+    @Override
+    public AgnosticConstruct getValue() {
+        return columnValue;
+    }
+
+    @Override
+    public ColumnReference getColumn() {
+        return column;
+    }
+
     public static ColumnAssignmentImpl create(ColumnReference column, AgnosticConstruct columnValue) {
         ColumnAssignmentImpl assignment = new ColumnAssignmentImpl();
         assignment.column = column;
