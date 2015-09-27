@@ -17,7 +17,7 @@ public class TableDefinedInsertImpl extends TableCenteredStatement implements Ta
 
     @Override
     public InsertStatement setting(ColumnAssignment... columnAssignments) {
-        return InsertStatementImpl.create(this, Arrays.asList(columnAssignments));
+        return InsertWithColumnAssignments.create(this, Arrays.asList(columnAssignments));
     }
 
     @Override

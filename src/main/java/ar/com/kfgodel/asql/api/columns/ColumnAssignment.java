@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.api.columns;
 
 import ar.com.kfgodel.asql.api.AgnosticConstruct;
+import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
 
 /**
@@ -11,4 +12,8 @@ public interface ColumnAssignment extends AgnosticConstruct {
 
     @Override
     ColumnAssignmentModel parseModel();
+
+    AgnosticConstruct getValue();
+
+    ColumnReference getColumn();
 }

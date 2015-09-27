@@ -82,4 +82,10 @@ public interface Internal {
     static AgnosticConstruct boolRef(boolean value) {
         return BooleanReference.create(value);
     }
+
+    static List<AgnosticConstruct> asConstructs(Object... expressions) {
+        return Arrays.stream(expressions)
+                .map(Internal::asConstruct)
+                .collect(Collectors.toList());
+    }
 }

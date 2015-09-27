@@ -164,6 +164,15 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
                     assertThat(Vendor.ansi().translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1, CURRENT_TIME )");
                 });
+
+                it("can use a subquery to specify values", ()->{
+                    InsertStatement statement = asql.insertInto("tableName")
+                            .set("column1", "column2")
+                            .to(asql.select("text for column1", "text for column2"));
+
+                    assertThat(Vendor.ansi().translate(statement))
+                            .isEqualTo("INSERT INTO tableName ( column1, column2 ) ( SELECT 'text for column1', 'text for column2' )");
+                });
             });
 
 
