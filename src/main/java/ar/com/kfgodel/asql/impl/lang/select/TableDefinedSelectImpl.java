@@ -1,8 +1,9 @@
 package ar.com.kfgodel.asql.impl.lang.select;
 
+import ar.com.kfgodel.asql.api.select.RestrictedSelect;
 import ar.com.kfgodel.asql.api.select.TableDefinedSelect;
+import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.references.TableReference;
-import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 import ar.com.kfgodel.asql.impl.model.select.FromModel;
 import ar.com.kfgodel.asql.impl.model.select.SelectModel;
@@ -19,7 +20,7 @@ public class TableDefinedSelectImpl implements TableDefinedSelect {
     private List<TableReference> tables;
 
     @Override
-    public AgnosticModel parseModel() {
+    public SelectModel parseModel() {
         SelectModel selectModel = previousNode.parseModel();
         selectModel.setFromClause(FromModel.create(parseTableModels()));
         return selectModel;
@@ -37,5 +38,9 @@ public class TableDefinedSelectImpl implements TableDefinedSelect {
         select.tables = tables;
         return select;
     }
-    
+
+    @Override
+    public RestrictedSelect where(Object condition) {
+        return RestrictedSelectImpl.create(this, Internal.asConstruct(condition));
+    }
 }

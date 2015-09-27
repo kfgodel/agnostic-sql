@@ -1,5 +1,10 @@
 <#include "/macros/_renderAsModel.ftl" />
-SELECT <#list model.projections as projection><@renderAsModel model=projection/><#sep>, </#sep></#list><#rt>
+<@compress single_line=true>
+SELECT <#list model.projections as projection><@renderAsModel model=projection/><#sep>, </#sep></#list>
 <#if model.fromClause??>
-${" "}<@renderAsModel model=model.fromClause /><#rt>
+${" "}<@renderAsModel model=model.fromClause />
 </#if>
+<#if model.whereClause.defined>
+${" "}<@renderAsModel model=model.whereClause/>
+</#if>
+</@compress>

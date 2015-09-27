@@ -7,4 +7,5 @@ import ar.com.kfgodel.asql.api.AgnosticStatement;
  * Created by tenpines on 27/09/15.
  */
 public interface TableDefinedSelect extends AgnosticStatement {
+    RestrictedSelect where(Object condition);
 }

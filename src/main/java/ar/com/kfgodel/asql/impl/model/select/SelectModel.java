@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.impl.model.select;
 
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
+import ar.com.kfgodel.asql.impl.model.where.WhereModel;
 
 import java.util.List;
 
@@ -11,6 +12,11 @@ public class SelectModel implements AgnosticModel {
 
     private List<AgnosticModel> projections;
     private FromModel fromClause;
+    private WhereModel whereClause;
+
+    public WhereModel getWhereClause() {
+        return whereClause;
+    }
 
     public FromModel getFromClause() {
         return fromClause;
@@ -32,6 +38,7 @@ public class SelectModel implements AgnosticModel {
     public static SelectModel create(List<AgnosticModel> projections){
         SelectModel selectModel = new SelectModel();
         selectModel.projections = projections;
+        selectModel.whereClause = WhereModel.create();
         return selectModel;
     }
     

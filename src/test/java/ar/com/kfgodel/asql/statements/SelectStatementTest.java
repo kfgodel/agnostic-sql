@@ -35,15 +35,25 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
             describe("from clause", ()->{
 
                 it("may reference a set of tables", ()->{
-                    AgnosticStatement select = asql.select(1).from("table1", "table2");
+                    AgnosticStatement select = asql.select(asql.column("column1")).from("table1", "table2");
 
                     String translated = context().vendor().translate(select);
 
-                    assertThat(translated).isEqualTo("SELECT 1 FROM table1, table2");
+                    assertThat(translated).isEqualTo("SELECT column1 FROM table1, table2");
                 });
 
                 it("can join tables on conditions");
 
+            });
+
+            it("has a where clause to express predicates", ()->{
+                AgnosticStatement select = asql.select(asql.column("column1"))
+                        .from("table1")
+                        .where(asql.column("column1").isEqualsTo(2));
+
+                String translated = context().vendor().translate(select);
+
+                assertThat(translated).isEqualTo("SELECT column1 FROM table1 WHERE column1 = 2");
             });
         });
     }
