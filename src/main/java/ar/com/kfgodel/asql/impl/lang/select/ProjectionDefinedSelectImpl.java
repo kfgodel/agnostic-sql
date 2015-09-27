@@ -2,9 +2,12 @@ package ar.com.kfgodel.asql.impl.lang.select;
 
 import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.api.select.ProjectionDefinedSelect;
+import ar.com.kfgodel.asql.api.select.TableDefinedSelect;
+import ar.com.kfgodel.asql.impl.lang.references.TableReference;
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 import ar.com.kfgodel.asql.impl.model.select.SelectModel;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,7 +19,7 @@ public class ProjectionDefinedSelectImpl implements ProjectionDefinedSelect {
     private List<AgnosticConstruct> projections;
 
     @Override
-    public AgnosticModel parseModel() {
+    public SelectModel parseModel() {
         return SelectModel.create(parseExpressionModels());
     }
 
@@ -29,5 +32,12 @@ public class ProjectionDefinedSelectImpl implements ProjectionDefinedSelect {
         select.projections = projections;
         return select;
     }
-    
+
+    @Override
+    public TableDefinedSelect from(String... tableNames) {
+        List<TableReference> tableReferences = Arrays.stream(tableNames)
+                .map(TableReference::create)
+                .collect(Collectors.toList());
+        return TableDefinedSelectImpl.create(this, tableReferences);
+    }
 }

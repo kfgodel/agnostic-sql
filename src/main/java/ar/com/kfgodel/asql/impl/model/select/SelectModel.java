@@ -10,6 +10,15 @@ import java.util.List;
 public class SelectModel implements AgnosticModel {
 
     private List<AgnosticModel> projections;
+    private FromModel fromClause;
+
+    public FromModel getFromClause() {
+        return fromClause;
+    }
+
+    public void setFromClause(FromModel fromClause) {
+        this.fromClause = fromClause;
+    }
 
     public List<AgnosticModel> getProjections() {
         return projections;
