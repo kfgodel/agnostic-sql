@@ -66,6 +66,15 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
                     assertThat(translated).isEqualTo("SELECT COUNT(*) FROM table1");
                 });
 
+                it("count specific column", ()->{
+                    AgnosticStatement select = asql.select(Function.count(asql.column("column1")))
+                            .from("table1");
+
+                    String translated = context().vendor().translate(select);
+
+                    assertThat(translated).isEqualTo("SELECT COUNT(column1) FROM table1");
+                });
+
             });
         });
     }
