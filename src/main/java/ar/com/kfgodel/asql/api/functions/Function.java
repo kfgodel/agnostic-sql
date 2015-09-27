@@ -1,8 +1,14 @@
 package ar.com.kfgodel.asql.api.functions;
 
+import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.impl.lang.functions.MonoArgInvocation;
+import ar.com.kfgodel.asql.impl.lang.functions.MultiArgInvocation;
 import ar.com.kfgodel.asql.impl.lang.functions.NoArgFunctionInvocation;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This type represents an agnostic sql function
@@ -40,4 +46,9 @@ public interface Function {
     }
 
 
+    static FunctionInvocation distinct(NamedColumn... columns) {
+        List<AgnosticConstruct> values = Arrays.stream(columns)
+                .collect(Collectors.toList());
+        return MultiArgInvocation.create("distinct", values);
+    }
 }
