@@ -5,6 +5,7 @@ import ar.com.kfgodel.asql.api.constraints.NamedConstraint;
 import ar.com.kfgodel.asql.api.create.TableDefinedCreate;
 import ar.com.kfgodel.asql.api.delete.UnrestrictedDeleteStatement;
 import ar.com.kfgodel.asql.api.drop.DropStatement;
+import ar.com.kfgodel.asql.api.indices.NameDefinedCreateIndex;
 import ar.com.kfgodel.asql.api.insert.TableDefinedInsert;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.api.scripts.AgnosticScript;
@@ -20,7 +21,7 @@ public interface Asql {
 
     NamedColumn column(String columnName);
 
-    TableDefinedCreate create(String tableName);
+    TableDefinedCreate createTable(String tableName);
 
     TableDefinedAlter alter(String tableName);
 
@@ -35,4 +36,6 @@ public interface Asql {
     AgnosticScript asScript(AgnosticStatement... statements);
 
     ProjectionDefinedSelect select(Object... expressions);
+
+    NameDefinedCreateIndex createIndex(String indexName);
 }

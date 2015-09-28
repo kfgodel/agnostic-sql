@@ -9,6 +9,7 @@ import ar.com.kfgodel.asql.api.alter.RemoveColumnStatement;
 import ar.com.kfgodel.asql.api.delete.RestrictedDeleteStatement;
 import ar.com.kfgodel.asql.api.drop.DropStatement;
 import ar.com.kfgodel.asql.api.functions.Function;
+import ar.com.kfgodel.asql.api.indices.CreateIndexStatement;
 import ar.com.kfgodel.asql.api.insert.InsertStatement;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
@@ -119,7 +120,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
                 context().vendor(() -> Vendor.ansi());
 
-                context().statement(() -> asql.create("tableName")
+                context().statement(() -> asql.createTable("tableName")
                         .withIdPk()
                         .adding(asql.column("momentoDeCreacion").typed(DataType.timestamp()),
                                 asql.column("momentoDeUltimaModificacion").typed(DataType.timestamp()),
@@ -275,6 +276,19 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
                     });
                 });
+            });
+
+            describe("index", ()->{
+
+                it("is created for columns", ()->{
+                    CreateIndexStatement statement = asql.createIndex("anIndexName")
+                            .on("tableName").forColumns("column1","column2");
+
+                    String translated = Vendor.ansi().translate(statement);
+
+                    assertThat(translated).isEqualTo("CREATE INDEX anIndexName ON tableName (column1, column2)");
+                });
+
             });
 
         });
