@@ -33,6 +33,8 @@ public class DataTypeTest extends JavaSpec<AsqlTestContext> {
                 assertThat(ansi.translate(DataType.fk())).isEqualTo("bigint");
 
                 assertThat(ansi.translate(DataType.booleanic())).isEqualTo("boolean");
+
+                assertThat(ansi.translate(DataType.blob())).isEqualTo("BLOB");
             });
             it("have sqlserver translations", () -> {
                 Vendor sqlserver = Vendor.sqlserver();
@@ -50,6 +52,8 @@ public class DataTypeTest extends JavaSpec<AsqlTestContext> {
                 assertThat(sqlserver.translate(DataType.fk())).isEqualTo("numeric(19,0)");
 
                 assertThat(sqlserver.translate(DataType.booleanic())).isEqualTo("bit");
+
+                assertThat(sqlserver.translate(DataType.blob())).isEqualTo("VARBINARY(MAX)");
             });
             it("have hsqldb translations", () -> {
                 Vendor hsqldb = Vendor.hsqldb();
@@ -67,6 +71,7 @@ public class DataTypeTest extends JavaSpec<AsqlTestContext> {
                 assertThat(hsqldb.translate(DataType.fk())).isEqualTo("bigint");
 
                 assertThat(hsqldb.translate(DataType.booleanic())).isEqualTo("bit");
+                assertThat(hsqldb.translate(DataType.blob())).isEqualTo("BLOB");
             });
         });
 
