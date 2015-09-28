@@ -9,6 +9,7 @@ import ar.com.kfgodel.asql.api.create.TableDefinedCreate;
 import ar.com.kfgodel.asql.api.delete.UnrestrictedDeleteStatement;
 import ar.com.kfgodel.asql.api.drop.DropStatement;
 import ar.com.kfgodel.asql.api.indices.NameDefinedCreateIndex;
+import ar.com.kfgodel.asql.api.indices.NameDefinedDropIndex;
 import ar.com.kfgodel.asql.api.insert.TableDefinedInsert;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.api.scripts.AgnosticScript;
@@ -21,8 +22,8 @@ import ar.com.kfgodel.asql.impl.lang.create.TableDefinedCreateImpl;
 import ar.com.kfgodel.asql.impl.lang.delete.UnrestrictedDeleteStatementImpl;
 import ar.com.kfgodel.asql.impl.lang.drop.DropStatementImpl;
 import ar.com.kfgodel.asql.impl.lang.indices.NameDefinedCreateIndexImpl;
+import ar.com.kfgodel.asql.impl.lang.indices.NameDefinedDropIndexImpl;
 import ar.com.kfgodel.asql.impl.lang.insert.TableDefinedInsertImpl;
-import ar.com.kfgodel.asql.impl.lang.references.IndexReference;
 import ar.com.kfgodel.asql.impl.lang.restrictions.NamedColumnImpl;
 import ar.com.kfgodel.asql.impl.lang.scripts.AgnosticScriptImpl;
 import ar.com.kfgodel.asql.impl.lang.select.ProjectionDefinedSelectImpl;
@@ -68,7 +69,7 @@ public class AsqlBuilder implements Asql {
     }
 
     @Override
-    public DropStatement drop(String tableName) {
+    public DropStatement dropTable(String tableName) {
         return DropStatementImpl.create(Internal.table(tableName));
     }
 
@@ -98,6 +99,11 @@ public class AsqlBuilder implements Asql {
 
     @Override
     public NameDefinedCreateIndex createIndex(String indexName) {
-        return NameDefinedCreateIndexImpl.create(IndexReference.create(indexName));
+        return NameDefinedCreateIndexImpl.create(Internal.index(indexName));
+    }
+
+    @Override
+    public NameDefinedDropIndex dropIndex(String indexName) {
+        return NameDefinedDropIndexImpl.create(Internal.index(indexName));
     }
 }

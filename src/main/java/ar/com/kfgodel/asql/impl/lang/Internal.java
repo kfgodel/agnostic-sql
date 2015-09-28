@@ -88,4 +88,8 @@ public interface Internal {
                 .map(Internal::asConstruct)
                 .collect(Collectors.toList());
     }
+
+    static IndexReference index(String indexName) {
+        return IndexReference.create(indexName);
+    }
 }

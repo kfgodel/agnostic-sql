@@ -10,6 +10,7 @@ import ar.com.kfgodel.asql.api.delete.RestrictedDeleteStatement;
 import ar.com.kfgodel.asql.api.drop.DropStatement;
 import ar.com.kfgodel.asql.api.functions.Function;
 import ar.com.kfgodel.asql.api.indices.CreateIndexStatement;
+import ar.com.kfgodel.asql.api.indices.DropIndexStatement;
 import ar.com.kfgodel.asql.api.insert.InsertStatement;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
@@ -162,7 +163,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
             describe("drop table", () -> {
                 it("is basically ansi for all vendors",()->{
-                    DropStatement statement = asql.drop("tableName");
+                    DropStatement statement = asql.dropTable("tableName");
 
                     assertThat(Vendor.ansi().translate(statement)).isEqualTo("DROP TABLE tableName");
                     assertThat(Vendor.sqlserver().translate(statement)).isEqualTo("DROP TABLE tableName");
@@ -280,13 +281,34 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
             describe("index", ()->{
 
-                it("is created for columns", ()->{
+                it("is created for columns", () -> {
                     CreateIndexStatement statement = asql.createIndex("anIndexName")
-                            .on("tableName").forColumns("column1","column2");
+                            .on("tableName").forColumns("column1", "column2");
 
                     String translated = Vendor.ansi().translate(statement);
 
                     assertThat(translated).isEqualTo("CREATE INDEX anIndexName ON tableName (column1, column2)");
+                });
+
+
+                describe("drop", () -> {
+                    it("is dropped from a table (for compatibility reasons)", () -> {
+                        DropIndexStatement statement = asql.dropIndex("anIndexName")
+                                .from("tableName");
+
+                        String translated = Vendor.ansi().translate(statement);
+
+                        assertThat(translated).isEqualTo("DROP INDEX anIndexName");
+                    });
+
+                    it("table is needed for sqlserver", () -> {
+                        DropIndexStatement statement = asql.dropIndex("anIndexName")
+                                .from("tableName");
+
+                        String translated = Vendor.sqlserver().translate(statement);
+
+                        assertThat(translated).isEqualTo("DROP INDEX tableName.anIndexName");
+                    });
                 });
 
             });
