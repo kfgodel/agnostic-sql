@@ -27,6 +27,9 @@ import ar.com.kfgodel.asql.impl.lang.insert.TableDefinedInsertImpl;
 import ar.com.kfgodel.asql.impl.lang.restrictions.NamedColumnImpl;
 import ar.com.kfgodel.asql.impl.lang.scripts.AgnosticScriptImpl;
 import ar.com.kfgodel.asql.impl.lang.select.ProjectionDefinedSelectImpl;
+import ar.com.kfgodel.asql.impl.lang.transactions.BeginTransaction;
+import ar.com.kfgodel.asql.impl.lang.transactions.CommitTransaction;
+import ar.com.kfgodel.asql.impl.lang.transactions.RollbackTransaction;
 import ar.com.kfgodel.asql.impl.lang.update.TableDefinedUpdateImpl;
 
 import java.util.Arrays;
@@ -105,5 +108,20 @@ public class AsqlBuilder implements Asql {
     @Override
     public NameDefinedDropIndex dropIndex(String indexName) {
         return NameDefinedDropIndexImpl.create(Internal.index(indexName));
+    }
+
+    @Override
+    public AgnosticStatement begin() {
+        return BeginTransaction.create();
+    }
+
+    @Override
+    public AgnosticStatement commit() {
+        return CommitTransaction.create();
+    }
+
+    @Override
+    public AgnosticStatement rollback() {
+        return RollbackTransaction.create();
     }
 }
