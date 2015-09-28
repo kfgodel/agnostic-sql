@@ -4,6 +4,7 @@ import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
 import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
 import ar.com.kfgodel.asql.api.types.DataType;
+import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
 
 import java.util.Collection;
 
@@ -64,5 +65,6 @@ public interface NamedColumn extends AgnosticConstruct {
 
     QueryCondition isNotIn(Collection<?> values);
 
+    ColumnReference getColumn();
 
 }
