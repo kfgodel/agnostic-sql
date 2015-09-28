@@ -62,6 +62,27 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
             });
 
+            describe("column rename", ()->{
+
+                context().statement(()-> asql.alter("tableName")
+                        .renaming(asql.column("previousName"))
+                        .to("newName")
+                );
+
+                it("is translated to standard sql for hsql", () -> {
+                    String translated = Vendor.hsqldb().translate(context().statement());
+
+                    assertThat(translated).isEqualTo("ALTER TABLE tableName ALTER COLUMN previousName RENAME TO newName");
+                });
+
+                it("is translated to a SP for sqlserver", ()->{
+                    String translated = Vendor.sqlserver().translate(context().statement());
+
+                    assertThat(translated).isEqualTo("EXEC sp_RENAME '[tableName].[previousName]','newName','COLUMN'");
+                });
+
+            });
+
             describe("select", ()->{
                 context().vendor(() -> Vendor.ansi());
 
@@ -163,15 +184,6 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     InsertStatement statement = asql.insertInto("tableName").set("column1", "column2").to(1, Function.currentTime());
 
                     assertThat(Vendor.ansi().translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1, CURRENT_TIME )");
-                });
-
-                it("can use a subquery to specify values", ()->{
-                    InsertStatement statement = asql.insertInto("tableName")
-                            .set("column1", "column2")
-                            .to(asql.select("text for column1", "text for column2"));
-
-                    assertThat(Vendor.ansi().translate(statement))
-                            .isEqualTo("INSERT INTO tableName ( column1, column2 ) ( SELECT 'text for column1', 'text for column2' )");
                 });
             });
 

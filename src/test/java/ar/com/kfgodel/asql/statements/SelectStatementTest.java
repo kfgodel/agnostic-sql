@@ -33,9 +33,9 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
                 assertThat(translated).isEqualTo("SELECT 1");
             });
 
-            describe("from clause", ()->{
+            describe("from clause", () -> {
 
-                it("may reference a set of tables", ()->{
+                it("may reference a set of tables", () -> {
                     AgnosticStatement select = asql.select(asql.column("column1")).from("table1", "table2");
 
                     String translated = context().vendor().translate(select);
@@ -55,9 +55,9 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
                 assertThat(translated).isEqualTo("SELECT column1 FROM table1 WHERE column1 = 2");
             });
 
-            describe("projections include", ()->{
+            describe("projections include", () -> {
 
-                it("distinct columns", ()->{
+                it("distinct columns", () -> {
                     AgnosticStatement select = asql.select(Function.distinct(asql.column("column1"), asql.column("column2")))
                             .from("table1");
 
@@ -66,7 +66,7 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
                     assertThat(translated).isEqualTo("SELECT DISTINCT column1, column2 FROM table1");
                 });
 
-                it("count(*)", ()->{
+                it("count(*)", () -> {
                     AgnosticStatement select = asql.select(Function.count())
                             .from("table1");
 
@@ -75,7 +75,7 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
                     assertThat(translated).isEqualTo("SELECT COUNT(*) FROM table1");
                 });
 
-                it("count specific column", ()->{
+                it("count specific column", () -> {
                     AgnosticStatement select = asql.select(Function.count(asql.column("column1")))
                             .from("table1");
 
@@ -84,7 +84,7 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
                     assertThat(translated).isEqualTo("SELECT COUNT(column1) FROM table1");
                 });
 
-                it("maximum of a column", ()->{
+                it("maximum of a column", () -> {
                     AgnosticStatement select = asql.select(Function.max(asql.column("column1")))
                             .from("table1");
 
@@ -93,7 +93,7 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
                     assertThat(translated).isEqualTo("SELECT MAX(column1) FROM table1");
                 });
 
-                it("minimum of a column", ()->{
+                it("minimum of a column", () -> {
                     AgnosticStatement select = asql.select(Function.min(asql.column("column1")))
                             .from("table1");
 
@@ -102,7 +102,7 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
                     assertThat(translated).isEqualTo("SELECT MIN(column1) FROM table1");
                 });
 
-                it("sum of a column", ()->{
+                it("sum of a column", () -> {
                     AgnosticStatement select = asql.select(Function.sum(asql.column("column1")))
                             .from("table1");
 
@@ -111,7 +111,7 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
                     assertThat(translated).isEqualTo("SELECT SUM(column1) FROM table1");
                 });
 
-                it("average of a column", ()->{
+                it("average of a column", () -> {
                     AgnosticStatement select = asql.select(Function.avg(asql.column("column1")))
                             .from("table1");
 
