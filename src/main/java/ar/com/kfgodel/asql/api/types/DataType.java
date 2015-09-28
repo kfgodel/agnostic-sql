@@ -50,4 +50,8 @@ public interface DataType extends AgnosticConstruct {
     static DataType booleanic() {
         return DataTypeImpl.create("booleanic");
     }
+
+    static DataType blob() {
+        return DataTypeImpl.create("blob");
+    }
 }
