@@ -30,7 +30,7 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
 
             it("can generate the simplest create model", () -> {
 
-                CreateStatement create = context().asql().create("tableName");
+                CreateStatement create = context().asql().createTable("tableName");
 
                 CreateModel createModel = create.parseModel();
 
@@ -38,7 +38,7 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
             });
 
             it("can declare an id column used as pk",()->{
-                CreateStatement create = context().asql().create("tableName")
+                CreateStatement create = context().asql().createTable("tableName")
                         .withIdPk();
 
                 CreateModel createModel = create.parseModel();
@@ -58,7 +58,7 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
                 it("can declare the column type",()->{
                     Asql asql = context().asql();
                     CreateStatement create = asql
-                            .create("tableName")
+                            .createTable("tableName")
                             .with(asql.column("columnName").typed(DataType.bigInteger()));
 
                     CreateModel createModel = create.parseModel();
@@ -71,7 +71,7 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
                 it("can declare a column nullity",()->{
                     Asql asql = context().asql();
                     CreateStatement create = asql
-                            .create("tableName")
+                            .createTable("tableName")
                             .with(asql.column("column1").typed(DataType.bigInteger()).nonNullable(),
                                     asql.column("column2").typed(DataType.shortString()).nullable());
 
@@ -87,7 +87,7 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
                 it("can declare a column default value",()->{
                     Asql asql = context().asql();
                     CreateStatement create = asql
-                            .create("tableName")
+                            .createTable("tableName")
                             .with(asql.column("columnName").typed(DataType.bigInteger()).defaultedTo(4));
 
                     CreateModel createModel = create.parseModel();
