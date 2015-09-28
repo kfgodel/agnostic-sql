@@ -41,4 +41,10 @@ public interface Asql {
     NameDefinedCreateIndex createIndex(String indexName);
 
     NameDefinedDropIndex dropIndex(String indexName);
+
+    AgnosticStatement begin();
+
+    AgnosticStatement commit();
+
+    AgnosticStatement rollback();
 }

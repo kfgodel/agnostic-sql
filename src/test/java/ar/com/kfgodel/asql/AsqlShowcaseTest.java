@@ -313,6 +313,44 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
             });
 
+            describe("a transaction", ()->{
+
+                it("is created with begin", () -> {
+                    AgnosticStatement statement = asql.begin();
+
+                    String translated = Vendor.ansi().translate(statement);
+
+                    assertThat(translated).isEqualTo("BEGIN");
+                });
+
+                it("is committed with commit", ()->{
+                    AgnosticStatement statement = asql.commit();
+
+                    String translated = Vendor.ansi().translate(statement);
+
+                    assertThat(translated).isEqualTo("COMMIT");
+                });
+
+                it("is rollbacked with rollback", ()->{
+                    AgnosticStatement statement = asql.rollback();
+
+                    String translated = Vendor.ansi().translate(statement);
+
+                    assertThat(translated).isEqualTo("ROLLBACK");
+                });
+
+                describe("for sqlserver", ()->{
+                    it("begin is translated slightly differently", ()->{
+                        AgnosticStatement statement = asql.begin();
+
+                        String translated = Vendor.sqlserver().translate(statement);
+
+                        assertThat(translated).isEqualTo("BEGIN TRANSACTION");
+                    });
+                });
+
+            });
+
         });
 
     }
