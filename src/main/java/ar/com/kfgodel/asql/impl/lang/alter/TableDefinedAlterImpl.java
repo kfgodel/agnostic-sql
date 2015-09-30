@@ -43,4 +43,9 @@ public class TableDefinedAlterImpl extends TableCenteredStatement implements Tab
     public ColumnDefinedRename renaming(NamedColumn previousName) {
         return ColumnDefinedRenameImpl.create(this, previousName);
     }
+
+    @Override
+    public RenameTableStatement renameTo(String newName) {
+        return RenameTableStatementImpl.create(this, newName);
+    }
 }
