@@ -18,4 +18,6 @@ public interface TableDefinedAlter {
     ChangeColumnStatement changing(ColumnDeclaration columnChange);
 
     ColumnDefinedRename renaming(NamedColumn previousName);
+
+    RenameTableStatement renameTo(String newName);
 }

@@ -172,6 +172,26 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
             });
 
 
+            describe("rename table", ()->{
+                context().statement(()-> asql.alter("tableName")
+                                .renameTo("newName")
+                );
+
+                it("is translated to standard sql for hsql", () -> {
+                    String translated = Vendor.hsqldb().translate(context().statement());
+
+                    assertThat(translated).isEqualTo("ALTER TABLE tableName RENAME TO newName");
+                });
+
+                it("is translated to a SP for sqlserver", ()->{
+                    String translated = Vendor.sqlserver().translate(context().statement());
+
+                    assertThat(translated).isEqualTo("EXEC sp_RENAME 'tableName', 'newName'");
+                });
+
+            });
+
+
             describe("insert", () -> {
                 it("is basically ansi for all vendors",()->{
                     InsertStatement statement = asql.insertInto("tableName").setting(asql.column("column1").to(1),
@@ -323,7 +343,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     assertThat(translated).isEqualTo("BEGIN");
                 });
 
-                it("is committed with commit", ()->{
+                it("is committed with commit", () -> {
                     AgnosticStatement statement = asql.commit();
 
                     String translated = Vendor.ansi().translate(statement);
@@ -331,7 +351,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     assertThat(translated).isEqualTo("COMMIT");
                 });
 
-                it("is rollbacked with rollback", ()->{
+                it("is rollbacked with rollback", () -> {
                     AgnosticStatement statement = asql.rollback();
 
                     String translated = Vendor.ansi().translate(statement);
@@ -340,7 +360,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                 });
 
                 describe("for sqlserver", ()->{
-                    it("begin is translated slightly differently", ()->{
+                    it("begin is translated slightly differently", () -> {
                         AgnosticStatement statement = asql.begin();
 
                         String translated = Vendor.sqlserver().translate(statement);
