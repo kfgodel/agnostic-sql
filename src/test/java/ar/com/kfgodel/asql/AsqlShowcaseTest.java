@@ -267,7 +267,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                 });
 
                 describe("primary key", () -> {
-                    it("can be expressed for a single column", () -> {
+                    it("can be expressed for multiple column", () -> {
                         AgnosticStatement statement = asql.alter("tableName")
                                 .adding(asql.constraint("constraintName")
                                         .pkFor("columnName1", "columnName2"));
