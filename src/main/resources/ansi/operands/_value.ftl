@@ -1,1 +1,1 @@
-${model.value}
+${model.value?c}

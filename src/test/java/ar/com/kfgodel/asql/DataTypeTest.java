@@ -25,6 +25,7 @@ public class DataTypeTest extends JavaSpec<AsqlTestContext> {
 
                 assertThat(ansi.translate(DataType.shortString())).isEqualTo("VARCHAR(255)");
                 assertThat(ansi.translate(DataType.largeText())).isEqualTo("clob");
+                assertThat(ansi.translate(DataType.limitedText(1024))).isEqualTo("VARCHAR(1024)");
 
                 assertThat(ansi.translate(DataType.timestamp())).isEqualTo("timestamp");
                 assertThat(ansi.translate(DataType.date())).isEqualTo("date");
@@ -44,6 +45,7 @@ public class DataTypeTest extends JavaSpec<AsqlTestContext> {
 
                 assertThat(sqlserver.translate(DataType.shortString())).isEqualTo("VARCHAR(255)");
                 assertThat(sqlserver.translate(DataType.largeText())).isEqualTo("text");
+                assertThat(sqlserver.translate(DataType.limitedText(1024))).isEqualTo("VARCHAR(1024)");
 
                 assertThat(sqlserver.translate(DataType.timestamp())).isEqualTo("datetime");
                 assertThat(sqlserver.translate(DataType.date())).isEqualTo("date");
@@ -63,6 +65,7 @@ public class DataTypeTest extends JavaSpec<AsqlTestContext> {
 
                 assertThat(hsqldb.translate(DataType.shortString())).isEqualTo("VARCHAR(255)");
                 assertThat(hsqldb.translate(DataType.largeText())).isEqualTo("clob");
+                assertThat(hsqldb.translate(DataType.limitedText(1024))).isEqualTo("VARCHAR(1024)");
 
                 assertThat(hsqldb.translate(DataType.timestamp())).isEqualTo("timestamp");
                 assertThat(hsqldb.translate(DataType.date())).isEqualTo("date");
