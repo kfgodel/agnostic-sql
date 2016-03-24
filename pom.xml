@@ -43,6 +43,18 @@
       <version>${version.freemarker}</version>
     </dependency>
 
+    <!-- Nary: Stream and optional -->
+    <dependency>
+      <groupId>ar.com.kfgodel</groupId>
+      <artifactId>nary</artifactId>
+    </dependency>
+
+    <!-- Rspec like testing -->
+    <dependency>
+      <groupId>ar.com.dgarcia</groupId>
+      <artifactId>java-spec</artifactId>
+    </dependency>
+
   </dependencies>
 
 </project>
