@@ -5,7 +5,7 @@
 
   <parent>
     <groupId>ar.com.kfgodel</groupId>
-    <artifactId>root-pom</artifactId>
+    <artifactId>java-pom</artifactId>
     <version>0.1-SNAPSHOT</version>
   </parent>
 
@@ -30,18 +30,9 @@
     </repository>
   </repositories>
 
-
-
   <properties>
     <version.freemarker>2.3.23</version.freemarker>
   </properties>
-
-
-  <build>
-    <plugins>
-
-    </plugins>
-  </build>
 
   <dependencies>
 
