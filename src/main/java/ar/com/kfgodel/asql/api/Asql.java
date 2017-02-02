@@ -14,6 +14,8 @@ import ar.com.kfgodel.asql.api.select.ProjectionDefinedSelect;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 
 /**
+ * This type represents the starting point of an statement (or construct to use in) in an agnostic manner
+ *  This is the root of the api for generating complex expressions
  * Created by kfgodel on 11/07/15.
  */
 public interface Asql {
