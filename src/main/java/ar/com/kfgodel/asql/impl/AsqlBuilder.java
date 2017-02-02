@@ -37,6 +37,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * This type represents the base builder for creating agnostic constructs
+ *
  * Created by kfgodel on 11/07/15.
  */
 public class AsqlBuilder implements Asql {

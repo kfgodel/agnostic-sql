@@ -14,6 +14,7 @@ import ar.com.kfgodel.asql.api.indices.DropIndexStatement;
 import ar.com.kfgodel.asql.api.insert.InsertStatement;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
+import ar.com.kfgodel.asql.api.variables.Variable;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.impl.AsqlBuilder;
 import org.junit.runner.RunWith;
@@ -21,6 +22,8 @@ import org.junit.runner.RunWith;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
+ * This type showcases the different asql use cases, and how to express the different queries
+ *
  * Created by kfgodel on 11/07/15.
  */
 @RunWith(JavaSpecRunner.class)
@@ -237,6 +240,14 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                             .isEqualTo("UPDATE POSA_EMPLEADOS SET CATEGORIA_ID = 1 WHERE CATEGORIA_ID IS NULL;\n" +
                                     "UPDATE POSA_EMPLEADOS SET NOMBRE = 'Pepe' WHERE CATEGORIA_ID IS NOT NULL");
                 });
+                
+                it("can use positional variables for parameterized values",()->{
+                    AgnosticStatement statement = asql.update("P10_CONFIG").setting(asql.column("dbVersion").to(Variable.byPosition()));
+
+                    String generatedSql = context().vendor().translate(statement);
+
+                    assertThat(generatedSql).isEqualTo("UPDATE P10_CONFIG SET dbVersion = ?");
+                });   
 
             });
 
