@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.impl.templating;
 
 import ar.com.kfgodel.asql.api.AsqlException;
+import ar.com.kfgodel.nary.api.Nary;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.TemplateLoader;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * This type represents the templating engine implemented with Freemarker
@@ -23,7 +25,7 @@ public class FreemarkerEngine implements TemplateEngine {
 
     private Configuration freemarkerConfig;
 
-    public static FreemarkerEngine create(String vendorSpecificDir) {
+    public static FreemarkerEngine create(Nary<String> vendorSpecificDir) {
         FreemarkerEngine engine = new FreemarkerEngine();
         engine.initializeFor(vendorSpecificDir);
         return engine;
@@ -31,21 +33,27 @@ public class FreemarkerEngine implements TemplateEngine {
 
     /**
      * Configures the templating engine to load templates first from the given vendor preferred dir
-     * @param priorityVendorDir The vendor specific priority dir
+     * @param templateLocations The vendor specific priority dir
      */
-    private void initializeFor(String priorityVendorDir) {
+    private void initializeFor(Nary<String> templateLocations) {
         // Version is the latest as today 2015/07/10
         this.freemarkerConfig = new Configuration(Configuration.VERSION_2_3_22);
         // We use the classpath to load templates, with priority for the vendor templates and then ansi
-        ClassTemplateLoader vendorSpecificTemplates = new ClassTemplateLoader(getClass(), "/" + priorityVendorDir + "/");
-        ClassTemplateLoader ansiTemplates = new ClassTemplateLoader(getClass(), "/ansi/");
-        MultiTemplateLoader mtl = new MultiTemplateLoader(new TemplateLoader[] { vendorSpecificTemplates, ansiTemplates });
+        TemplateLoader[] templateLoaders = createLoadersFrom(templateLocations);
+        MultiTemplateLoader mtl = new MultiTemplateLoader(templateLoaders);
         freemarkerConfig.setTemplateLoader(mtl);
         // Use UTF to read templates
         freemarkerConfig.setDefaultEncoding("UTF-8");
         // throw exception on any rendering error
         freemarkerConfig.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 
+    }
+
+    private TemplateLoader[] createLoadersFrom(Nary<String> templateLocations) {
+        return templateLocations
+                .mapNary(templateLocation -> "/" + templateLocation + "/")
+                .mapNary(classpathLocation -> new ClassTemplateLoader(getClass(), classpathLocation))
+                .collect(Collectors.toList()).toArray(new TemplateLoader[0]);
     }
 
     @Override

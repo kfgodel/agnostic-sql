@@ -6,7 +6,6 @@ import ar.com.kfgodel.asql.AsqlTestContext;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
-import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
 import ar.com.kfgodel.asql.impl.model.alter.AddColumnModel;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
@@ -27,7 +26,7 @@ public class AddColumnModelTest extends JavaSpec<AsqlTestContext> {
             context().addModel(() -> AddColumnModel.create(TableReferenceModel.create("tableName"), ColumnDeclarationModel.create(ColumnReferenceModel.create("columnName"), DataType.integer().parseModel())));
 
             it("can be translated to another vendor specific statement", () -> {
-                VendorInterpreter interpreter = TemplateInterpreter.create(Vendor.ansi());
+                VendorInterpreter interpreter = Vendor.ansi().getInterpreter();
 
                 String translatedSql = interpreter.translate(context().addModel());
 
