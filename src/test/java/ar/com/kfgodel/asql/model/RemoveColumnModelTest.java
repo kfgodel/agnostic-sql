@@ -5,7 +5,6 @@ import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.AsqlTestContext;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
-import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
 import ar.com.kfgodel.asql.impl.model.alter.RemoveColumnModel;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
@@ -25,7 +24,7 @@ public class RemoveColumnModelTest extends JavaSpec<AsqlTestContext> {
             context().removeModel(() -> RemoveColumnModel.create(TableReferenceModel.create("tableName"), ColumnReferenceModel.create("columnName")));
 
             it("can be translated to a vendor specific statement", () -> {
-                VendorInterpreter interpreter = TemplateInterpreter.create(Vendor.ansi());
+                VendorInterpreter interpreter = Vendor.ansi().getInterpreter();
 
                 String translatedSql = interpreter.translate(context().removeModel());
 

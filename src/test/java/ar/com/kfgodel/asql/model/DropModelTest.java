@@ -5,7 +5,6 @@ import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.AsqlTestContext;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
-import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
 import ar.com.kfgodel.asql.impl.model.drop.DropModel;
 import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
 import org.junit.runner.RunWith;
@@ -24,7 +23,7 @@ public class DropModelTest extends JavaSpec<AsqlTestContext> {
             context().model(() -> DropModel.create(TableReferenceModel.create("tableName")));
 
             it("can be translated to another vendor specific statement", () -> {
-                VendorInterpreter interpreter = TemplateInterpreter.create(Vendor.ansi());
+                VendorInterpreter interpreter = Vendor.ansi().getInterpreter();
 
                 String translatedSql = interpreter.translate(context().model());
 

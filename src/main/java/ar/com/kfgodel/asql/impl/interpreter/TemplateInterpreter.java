@@ -2,9 +2,9 @@ package ar.com.kfgodel.asql.impl.interpreter;
 
 import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
-import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 import ar.com.kfgodel.asql.impl.templating.FreemarkerEngine;
+import ar.com.kfgodel.nary.api.Nary;
 
 /**
  * This type implements the vendor interpreter using templates for expressing vendor statements.<br>
@@ -17,9 +17,9 @@ public class TemplateInterpreter implements VendorInterpreter {
 
     private FreemarkerEngine templateEngine;
 
-    public static TemplateInterpreter create(Vendor vendor) {
+    public static TemplateInterpreter create(Nary<String> templateLocationsInClasspath) {
         TemplateInterpreter interpreter = new TemplateInterpreter();
-        interpreter.templateEngine = FreemarkerEngine.create(vendor.getTemplateLocationInClasspath());
+        interpreter.templateEngine = FreemarkerEngine.create(templateLocationsInClasspath);
         return interpreter;
     }
 

@@ -6,7 +6,6 @@ import ar.com.kfgodel.asql.AsqlTestContext;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
-import ar.com.kfgodel.asql.impl.interpreter.TemplateInterpreter;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.constraints.ConstraintDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.constraints.PkDefinitionModel;
@@ -45,7 +44,7 @@ public class CreateModelTest extends JavaSpec<AsqlTestContext> {
 
             it("can be translated to a vendor specific statement", () -> {
 
-                VendorInterpreter interpreter = TemplateInterpreter.create(Vendor.ansi());
+                VendorInterpreter interpreter = Vendor.ansi().getInterpreter();
 
                 String translatedSql = interpreter.translate(context().createModel());
 
@@ -63,7 +62,7 @@ public class CreateModelTest extends JavaSpec<AsqlTestContext> {
             });
             
             it("can be translated to another vendor specific statement",()->{
-                VendorInterpreter interpreter = TemplateInterpreter.create(Vendor.sqlserver());
+                VendorInterpreter interpreter = Vendor.sqlserver().getInterpreter();
 
                 String translatedSql = interpreter.translate(context().createModel());
 
