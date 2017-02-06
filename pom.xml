@@ -18,7 +18,7 @@
 
   <scm>
     <connection>scm:git:ssh://github.com/kfgodel/agnostic-sql.git</connection>
-    <developerConnection>scm:git:ssh://github.com/kfgodel/agnostic-sql.git</developerConnection>
+    <developerConnection>scm:git:ssh://git@github.com/kfgodel/agnostic-sql.git</developerConnection>
     <url>https://github.com/kfgodel/agnostic-sql</url>
   </scm>
 
