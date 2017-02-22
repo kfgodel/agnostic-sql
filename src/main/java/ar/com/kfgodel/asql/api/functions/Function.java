@@ -24,6 +24,10 @@ public interface Function {
         return NoArgFunctionInvocation.create("current_time");
     }
 
+    static FunctionInvocation currentTimestamp() {
+        return NoArgFunctionInvocation.create("current_timestamp");
+    }
+
     static FunctionInvocation count() {
         return NoArgFunctionInvocation.create("count_all");
     }

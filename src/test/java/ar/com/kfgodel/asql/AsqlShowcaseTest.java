@@ -206,9 +206,9 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                 });
 
                 it("has an alternative traditional form",()->{
-                    InsertStatement statement = asql.insertInto("tableName").set("column1", "column2").to(1, Function.currentTime());
+                    InsertStatement statement = asql.insertInto("tableName").set("column1", "column2", "column3").to(1, Function.currentTime(), Function.currentTimestamp());
 
-                    assertThat(Vendor.ansi().translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2 ) VALUES ( 1, CURRENT_TIME )");
+                    assertThat(Vendor.ansi().translate(statement)).isEqualTo("INSERT INTO tableName ( column1, column2, column3 ) VALUES ( 1, CURRENT_TIME, CURRENT_TIMESTAMP )");
                 });
             });
 
