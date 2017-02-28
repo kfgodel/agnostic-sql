@@ -7,10 +7,12 @@ import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.create.CreateStatement;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.impl.AsqlBuilder;
+import ar.com.kfgodel.asql.impl.lang.references.NullReference;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.constraints.ConstraintDeclarationModel;
 import ar.com.kfgodel.asql.impl.model.constraints.PkDefinitionModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
+import ar.com.kfgodel.asql.impl.model.operators.NotPlacedBeforeModel;
 import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
 import org.junit.runner.RunWith;
 
@@ -68,7 +70,7 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
                     assertThat(columnModel.getColumnType()).isEqualTo(DataType.bigInteger().parseModel());
                 });
 
-                it("can declare a column nullity",()->{
+                it("can declare a column nullability", () -> {
                     Asql asql = context().asql();
                     CreateStatement create = asql
                             .createTable("tableName")
@@ -78,10 +80,10 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
                     CreateModel createModel = create.parseModel();
 
                     ColumnDeclarationModel column1Model = createModel.getColumnDeclarations().get(0);
-                    assertThat(column1Model.getNullity()).isEqualTo("NOT NULL");
+                    assertThat(column1Model.getNullability()).isEqualTo(NotPlacedBeforeModel.create(NullReference.create().parseModel()));
 
                     ColumnDeclarationModel column2Model = createModel.getColumnDeclarations().get(1);
-                    assertThat(column2Model.getNullity()).isEqualTo("NULL");
+                    assertThat(column2Model.getNullability()).isEqualTo(NullReference.create().parseModel());
                 });
 
                 it("can declare a column default value",()->{

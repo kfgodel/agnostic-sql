@@ -1,6 +1,6 @@
 <@renderAsModel model=model.column /> <@renderAsModel model=model.columnType />
-<#if model.nullity??>
-${model.nullity}
+<#if model.nullability??>
+  <@renderAsModel model=model.nullability />
 </#if>
 <#if model.defaultValue??>
 DEFAULT <@renderAsModel model=model.defaultValue />

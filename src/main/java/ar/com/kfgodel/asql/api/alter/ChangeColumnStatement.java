@@ -11,4 +11,14 @@ public interface ChangeColumnStatement extends AgnosticStatement {
 
     @Override
     ChangeColumnModel parseModel();
+
+    /**
+     * @return A new statemet to modify the column definition so it accepts null values
+     */
+    ChangeNullabilityStatement toNullable();
+
+    /**
+     * @return A new statement to modify the column definition so it doesn't accept null values
+     */
+    ChangeNullabilityStatement toNonNullable();
 }

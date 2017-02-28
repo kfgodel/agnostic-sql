@@ -1,0 +1,1 @@
+<@renderAsModel model=model.column /> <@renderAsModel model=model.columnType /> <@renderAsModel model=model.nullability />

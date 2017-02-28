@@ -2,8 +2,8 @@ package ar.com.kfgodel.asql.impl.lang.operators;
 
 import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.impl.lang.references.OperatorReference;
-import ar.com.kfgodel.asql.impl.model.operators.NotAfterModel;
-import ar.com.kfgodel.asql.impl.model.operators.NotBeforeModel;
+import ar.com.kfgodel.asql.impl.model.operators.NotPlacedAfterModel;
+import ar.com.kfgodel.asql.impl.model.operators.NotPlacedBeforeModel;
 
 /**
  * This type serves as an access point to the agnostic operators
@@ -43,12 +43,14 @@ public interface Operator {
         return OperatorReference.create("like");
     }
 
-    static AgnosticConstruct notBefore(AgnosticConstruct negatedConstruct) {
-        return NotOperator.create(negatedConstruct, NotBeforeModel::create);
+    static <T extends AgnosticConstruct> T notPlacedBefore(T negatedConstruct) {
+        NotOperator<T> negated = NotOperator.create(negatedConstruct, NotPlacedBeforeModel::create);
+        return (T) negated;
     }
 
-    static AgnosticConstruct notAfter(AgnosticConstruct negatedConstruct) {
-        return NotOperator.create(negatedConstruct, NotAfterModel::create);
+    static <T extends AgnosticConstruct> T notPlacedAfter(T negatedConstruct) {
+        NotOperator<T> negated = NotOperator.create(negatedConstruct, NotPlacedAfterModel::create);
+        return (T) negated;
     }
 
     static AgnosticConstruct in() {
@@ -64,14 +66,14 @@ public interface Operator {
     }
 
     static AgnosticConstruct isNot() {
-        return notAfter(is());
+        return notPlacedAfter(is());
     }
 
     static AgnosticConstruct notLike() {
-        return notBefore(like());
+        return notPlacedBefore(like());
     }
 
     static AgnosticConstruct notIn() {
-        return notBefore(in());
+        return notPlacedBefore(in());
     }
 }

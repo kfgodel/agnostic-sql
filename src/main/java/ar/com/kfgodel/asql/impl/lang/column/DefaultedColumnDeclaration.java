@@ -5,6 +5,9 @@ import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.Parseable;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 
+import static ar.com.kfgodel.asql.impl.lang.column.NullabilityDeclaration.makeNonNullable;
+import static ar.com.kfgodel.asql.impl.lang.column.NullabilityDeclaration.makeNullable;
+
 /**
  * Created by kfgodel on 14/07/15.
  */
@@ -14,17 +17,17 @@ public class DefaultedColumnDeclaration implements ColumnDeclaration {
 
     @Override
     public ColumnDeclaration nonNullable() {
-        return NonNullableDeclaration.create(this);
+        return makeNonNullable(this);
+    }
+
+    @Override
+    public ColumnDeclaration nullable() {
+        return makeNullable(this);
     }
 
     @Override
     public ColumnDeclaration defaultedTo(Object columnValue) {
         return DefaultedColumnDeclaration.create(previousNode, columnValue);
-    }
-
-    @Override
-    public ColumnDeclaration nullable() {
-        return NullableDeclaration.create(this);
     }
 
     @Override
