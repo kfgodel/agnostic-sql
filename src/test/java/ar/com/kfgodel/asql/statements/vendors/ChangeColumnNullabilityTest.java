@@ -11,11 +11,11 @@ import org.junit.runner.RunWith;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * This type verifies that the transalation for each vendor specifics is as expected
+ * This type verifies that the transalation for each vendor is correct when creating a column with explicit nullability
  * Created by dario.garcia on 28/02/17.
  */
 @RunWith(JavaSpecRunner.class)
-public class CreationWithNullability extends JavaSpec<AsqlTestContext> {
+public class ChangeColumnNullabilityTest extends JavaSpec<AsqlTestContext> {
   @Override
   public void define() {
     AsqlBuilder asql = AsqlBuilder.create();
@@ -27,62 +27,50 @@ public class CreationWithNullability extends JavaSpec<AsqlTestContext> {
         assertThat(context().translated()).isEqualTo(context().expectedTranslation());
       });
 
-      describe("for a table creation with a null column", () -> {
+      describe("for a column made nullable", () -> {
         given(() -> {
-          context().statement(() -> asql.createTable("tabla").with(asql.column("columna").typed(DataType.bigInteger()).nullable()));
+          context().statement(() -> asql.alter("tabla").changing(asql.column("columna").typed(DataType.bigInteger())).toNullable());
         });
 
         it("generates a standard statement when vendor is ansi", () -> {
           context().vendor(Vendor::ansi);
-          context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
-            "columna bigint NULL\n" +
-            ")");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna bigint NULL");
           executeAsGivenWhenThenTest();
         });
 
         it("generates an hsqldb specific statement when vendor is hsqldb", () -> {
           context().vendor(Vendor::hsqldb);
-          context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
-            "columna bigint NULL\n" +
-            ")");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna SET NULL");
           executeAsGivenWhenThenTest();
         });
 
         it("generates a sqlserver specific statement when vendor is sqlserver", () -> {
           context().vendor(Vendor::sqlserver);
-          context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
-            "columna numeric(19,0) NULL\n" +
-            ")");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna numeric(19,0) NULL");
           executeAsGivenWhenThenTest();
         });
       });
 
-      describe("for a table creation with a non null column", () -> {
+      describe("for a column made non nullable", () -> {
         given(() -> {
-          context().statement(() -> asql.createTable("tabla").with(asql.column("columna").typed(DataType.bigInteger()).nonNullable()));
+          context().statement(() -> asql.alter("tabla").changing(asql.column("columna").typed(DataType.bigInteger())).toNonNullable());
         });
 
         it("generates a standard statement when vendor is ansi", () -> {
           context().vendor(Vendor::ansi);
-          context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
-            "columna bigint NOT NULL\n" +
-            ")");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna bigint NOT NULL");
           executeAsGivenWhenThenTest();
         });
 
         it("generates an hsqldb specific statement when vendor is hsqldb", () -> {
           context().vendor(Vendor::hsqldb);
-          context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
-            "columna bigint NOT NULL\n" +
-            ")");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna SET NOT NULL");
           executeAsGivenWhenThenTest();
         });
 
         it("generates a sqlserver specific statement when vendor is sqlserver", () -> {
           context().vendor(Vendor::sqlserver);
-          context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
-            "columna numeric(19,0) NOT NULL\n" +
-            ")");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna numeric(19,0) NOT NULL");
           executeAsGivenWhenThenTest();
         });
       });
