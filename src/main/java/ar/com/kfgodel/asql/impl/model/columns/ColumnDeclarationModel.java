@@ -2,6 +2,7 @@ package ar.com.kfgodel.asql.impl.model.columns;
 
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 import ar.com.kfgodel.asql.impl.model.create.TablePartModel;
+import ar.com.kfgodel.asql.impl.model.nullability.NullabilityModel;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 
 /**
@@ -12,7 +13,7 @@ public class ColumnDeclarationModel implements TablePartModel, AgnosticModel{
 
     private ColumnReferenceModel column;
     private AgnosticModel columnType;
-    private String nullity;
+    private NullabilityModel nullability;
     private Object defaultValue;
 
     public ColumnReferenceModel getColumn() {
@@ -31,12 +32,12 @@ public class ColumnDeclarationModel implements TablePartModel, AgnosticModel{
         this.columnType = columnType;
     }
 
-    public String getNullity() {
-        return nullity;
+    public NullabilityModel getNullability() {
+        return nullability;
     }
 
-    public void setNullity(String nullity) {
-        this.nullity = nullity;
+    public void setNullability(NullabilityModel nullability) {
+        this.nullability = nullability;
     }
 
     public Object getDefaultValue() {
@@ -47,25 +48,25 @@ public class ColumnDeclarationModel implements TablePartModel, AgnosticModel{
         this.defaultValue = defaultValue;
     }
 
+    @Override
+    public String getTemplatePath() {
+        return "/columns/_columnDeclaration.ftl";
+    }
+
+    public ColumnDeclarationModel withNullability(NullabilityModel nullity) {
+        this.setNullability(nullity);
+        return this;
+    }
+
+    public ColumnDeclarationModel withDefaultValue(Object defaultValue) {
+        this.setDefaultValue(defaultValue);
+        return this;
+    }
+
     public static ColumnDeclarationModel create(ColumnReferenceModel columnReference, AgnosticModel columnType) {
         ColumnDeclarationModel model = new ColumnDeclarationModel();
         model.column = columnReference;
         model.columnType = columnType;
         return model;
-    }
-
-    public ColumnDeclarationModel withNullity(String nullity){
-        this.setNullity(nullity);
-        return this;
-    }
-
-    public ColumnDeclarationModel withDefaultValue(Object defaultValue){
-        this.setDefaultValue(defaultValue);
-        return this;
-    }
-
-    @Override
-    public String getTemplatePath() {
-        return "/columns/_columnDeclaration.ftl";
     }
 }

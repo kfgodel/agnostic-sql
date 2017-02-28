@@ -5,6 +5,9 @@ import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.impl.lang.restrictions.NamedColumnImpl;
 import ar.com.kfgodel.asql.impl.model.columns.ColumnDeclarationModel;
 
+import static ar.com.kfgodel.asql.impl.lang.column.NullabilityDeclaration.makeNonNullable;
+import static ar.com.kfgodel.asql.impl.lang.column.NullabilityDeclaration.makeNullable;
+
 /**
  * Created by kfgodel on 14/07/15.
  */
@@ -15,12 +18,12 @@ public class MinimalColumnDeclaration implements ColumnDeclaration {
 
     @Override
     public ColumnDeclaration nonNullable() {
-        return NonNullableDeclaration.create(this);
+        return makeNonNullable(this);
     }
 
     @Override
     public ColumnDeclaration nullable() {
-        return NullableDeclaration.create(this);
+        return makeNullable(this);
     }
 
     @Override

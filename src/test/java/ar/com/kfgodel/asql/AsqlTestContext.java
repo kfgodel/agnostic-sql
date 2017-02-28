@@ -48,4 +48,9 @@ public interface AsqlTestContext extends TestContext {
 
     String translated();
     void translated(Supplier<String> definition);
+
+    String expectedTranslation();
+
+    void expectedTranslation(Supplier<String> definition);
+
 }

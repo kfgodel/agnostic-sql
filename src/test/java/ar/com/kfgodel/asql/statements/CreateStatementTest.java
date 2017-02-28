@@ -68,7 +68,7 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
                     assertThat(columnModel.getColumnType()).isEqualTo(DataType.bigInteger().parseModel());
                 });
 
-                it("can declare a column nullity",()->{
+                it("can declare a column nullability", () -> {
                     Asql asql = context().asql();
                     CreateStatement create = asql
                             .createTable("tableName")
@@ -78,10 +78,10 @@ public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
                     CreateModel createModel = create.parseModel();
 
                     ColumnDeclarationModel column1Model = createModel.getColumnDeclarations().get(0);
-                    assertThat(column1Model.getNullity()).isEqualTo("NOT NULL");
+                    assertThat(column1Model.getNullability()).isEqualTo("NOT NULL");
 
                     ColumnDeclarationModel column2Model = createModel.getColumnDeclarations().get(1);
-                    assertThat(column2Model.getNullity()).isEqualTo("NULL");
+                    assertThat(column2Model.getNullability()).isEqualTo("NULL");
                 });
 
                 it("can declare a column default value",()->{
