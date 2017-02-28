@@ -2,8 +2,7 @@ package ar.com.kfgodel.asql.impl.lang.operators;
 
 import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.impl.lang.references.OperatorReference;
-import ar.com.kfgodel.asql.impl.model.operators.NotPlacedAfterModel;
-import ar.com.kfgodel.asql.impl.model.operators.NotPlacedBeforeModel;
+import ar.com.kfgodel.asql.impl.model.operators.NotOperatorModel;
 
 /**
  * This type serves as an access point to the agnostic operators
@@ -44,12 +43,12 @@ public interface Operator {
     }
 
     static <T extends AgnosticConstruct> T notPlacedBefore(T negatedConstruct) {
-        NotOperator<T> negated = NotOperator.create(negatedConstruct, NotPlacedBeforeModel::create);
+        NotOperator<T> negated = NotOperator.create(negatedConstruct, NotOperatorModel::createPlacedBefore);
         return (T) negated;
     }
 
     static <T extends AgnosticConstruct> T notPlacedAfter(T negatedConstruct) {
-        NotOperator<T> negated = NotOperator.create(negatedConstruct, NotPlacedAfterModel::create);
+        NotOperator<T> negated = NotOperator.create(negatedConstruct, NotOperatorModel::createPlacedAfter);
         return (T) negated;
     }
 
