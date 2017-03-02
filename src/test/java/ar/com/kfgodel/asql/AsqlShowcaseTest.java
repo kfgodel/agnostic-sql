@@ -54,7 +54,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
                     String translatedSql = hsqldb.translate(context().statement());
 
-                    assertThat(translatedSql).isEqualTo("ALTER TABLE tableName ADD COLUMN columnName bigint");
+                    assertThat(translatedSql).isEqualTo("ALTER TABLE tableName ADD columnName bigint");
                 });
 
                 it("can be translated to sqlserver vendor sql", () -> {

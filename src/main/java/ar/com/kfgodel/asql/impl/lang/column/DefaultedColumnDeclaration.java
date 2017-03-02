@@ -12,6 +12,7 @@ import static ar.com.kfgodel.asql.impl.lang.column.NullabilityDeclaration.makeNu
  * Created by kfgodel on 14/07/15.
  */
 public class DefaultedColumnDeclaration implements ColumnDeclaration {
+
     private ColumnDeclaration previousNode;
     private Parseable defaultValue;
 
