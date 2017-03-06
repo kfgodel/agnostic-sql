@@ -1,1 +1,1 @@
-<#include "bigint.ftl"/> identity
+<#include "bigint.ftl"/> IDENTITY

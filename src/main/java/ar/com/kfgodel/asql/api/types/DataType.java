@@ -10,54 +10,67 @@ import ar.com.kfgodel.asql.impl.lang.types.DataTypeImpl;
  */
 public interface DataType extends AgnosticConstruct {
 
-    /**
-     * Name of this type, used to compare to other types
-     * @return The vendor agnostic type name
-     */
-    String getAgnosticName();
+  /**
+   * Name of this type, used to compare to other types
+   *
+   * @return The vendor agnostic type name
+   */
+  String getAgnosticName();
 
-    static DataType bigInteger() {
-        return DataTypeImpl.create("bigint", Internal.asConstructs());
-    }
+  static AgnosticConstruct time() {
+    return DataTypeImpl.create("time", Internal.asConstructs());
+  }
 
-    static DataType timestamp() {
-        return DataTypeImpl.create("timestamp", Internal.asConstructs());
-    }
+  static AgnosticConstruct doublenic() {
+    return DataTypeImpl.create("doublenic", Internal.asConstructs());
+  }
 
-    static DataType integer() {
-        return DataTypeImpl.create("integer", Internal.asConstructs());
-    }
+  static AgnosticConstruct decimal() {
+    return DataTypeImpl.create("decimal", Internal.asConstructs());
+  }
 
-    static DataType fk() {
-        return DataTypeImpl.create("fk", Internal.asConstructs());
-    }
+  static DataType bigInteger() {
+    return DataTypeImpl.create("bigint", Internal.asConstructs());
+  }
 
-    static DataType pk() {
-        return DataTypeImpl.create("pk", Internal.asConstructs());
-    }
+  static DataType timestamp() {
+    return DataTypeImpl.create("timestamp", Internal.asConstructs());
+  }
 
-    static DataType shortString() {
-        return DataTypeImpl.create("shortstring", Internal.asConstructs());
-    }
+  static DataType integer() {
+    return DataTypeImpl.create("integer", Internal.asConstructs());
+  }
 
-    static DataType largeText() {
-        return DataTypeImpl.create("largetext", Internal.asConstructs());
-    }
+  static DataType fk() {
+    return DataTypeImpl.create("fk", Internal.asConstructs());
+  }
 
-    static DataType limitedText(int maximumSize) {
-        return DataTypeImpl.create("limitedtext", Internal.asConstructs(maximumSize));
-    }
+  static DataType pk() {
+    return DataTypeImpl.create("pk", Internal.asConstructs());
+  }
 
-    static DataType date() {
-        return DataTypeImpl.create("date", Internal.asConstructs());
-    }
+  static DataType shortString() {
+    return DataTypeImpl.create("shortstring", Internal.asConstructs());
+  }
 
-    static DataType booleanic() {
-        return DataTypeImpl.create("booleanic", Internal.asConstructs());
-    }
+  static DataType largeText() {
+    return DataTypeImpl.create("largetext", Internal.asConstructs());
+  }
 
-    static DataType blob() {
-        return DataTypeImpl.create("blob", Internal.asConstructs());
-    }
+  static DataType limitedText(int maximumSize) {
+    return DataTypeImpl.create("limitedtext", Internal.asConstructs(maximumSize));
+  }
+
+  static DataType date() {
+    return DataTypeImpl.create("date", Internal.asConstructs());
+  }
+
+  static DataType booleanic() {
+    return DataTypeImpl.create("booleanic", Internal.asConstructs());
+  }
+
+  static DataType blob() {
+    return DataTypeImpl.create("blob", Internal.asConstructs());
+  }
 
 }

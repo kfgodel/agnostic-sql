@@ -1,1 +1,1 @@
-datetime
+DATETIME2

@@ -1,1 +1,1 @@
-boolean
+BOOLEAN

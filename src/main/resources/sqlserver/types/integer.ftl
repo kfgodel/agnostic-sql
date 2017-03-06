@@ -1,1 +1,1 @@
-numeric(19,0)
+NUMERIC(19,0)
