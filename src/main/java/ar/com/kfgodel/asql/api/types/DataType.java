@@ -17,15 +17,15 @@ public interface DataType extends AgnosticConstruct {
    */
   String getAgnosticName();
 
-  static AgnosticConstruct time() {
+  static DataType time() {
     return DataTypeImpl.create("time", Internal.asConstructs());
   }
 
-  static AgnosticConstruct doublenic() {
+  static DataType doublenic() {
     return DataTypeImpl.create("doublenic", Internal.asConstructs());
   }
 
-  static AgnosticConstruct decimal() {
+  static DataType decimal() {
     return DataTypeImpl.create("decimal", Internal.asConstructs());
   }
 
