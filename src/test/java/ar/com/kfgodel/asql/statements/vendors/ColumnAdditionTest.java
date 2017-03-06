@@ -34,19 +34,19 @@ public class ColumnAdditionTest extends JavaSpec<AsqlTestContext> {
 
         it("generates a standard statement when vendor is ansi", () -> {
           context().vendor(Vendor::ansi);
-          context().expectedTranslation(() -> "ALTER TABLE tabla ADD columna boolean NOT NULL DEFAULT false");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ADD columna BOOLEAN NOT NULL DEFAULT false");
           executeAsGivenWhenThenTest();
         });
 
         it("generates an hsqldb specific statement when vendor is hsqldb", () -> {
           context().vendor(Vendor::hsqldb);
-          context().expectedTranslation(() -> "ALTER TABLE tabla ADD columna boolean DEFAULT false NOT NULL");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ADD columna BOOLEAN DEFAULT false NOT NULL");
           executeAsGivenWhenThenTest();
         });
 
         it("generates a sqlserver specific statement when vendor is sqlserver", () -> {
           context().vendor(Vendor::sqlserver);
-          context().expectedTranslation(() -> "ALTER TABLE tabla ADD columna bit NOT NULL DEFAULT false");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ADD columna BIT NOT NULL DEFAULT false");
           executeAsGivenWhenThenTest();
         });
       });

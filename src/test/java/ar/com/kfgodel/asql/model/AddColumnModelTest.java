@@ -30,7 +30,7 @@ public class AddColumnModelTest extends JavaSpec<AsqlTestContext> {
 
                 String translatedSql = interpreter.translate(context().addModel());
 
-                assertThat(translatedSql).isEqualTo("ALTER TABLE tableName ADD columnName integer");
+                assertThat(translatedSql).isEqualTo("ALTER TABLE tableName ADD columnName INTEGER");
             });
 
         });

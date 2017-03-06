@@ -34,7 +34,7 @@ public class ChangeColumnNullabilityTest extends JavaSpec<AsqlTestContext> {
 
         it("generates a standard statement when vendor is ansi", () -> {
           context().vendor(Vendor::ansi);
-          context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna bigint NULL");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna BIGINT NULL");
           executeAsGivenWhenThenTest();
         });
 
@@ -46,7 +46,7 @@ public class ChangeColumnNullabilityTest extends JavaSpec<AsqlTestContext> {
 
         it("generates a sqlserver specific statement when vendor is sqlserver", () -> {
           context().vendor(Vendor::sqlserver);
-          context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna numeric(19,0) NULL");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna NUMERIC(19,0) NULL");
           executeAsGivenWhenThenTest();
         });
       });
@@ -58,7 +58,7 @@ public class ChangeColumnNullabilityTest extends JavaSpec<AsqlTestContext> {
 
         it("generates a standard statement when vendor is ansi", () -> {
           context().vendor(Vendor::ansi);
-          context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna bigint NOT NULL");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna BIGINT NOT NULL");
           executeAsGivenWhenThenTest();
         });
 
@@ -70,7 +70,7 @@ public class ChangeColumnNullabilityTest extends JavaSpec<AsqlTestContext> {
 
         it("generates a sqlserver specific statement when vendor is sqlserver", () -> {
           context().vendor(Vendor::sqlserver);
-          context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna numeric(19,0) NOT NULL");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna NUMERIC(19,0) NOT NULL");
           executeAsGivenWhenThenTest();
         });
       });

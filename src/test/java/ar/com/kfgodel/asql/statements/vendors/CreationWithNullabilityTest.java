@@ -35,7 +35,7 @@ public class CreationWithNullabilityTest extends JavaSpec<AsqlTestContext> {
         it("generates a standard statement when vendor is ansi", () -> {
           context().vendor(Vendor::ansi);
           context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
-            "columna bigint NULL\n" +
+            "columna BIGINT NULL\n" +
             ")");
           executeAsGivenWhenThenTest();
         });
@@ -43,7 +43,7 @@ public class CreationWithNullabilityTest extends JavaSpec<AsqlTestContext> {
         it("generates an hsqldb specific statement when vendor is hsqldb", () -> {
           context().vendor(Vendor::hsqldb);
           context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
-            "columna bigint NULL\n" +
+            "columna BIGINT NULL\n" +
             ")");
           executeAsGivenWhenThenTest();
         });
@@ -51,7 +51,7 @@ public class CreationWithNullabilityTest extends JavaSpec<AsqlTestContext> {
         it("generates a sqlserver specific statement when vendor is sqlserver", () -> {
           context().vendor(Vendor::sqlserver);
           context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
-            "columna numeric(19,0) NULL\n" +
+            "columna NUMERIC(19,0) NULL\n" +
             ")");
           executeAsGivenWhenThenTest();
         });
@@ -65,7 +65,7 @@ public class CreationWithNullabilityTest extends JavaSpec<AsqlTestContext> {
         it("generates a standard statement when vendor is ansi", () -> {
           context().vendor(Vendor::ansi);
           context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
-            "columna bigint NOT NULL\n" +
+            "columna BIGINT NOT NULL\n" +
             ")");
           executeAsGivenWhenThenTest();
         });
@@ -73,7 +73,7 @@ public class CreationWithNullabilityTest extends JavaSpec<AsqlTestContext> {
         it("generates an hsqldb specific statement when vendor is hsqldb", () -> {
           context().vendor(Vendor::hsqldb);
           context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
-            "columna bigint NOT NULL\n" +
+            "columna BIGINT NOT NULL\n" +
             ")");
           executeAsGivenWhenThenTest();
         });
@@ -81,7 +81,7 @@ public class CreationWithNullabilityTest extends JavaSpec<AsqlTestContext> {
         it("generates a sqlserver specific statement when vendor is sqlserver", () -> {
           context().vendor(Vendor::sqlserver);
           context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
-            "columna numeric(19,0) NOT NULL\n" +
+            "columna NUMERIC(19,0) NOT NULL\n" +
             ")");
           executeAsGivenWhenThenTest();
         });
