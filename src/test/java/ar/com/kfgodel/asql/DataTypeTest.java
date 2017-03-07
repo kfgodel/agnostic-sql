@@ -45,7 +45,7 @@ public class DataTypeTest extends JavaSpec<AsqlTestContext> {
                 Vendor sqlserver = Vendor.sqlserver();
 
                 assertThat(sqlserver.translate(DataType.bigInteger())).isEqualTo("BIGINT");
-                assertThat(sqlserver.translate(DataType.integer())).isEqualTo("NUMERIC(19,0)");
+                assertThat(sqlserver.translate(DataType.integer())).isEqualTo("INT");
 
                 assertThat(sqlserver.translate(DataType.decimal())).isEqualTo("DECIMAL");
                 assertThat(sqlserver.translate(DataType.doublenic())).isEqualTo("DOUBLE");

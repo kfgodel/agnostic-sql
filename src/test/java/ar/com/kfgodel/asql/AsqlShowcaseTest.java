@@ -115,7 +115,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                     ChangeColumnStatement statement = asql.alter("tableName").changing(asql.column("columnName").typed(DataType.integer()));
 
                     assertThat(Vendor.ansi().translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INTEGER");
-                    assertThat(Vendor.sqlserver().translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName NUMERIC(19,0)");
+                    assertThat(Vendor.sqlserver().translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INT");
                     assertThat(Vendor.hsqldb().translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INTEGER");
                 });
             });
@@ -156,7 +156,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
                             "momentoDeCreacion DATETIME2, \n" +
                             "momentoDeUltimaModificacion DATETIME2, \n" +
                             "persistenceVersion BIGINT, \n" +
-                            "diasPorLiquidar NUMERIC(19,0) NOT NULL, \n" +
+                            "diasPorLiquidar INT NOT NULL, \n" +
                             "estado VARCHAR(255), \n" +
                             "PRIMARY KEY ( id )\n" +
                             ")");

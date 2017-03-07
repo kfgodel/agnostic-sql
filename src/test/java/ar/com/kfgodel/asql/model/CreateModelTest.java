@@ -73,8 +73,8 @@ public class CreateModelTest extends JavaSpec<AsqlTestContext> {
                         "momentoDeCreacion DATETIME2, \n" +
                         "momentoDeUltimaModificacion DATETIME2, \n" +
                         "persistenceVersion BIGINT, \n" +
-                        "diasPorLiquidar NUMERIC(19,0) NOT NULL, \n" +
-                        "cantidad NUMERIC(19,0) NOT NULL DEFAULT 0, \n" +
+                        "diasPorLiquidar INT NOT NULL, \n" +
+                        "cantidad INT NOT NULL DEFAULT 0, \n" +
                         "otra_id BIGINT, \n" +
                         "estado VARCHAR(255), \n" +
                         "PRIMARY KEY ( id )\n" +

@@ -1,1 +1,1 @@
-NUMERIC(19,0)
+INT
