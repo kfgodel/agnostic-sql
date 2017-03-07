@@ -48,7 +48,7 @@ public class DataTypeTest extends JavaSpec<AsqlTestContext> {
                 assertThat(sqlserver.translate(DataType.integer())).isEqualTo("INT");
 
                 assertThat(sqlserver.translate(DataType.decimal())).isEqualTo("DECIMAL");
-                assertThat(sqlserver.translate(DataType.doublenic())).isEqualTo("DOUBLE");
+                assertThat(sqlserver.translate(DataType.doublenic())).isEqualTo("FLOAT");
 
                 assertThat(sqlserver.translate(DataType.shortString())).isEqualTo("VARCHAR(255)");
                 assertThat(sqlserver.translate(DataType.largeText())).isEqualTo("TEXT");
