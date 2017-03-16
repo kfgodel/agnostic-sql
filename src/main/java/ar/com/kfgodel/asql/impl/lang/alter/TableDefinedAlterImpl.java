@@ -5,7 +5,6 @@ import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
 import ar.com.kfgodel.asql.api.constraints.ConstraintDeclaration;
 import ar.com.kfgodel.asql.api.constraints.NamedConstraint;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
-import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.references.TableReference;
 import ar.com.kfgodel.asql.impl.lang.support.TableCenteredStatement;
 
@@ -31,8 +30,8 @@ public class TableDefinedAlterImpl extends TableCenteredStatement implements Tab
     }
 
     @Override
-    public RemoveColumnStatement removing(String columnName) {
-        return RemoveColumnStatementImpl.create(this, Internal.column(columnName));
+    public RemoveColumnStatement removing(NamedColumn columnName) {
+        return RemoveColumnStatementImpl.create(this, columnName.getColumnReference());
     }
 
     @Override

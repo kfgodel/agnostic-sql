@@ -14,7 +14,7 @@ public interface TableDefinedAlter {
 
   AddConstraintStatement adding(ConstraintDeclaration newConstraint);
 
-  RemoveColumnStatement removing(String columnName);
+  RemoveColumnStatement removing(NamedColumn columnName);
 
   ChangeColumnStatement changing(ColumnDeclaration columnChange);
 

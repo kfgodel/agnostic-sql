@@ -31,7 +31,7 @@ public class ColumnDefinedRenameImpl implements ColumnDefinedRename {
     }
 
     public ColumnReference getRenamedColumn(){
-        return renamedColumn.getColumn();
+        return renamedColumn.getColumnReference();
     }
 
 

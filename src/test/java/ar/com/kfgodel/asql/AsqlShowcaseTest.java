@@ -102,7 +102,7 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
             describe("drop column", () -> {
                 it("is basically ansi for all vendors",()->{
-                    RemoveColumnStatement statement = asql.alter("tableName").removing("columnName");
+                    RemoveColumnStatement statement = asql.alter("tableName").removing(asql.column("columnName"));
 
                     assertThat(Vendor.ansi().translate(statement)).isEqualTo("ALTER TABLE tableName DROP COLUMN columnName");
                     assertThat(Vendor.sqlserver().translate(statement)).isEqualTo("ALTER TABLE tableName DROP COLUMN columnName");

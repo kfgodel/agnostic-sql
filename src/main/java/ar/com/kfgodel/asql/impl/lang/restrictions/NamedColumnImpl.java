@@ -20,7 +20,7 @@ public class NamedColumnImpl implements NamedColumn {
 
     private ColumnReference column;
 
-    public ColumnReference getColumn() {
+    public ColumnReference getColumnReference() {
         return column;
     }
 

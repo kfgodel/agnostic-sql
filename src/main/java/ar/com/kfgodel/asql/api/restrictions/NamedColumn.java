@@ -65,6 +65,6 @@ public interface NamedColumn extends AgnosticConstruct {
 
     QueryCondition isNotIn(Collection<?> values);
 
-    ColumnReference getColumn();
+    ColumnReference getColumnReference();
 
 }
