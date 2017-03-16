@@ -3,6 +3,7 @@ package ar.com.kfgodel.asql.impl.lang.alter;
 import ar.com.kfgodel.asql.api.alter.*;
 import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
 import ar.com.kfgodel.asql.api.constraints.ConstraintDeclaration;
+import ar.com.kfgodel.asql.api.constraints.NamedConstraint;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.references.TableReference;
@@ -47,5 +48,10 @@ public class TableDefinedAlterImpl extends TableCenteredStatement implements Tab
     @Override
     public RenameTableStatement renameTo(String newName) {
         return RenameTableStatementImpl.create(this, newName);
+    }
+
+    @Override
+    public RemoveConstraintStatement removing(NamedConstraint namedConstraint) {
+        return RemoveConstraintStatementImpl.create(this, namedConstraint.getConstraintReference());
     }
 }

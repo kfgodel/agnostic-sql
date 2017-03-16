@@ -27,7 +27,7 @@ public class ColumnDefinedUniqueImpl implements ConstraintDeclaration {
     @Override
     public ConstraintDeclarationModel parseModel() {
         ConstraintDeclarationModel declarationModel = ConstraintDeclarationModel.create(UniqueDefinitionModel.create(parseColumnModels()));
-        declarationModel.setIdentification(previousNode.getConstraint().parseModel());
+        declarationModel.setIdentification(previousNode.getConstraintReference().parseModel());
         return declarationModel;
     }
 

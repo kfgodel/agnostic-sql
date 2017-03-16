@@ -13,7 +13,7 @@ public class NamedConstraintImpl implements NamedConstraint {
 
     private ConstraintReference constraint;
 
-    public ConstraintReference getConstraint() {
+    public ConstraintReference getConstraintReference() {
         return constraint;
     }
 

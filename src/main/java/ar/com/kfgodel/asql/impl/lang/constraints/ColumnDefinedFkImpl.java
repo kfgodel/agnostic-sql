@@ -18,7 +18,7 @@ public class ColumnDefinedFkImpl implements ColumnDefinedFk {
 
 
     public ConstraintReference getConstraint(){
-        return previousNode.getConstraint();
+        return previousNode.getConstraintReference();
     }
 
     public List<ColumnReference> getSourceColumns() {

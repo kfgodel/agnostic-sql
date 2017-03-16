@@ -28,7 +28,7 @@ public class ColumnDefinedPkImpl implements ConstraintDeclaration {
     public ConstraintDeclarationModel parseModel() {
         PkDefinitionModel pkDefinition = PkDefinitionModel.create(parseColumnModels());
         ConstraintDeclarationModel declarationModel = ConstraintDeclarationModel.create(pkDefinition);
-        declarationModel.setIdentification(previousNode.getConstraint().parseModel());
+        declarationModel.setIdentification(previousNode.getConstraintReference().parseModel());
         return declarationModel;
     }
 
