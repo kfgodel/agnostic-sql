@@ -57,4 +57,5 @@ public interface Asql {
    * @return The piece construct to use on statements
    */
   CustomConstruct customSql(String translatedSql);
+
 }

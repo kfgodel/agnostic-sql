@@ -22,74 +22,78 @@ import java.util.stream.Collectors;
  */
 public interface Internal {
 
-    static PatternHelper pattern() {
-        return PatternHelperImpl.create();
-    }
+  static PatternHelper pattern() {
+    return PatternHelperImpl.create();
+  }
 
-    static ColumnReference column(String aColumnName) {
-        return ColumnReference.create(aColumnName);
-    }
+  static ColumnReference column(String aColumnName) {
+    return ColumnReference.create(aColumnName);
+  }
 
-    static LiteralReference literal(Object value) {
-        return LiteralReference.create(value);
-    }
+  static SequenceReference sequence(String aSequenceName) {
+    return SequenceReference.create(aSequenceName);
+  }
 
-    static NullReference nullRef() {
-        return NullReference.create();
-    }
+  static LiteralReference literal(Object value) {
+    return LiteralReference.create(value);
+  }
 
-    static ListLiteralReference list(Collection<?> values) {
-        return ListLiteralReference.create(values);
-    }
+  static NullReference nullRef() {
+    return NullReference.create();
+  }
 
-    static ColumnAssignment columnAssignment(ColumnReference column, Object columnValue) {
-        return ColumnAssignmentImpl.create(column, Internal.asConstruct(columnValue));
-    }
+  static ListLiteralReference list(Collection<?> values) {
+    return ListLiteralReference.create(values);
+  }
 
-    static BinaryOperatorCondition binaryOp(AgnosticConstruct leftOperand, AgnosticConstruct operator, AgnosticConstruct rightOperand) {
-        return BinaryOperatorCondition.create(leftOperand, operator, rightOperand);
-    }
+  static ColumnAssignment columnAssignment(ColumnReference column, Object columnValue) {
+    return ColumnAssignmentImpl.create(column, Internal.asConstruct(columnValue));
+  }
 
-    static TableReference table(String tableName) {
-        return TableReference.create(tableName);
-    }
+  static BinaryOperatorCondition binaryOp(AgnosticConstruct leftOperand, AgnosticConstruct operator, AgnosticConstruct rightOperand) {
+    return BinaryOperatorCondition.create(leftOperand, operator, rightOperand);
+  }
 
-    static List<ColumnReference> columns(String... columnNames) {
-        return Arrays.stream(columnNames)
-                .map(Internal::column)
-                .collect(Collectors.toList());
-    }
+  static TableReference table(String tableName) {
+    return TableReference.create(tableName);
+  }
 
-    static ConstraintReference constraint(String constraintName) {
-        return ConstraintReference.create(constraintName);
-    }
+  static List<ColumnReference> columns(String... columnNames) {
+    return Arrays.stream(columnNames)
+      .map(Internal::column)
+      .collect(Collectors.toList());
+  }
 
-    static AgnosticConstruct asConstruct(Object expression) {
-        if(expression instanceof SelectStatement){
-            return SubqueryReference.create((SelectStatement) expression);
-        }
-        if(expression instanceof AgnosticConstruct){
-            // No need for conversion
-            return (AgnosticConstruct) expression;
-        }
-        if(expression instanceof Boolean){
-            Boolean asBoolean = (Boolean) expression;
-            return boolRef(asBoolean);
-        }
-        return Internal.literal(expression);
-    }
+  static ConstraintReference constraint(String constraintName) {
+    return ConstraintReference.create(constraintName);
+  }
 
-    static AgnosticConstruct boolRef(boolean value) {
-        return BooleanReference.create(value);
+  static AgnosticConstruct asConstruct(Object expression) {
+    if (expression instanceof SelectStatement) {
+      return SubqueryReference.create((SelectStatement) expression);
     }
+    if (expression instanceof AgnosticConstruct) {
+      // No need for conversion
+      return (AgnosticConstruct) expression;
+    }
+    if (expression instanceof Boolean) {
+      Boolean asBoolean = (Boolean) expression;
+      return boolRef(asBoolean);
+    }
+    return Internal.literal(expression);
+  }
 
-    static List<AgnosticConstruct> asConstructs(Object... expressions) {
-        return Arrays.stream(expressions)
-                .map(Internal::asConstruct)
-                .collect(Collectors.toList());
-    }
+  static AgnosticConstruct boolRef(boolean value) {
+    return BooleanReference.create(value);
+  }
 
-    static IndexReference index(String indexName) {
-        return IndexReference.create(indexName);
-    }
+  static List<AgnosticConstruct> asConstructs(Object... expressions) {
+    return Arrays.stream(expressions)
+      .map(Internal::asConstruct)
+      .collect(Collectors.toList());
+  }
+
+  static IndexReference index(String indexName) {
+    return IndexReference.create(indexName);
+  }
 }

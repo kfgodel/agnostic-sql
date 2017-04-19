@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql;
 
 import ar.com.dgarcia.javaspec.api.contexts.TestContext;
+import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.custom.CustomConstruct;
@@ -55,5 +56,8 @@ public interface AsqlTestContext extends TestContext {
 
   CustomConstruct customConstruct();
   void customConstruct(Supplier<CustomConstruct> definition);
+
+  AgnosticConstruct construct();
+  void construct(Supplier<AgnosticConstruct> definition);
 
 }
