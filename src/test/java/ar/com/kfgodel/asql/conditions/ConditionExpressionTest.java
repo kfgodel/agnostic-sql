@@ -40,25 +40,25 @@ public class ConditionExpressionTest extends JavaSpec<AsqlTestContext> {
             });
 
             it("equal to a value", () -> {
-                context().condition(() -> asql.column("columnName").isEqualsTo("text"));
+                context().condition(() -> asql.column("columnName").isEqualTo("text"));
 
                 assertThat(context().translated()).isEqualTo("columnName = 'text'");
             });
 
             it("equal to another column", () -> {
-                context().condition(() -> asql.column("columnName").isEqualsToColumn("anotherColumn"));
+                context().condition(() -> asql.column("columnName").isEqualToColumn("anotherColumn"));
 
                 assertThat(context().translated()).isEqualTo("columnName = anotherColumn");
             });
 
             it("NOT equal to a value", () -> {
-                context().condition(() -> asql.column("columnName").isNotEqualsTo("text"));
+                context().condition(() -> asql.column("columnName").isNotEqualTo("text"));
 
                 assertThat(context().translated()).isEqualTo("columnName <> 'text'");
             });
 
             it("NOT equal to another column", () -> {
-                context().condition(() -> asql.column("columnName").isNotEqualsToColumn("anotherColumn"));
+                context().condition(() -> asql.column("columnName").isNotEqualToColumn("anotherColumn"));
 
                 assertThat(context().translated()).isEqualTo("columnName <> anotherColumn");
             });

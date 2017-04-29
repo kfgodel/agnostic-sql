@@ -45,22 +45,22 @@ public class NamedColumnImpl implements NamedColumn {
     }
 
     @Override
-    public QueryCondition isEqualsTo(Object operand) {
+    public QueryCondition isEqualTo(Object operand) {
         return Internal.binaryOp(this, Operator.equal(), Internal.literal(operand));
     }
 
     @Override
-    public QueryCondition isEqualsToColumn(String aColumnName) {
+    public QueryCondition isEqualToColumn(String aColumnName) {
         return Internal.binaryOp(this, Operator.equal(), Internal.column(aColumnName));
     }
 
     @Override
-    public QueryCondition isNotEqualsTo(Object value) {
+    public QueryCondition isNotEqualTo(Object value) {
         return Internal.binaryOp(this, Operator.different(), Internal.literal(value));
     }
 
     @Override
-    public QueryCondition isNotEqualsToColumn(String aColumnName) {
+    public QueryCondition isNotEqualToColumn(String aColumnName) {
         return Internal.binaryOp(this, Operator.different(), Internal.column(aColumnName));
     }
 

@@ -48,7 +48,7 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
             it("has a where clause to express predicates", ()->{
                 AgnosticStatement select = asql.select(asql.column("column1"))
                         .from("table1")
-                        .where(asql.column("column1").isEqualsTo(2));
+                        .where(asql.column("column1").isEqualTo(2));
 
                 String translated = context().vendor().translate(select);
 
