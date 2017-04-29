@@ -11,7 +11,7 @@
   </parent>
 
   <artifactId>agnostic-sql</artifactId>
-  <version>0.1.13-SNAPSHOT</version>
+  <version>0.1.13</version>
   <packaging>jar</packaging>
 
   <name>AgnosticSql</name>
