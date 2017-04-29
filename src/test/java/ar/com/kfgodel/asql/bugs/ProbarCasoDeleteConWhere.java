@@ -17,7 +17,7 @@ public class ProbarCasoDeleteConWhere extends JavaSpec<AsqlTestContext> {
   @Override
   public void define() {
     AsqlBuilder asql = AsqlBuilder.create();
-    xit("deberia andar",()->{
+    it("deberia andar",()->{
       String traducido = Vendor.ansi().translate(
         asql.deleteFrom("P10_ROLES_P10_PERMISOS")
           .where(
