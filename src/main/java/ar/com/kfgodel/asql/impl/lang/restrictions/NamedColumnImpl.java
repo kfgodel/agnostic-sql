@@ -46,7 +46,7 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isEqualTo(Object operand) {
-        return Internal.binaryOp(this, Operator.equal(), Internal.literal(operand));
+        return Internal.binaryOp(this, Operator.equal(), Internal.asConstruct(operand));
     }
 
     @Override
@@ -56,7 +56,7 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isNotEqualTo(Object value) {
-        return Internal.binaryOp(this, Operator.different(), Internal.literal(value));
+        return Internal.binaryOp(this, Operator.different(), Internal.asConstruct(value));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isLessThan(Object value) {
-        return Internal.binaryOp(this, Operator.less(), Internal.literal(value));
+        return Internal.binaryOp(this, Operator.less(), Internal.asConstruct(value));
     }
 
     @Override
@@ -78,7 +78,7 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isGreaterThan(Object value) {
-        return Internal.binaryOp(this, Operator.greater(), Internal.literal(value));
+        return Internal.binaryOp(this, Operator.greater(), Internal.asConstruct(value));
     }
 
     @Override
@@ -88,7 +88,7 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isLessOrEqualThan(Object value) {
-        return Internal.binaryOp(this, Operator.lessOrEqual(), Internal.literal(value));
+        return Internal.binaryOp(this, Operator.lessOrEqual(), Internal.asConstruct(value));
     }
 
     @Override
@@ -98,7 +98,7 @@ public class NamedColumnImpl implements NamedColumn {
 
     @Override
     public QueryCondition isGreaterOrEqualThan(Object value) {
-        return Internal.binaryOp(this, Operator.greaterOrEqual(), Internal.literal(value));
+        return Internal.binaryOp(this, Operator.greaterOrEqual(), Internal.asConstruct(value));
     }
 
     @Override
