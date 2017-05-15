@@ -70,7 +70,7 @@ public interface Internal {
 
   static AgnosticConstruct asConstruct(Object expression) {
     if (expression instanceof SelectStatement) {
-      return SubqueryReference.create((SelectStatement) expression);
+      return asSubquery((SelectStatement) expression);
     }
     if (expression instanceof AgnosticConstruct) {
       // No need for conversion
@@ -81,6 +81,10 @@ public interface Internal {
       return boolRef(asBoolean);
     }
     return Internal.literal(expression);
+  }
+
+  static SubqueryReference asSubquery(SelectStatement expression) {
+    return SubqueryReference.create(expression);
   }
 
   static AgnosticConstruct boolRef(boolean value) {

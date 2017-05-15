@@ -6,7 +6,6 @@ import ar.com.kfgodel.asql.api.select.SelectStatement;
 import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
 import ar.com.kfgodel.asql.impl.lang.references.InsertValueListReference;
-import ar.com.kfgodel.asql.impl.lang.references.SubqueryReference;
 import ar.com.kfgodel.asql.impl.lang.references.TableReference;
 import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
 
@@ -39,7 +38,7 @@ public class ColumnDefinedInsertImpl implements ColumnDefinedInsert {
 
     @Override
     public InsertStatement to(SelectStatement subquery) {
-        return InsertWithSuquery.create(this, SubqueryReference.create(subquery));
+        return InsertWithSuquery.create(this, Internal.asSubquery(subquery));
     }
 
     public static ColumnDefinedInsertImpl create(TableDefinedInsertImpl previousNode, List<ColumnReference> columns) {

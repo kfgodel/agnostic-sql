@@ -29,29 +29,29 @@ public class RestrictedDeleteTest extends JavaSpec<AsqlTestContext> {
       describe("for a restricted deletion", () -> {
         given(() -> {
           context().statement(() ->
-            asql.deleteFrom("P10_ROLES_P10_PERMISOS").where(
-                asql.column("PERMISOS_ID").isEqualTo(asql.select(asql.column("ID")).from("P10_PERMISOS").where(asql.column("NOMBREINTERNO").isEqualTo("un permiso")))
-                  .and(asql.column("columna").isEqualTo(2)
-                )
-              )
+            asql.deleteFrom("P10_GRUPOS_P10_ROLES").where(asql.column("ROLES_ID").isIn(
+              asql.select("ID")
+                .from("P10_ROLES")
+                .where(asql.column("NOMBRE").isEqualTo("Administrador de temas relacionados a beneficios y vouchers"))
+            ))
           );
         });
 
         it("generates a standard statement when vendor is ansi", () -> {
           context().vendor(Vendor::ansi);
-          context().expectedTranslation(() -> "DELETE FROM P10_ROLES_P10_PERMISOS WHERE PERMISOS_ID = ( SELECT ID FROM P10_PERMISOS WHERE NOMBREINTERNO = 'un permiso' ) AND columna = 2");
+          context().expectedTranslation(() -> "DELETE FROM P10_GRUPOS_P10_ROLES WHERE ROLES_ID IN ( SELECT 'ID' FROM P10_ROLES WHERE NOMBRE = 'Administrador de temas relacionados a beneficios y vouchers' )");
           executeAsGivenWhenThenTest();
         });
 
         it("generates an hsqldb specific statement when vendor is hsqldb", () -> {
           context().vendor(Vendor::hsqldb);
-          context().expectedTranslation(() -> "DELETE FROM P10_ROLES_P10_PERMISOS WHERE PERMISOS_ID = ( SELECT ID FROM P10_PERMISOS WHERE NOMBREINTERNO = 'un permiso' ) AND columna = 2");
+          context().expectedTranslation(() -> "DELETE FROM P10_GRUPOS_P10_ROLES WHERE ROLES_ID IN ( SELECT 'ID' FROM P10_ROLES WHERE NOMBRE = 'Administrador de temas relacionados a beneficios y vouchers' )");
           executeAsGivenWhenThenTest();
         });
 
         it("generates a sqlserver specific statement when vendor is sqlserver", () -> {
           context().vendor(Vendor::sqlserver);
-          context().expectedTranslation(() -> "DELETE FROM P10_ROLES_P10_PERMISOS WHERE PERMISOS_ID = ( SELECT ID FROM P10_PERMISOS WHERE NOMBREINTERNO = 'un permiso' ) AND columna = 2");
+          context().expectedTranslation(() -> "DELETE FROM P10_GRUPOS_P10_ROLES WHERE ROLES_ID IN ( SELECT 'ID' FROM P10_ROLES WHERE NOMBRE = 'Administrador de temas relacionados a beneficios y vouchers' )");
           executeAsGivenWhenThenTest();
         });
       });

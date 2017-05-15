@@ -3,6 +3,7 @@ package ar.com.kfgodel.asql.api.restrictions;
 import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.api.columns.ColumnAssignment;
 import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
+import ar.com.kfgodel.asql.api.select.SelectStatement;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.impl.lang.references.ColumnReference;
 
@@ -61,9 +62,13 @@ public interface NamedColumn extends AgnosticConstruct {
 
     QueryCondition doesNotContain(String substring);
 
+    QueryCondition isIn(SelectStatement subQuery);
+
     QueryCondition isIn(Collection<?> values);
 
     QueryCondition isNotIn(Collection<?> values);
+
+    QueryCondition isNotIn(SelectStatement subQuery);
 
     ColumnReference getColumnReference();
 
