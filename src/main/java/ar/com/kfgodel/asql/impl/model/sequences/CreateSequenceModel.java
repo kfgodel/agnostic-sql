@@ -44,6 +44,8 @@ public class CreateSequenceModel implements AgnosticModel {
   public static CreateSequenceModel create(SequenceReferenceModel sequenceReference) {
     CreateSequenceModel model = new CreateSequenceModel();
     model.sequence = sequenceReference;
+    model.incrementValue = Optional.empty();
+    model.startingValue = Optional.empty();
     return model;
   }
 
