@@ -12,6 +12,7 @@ import ar.com.kfgodel.asql.api.insert.TableDefinedInsert;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.api.scripts.AgnosticScript;
 import ar.com.kfgodel.asql.api.select.ProjectionDefinedSelect;
+import ar.com.kfgodel.asql.api.sequences.CreateSequenceStatement;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 
 /**
@@ -44,6 +45,8 @@ public interface Asql {
   NameDefinedCreateIndex createIndex(String indexName);
 
   NameDefinedDropIndex dropIndex(String indexName);
+
+  CreateSequenceStatement createSequece(String sequenceName);
 
   AgnosticStatement begin();
 

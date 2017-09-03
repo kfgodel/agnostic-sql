@@ -15,6 +15,7 @@ import ar.com.kfgodel.asql.api.insert.TableDefinedInsert;
 import ar.com.kfgodel.asql.api.restrictions.NamedColumn;
 import ar.com.kfgodel.asql.api.scripts.AgnosticScript;
 import ar.com.kfgodel.asql.api.select.ProjectionDefinedSelect;
+import ar.com.kfgodel.asql.api.sequences.CreateSequenceStatement;
 import ar.com.kfgodel.asql.api.update.TableDefinedUpdate;
 import ar.com.kfgodel.asql.impl.lang.Internal;
 import ar.com.kfgodel.asql.impl.lang.alter.TableDefinedAlterImpl;
@@ -29,6 +30,7 @@ import ar.com.kfgodel.asql.impl.lang.insert.TableDefinedInsertImpl;
 import ar.com.kfgodel.asql.impl.lang.restrictions.NamedColumnImpl;
 import ar.com.kfgodel.asql.impl.lang.scripts.AgnosticScriptImpl;
 import ar.com.kfgodel.asql.impl.lang.select.ProjectionDefinedSelectImpl;
+import ar.com.kfgodel.asql.impl.lang.sequence.NameDefinedCreateSequenceDeclaration;
 import ar.com.kfgodel.asql.impl.lang.transactions.BeginTransaction;
 import ar.com.kfgodel.asql.impl.lang.transactions.CommitTransaction;
 import ar.com.kfgodel.asql.impl.lang.transactions.RollbackTransaction;
@@ -112,6 +114,11 @@ public class AsqlBuilder implements Asql {
   @Override
   public NameDefinedDropIndex dropIndex(String indexName) {
     return NameDefinedDropIndexImpl.create(Internal.index(indexName));
+  }
+
+  @Override
+  public CreateSequenceStatement createSequece(String sequenceName) {
+    return NameDefinedCreateSequenceDeclaration.create(Internal.sequence(sequenceName));
   }
 
   @Override
