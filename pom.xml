@@ -18,16 +18,16 @@
   <description>Java project to write sql for different vendors using same code</description>
 
   <scm>
-    <connection>scm:git:ssh://github.com/kfgodel/agnostic-sql.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/kfgodel/agnostic-sql.git</developerConnection>
-    <url>https://github.com/kfgodel/agnostic-sql</url>
+    <developerConnection>scm:git:ssh://github.com/kfgodel/agnostic-sql.git</developerConnection>
+    <connection>${project.scm.developerConnection}</connection>
+    <url>${project.url}</url>
   </scm>
 
   <repositories>
     <repository>
       <id>kfgodel_mosquito</id>
       <name>Repo Mosquito</name>
-      <url>http://kfgodel.info:8081/nexus/content/groups/public/</url>
+      <url>http://kfgodel.info:8081/nexus/repository/public/</url>
     </repository>
   </repositories>
 
@@ -46,8 +46,9 @@
 
     <!-- Nary: Stream and optional -->
     <dependency>
-      <groupId>ar.com.kfgodel</groupId>
+      <groupId>info.kfgodel</groupId>
       <artifactId>nary</artifactId>
+      <version>2.0.7</version>
     </dependency>
 
     <!-- Rspec like testing -->
