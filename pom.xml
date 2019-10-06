@@ -4,15 +4,14 @@
          xmlns="http://maven.apache.org/POM/4.0.0">
   <modelVersion>4.0.0</modelVersion>
 
+  <artifactId>agnostic-sql</artifactId>
+  <version>0.1.19-SNAPSHOT</version>
+
   <parent>
     <groupId>ar.com.kfgodel</groupId>
     <artifactId>java-pom</artifactId>
     <version>0.1-SNAPSHOT</version>
   </parent>
-
-  <artifactId>agnostic-sql</artifactId>
-  <version>0.1.19-SNAPSHOT</version>
-  <packaging>jar</packaging>
 
   <name>AgnosticSql</name>
   <description>Java project to write sql for different vendors using same code</description>
@@ -32,6 +31,9 @@
   </repositories>
 
   <properties>
+    <!-- Sonar properties to prevent unintentional id changes (Reference: https://docs.sonarqube.org/latest/analysis/analysis-parameters/) -->
+    <sonar.projectKey>ar.com.kfgodel:agnostic-sql:master</sonar.projectKey>
+
     <version.freemarker>2.3.23</version.freemarker>
   </properties>
 
