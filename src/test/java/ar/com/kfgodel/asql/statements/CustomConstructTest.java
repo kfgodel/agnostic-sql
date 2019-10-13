@@ -1,11 +1,11 @@
 package ar.com.kfgodel.asql.statements;
 
-import ar.com.dgarcia.javaspec.api.JavaSpec;
-import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.AsqlTestContext;
 import ar.com.kfgodel.asql.api.Asql;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.impl.AsqlBuilder;
+import info.kfgodel.jspek.api.JavaSpec;
+import info.kfgodel.jspek.api.JavaSpecRunner;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;

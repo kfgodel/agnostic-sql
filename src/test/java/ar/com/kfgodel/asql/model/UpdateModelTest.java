@@ -1,7 +1,5 @@
 package ar.com.kfgodel.asql.model;
 
-import ar.com.dgarcia.javaspec.api.JavaSpec;
-import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.AsqlTestContext;
 import ar.com.kfgodel.asql.api.interpreter.VendorInterpreter;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
@@ -13,6 +11,8 @@ import ar.com.kfgodel.asql.impl.model.restrictions.PredicateModel;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
 import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
 import com.google.common.collect.Lists;
+import info.kfgodel.jspek.api.JavaSpec;
+import info.kfgodel.jspek.api.JavaSpecRunner;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;

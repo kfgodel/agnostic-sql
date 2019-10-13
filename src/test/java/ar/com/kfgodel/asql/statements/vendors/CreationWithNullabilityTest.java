@@ -1,11 +1,11 @@
 package ar.com.kfgodel.asql.statements.vendors;
 
-import ar.com.dgarcia.javaspec.api.JavaSpec;
-import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.asql.AsqlTestContext;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.impl.AsqlBuilder;
+import info.kfgodel.jspek.api.JavaSpec;
+import info.kfgodel.jspek.api.JavaSpecRunner;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,24 +20,17 @@ public class CreationWithNullabilityTest extends JavaSpec<AsqlTestContext> {
   public void define() {
     AsqlBuilder asql = AsqlBuilder.create();
     describe("an agnostic statement translation", () -> {
-      when(() -> {
-        context().translated(() -> context().vendor().translate(context().statement()));
-      });
-      then(() -> {
-        assertThat(context().translated()).isEqualTo(context().expectedTranslation());
-      });
+      context().translated(() -> context().vendor().translate(context().statement()));
 
       describe("for a table creation with a null column", () -> {
-        given(() -> {
-          context().statement(() -> asql.createTable("tabla").with(asql.column("columna").typed(DataType.bigInteger()).nullable()));
-        });
+        context().statement(() -> asql.createTable("tabla").with(asql.column("columna").typed(DataType.bigInteger()).nullable()));
 
         it("generates a standard statement when vendor is ansi", () -> {
           context().vendor(Vendor::ansi);
           context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
             "columna BIGINT NULL\n" +
             ")");
-          executeAsGivenWhenThenTest();
+          verifyTranslationsIsAsExpected();
         });
 
         it("generates an hsqldb specific statement when vendor is hsqldb", () -> {
@@ -45,7 +38,7 @@ public class CreationWithNullabilityTest extends JavaSpec<AsqlTestContext> {
           context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
             "columna BIGINT NULL\n" +
             ")");
-          executeAsGivenWhenThenTest();
+          verifyTranslationsIsAsExpected();
         });
 
         it("generates a sqlserver specific statement when vendor is sqlserver", () -> {
@@ -53,21 +46,19 @@ public class CreationWithNullabilityTest extends JavaSpec<AsqlTestContext> {
           context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
             "columna BIGINT NULL\n" +
             ")");
-          executeAsGivenWhenThenTest();
+          verifyTranslationsIsAsExpected();
         });
       });
 
       describe("for a table creation with a non null column", () -> {
-        given(() -> {
-          context().statement(() -> asql.createTable("tabla").with(asql.column("columna").typed(DataType.bigInteger()).nonNullable()));
-        });
+        context().statement(() -> asql.createTable("tabla").with(asql.column("columna").typed(DataType.bigInteger()).nonNullable()));
 
         it("generates a standard statement when vendor is ansi", () -> {
           context().vendor(Vendor::ansi);
           context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
             "columna BIGINT NOT NULL\n" +
             ")");
-          executeAsGivenWhenThenTest();
+          verifyTranslationsIsAsExpected();
         });
 
         it("generates an hsqldb specific statement when vendor is hsqldb", () -> {
@@ -75,7 +66,7 @@ public class CreationWithNullabilityTest extends JavaSpec<AsqlTestContext> {
           context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
             "columna BIGINT NOT NULL\n" +
             ")");
-          executeAsGivenWhenThenTest();
+          verifyTranslationsIsAsExpected();
         });
 
         it("generates a sqlserver specific statement when vendor is sqlserver", () -> {
@@ -83,13 +74,17 @@ public class CreationWithNullabilityTest extends JavaSpec<AsqlTestContext> {
           context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
             "columna BIGINT NOT NULL\n" +
             ")");
-          executeAsGivenWhenThenTest();
+          verifyTranslationsIsAsExpected();
         });
       });
 
 
     });
 
+  }
+
+  private void verifyTranslationsIsAsExpected() {
+    assertThat(context().translated()).isEqualTo(context().expectedTranslation());
   }
 
 

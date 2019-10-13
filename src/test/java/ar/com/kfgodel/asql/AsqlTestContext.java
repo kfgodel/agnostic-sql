@@ -1,6 +1,5 @@
 package ar.com.kfgodel.asql;
 
-import ar.com.dgarcia.javaspec.api.contexts.TestContext;
 import ar.com.kfgodel.asql.api.AgnosticConstruct;
 import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.Asql;
@@ -12,6 +11,7 @@ import ar.com.kfgodel.asql.impl.model.alter.AddColumnModel;
 import ar.com.kfgodel.asql.impl.model.alter.RemoveColumnModel;
 import ar.com.kfgodel.asql.impl.model.create.CreateModel;
 import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
+import info.kfgodel.jspek.api.contexts.TestContext;
 
 import java.util.function.Supplier;
 
