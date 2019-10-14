@@ -3,16 +3,15 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-
-  <groupId>info.kfgodel</groupId>
-  <artifactId>agnostic-sql</artifactId>
-  <version>0.1.19-SNAPSHOT</version>
-
   <parent>
     <groupId>info.kfgodel</groupId>
     <artifactId>java-pom</artifactId>
     <version>0.1.8</version>
   </parent>
+
+  <groupId>info.kfgodel</groupId>
+  <artifactId>agnostic-sql</artifactId>
+  <version>0.1.19-SNAPSHOT</version>
 
   <name>AgnosticSql</name>
   <description>Java project to generate sql for different vendors using an unified DSL</description>
