@@ -9,6 +9,6 @@ import ar.com.kfgodel.asql.impl.model.insert.InsertModel;
  */
 public interface InsertStatement extends AgnosticStatement {
 
-    @Override
-    InsertModel parseModel();
+  @Override
+  InsertModel parseModel();
 }

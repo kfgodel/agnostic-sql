@@ -8,8 +8,8 @@ import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
  */
 public interface UnrestrictedUpdate extends AgnosticStatement {
 
-    RestrictedUpdate where(Object condition);
+  RestrictedUpdate where(Object condition);
 
-    @Override
-    UpdateModel parseModel();
+  @Override
+  UpdateModel parseModel();
 }

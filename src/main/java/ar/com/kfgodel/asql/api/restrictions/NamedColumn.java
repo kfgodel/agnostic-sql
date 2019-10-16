@@ -14,62 +14,62 @@ import java.util.Collection;
  */
 public interface NamedColumn extends AgnosticConstruct {
 
-    QueryCondition isNull();
+  QueryCondition isNull();
 
-    QueryCondition isNotNull();
+  QueryCondition isNotNull();
 
-    ColumnAssignment to(Object value);
+  ColumnAssignment to(Object value);
 
-    ColumnDeclaration typed(DataType dataType);
+  ColumnDeclaration typed(DataType dataType);
 
-    QueryCondition isEqualTo(Object operand);
+  QueryCondition isEqualTo(Object operand);
 
-    QueryCondition isEqualToColumn(String aColumnName);
+  QueryCondition isEqualToColumn(String aColumnName);
 
-    QueryCondition isNotEqualTo(Object value);
+  QueryCondition isNotEqualTo(Object value);
 
-    QueryCondition isNotEqualToColumn(String aColumnName);
+  QueryCondition isNotEqualToColumn(String aColumnName);
 
-    QueryCondition isLessThan(Object value);
+  QueryCondition isLessThan(Object value);
 
-    QueryCondition isLessThanColumn(String aColumnName);
+  QueryCondition isLessThanColumn(String aColumnName);
 
-    QueryCondition isGreaterThan(Object value);
+  QueryCondition isGreaterThan(Object value);
 
-    QueryCondition isGreaterThanColumn(String aColumnName);
+  QueryCondition isGreaterThanColumn(String aColumnName);
 
-    QueryCondition isLessOrEqualThan(Object value);
+  QueryCondition isLessOrEqualThan(Object value);
 
-    QueryCondition isLessThanOrEqualColumn(String aColumnName);
+  QueryCondition isLessThanOrEqualColumn(String aColumnName);
 
-    QueryCondition isGreaterOrEqualThan(Object value);
+  QueryCondition isGreaterOrEqualThan(Object value);
 
-    QueryCondition isGreaterOrEqualThanColumn(String aColumnName);
+  QueryCondition isGreaterOrEqualThanColumn(String aColumnName);
 
-    QueryCondition isLike(String pattern);
+  QueryCondition isLike(String pattern);
 
-    QueryCondition isNotLike(String pattern);
+  QueryCondition isNotLike(String pattern);
 
-    QueryCondition startsWith(String prefix);
+  QueryCondition startsWith(String prefix);
 
-    QueryCondition doesNotStartWith(String prefix);
+  QueryCondition doesNotStartWith(String prefix);
 
-    QueryCondition endsWith(String suffix);
+  QueryCondition endsWith(String suffix);
 
-    QueryCondition doesNotEndWith(String suffix);
+  QueryCondition doesNotEndWith(String suffix);
 
-    QueryCondition contains(String substring);
+  QueryCondition contains(String substring);
 
-    QueryCondition doesNotContain(String substring);
+  QueryCondition doesNotContain(String substring);
 
-    QueryCondition isIn(SelectStatement subQuery);
+  QueryCondition isIn(SelectStatement subQuery);
 
-    QueryCondition isIn(Collection<?> values);
+  QueryCondition isIn(Collection<?> values);
 
-    QueryCondition isNotIn(Collection<?> values);
+  QueryCondition isNotIn(Collection<?> values);
 
-    QueryCondition isNotIn(SelectStatement subQuery);
+  QueryCondition isNotIn(SelectStatement subQuery);
 
-    ColumnReference getColumnReference();
+  ColumnReference getColumnReference();
 
 }

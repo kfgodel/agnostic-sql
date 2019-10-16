@@ -9,21 +9,21 @@ import ar.com.kfgodel.asql.impl.model.select.SelectModel;
  */
 public class RestrictedSelectImpl implements RestrictedSelect {
 
-    private TableDefinedSelectImpl previousNode;
-    private AgnosticConstruct condition;
+  private TableDefinedSelectImpl previousNode;
+  private AgnosticConstruct condition;
 
-    @Override
-    public SelectModel parseModel() {
-        SelectModel selectModel = previousNode.parseModel();
-        selectModel.getWhereClause().setPredicate(condition.parseModel());
-        return selectModel;
-    }
-    
-    public static RestrictedSelectImpl create(TableDefinedSelectImpl previousNode, AgnosticConstruct condition){
-        RestrictedSelectImpl select = new RestrictedSelectImpl();
-        select.previousNode = previousNode;
-        select.condition = condition;
-        return select;
-    }
-    
+  @Override
+  public SelectModel parseModel() {
+    SelectModel selectModel = previousNode.parseModel();
+    selectModel.getWhereClause().setPredicate(condition.parseModel());
+    return selectModel;
+  }
+
+  public static RestrictedSelectImpl create(TableDefinedSelectImpl previousNode, AgnosticConstruct condition) {
+    RestrictedSelectImpl select = new RestrictedSelectImpl();
+    select.previousNode = previousNode;
+    select.condition = condition;
+    return select;
+  }
+
 }

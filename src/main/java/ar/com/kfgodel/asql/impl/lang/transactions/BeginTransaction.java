@@ -8,14 +8,14 @@ import ar.com.kfgodel.asql.impl.model.references.SymbolModel;
  * Created by tenpines on 27/09/15.
  */
 public class BeginTransaction implements AgnosticStatement {
-    @Override
-    public AgnosticModel parseModel() {
-        return SymbolModel.create("/transactions/begin.ftl");
-    }
+  @Override
+  public AgnosticModel parseModel() {
+    return SymbolModel.create("/transactions/begin.ftl");
+  }
 
-    public static BeginTransaction create(){
-        BeginTransaction beginTransaction = new BeginTransaction();
-        return beginTransaction;
-    }
+  public static BeginTransaction create() {
+    BeginTransaction beginTransaction = new BeginTransaction();
+    return beginTransaction;
+  }
 
 }

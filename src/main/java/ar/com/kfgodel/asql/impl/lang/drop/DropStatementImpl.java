@@ -10,15 +10,15 @@ import ar.com.kfgodel.asql.impl.model.drop.DropModel;
  */
 public class DropStatementImpl extends TableCenteredStatement implements DropStatement {
 
-    @Override
-    public DropModel parseModel() {
-        return DropModel.create(getTable().parseModel());
-    }
+  @Override
+  public DropModel parseModel() {
+    return DropModel.create(getTable().parseModel());
+  }
 
-    public static DropStatementImpl create(TableReference table) {
-        DropStatementImpl statement = new DropStatementImpl();
-        statement.setTable(table);
-        return statement;
-    }
+  public static DropStatementImpl create(TableReference table) {
+    DropStatementImpl statement = new DropStatementImpl();
+    statement.setTable(table);
+    return statement;
+  }
 
 }

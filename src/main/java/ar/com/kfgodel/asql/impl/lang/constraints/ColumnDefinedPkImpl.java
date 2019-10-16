@@ -14,27 +14,27 @@ import java.util.stream.Collectors;
  */
 public class ColumnDefinedPkImpl implements ConstraintDeclaration {
 
-    private NamedConstraintImpl previousNode;
-    private List<ColumnReference> columns;
+  private NamedConstraintImpl previousNode;
+  private List<ColumnReference> columns;
 
-    public static ColumnDefinedPkImpl create(NamedConstraintImpl previousNode, List<ColumnReference> columns) {
-        ColumnDefinedPkImpl pk = new ColumnDefinedPkImpl();
-        pk.previousNode = previousNode;
-        pk.columns = columns;
-        return pk;
-    }
+  public static ColumnDefinedPkImpl create(NamedConstraintImpl previousNode, List<ColumnReference> columns) {
+    ColumnDefinedPkImpl pk = new ColumnDefinedPkImpl();
+    pk.previousNode = previousNode;
+    pk.columns = columns;
+    return pk;
+  }
 
-    @Override
-    public ConstraintDeclarationModel parseModel() {
-        PkDefinitionModel pkDefinition = PkDefinitionModel.create(parseColumnModels());
-        ConstraintDeclarationModel declarationModel = ConstraintDeclarationModel.create(pkDefinition);
-        declarationModel.setIdentification(previousNode.getConstraintReference().parseModel());
-        return declarationModel;
-    }
+  @Override
+  public ConstraintDeclarationModel parseModel() {
+    PkDefinitionModel pkDefinition = PkDefinitionModel.create(parseColumnModels());
+    ConstraintDeclarationModel declarationModel = ConstraintDeclarationModel.create(pkDefinition);
+    declarationModel.setIdentification(previousNode.getConstraintReference().parseModel());
+    return declarationModel;
+  }
 
-    private List<ColumnReferenceModel> parseColumnModels() {
-        return columns.stream()
-                .map(ColumnReference::parseModel)
-                .collect(Collectors.toList());
-    }
+  private List<ColumnReferenceModel> parseColumnModels() {
+    return columns.stream()
+      .map(ColumnReference::parseModel)
+      .collect(Collectors.toList());
+  }
 }

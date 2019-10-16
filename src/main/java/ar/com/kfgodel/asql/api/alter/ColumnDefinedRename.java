@@ -5,5 +5,5 @@ package ar.com.kfgodel.asql.api.alter;
  * Created by tenpines on 27/09/15.
  */
 public interface ColumnDefinedRename {
-    RenameColumnStatement to(String newName);
+  RenameColumnStatement to(String newName);
 }

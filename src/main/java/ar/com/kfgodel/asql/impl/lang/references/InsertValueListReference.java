@@ -14,23 +14,23 @@ import java.util.stream.Collectors;
  */
 public class InsertValueListReference implements AgnosticConstruct {
 
-    private List<AgnosticConstruct> values;
+  private List<AgnosticConstruct> values;
 
-    @Override
-    public AgnosticModel parseModel() {
-        return InsertValueListModel.create(ValueListModel.create(parseValueModels()));
-    }
+  @Override
+  public AgnosticModel parseModel() {
+    return InsertValueListModel.create(ValueListModel.create(parseValueModels()));
+  }
 
-    private List<AgnosticModel> parseValueModels() {
-        return values.stream()
-                .map(AgnosticConstruct::parseModel)
-                .collect(Collectors.toList());
-    }
-    
-    public static InsertValueListReference create(List<AgnosticConstruct> values){
-        InsertValueListReference listReference = new InsertValueListReference();
-        listReference.values = values;
-        return listReference;
-    }
-    
+  private List<AgnosticModel> parseValueModels() {
+    return values.stream()
+      .map(AgnosticConstruct::parseModel)
+      .collect(Collectors.toList());
+  }
+
+  public static InsertValueListReference create(List<AgnosticConstruct> values) {
+    InsertValueListReference listReference = new InsertValueListReference();
+    listReference.values = values;
+    return listReference;
+  }
+
 }

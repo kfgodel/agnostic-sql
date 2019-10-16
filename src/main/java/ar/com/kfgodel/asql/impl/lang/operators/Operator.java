@@ -10,69 +10,69 @@ import ar.com.kfgodel.asql.impl.model.operators.NotOperatorModel;
  */
 public interface Operator {
 
-    static AgnosticConstruct is() {
-        return OperatorReference.create("is");
-    }
+  static AgnosticConstruct is() {
+    return OperatorReference.create("is");
+  }
 
-    static AgnosticConstruct equal() {
-        return OperatorReference.create("equal");
-    }
+  static AgnosticConstruct equal() {
+    return OperatorReference.create("equal");
+  }
 
-    static AgnosticConstruct different() {
-        return OperatorReference.create("different");
-    }
+  static AgnosticConstruct different() {
+    return OperatorReference.create("different");
+  }
 
-    static AgnosticConstruct less() {
-        return OperatorReference.create("less");
-    }
+  static AgnosticConstruct less() {
+    return OperatorReference.create("less");
+  }
 
-    static AgnosticConstruct greater() {
-        return OperatorReference.create("greater");
-    }
+  static AgnosticConstruct greater() {
+    return OperatorReference.create("greater");
+  }
 
-    static AgnosticConstruct lessOrEqual() {
-        return OperatorReference.create("lessOrEqual");
-    }
+  static AgnosticConstruct lessOrEqual() {
+    return OperatorReference.create("lessOrEqual");
+  }
 
-    static AgnosticConstruct greaterOrEqual() {
-        return OperatorReference.create("greaterOrEqual");
-    }
+  static AgnosticConstruct greaterOrEqual() {
+    return OperatorReference.create("greaterOrEqual");
+  }
 
-    static AgnosticConstruct like() {
-        return OperatorReference.create("like");
-    }
+  static AgnosticConstruct like() {
+    return OperatorReference.create("like");
+  }
 
-    static <T extends AgnosticConstruct> T notPlacedBefore(T negatedConstruct) {
-        NotOperator<T> negated = NotOperator.create(negatedConstruct, NotOperatorModel::createPlacedBefore);
-        return (T) negated;
-    }
+  static <T extends AgnosticConstruct> T notPlacedBefore(T negatedConstruct) {
+    NotOperator<T> negated = NotOperator.create(negatedConstruct, NotOperatorModel::createPlacedBefore);
+    return (T) negated;
+  }
 
-    static <T extends AgnosticConstruct> T notPlacedAfter(T negatedConstruct) {
-        NotOperator<T> negated = NotOperator.create(negatedConstruct, NotOperatorModel::createPlacedAfter);
-        return (T) negated;
-    }
+  static <T extends AgnosticConstruct> T notPlacedAfter(T negatedConstruct) {
+    NotOperator<T> negated = NotOperator.create(negatedConstruct, NotOperatorModel::createPlacedAfter);
+    return (T) negated;
+  }
 
-    static AgnosticConstruct in() {
-        return OperatorReference.create("in");
-    }
+  static AgnosticConstruct in() {
+    return OperatorReference.create("in");
+  }
 
-    static AgnosticConstruct and() {
-        return OperatorReference.create("and");
-    }
+  static AgnosticConstruct and() {
+    return OperatorReference.create("and");
+  }
 
-    static AgnosticConstruct or() {
-        return OperatorReference.create("or");
-    }
+  static AgnosticConstruct or() {
+    return OperatorReference.create("or");
+  }
 
-    static AgnosticConstruct isNot() {
-        return notPlacedAfter(is());
-    }
+  static AgnosticConstruct isNot() {
+    return notPlacedAfter(is());
+  }
 
-    static AgnosticConstruct notLike() {
-        return notPlacedBefore(like());
-    }
+  static AgnosticConstruct notLike() {
+    return notPlacedBefore(like());
+  }
 
-    static AgnosticConstruct notIn() {
-        return notPlacedBefore(in());
-    }
+  static AgnosticConstruct notIn() {
+    return notPlacedBefore(in());
+  }
 }

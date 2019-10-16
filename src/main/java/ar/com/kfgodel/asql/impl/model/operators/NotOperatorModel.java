@@ -42,11 +42,11 @@ public class NotOperatorModel implements AgnosticModel, NullabilityModel {
   }
 
 
-  public static NotOperatorModel createPlacedAfter(AgnosticModel negatedModel){
+  public static NotOperatorModel createPlacedAfter(AgnosticModel negatedModel) {
     return create(negatedModel, "/operators/_notAfter.ftl");
   }
 
-  public static NotOperatorModel createPlacedBefore(AgnosticModel negatedModel){
+  public static NotOperatorModel createPlacedBefore(AgnosticModel negatedModel) {
     return create(negatedModel, "/operators/_notBefore.ftl");
   }
 

@@ -14,26 +14,26 @@ import java.util.stream.Collectors;
  */
 public class ColumnDefinedUniqueImpl implements ConstraintDeclaration {
 
-    private List<ColumnReference> columns;
-    private NamedConstraintImpl previousNode;
+  private List<ColumnReference> columns;
+  private NamedConstraintImpl previousNode;
 
-    public static ColumnDefinedUniqueImpl create(NamedConstraintImpl previousNode, List<ColumnReference> columns){
-        ColumnDefinedUniqueImpl unique = new ColumnDefinedUniqueImpl();
-        unique.previousNode = previousNode;
-        unique.columns = columns;
-        return unique;
-    }
+  public static ColumnDefinedUniqueImpl create(NamedConstraintImpl previousNode, List<ColumnReference> columns) {
+    ColumnDefinedUniqueImpl unique = new ColumnDefinedUniqueImpl();
+    unique.previousNode = previousNode;
+    unique.columns = columns;
+    return unique;
+  }
 
-    @Override
-    public ConstraintDeclarationModel parseModel() {
-        ConstraintDeclarationModel declarationModel = ConstraintDeclarationModel.create(UniqueDefinitionModel.create(parseColumnModels()));
-        declarationModel.setIdentification(previousNode.getConstraintReference().parseModel());
-        return declarationModel;
-    }
+  @Override
+  public ConstraintDeclarationModel parseModel() {
+    ConstraintDeclarationModel declarationModel = ConstraintDeclarationModel.create(UniqueDefinitionModel.create(parseColumnModels()));
+    declarationModel.setIdentification(previousNode.getConstraintReference().parseModel());
+    return declarationModel;
+  }
 
-    private List<ColumnReferenceModel> parseColumnModels() {
-        return columns.stream()
-                .map(ColumnReference::parseModel)
-                    .collect(Collectors.toList());
-    }
+  private List<ColumnReferenceModel> parseColumnModels() {
+    return columns.stream()
+      .map(ColumnReference::parseModel)
+      .collect(Collectors.toList());
+  }
 }

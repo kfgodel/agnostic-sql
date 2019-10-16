@@ -9,21 +9,21 @@ import java.util.List;
  */
 public class PkDefinitionModel implements ConstraintDefinitionModel {
 
-    private List<ColumnReferenceModel> columns;
+  private List<ColumnReferenceModel> columns;
 
-    public List<ColumnReferenceModel> getColumns() {
-        return columns;
-    }
-    
-    public static PkDefinitionModel create(List<ColumnReferenceModel> columns){
-        PkDefinitionModel model = new PkDefinitionModel();
-        model.columns = columns;
-        return model;
-    }
-    
+  public List<ColumnReferenceModel> getColumns() {
+    return columns;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/constraints/_pkDefinition.ftl";
-    }
+  public static PkDefinitionModel create(List<ColumnReferenceModel> columns) {
+    PkDefinitionModel model = new PkDefinitionModel();
+    model.columns = columns;
+    return model;
+  }
+
+
+  @Override
+  public String getTemplatePath() {
+    return "/constraints/_pkDefinition.ftl";
+  }
 }

@@ -11,28 +11,28 @@ import ar.com.kfgodel.asql.impl.lang.references.TableReference;
  */
 public class ColumnDefinedRenameImpl implements ColumnDefinedRename {
 
-    private TableDefinedAlterImpl previousNode;
-    private NamedColumn renamedColumn;
+  private TableDefinedAlterImpl previousNode;
+  private NamedColumn renamedColumn;
 
-    @Override
-    public RenameColumnStatement to(String newName) {
-        return RenameColumnStatementImpl.create(this, newName);
-    }
+  @Override
+  public RenameColumnStatement to(String newName) {
+    return RenameColumnStatementImpl.create(this, newName);
+  }
 
-    public static ColumnDefinedRenameImpl create(TableDefinedAlterImpl previousNode, NamedColumn renamedColumn){
-        ColumnDefinedRenameImpl rename = new ColumnDefinedRenameImpl();
-        rename.previousNode = previousNode;
-        rename.renamedColumn = renamedColumn;
-        return rename;
-    }
+  public static ColumnDefinedRenameImpl create(TableDefinedAlterImpl previousNode, NamedColumn renamedColumn) {
+    ColumnDefinedRenameImpl rename = new ColumnDefinedRenameImpl();
+    rename.previousNode = previousNode;
+    rename.renamedColumn = renamedColumn;
+    return rename;
+  }
 
-    public TableReference getTable(){
-        return previousNode.getTable();
-    }
+  public TableReference getTable() {
+    return previousNode.getTable();
+  }
 
-    public ColumnReference getRenamedColumn(){
-        return renamedColumn.getColumnReference();
-    }
+  public ColumnReference getRenamedColumn() {
+    return renamedColumn.getColumnReference();
+  }
 
 
 }

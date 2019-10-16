@@ -10,25 +10,25 @@ import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
  */
 public class AddColumnModel extends TableCenteredModel {
 
-    private ColumnDeclarationModel columnDeclaration;
+  private ColumnDeclarationModel columnDeclaration;
 
-    public ColumnDeclarationModel getColumnDeclaration() {
-        return columnDeclaration;
-    }
+  public ColumnDeclarationModel getColumnDeclaration() {
+    return columnDeclaration;
+  }
 
-    public void setColumnDeclaration(ColumnDeclarationModel columnDeclaration) {
-        this.columnDeclaration = columnDeclaration;
-    }
+  public void setColumnDeclaration(ColumnDeclarationModel columnDeclaration) {
+    this.columnDeclaration = columnDeclaration;
+  }
 
-    public static AddColumnModel create(TableReferenceModel table, ColumnDeclarationModel columnDeclaration) {
-        AddColumnModel model = new AddColumnModel();
-        model.setTable(table);
-        model.columnDeclaration = columnDeclaration;
-        return model;
-    }
+  public static AddColumnModel create(TableReferenceModel table, ColumnDeclarationModel columnDeclaration) {
+    AddColumnModel model = new AddColumnModel();
+    model.setTable(table);
+    model.columnDeclaration = columnDeclaration;
+    return model;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/alter/add_column.ftl";
-    }
+  @Override
+  public String getTemplatePath() {
+    return "/alter/add_column.ftl";
+  }
 }

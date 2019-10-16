@@ -9,20 +9,20 @@ import ar.com.kfgodel.asql.impl.model.references.IndexReferenceModel;
  */
 public class IndexReference implements AgnosticConstruct {
 
-    private String name;
+  private String name;
 
-    public String getName() {
-        return name;
-    }
-    
-    public static IndexReference create(String indexName){
-        IndexReference reference = new IndexReference();
-        reference.name = indexName;
-        return reference;
-    }
+  public String getName() {
+    return name;
+  }
 
-    @Override
-    public IndexReferenceModel parseModel() {
-        return IndexReferenceModel.create(name);
-    }
+  public static IndexReference create(String indexName) {
+    IndexReference reference = new IndexReference();
+    reference.name = indexName;
+    return reference;
+  }
+
+  @Override
+  public IndexReferenceModel parseModel() {
+    return IndexReferenceModel.create(name);
+  }
 }

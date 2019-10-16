@@ -5,5 +5,5 @@ package ar.com.kfgodel.asql.api.constraints;
  * Created by kfgodel on 16/07/15.
  */
 public interface ColumnDefinedFk {
-    FkConstraintDeclaration to(String referencedTableName);
+  FkConstraintDeclaration to(String referencedTableName);
 }

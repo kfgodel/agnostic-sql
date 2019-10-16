@@ -10,21 +10,21 @@ import ar.com.kfgodel.asql.impl.model.insert.InsertModel;
  */
 public class InsertWithSuquery implements InsertStatement {
 
-    private ColumnDefinedInsertImpl previousNode;
-    private SubqueryReference subquery;
+  private ColumnDefinedInsertImpl previousNode;
+  private SubqueryReference subquery;
 
-    @Override
-    public InsertModel parseModel() {
-        InsertModel insertModel = InsertModel.create(previousNode.getTable().parseModel(), subquery.parseModel());
-        insertModel.setColumnList(previousNode.getParsedColumnModels());
-        return insertModel;
-    }
+  @Override
+  public InsertModel parseModel() {
+    InsertModel insertModel = InsertModel.create(previousNode.getTable().parseModel(), subquery.parseModel());
+    insertModel.setColumnList(previousNode.getParsedColumnModels());
+    return insertModel;
+  }
 
-    public static InsertWithSuquery create(ColumnDefinedInsertImpl previousNode, SubqueryReference subquery){
-        InsertWithSuquery insert = new InsertWithSuquery();
-        insert.previousNode = previousNode;
-        insert.subquery = subquery;
-        return insert;
-    }
+  public static InsertWithSuquery create(ColumnDefinedInsertImpl previousNode, SubqueryReference subquery) {
+    InsertWithSuquery insert = new InsertWithSuquery();
+    insert.previousNode = previousNode;
+    insert.subquery = subquery;
+    return insert;
+  }
 
 }

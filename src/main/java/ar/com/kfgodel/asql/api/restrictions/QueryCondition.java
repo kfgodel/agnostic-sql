@@ -11,14 +11,14 @@ import ar.com.kfgodel.asql.impl.model.AgnosticModel;
  */
 public interface QueryCondition extends AgnosticConstruct {
 
-    @Override
-    AgnosticModel parseModel();
+  @Override
+  AgnosticModel parseModel();
 
-    default QueryCondition and(QueryCondition anotherCondition){
-        return Internal.binaryOp(this, Operator.and(), anotherCondition);
-    }
+  default QueryCondition and(QueryCondition anotherCondition) {
+    return Internal.binaryOp(this, Operator.and(), anotherCondition);
+  }
 
-    default QueryCondition or(QueryCondition anotherCondition){
-        return Internal.binaryOp(this, Operator.or(), anotherCondition);
-    }
+  default QueryCondition or(QueryCondition anotherCondition) {
+    return Internal.binaryOp(this, Operator.or(), anotherCondition);
+  }
 }

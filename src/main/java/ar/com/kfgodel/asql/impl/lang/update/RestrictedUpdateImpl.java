@@ -9,21 +9,21 @@ import ar.com.kfgodel.asql.impl.model.update.UpdateModel;
  */
 public class RestrictedUpdateImpl implements RestrictedUpdate {
 
-    private UnrestrictedUpdateImpl unrestrictedUpdate;
-    private AgnosticConstruct condition;
+  private UnrestrictedUpdateImpl unrestrictedUpdate;
+  private AgnosticConstruct condition;
 
-    @Override
-    public UpdateModel parseModel() {
-        UpdateModel updateModel = unrestrictedUpdate.parseModel();
-        updateModel.getWhereClause().setPredicate(condition.parseModel());
-        return updateModel;
-    }
+  @Override
+  public UpdateModel parseModel() {
+    UpdateModel updateModel = unrestrictedUpdate.parseModel();
+    updateModel.getWhereClause().setPredicate(condition.parseModel());
+    return updateModel;
+  }
 
-    public static RestrictedUpdateImpl create(UnrestrictedUpdateImpl unrestrictedUpdate, AgnosticConstruct condition) {
-        RestrictedUpdateImpl update = new RestrictedUpdateImpl();
-        update.condition = condition;
-        update.unrestrictedUpdate = unrestrictedUpdate;
-        return update;
-    }
+  public static RestrictedUpdateImpl create(UnrestrictedUpdateImpl unrestrictedUpdate, AgnosticConstruct condition) {
+    RestrictedUpdateImpl update = new RestrictedUpdateImpl();
+    update.condition = condition;
+    update.unrestrictedUpdate = unrestrictedUpdate;
+    return update;
+  }
 
 }

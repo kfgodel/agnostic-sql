@@ -9,27 +9,27 @@ import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
  */
 public class DropIndexModel implements AgnosticModel {
 
-    private IndexReferenceModel index;
-    private TableReferenceModel table;
+  private IndexReferenceModel index;
+  private TableReferenceModel table;
 
-    public IndexReferenceModel getIndex() {
-        return index;
-    }
+  public IndexReferenceModel getIndex() {
+    return index;
+  }
 
-    public TableReferenceModel getTable() {
-        return table;
-    }
+  public TableReferenceModel getTable() {
+    return table;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/indices/drop_index.ftl";
-    }
-    
-    public static DropIndexModel create(IndexReferenceModel index, TableReferenceModel table){
-        DropIndexModel dropModel = new DropIndexModel();
-        dropModel.index = index;
-        dropModel.table = table;
-        return dropModel;
-    }
-    
+  @Override
+  public String getTemplatePath() {
+    return "/indices/drop_index.ftl";
+  }
+
+  public static DropIndexModel create(IndexReferenceModel index, TableReferenceModel table) {
+    DropIndexModel dropModel = new DropIndexModel();
+    dropModel.index = index;
+    dropModel.table = table;
+    return dropModel;
+  }
+
 }

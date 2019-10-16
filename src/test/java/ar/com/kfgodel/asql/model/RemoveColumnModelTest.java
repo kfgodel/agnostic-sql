@@ -17,22 +17,22 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(JavaSpecRunner.class)
 public class RemoveColumnModelTest extends JavaSpec<AsqlTestContext> {
-    @Override
-    public void define() {
-        describe("an agnostic remove column statement", () -> {
+  @Override
+  public void define() {
+    describe("an agnostic remove column statement", () -> {
 
-            context().removeModel(() -> RemoveColumnModel.create(TableReferenceModel.create("tableName"), ColumnReferenceModel.create("columnName")));
+      context().removeModel(() -> RemoveColumnModel.create(TableReferenceModel.create("tableName"), ColumnReferenceModel.create("columnName")));
 
-            it("can be translated to a vendor specific statement", () -> {
-                VendorInterpreter interpreter = Vendor.ansi().getInterpreter();
+      it("can be translated to a vendor specific statement", () -> {
+        VendorInterpreter interpreter = Vendor.ansi().getInterpreter();
 
-                String translatedSql = interpreter.translate(context().removeModel());
+        String translatedSql = interpreter.translate(context().removeModel());
 
-                assertThat(translatedSql).isEqualTo("ALTER TABLE tableName DROP COLUMN columnName");
-            });
+        assertThat(translatedSql).isEqualTo("ALTER TABLE tableName DROP COLUMN columnName");
+      });
 
 
-        });
+    });
 
-    }
+  }
 }

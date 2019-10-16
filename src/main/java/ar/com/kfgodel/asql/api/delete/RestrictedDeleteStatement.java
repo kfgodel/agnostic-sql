@@ -8,6 +8,6 @@ import ar.com.kfgodel.asql.impl.model.delete.DeleteModel;
  */
 public interface RestrictedDeleteStatement extends AgnosticStatement {
 
-    @Override
-    DeleteModel parseModel();
+  @Override
+  DeleteModel parseModel();
 }

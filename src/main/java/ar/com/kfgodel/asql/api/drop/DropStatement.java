@@ -9,6 +9,6 @@ import ar.com.kfgodel.asql.impl.model.drop.DropModel;
  */
 public interface DropStatement extends AgnosticStatement {
 
-    @Override
-    DropModel parseModel();
+  @Override
+  DropModel parseModel();
 }

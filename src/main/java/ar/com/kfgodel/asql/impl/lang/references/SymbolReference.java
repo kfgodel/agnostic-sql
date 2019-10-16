@@ -9,17 +9,17 @@ import ar.com.kfgodel.asql.impl.model.references.SymbolModel;
  */
 public class SymbolReference implements AgnosticConstruct {
 
-    private String symbolTemplatePath;
+  private String symbolTemplatePath;
 
-    @Override
-    public AgnosticModel parseModel() {
-        return SymbolModel.create(symbolTemplatePath);
-    }
+  @Override
+  public AgnosticModel parseModel() {
+    return SymbolModel.create(symbolTemplatePath);
+  }
 
-    public static SymbolReference create(String symbolPath){
-        SymbolReference reference = new SymbolReference();
-        reference.symbolTemplatePath = symbolPath;
-        return reference;
-    }
+  public static SymbolReference create(String symbolPath) {
+    SymbolReference reference = new SymbolReference();
+    reference.symbolTemplatePath = symbolPath;
+    return reference;
+  }
 
 }

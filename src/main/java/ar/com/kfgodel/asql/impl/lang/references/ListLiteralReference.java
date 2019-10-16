@@ -15,24 +15,24 @@ import java.util.stream.Collectors;
  */
 public class ListLiteralReference implements AgnosticConstruct {
 
-    private Collection<?> values;
+  private Collection<?> values;
 
-    public static ListLiteralReference create(Collection<?> values){
-        ListLiteralReference listReference = new ListLiteralReference();
-        listReference.values = values;
-        return listReference;
-    }
+  public static ListLiteralReference create(Collection<?> values) {
+    ListLiteralReference listReference = new ListLiteralReference();
+    listReference.values = values;
+    return listReference;
+  }
 
-    @Override
-    public AgnosticModel parseModel() {
-        return ValueListModel.create(parseValueModels());
-    }
+  @Override
+  public AgnosticModel parseModel() {
+    return ValueListModel.create(parseValueModels());
+  }
 
-    private List<AgnosticModel> parseValueModels() {
-        List<AgnosticModel> parsedValues = values.stream()
-                .map(ExplicitValueModel::create)
-                .collect(Collectors.toList());
-        return parsedValues;
-    }
+  private List<AgnosticModel> parseValueModels() {
+    List<AgnosticModel> parsedValues = values.stream()
+      .map(ExplicitValueModel::create)
+      .collect(Collectors.toList());
+    return parsedValues;
+  }
 
 }

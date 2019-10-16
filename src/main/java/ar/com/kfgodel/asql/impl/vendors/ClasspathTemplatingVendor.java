@@ -12,21 +12,21 @@ import ar.com.kfgodel.nary.api.Nary;
  */
 public class ClasspathTemplatingVendor implements Vendor {
 
-    private String[] priorityOrderedTemplateLocations;
+  private String[] priorityOrderedTemplateLocations;
 
-    public Nary<String> getTemplateLocationInClasspath() {
-        return Nary.create(priorityOrderedTemplateLocations);
-    }
+  public Nary<String> getTemplateLocationInClasspath() {
+    return Nary.create(priorityOrderedTemplateLocations);
+  }
 
-    public static ClasspathTemplatingVendor create(String... priorityOrderedTemplateLocations) {
-        ClasspathTemplatingVendor vendor = new ClasspathTemplatingVendor();
-        vendor.priorityOrderedTemplateLocations = priorityOrderedTemplateLocations;
-        return vendor;
-    }
+  public static ClasspathTemplatingVendor create(String... priorityOrderedTemplateLocations) {
+    ClasspathTemplatingVendor vendor = new ClasspathTemplatingVendor();
+    vendor.priorityOrderedTemplateLocations = priorityOrderedTemplateLocations;
+    return vendor;
+  }
 
-    @Override
-    public VendorInterpreter getInterpreter() {
-        Nary<String> templateLocationInClasspath = this.getTemplateLocationInClasspath();
-        return TemplateInterpreter.create(templateLocationInClasspath);
-    }
+  @Override
+  public VendorInterpreter getInterpreter() {
+    Nary<String> templateLocationInClasspath = this.getTemplateLocationInClasspath();
+    return TemplateInterpreter.create(templateLocationInClasspath);
+  }
 }

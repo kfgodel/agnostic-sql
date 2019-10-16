@@ -15,29 +15,29 @@ import com.google.common.collect.Lists;
  * Created by kfgodel on 14/07/15.
  */
 public class PkDefinedCreateImpl implements ColumnDefinedCreate {
-    private CreateStatement previous;
+  private CreateStatement previous;
 
-    @Override
-    public ColumnDefinedCreate adding(ColumnDeclaration... declarations) {
-        return ColumnDefinedCreateImpl.create(this, declarations);
-    }
+  @Override
+  public ColumnDefinedCreate adding(ColumnDeclaration... declarations) {
+    return ColumnDefinedCreateImpl.create(this, declarations);
+  }
 
-    @Override
-    public CreateModel parseModel() {
-        CreateModel createModel = previous.parseModel();
+  @Override
+  public CreateModel parseModel() {
+    CreateModel createModel = previous.parseModel();
 
-        ColumnReferenceModel pkColumn = ColumnReferenceModel.create("id");
-        createModel.addDeclaration(ColumnDeclarationModel.create(pkColumn, DataType.pk().parseModel()));
+    ColumnReferenceModel pkColumn = ColumnReferenceModel.create("id");
+    createModel.addDeclaration(ColumnDeclarationModel.create(pkColumn, DataType.pk().parseModel()));
 
-        PkDefinitionModel pkDefinitionModel = PkDefinitionModel.create(Lists.newArrayList(pkColumn));
-        createModel.addConstraint(ConstraintDeclarationModel.create(pkDefinitionModel));
-        return createModel;
-    }
+    PkDefinitionModel pkDefinitionModel = PkDefinitionModel.create(Lists.newArrayList(pkColumn));
+    createModel.addConstraint(ConstraintDeclarationModel.create(pkDefinitionModel));
+    return createModel;
+  }
 
-    public static PkDefinedCreateImpl create(CreateStatement previousDefinition) {
-        PkDefinedCreateImpl pkDefinedCreate = new PkDefinedCreateImpl();
-        pkDefinedCreate.previous = previousDefinition;
-        return pkDefinedCreate;
-    }
+  public static PkDefinedCreateImpl create(CreateStatement previousDefinition) {
+    PkDefinedCreateImpl pkDefinedCreate = new PkDefinedCreateImpl();
+    pkDefinedCreate.previous = previousDefinition;
+    return pkDefinedCreate;
+  }
 
 }

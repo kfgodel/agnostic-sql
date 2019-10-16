@@ -8,44 +8,44 @@ import ar.com.kfgodel.asql.impl.model.AgnosticModel;
  */
 public class PredicateModel implements AgnosticModel {
 
-    private AgnosticModel leftSideOperand;
-    private AgnosticModel operator;
-    private AgnosticModel rightSideOperand;
+  private AgnosticModel leftSideOperand;
+  private AgnosticModel operator;
+  private AgnosticModel rightSideOperand;
 
-    public AgnosticModel getLeftSideOperand() {
-        return leftSideOperand;
-    }
+  public AgnosticModel getLeftSideOperand() {
+    return leftSideOperand;
+  }
 
-    public void setLeftSideOperand(AgnosticModel leftSideOperand) {
-        this.leftSideOperand = leftSideOperand;
-    }
+  public void setLeftSideOperand(AgnosticModel leftSideOperand) {
+    this.leftSideOperand = leftSideOperand;
+  }
 
-    public AgnosticModel getOperator() {
-        return operator;
-    }
+  public AgnosticModel getOperator() {
+    return operator;
+  }
 
-    public void setOperator(AgnosticModel operator) {
-        this.operator = operator;
-    }
+  public void setOperator(AgnosticModel operator) {
+    this.operator = operator;
+  }
 
-    public AgnosticModel getRightSideOperand() {
-        return rightSideOperand;
-    }
+  public AgnosticModel getRightSideOperand() {
+    return rightSideOperand;
+  }
 
-    public void setRightSideOperand(AgnosticModel rightSideOperand) {
-        this.rightSideOperand = rightSideOperand;
-    }
+  public void setRightSideOperand(AgnosticModel rightSideOperand) {
+    this.rightSideOperand = rightSideOperand;
+  }
 
-    public static PredicateModel create(AgnosticModel left, AgnosticModel operator, AgnosticModel right) {
-        PredicateModel node = new PredicateModel();
-        node.leftSideOperand = left;
-        node.operator = operator;
-        node.rightSideOperand = right;
-        return node;
-    }
+  public static PredicateModel create(AgnosticModel left, AgnosticModel operator, AgnosticModel right) {
+    PredicateModel node = new PredicateModel();
+    node.leftSideOperand = left;
+    node.operator = operator;
+    node.rightSideOperand = right;
+    return node;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/where/_predicate.ftl";
-    }
+  @Override
+  public String getTemplatePath() {
+    return "/where/_predicate.ftl";
+  }
 }

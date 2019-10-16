@@ -9,29 +9,29 @@ import ar.com.kfgodel.asql.impl.model.references.ConstraintReferenceModel;
  */
 public class ConstraintDeclarationModel implements AgnosticModel, TablePartModel {
 
-    private ConstraintReferenceModel identification;
-    private ConstraintDefinitionModel definition;
+  private ConstraintReferenceModel identification;
+  private ConstraintDefinitionModel definition;
 
-    public ConstraintReferenceModel getIdentification() {
-        return identification;
-    }
+  public ConstraintReferenceModel getIdentification() {
+    return identification;
+  }
 
-    public ConstraintDefinitionModel getDefinition() {
-        return definition;
-    }
+  public ConstraintDefinitionModel getDefinition() {
+    return definition;
+  }
 
-    public static ConstraintDeclarationModel create(ConstraintDefinitionModel definition) {
-        ConstraintDeclarationModel model = new ConstraintDeclarationModel();
-        model.definition = definition;
-        return model;
-    }
+  public static ConstraintDeclarationModel create(ConstraintDefinitionModel definition) {
+    ConstraintDeclarationModel model = new ConstraintDeclarationModel();
+    model.definition = definition;
+    return model;
+  }
 
-    public void setIdentification(ConstraintReferenceModel identification) {
-        this.identification = identification;
-    }
+  public void setIdentification(ConstraintReferenceModel identification) {
+    this.identification = identification;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/constraints/_constraintDeclaration.ftl";
-    }
+  @Override
+  public String getTemplatePath() {
+    return "/constraints/_constraintDeclaration.ftl";
+  }
 }

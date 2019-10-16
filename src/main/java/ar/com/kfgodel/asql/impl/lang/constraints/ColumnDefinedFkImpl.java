@@ -13,28 +13,28 @@ import java.util.List;
  */
 public class ColumnDefinedFkImpl implements ColumnDefinedFk {
 
-    private NamedConstraintImpl previousNode;
-    private List<ColumnReference> sourceColumns;
+  private NamedConstraintImpl previousNode;
+  private List<ColumnReference> sourceColumns;
 
 
-    public ConstraintReference getConstraint(){
-        return previousNode.getConstraintReference();
-    }
+  public ConstraintReference getConstraint() {
+    return previousNode.getConstraintReference();
+  }
 
-    public List<ColumnReference> getSourceColumns() {
-        return sourceColumns;
-    }
+  public List<ColumnReference> getSourceColumns() {
+    return sourceColumns;
+  }
 
-    @Override
-    public FkConstraintDeclaration to(String referencedTableName) {
-        return FkConstraintDeclarationImpl.create(this, Internal.table(referencedTableName));
-    }
+  @Override
+  public FkConstraintDeclaration to(String referencedTableName) {
+    return FkConstraintDeclarationImpl.create(this, Internal.table(referencedTableName));
+  }
 
-    public static ColumnDefinedFkImpl create(NamedConstraintImpl previousNode, List<ColumnReference> sourceColumns) {
-        ColumnDefinedFkImpl definedFk = new ColumnDefinedFkImpl();
-        definedFk.sourceColumns = sourceColumns;
-        definedFk.previousNode = previousNode;
-        return definedFk;
-    }
+  public static ColumnDefinedFkImpl create(NamedConstraintImpl previousNode, List<ColumnReference> sourceColumns) {
+    ColumnDefinedFkImpl definedFk = new ColumnDefinedFkImpl();
+    definedFk.sourceColumns = sourceColumns;
+    definedFk.previousNode = previousNode;
+    return definedFk;
+  }
 
 }

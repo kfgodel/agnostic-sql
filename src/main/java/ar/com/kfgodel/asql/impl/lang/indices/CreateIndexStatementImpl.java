@@ -13,23 +13,23 @@ import java.util.stream.Collectors;
  * Created by tenpines on 27/09/15.
  */
 public class CreateIndexStatementImpl implements CreateIndexStatement {
-    private TableDefinedCreateIndexImpl previousNode;
-    private List<ColumnReference> columns;
+  private TableDefinedCreateIndexImpl previousNode;
+  private List<ColumnReference> columns;
 
-    @Override
-    public AgnosticModel parseModel() {
-        return CreateIndexModel.create(previousNode.getIndex().parseModel(), previousNode.getTable().parseModel(), parseColumnModels());
-    }
+  @Override
+  public AgnosticModel parseModel() {
+    return CreateIndexModel.create(previousNode.getIndex().parseModel(), previousNode.getTable().parseModel(), parseColumnModels());
+  }
 
-    private List<ColumnReferenceModel> parseColumnModels() {
-        return columns.stream().map(ColumnReference::parseModel).collect(Collectors.toList());
-    }
+  private List<ColumnReferenceModel> parseColumnModels() {
+    return columns.stream().map(ColumnReference::parseModel).collect(Collectors.toList());
+  }
 
-    public static CreateIndexStatementImpl create(TableDefinedCreateIndexImpl previousNode, List<ColumnReference> columns){
-        CreateIndexStatementImpl statement = new CreateIndexStatementImpl();
-        statement.previousNode = previousNode;
-        statement.columns = columns ;
-        return statement;
-    }
-    
+  public static CreateIndexStatementImpl create(TableDefinedCreateIndexImpl previousNode, List<ColumnReference> columns) {
+    CreateIndexStatementImpl statement = new CreateIndexStatementImpl();
+    statement.previousNode = previousNode;
+    statement.columns = columns;
+    return statement;
+  }
+
 }

@@ -8,6 +8,6 @@ import ar.com.kfgodel.asql.impl.model.alter.AddConstraintModel;
  */
 public interface AddConstraintStatement extends AgnosticStatement {
 
-    @Override
-    AddConstraintModel parseModel();
+  @Override
+  AddConstraintModel parseModel();
 }

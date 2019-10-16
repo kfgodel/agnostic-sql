@@ -12,29 +12,29 @@ import ar.com.kfgodel.asql.impl.model.alter.ChangeColumnModel;
  */
 public class ChangeColumnStatementImpl implements ChangeColumnStatement {
 
-    private TableDefinedAlterImpl previousNode;
-    private ColumnDeclaration columnDeclaration;
+  private TableDefinedAlterImpl previousNode;
+  private ColumnDeclaration columnDeclaration;
 
-    @Override
-    public ChangeColumnModel parseModel() {
-        return ChangeColumnModel.create(previousNode.getTable().parseModel(), columnDeclaration.parseModel());
-    }
+  @Override
+  public ChangeColumnModel parseModel() {
+    return ChangeColumnModel.create(previousNode.getTable().parseModel(), columnDeclaration.parseModel());
+  }
 
-    @Override
-    public ChangeNullabilityStatement toNullable() {
-        return ChangeNullabilityStatementImpl.create(previousNode, columnDeclaration, Internal.nullRef());
-    }
+  @Override
+  public ChangeNullabilityStatement toNullable() {
+    return ChangeNullabilityStatementImpl.create(previousNode, columnDeclaration, Internal.nullRef());
+  }
 
-    @Override
-    public ChangeNullabilityStatement toNonNullable() {
-        return ChangeNullabilityStatementImpl.create(previousNode, columnDeclaration, Operator.notPlacedBefore(Internal.nullRef()));
-    }
+  @Override
+  public ChangeNullabilityStatement toNonNullable() {
+    return ChangeNullabilityStatementImpl.create(previousNode, columnDeclaration, Operator.notPlacedBefore(Internal.nullRef()));
+  }
 
-    public static ChangeColumnStatementImpl create(TableDefinedAlterImpl previousNode, ColumnDeclaration column) {
-        ChangeColumnStatementImpl statement = new ChangeColumnStatementImpl();
-        statement.previousNode = previousNode;
-        statement.columnDeclaration = column;
-        return statement;
-    }
+  public static ChangeColumnStatementImpl create(TableDefinedAlterImpl previousNode, ColumnDeclaration column) {
+    ChangeColumnStatementImpl statement = new ChangeColumnStatementImpl();
+    statement.previousNode = previousNode;
+    statement.columnDeclaration = column;
+    return statement;
+  }
 
 }

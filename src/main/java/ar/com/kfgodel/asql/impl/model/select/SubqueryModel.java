@@ -7,21 +7,21 @@ import ar.com.kfgodel.asql.impl.model.AgnosticModel;
  */
 public class SubqueryModel implements AgnosticModel {
 
-    private AgnosticModel query;
+  private AgnosticModel query;
 
-    public AgnosticModel getQuery() {
-        return query;
-    }
+  public AgnosticModel getQuery() {
+    return query;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/operands/_subQuery.ftl";
-    }
-    
-    public static SubqueryModel create(AgnosticModel query){
-        SubqueryModel model = new SubqueryModel();
-        model.query = query;
-        return model;
-    }
-    
+  @Override
+  public String getTemplatePath() {
+    return "/operands/_subQuery.ftl";
+  }
+
+  public static SubqueryModel create(AgnosticModel query) {
+    SubqueryModel model = new SubqueryModel();
+    model.query = query;
+    return model;
+  }
+
 }

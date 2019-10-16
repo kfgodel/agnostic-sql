@@ -16,28 +16,28 @@ import java.util.stream.Collectors;
  */
 public class ProjectionDefinedSelectImpl implements ProjectionDefinedSelect {
 
-    private List<AgnosticConstruct> projections;
+  private List<AgnosticConstruct> projections;
 
-    @Override
-    public SelectModel parseModel() {
-        return SelectModel.create(parseExpressionModels());
-    }
+  @Override
+  public SelectModel parseModel() {
+    return SelectModel.create(parseExpressionModels());
+  }
 
-    private List<AgnosticModel> parseExpressionModels() {
-        return projections.stream().map(AgnosticConstruct::parseModel).collect(Collectors.toList());
-    }
+  private List<AgnosticModel> parseExpressionModels() {
+    return projections.stream().map(AgnosticConstruct::parseModel).collect(Collectors.toList());
+  }
 
-    public static ProjectionDefinedSelectImpl create(List<AgnosticConstruct> projections){
-        ProjectionDefinedSelectImpl select = new ProjectionDefinedSelectImpl();
-        select.projections = projections;
-        return select;
-    }
+  public static ProjectionDefinedSelectImpl create(List<AgnosticConstruct> projections) {
+    ProjectionDefinedSelectImpl select = new ProjectionDefinedSelectImpl();
+    select.projections = projections;
+    return select;
+  }
 
-    @Override
-    public TableDefinedSelect from(String... tableNames) {
-        List<TableReference> tableReferences = Arrays.stream(tableNames)
-                .map(TableReference::create)
-                .collect(Collectors.toList());
-        return TableDefinedSelectImpl.create(this, tableReferences);
-    }
+  @Override
+  public TableDefinedSelect from(String... tableNames) {
+    List<TableReference> tableReferences = Arrays.stream(tableNames)
+      .map(TableReference::create)
+      .collect(Collectors.toList());
+    return TableDefinedSelectImpl.create(this, tableReferences);
+  }
 }

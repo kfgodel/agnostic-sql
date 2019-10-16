@@ -11,17 +11,17 @@ import ar.com.kfgodel.asql.impl.model.select.SubqueryModel;
  */
 public class SubqueryReference implements AgnosticConstruct {
 
-    private SelectStatement query;
+  private SelectStatement query;
 
-    @Override
-    public AgnosticModel parseModel() {
-        return SubqueryModel.create(query.parseModel());
-    }
-    
-    public static SubqueryReference create(SelectStatement query){
-        SubqueryReference reference = new SubqueryReference();
-        reference.query = query;
-        return reference;
-    }
-    
+  @Override
+  public AgnosticModel parseModel() {
+    return SubqueryModel.create(query.parseModel());
+  }
+
+  public static SubqueryReference create(SelectStatement query) {
+    SubqueryReference reference = new SubqueryReference();
+    reference.query = query;
+    return reference;
+  }
+
 }

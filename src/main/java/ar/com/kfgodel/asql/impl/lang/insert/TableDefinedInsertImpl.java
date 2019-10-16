@@ -15,20 +15,20 @@ import java.util.Arrays;
  */
 public class TableDefinedInsertImpl extends TableCenteredStatement implements TableDefinedInsert {
 
-    @Override
-    public InsertStatement setting(ColumnAssignment... columnAssignments) {
-        return InsertWithColumnAssignments.create(this, Arrays.asList(columnAssignments));
-    }
+  @Override
+  public InsertStatement setting(ColumnAssignment... columnAssignments) {
+    return InsertWithColumnAssignments.create(this, Arrays.asList(columnAssignments));
+  }
 
-    @Override
-    public ColumnDefinedInsert set(String... columnNames) {
-        return ColumnDefinedInsertImpl.create(this, Internal.columns(columnNames));
-    }
+  @Override
+  public ColumnDefinedInsert set(String... columnNames) {
+    return ColumnDefinedInsertImpl.create(this, Internal.columns(columnNames));
+  }
 
-    public static TableDefinedInsertImpl create(TableReference table) {
-        TableDefinedInsertImpl insert = new TableDefinedInsertImpl();
-        insert.setTable(table);
-        return insert;
-    }
+  public static TableDefinedInsertImpl create(TableReference table) {
+    TableDefinedInsertImpl insert = new TableDefinedInsertImpl();
+    insert.setTable(table);
+    return insert;
+  }
 
 }

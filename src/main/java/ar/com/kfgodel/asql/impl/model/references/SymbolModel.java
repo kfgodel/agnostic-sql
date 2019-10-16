@@ -9,33 +9,33 @@ import ar.com.kfgodel.asql.impl.model.nullability.NullabilityModel;
  */
 public class SymbolModel implements AgnosticModel, NullabilityModel {
 
-    private String templatePath;
+  private String templatePath;
 
-    @Override
-    public String getTemplatePath() {
-        return templatePath;
-    }
-    
-    @Override
-    public int hashCode() {
-        return templatePath.hashCode();
-    }
+  @Override
+  public String getTemplatePath() {
+    return templatePath;
+  }
 
-    @Override
-    public boolean equals(Object obj) {
-        if(this == obj){
-            return true;
-        }
-        if(!SymbolModel.class.isInstance(obj)){
-            return false;
-        }
-        SymbolModel that = SymbolModel.class.cast(obj);
-        return this.templatePath.equals(that.templatePath);
-    }
+  @Override
+  public int hashCode() {
+    return templatePath.hashCode();
+  }
 
-    public static SymbolModel create(String templatePath) {
-        SymbolModel symbolModel = new SymbolModel();
-        symbolModel.templatePath = templatePath;
-        return symbolModel;
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
     }
+    if (!SymbolModel.class.isInstance(obj)) {
+      return false;
+    }
+    SymbolModel that = SymbolModel.class.cast(obj);
+    return this.templatePath.equals(that.templatePath);
+  }
+
+  public static SymbolModel create(String templatePath) {
+    SymbolModel symbolModel = new SymbolModel();
+    symbolModel.templatePath = templatePath;
+    return symbolModel;
+  }
 }

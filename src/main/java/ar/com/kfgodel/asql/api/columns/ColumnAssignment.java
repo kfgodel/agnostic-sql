@@ -10,10 +10,10 @@ import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
  */
 public interface ColumnAssignment extends AgnosticConstruct {
 
-    @Override
-    ColumnAssignmentModel parseModel();
+  @Override
+  ColumnAssignmentModel parseModel();
 
-    AgnosticConstruct getValue();
+  AgnosticConstruct getValue();
 
-    ColumnReference getColumn();
+  ColumnReference getColumn();
 }

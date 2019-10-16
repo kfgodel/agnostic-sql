@@ -9,16 +9,16 @@ import ar.com.kfgodel.asql.impl.model.references.SymbolModel;
  */
 public class NoArgFunctionInvocation implements FunctionInvocation {
 
-    private String name;
+  private String name;
 
-    public static NoArgFunctionInvocation create(String name) {
-        NoArgFunctionInvocation function = new NoArgFunctionInvocation();
-        function.name = name;
-        return function;
-    }
+  public static NoArgFunctionInvocation create(String name) {
+    NoArgFunctionInvocation function = new NoArgFunctionInvocation();
+    function.name = name;
+    return function;
+  }
 
-    @Override
-    public SymbolModel parseModel() {
-        return SymbolModel.create("/functions/"+name+".ftl");
-    }
+  @Override
+  public SymbolModel parseModel() {
+    return SymbolModel.create("/functions/" + name + ".ftl");
+  }
 }

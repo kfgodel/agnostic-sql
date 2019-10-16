@@ -12,20 +12,20 @@ import ar.com.kfgodel.asql.impl.model.delete.DeleteModel;
  */
 public class UnrestrictedDeleteStatementImpl extends TableCenteredStatement implements UnrestrictedDeleteStatement {
 
-    @Override
-    public DeleteModel parseModel() {
-        return DeleteModel.create(getTable().parseModel());
-    }
+  @Override
+  public DeleteModel parseModel() {
+    return DeleteModel.create(getTable().parseModel());
+  }
 
-    @Override
-    public RestrictedDeleteStatement where(Object condition) {
-        return RestrictedDeleteStatementImpl.create(this, Internal.asConstruct(condition));
-    }
+  @Override
+  public RestrictedDeleteStatement where(Object condition) {
+    return RestrictedDeleteStatementImpl.create(this, Internal.asConstruct(condition));
+  }
 
-    public static UnrestrictedDeleteStatementImpl create(TableReference table) {
-        UnrestrictedDeleteStatementImpl statement = new UnrestrictedDeleteStatementImpl();
-        statement.setTable(table);
-        return statement;
-    }
+  public static UnrestrictedDeleteStatementImpl create(TableReference table) {
+    UnrestrictedDeleteStatementImpl statement = new UnrestrictedDeleteStatementImpl();
+    statement.setTable(table);
+    return statement;
+  }
 
 }

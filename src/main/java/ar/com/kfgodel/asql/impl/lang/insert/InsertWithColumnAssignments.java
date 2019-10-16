@@ -17,37 +17,37 @@ import java.util.stream.Collectors;
  */
 public class InsertWithColumnAssignments implements InsertStatement {
 
-    private TableDefinedInsertImpl previousNode;
-    private List<ColumnAssignment> columnAssignments;
+  private TableDefinedInsertImpl previousNode;
+  private List<ColumnAssignment> columnAssignments;
 
-    @Override
-    public InsertModel parseModel() {
-        InsertModel insertModel = InsertModel.create(previousNode.getTable().parseModel(), getValueDefinition().parseModel());
-        insertModel.setColumnList(parseColumnModels());
-        return insertModel;
-    }
-    
-    public static InsertWithColumnAssignments create(TableDefinedInsertImpl previousNode, List<ColumnAssignment> assignments){
-        InsertWithColumnAssignments insert = new InsertWithColumnAssignments();
-        insert.previousNode = previousNode;
-        insert.columnAssignments = assignments;
-        return insert;
-    }
-    
+  @Override
+  public InsertModel parseModel() {
+    InsertModel insertModel = InsertModel.create(previousNode.getTable().parseModel(), getValueDefinition().parseModel());
+    insertModel.setColumnList(parseColumnModels());
+    return insertModel;
+  }
 
-    private List<ColumnReferenceModel> parseColumnModels() {
-        return columnAssignments
-                .stream()
-                .map(ColumnAssignment::getColumn)
-                .map(ColumnReference::parseModel)
-                .collect(Collectors.toList());
-    }
+  public static InsertWithColumnAssignments create(TableDefinedInsertImpl previousNode, List<ColumnAssignment> assignments) {
+    InsertWithColumnAssignments insert = new InsertWithColumnAssignments();
+    insert.previousNode = previousNode;
+    insert.columnAssignments = assignments;
+    return insert;
+  }
 
-    public InsertValueListReference getValueDefinition() {
-        List<AgnosticConstruct> values = columnAssignments
-                .stream()
-                .map(ColumnAssignment::getValue)
-                .collect(Collectors.toList());
-        return InsertValueListReference.create(values);
-    }
+
+  private List<ColumnReferenceModel> parseColumnModels() {
+    return columnAssignments
+      .stream()
+      .map(ColumnAssignment::getColumn)
+      .map(ColumnReference::parseModel)
+      .collect(Collectors.toList());
+  }
+
+  public InsertValueListReference getValueDefinition() {
+    List<AgnosticConstruct> values = columnAssignments
+      .stream()
+      .map(ColumnAssignment::getValue)
+      .collect(Collectors.toList());
+    return InsertValueListReference.create(values);
+  }
 }

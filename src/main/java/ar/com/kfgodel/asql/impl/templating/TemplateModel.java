@@ -5,8 +5,8 @@ package ar.com.kfgodel.asql.impl.templating;
  * Created by kfgodel on 12/07/15.
  */
 public interface TemplateModel {
-    /**
-     * @return The classpath relative path for the template that constructs a vendor specific language piece
-     */
-    String getTemplatePath();
+  /**
+   * @return The classpath relative path for the template that constructs a vendor specific language piece
+   */
+  String getTemplatePath();
 }

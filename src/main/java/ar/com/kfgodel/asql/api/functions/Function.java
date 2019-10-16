@@ -16,43 +16,46 @@ import java.util.stream.Collectors;
  */
 public interface Function {
 
-    static FunctionInvocation currentDate() {
-        return NoArgFunctionInvocation.create("current_date");
-    }
+  static FunctionInvocation currentDate() {
+    return NoArgFunctionInvocation.create("current_date");
+  }
 
-    static FunctionInvocation currentTime() {
-        return NoArgFunctionInvocation.create("current_time");
-    }
+  static FunctionInvocation currentTime() {
+    return NoArgFunctionInvocation.create("current_time");
+  }
 
-    static FunctionInvocation currentTimestamp() {
-        return NoArgFunctionInvocation.create("current_timestamp");
-    }
+  static FunctionInvocation currentTimestamp() {
+    return NoArgFunctionInvocation.create("current_timestamp");
+  }
 
-    static FunctionInvocation count() {
-        return NoArgFunctionInvocation.create("count_all");
-    }
+  static FunctionInvocation count() {
+    return NoArgFunctionInvocation.create("count_all");
+  }
 
-    static FunctionInvocation count(NamedColumn countedColumn) {
-        return MonoArgInvocation.create("count_column", countedColumn);
-    }
+  static FunctionInvocation count(NamedColumn countedColumn) {
+    return MonoArgInvocation.create("count_column", countedColumn);
+  }
 
-    static FunctionInvocation max(NamedColumn maxedColumn) {
-        return MonoArgInvocation.create("max", maxedColumn);
-    }
-    static FunctionInvocation min(NamedColumn maxedColumn) {
-        return MonoArgInvocation.create("min", maxedColumn);
-    }
-    static FunctionInvocation sum(NamedColumn maxedColumn) {
-        return MonoArgInvocation.create("sum", maxedColumn);
-    }
-    static FunctionInvocation avg(NamedColumn maxedColumn) {
-        return MonoArgInvocation.create("avg", maxedColumn);
-    }
+  static FunctionInvocation max(NamedColumn maxedColumn) {
+    return MonoArgInvocation.create("max", maxedColumn);
+  }
+
+  static FunctionInvocation min(NamedColumn maxedColumn) {
+    return MonoArgInvocation.create("min", maxedColumn);
+  }
+
+  static FunctionInvocation sum(NamedColumn maxedColumn) {
+    return MonoArgInvocation.create("sum", maxedColumn);
+  }
+
+  static FunctionInvocation avg(NamedColumn maxedColumn) {
+    return MonoArgInvocation.create("avg", maxedColumn);
+  }
 
 
-    static FunctionInvocation distinct(NamedColumn... columns) {
-        List<AgnosticConstruct> values = Arrays.stream(columns)
-                .collect(Collectors.toList());
-        return MultiArgInvocation.create("distinct", values);
-    }
+  static FunctionInvocation distinct(NamedColumn... columns) {
+    List<AgnosticConstruct> values = Arrays.stream(columns)
+      .collect(Collectors.toList());
+    return MultiArgInvocation.create("distinct", values);
+  }
 }

@@ -9,21 +9,21 @@ import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
  */
 public class ColumnReference implements AgnosticConstruct {
 
-    private String columnName;
+  private String columnName;
 
-    public String getColumnName() {
-        return columnName;
-    }
+  public String getColumnName() {
+    return columnName;
+  }
 
-    @Override
-    public ColumnReferenceModel parseModel() {
-        return ColumnReferenceModel.create(columnName);
-    }
+  @Override
+  public ColumnReferenceModel parseModel() {
+    return ColumnReferenceModel.create(columnName);
+  }
 
-    public static ColumnReference create(String columnName){
-        ColumnReference reference = new ColumnReference();
-        reference.columnName = columnName;
-        return reference;
-    }
+  public static ColumnReference create(String columnName) {
+    ColumnReference reference = new ColumnReference();
+    reference.columnName = columnName;
+    return reference;
+  }
 
 }

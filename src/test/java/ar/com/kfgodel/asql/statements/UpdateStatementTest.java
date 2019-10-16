@@ -18,25 +18,25 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(JavaSpecRunner.class)
 public class UpdateStatementTest extends JavaSpec<AsqlTestContext> {
-    @Override
-    public void define() {
-        describe("an agnostic update statement", () -> {
+  @Override
+  public void define() {
+    describe("an agnostic update statement", () -> {
 
-             it("can express a simple update", () -> {
-                 Asql asql = AsqlBuilder.create();
+      it("can express a simple update", () -> {
+        Asql asql = AsqlBuilder.create();
 
-                 UnrestrictedUpdate updateStatement = asql.update("tableName").setting(asql.column("columnName").to("value1"));
-                 UpdateModel updateModel = updateStatement.parseModel();
+        UnrestrictedUpdate updateStatement = asql.update("tableName").setting(asql.column("columnName").to("value1"));
+        UpdateModel updateModel = updateStatement.parseModel();
 
-                 assertThat(updateModel.getTable().getTableName()).isEqualTo("tableName");
+        assertThat(updateModel.getTable().getTableName()).isEqualTo("tableName");
 
-                 ColumnAssignmentModel assignment = updateModel.getColumnAssignments().get(0);
-                 assertThat(assignment.getColumn().getColumnName()).isEqualTo("columnName");
+        ColumnAssignmentModel assignment = updateModel.getColumnAssignments().get(0);
+        assertThat(assignment.getColumn().getColumnName()).isEqualTo("columnName");
 
-                 ExplicitValueModel assignedValue = (ExplicitValueModel) assignment.getAssignedValue();
-                 assertThat(assignedValue.getValue()).isEqualTo("value1");
-             });
-        });
+        ExplicitValueModel assignedValue = (ExplicitValueModel) assignment.getAssignedValue();
+        assertThat(assignedValue.getValue()).isEqualTo("value1");
+      });
+    });
 
-    }
+  }
 }

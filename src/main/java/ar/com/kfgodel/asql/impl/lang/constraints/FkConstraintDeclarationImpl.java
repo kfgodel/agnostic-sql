@@ -15,30 +15,30 @@ import java.util.stream.Collectors;
  */
 public class FkConstraintDeclarationImpl implements FkConstraintDeclaration {
 
-    private ColumnDefinedFkImpl previousNode;
+  private ColumnDefinedFkImpl previousNode;
 
-    private TableReference referencedTable;
+  private TableReference referencedTable;
 
-    @Override
-    public ConstraintDeclarationModel parseModel() {
-        List<ColumnReferenceModel> sourceColumns = parseColumnModels();
-        FkDefinitionModel fkDefinition = FkDefinitionModel.create(sourceColumns, referencedTable.parseModel());
-        ConstraintDeclarationModel fkDeclarationModel = ConstraintDeclarationModel.create(fkDefinition);
-        fkDeclarationModel.setIdentification(previousNode.getConstraint().parseModel());
-        return fkDeclarationModel;
-    }
+  @Override
+  public ConstraintDeclarationModel parseModel() {
+    List<ColumnReferenceModel> sourceColumns = parseColumnModels();
+    FkDefinitionModel fkDefinition = FkDefinitionModel.create(sourceColumns, referencedTable.parseModel());
+    ConstraintDeclarationModel fkDeclarationModel = ConstraintDeclarationModel.create(fkDefinition);
+    fkDeclarationModel.setIdentification(previousNode.getConstraint().parseModel());
+    return fkDeclarationModel;
+  }
 
-    private List<ColumnReferenceModel> parseColumnModels() {
-        return previousNode.getSourceColumns().stream()
-                .map(ColumnReference::parseModel)
-                .collect(Collectors.toList());
-    }
+  private List<ColumnReferenceModel> parseColumnModels() {
+    return previousNode.getSourceColumns().stream()
+      .map(ColumnReference::parseModel)
+      .collect(Collectors.toList());
+  }
 
-    public static FkConstraintDeclarationImpl create(ColumnDefinedFkImpl previousNode, TableReference referencedTable) {
-        FkConstraintDeclarationImpl constraint = new FkConstraintDeclarationImpl();
-        constraint.previousNode = previousNode;
-        constraint.referencedTable = referencedTable;
-        return constraint;
-    }
+  public static FkConstraintDeclarationImpl create(ColumnDefinedFkImpl previousNode, TableReference referencedTable) {
+    FkConstraintDeclarationImpl constraint = new FkConstraintDeclarationImpl();
+    constraint.previousNode = previousNode;
+    constraint.referencedTable = referencedTable;
+    return constraint;
+  }
 
 }

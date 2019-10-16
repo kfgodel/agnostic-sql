@@ -7,5 +7,5 @@ import ar.com.kfgodel.asql.impl.model.where.WhereModel;
  * Created by kfgodel on 16/07/15.
  */
 public interface WhereConstrainedModel {
-    WhereModel getWhereClause();
+  WhereModel getWhereClause();
 }

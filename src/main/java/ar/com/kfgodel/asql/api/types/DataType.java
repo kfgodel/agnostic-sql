@@ -72,6 +72,7 @@ public interface DataType extends AgnosticConstruct {
   static DataType blob() {
     return DataTypeImpl.create("blob", Internal.asConstructs());
   }
+
   static DataType clob() {
     return DataTypeImpl.create("clob", Internal.asConstructs());
   }

@@ -7,16 +7,18 @@ import ar.com.kfgodel.asql.api.columns.ColumnDeclaration;
  */
 public interface TableDefinedCreate extends CreateStatement {
 
-    /**
-     * Declares the additional columns that this table must include
-     * @param declarations The column declarations
-     * @return The new table definition
-     */
-    ColumnDefinedCreate with(ColumnDeclaration... declarations);
+  /**
+   * Declares the additional columns that this table must include
+   *
+   * @param declarations The column declarations
+   * @return The new table definition
+   */
+  ColumnDefinedCreate with(ColumnDeclaration... declarations);
 
-    /**
-     * Adds an id column used as PK for this table declaration
-     * @return The
-     */
-    ColumnDefinedCreate withIdPk();
+  /**
+   * Adds an id column used as PK for this table declaration
+   *
+   * @return The
+   */
+  ColumnDefinedCreate withIdPk();
 }

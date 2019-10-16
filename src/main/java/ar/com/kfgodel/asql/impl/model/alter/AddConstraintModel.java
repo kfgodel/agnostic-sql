@@ -10,25 +10,25 @@ import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
  */
 public class AddConstraintModel extends TableCenteredModel implements AgnosticModel {
 
-    private ConstraintDeclarationModel constraintDeclaration;
+  private ConstraintDeclarationModel constraintDeclaration;
 
-    public ConstraintDeclarationModel getConstraintDeclaration() {
-        return constraintDeclaration;
-    }
+  public ConstraintDeclarationModel getConstraintDeclaration() {
+    return constraintDeclaration;
+  }
 
-    public void setConstraintDeclaration(ConstraintDeclarationModel constraintDeclaration) {
-        this.constraintDeclaration = constraintDeclaration;
-    }
+  public void setConstraintDeclaration(ConstraintDeclarationModel constraintDeclaration) {
+    this.constraintDeclaration = constraintDeclaration;
+  }
 
-    public static AddConstraintModel create(TableReferenceModel table, ConstraintDeclarationModel constraintDeclaration) {
-        AddConstraintModel model = new AddConstraintModel();
-        model.setTable(table);
-        model.constraintDeclaration = constraintDeclaration;
-        return model;
-    }
+  public static AddConstraintModel create(TableReferenceModel table, ConstraintDeclarationModel constraintDeclaration) {
+    AddConstraintModel model = new AddConstraintModel();
+    model.setTable(table);
+    model.constraintDeclaration = constraintDeclaration;
+    return model;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/alter/add_constraint.ftl";
-    }
+  @Override
+  public String getTemplatePath() {
+    return "/alter/add_constraint.ftl";
+  }
 }

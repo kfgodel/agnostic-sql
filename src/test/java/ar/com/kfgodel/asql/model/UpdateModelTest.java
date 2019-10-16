@@ -23,54 +23,54 @@ import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
  */
 @RunWith(JavaSpecRunner.class)
 public class UpdateModelTest extends JavaSpec<AsqlTestContext> {
-    @Override
-    public void define() {
-        describe("an agnostic update statement model", () -> {
+  @Override
+  public void define() {
+    describe("an agnostic update statement model", () -> {
 
 
-            context().updateModel(() -> {
-                UpdateModel updateModel = UpdateModel.create(TableReferenceModel.create("tableName"), Lists.newArrayList(ColumnAssignmentModel.create(ColumnReferenceModel.create("column1"), ExplicitValueModel.create("value1"))));
-                updateModel.getWhereClause().setPredicate(PredicateModel.create(ColumnReferenceModel.create("column2"), Operator.equal().parseModel(), ExplicitValueModel.create(3)));
-                return updateModel;
-            });
+      context().updateModel(() -> {
+        UpdateModel updateModel = UpdateModel.create(TableReferenceModel.create("tableName"), Lists.newArrayList(ColumnAssignmentModel.create(ColumnReferenceModel.create("column1"), ExplicitValueModel.create("value1"))));
+        updateModel.getWhereClause().setPredicate(PredicateModel.create(ColumnReferenceModel.create("column2"), Operator.equal().parseModel(), ExplicitValueModel.create(3)));
+        return updateModel;
+      });
 
-            it("throws an error if no assignment defined", ()->{
-                try{
-                    UpdateModel.create(TableReferenceModel.create("aTableName"), Lists.newArrayList());
-                    failBecauseExceptionWasNotThrown(IllegalArgumentException.class);
-                }catch (IllegalArgumentException e){
-                    assertThat(e).hasMessage("At least one assignment needed");
-                }
-            });
+      it("throws an error if no assignment defined", () -> {
+        try {
+          UpdateModel.create(TableReferenceModel.create("aTableName"), Lists.newArrayList());
+          failBecauseExceptionWasNotThrown(IllegalArgumentException.class);
+        } catch (IllegalArgumentException e) {
+          assertThat(e).hasMessage("At least one assignment needed");
+        }
+      });
 
-            it("represents the abstract state of an agnostic sql update statement", () -> {
+      it("represents the abstract state of an agnostic sql update statement", () -> {
 
-                UpdateModel updateTree = context().updateModel();
+        UpdateModel updateTree = context().updateModel();
 
-                assertThat(updateTree.getTable().getTableName()).isEqualTo("tableName");
+        assertThat(updateTree.getTable().getTableName()).isEqualTo("tableName");
 
-                assertThat(updateTree.getColumnAssignments().get(0).getColumn().getColumnName()).isEqualTo("column1");
-                ExplicitValueModel assignedValue = (ExplicitValueModel) updateTree.getColumnAssignments().get(0).getAssignedValue();
-                assertThat(assignedValue.getValue()).isEqualTo("value1");
+        assertThat(updateTree.getColumnAssignments().get(0).getColumn().getColumnName()).isEqualTo("column1");
+        ExplicitValueModel assignedValue = (ExplicitValueModel) updateTree.getColumnAssignments().get(0).getAssignedValue();
+        assertThat(assignedValue.getValue()).isEqualTo("value1");
 
-                PredicateModel predicateModel = (PredicateModel) updateTree.getWhereClause().getPredicate();
-                ColumnReferenceModel leftSide = (ColumnReferenceModel) predicateModel.getLeftSideOperand();
-                assertThat(leftSide.getColumnName()).isEqualTo("column2");
-                assertThat(predicateModel.getOperator()).isEqualTo(Operator.equal().parseModel());
-                ExplicitValueModel rightSide = (ExplicitValueModel) predicateModel.getRightSideOperand();
-                assertThat(rightSide.getValue()).isEqualTo(3);
-            });
+        PredicateModel predicateModel = (PredicateModel) updateTree.getWhereClause().getPredicate();
+        ColumnReferenceModel leftSide = (ColumnReferenceModel) predicateModel.getLeftSideOperand();
+        assertThat(leftSide.getColumnName()).isEqualTo("column2");
+        assertThat(predicateModel.getOperator()).isEqualTo(Operator.equal().parseModel());
+        ExplicitValueModel rightSide = (ExplicitValueModel) predicateModel.getRightSideOperand();
+        assertThat(rightSide.getValue()).isEqualTo(3);
+      });
 
-            it("can be translated to a vendor specific statement", () -> {
+      it("can be translated to a vendor specific statement", () -> {
 
-                VendorInterpreter interpreter = Vendor.ansi().getInterpreter();
+        VendorInterpreter interpreter = Vendor.ansi().getInterpreter();
 
-                String translatedSql = interpreter.translate(context().updateModel());
+        String translatedSql = interpreter.translate(context().updateModel());
 
-                assertThat(translatedSql).isEqualTo("UPDATE tableName SET column1 = 'value1' WHERE column2 = 3");
+        assertThat(translatedSql).isEqualTo("UPDATE tableName SET column1 = 'value1' WHERE column2 = 3");
 
-            });
-        });
+      });
+    });
 
-    }
+  }
 }

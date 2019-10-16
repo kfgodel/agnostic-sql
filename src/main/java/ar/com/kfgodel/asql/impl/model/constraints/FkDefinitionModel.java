@@ -10,27 +10,27 @@ import java.util.List;
  */
 public class FkDefinitionModel implements ConstraintDefinitionModel {
 
-    private List<ColumnReferenceModel> columns;
-    private TableReferenceModel referencedTable;
+  private List<ColumnReferenceModel> columns;
+  private TableReferenceModel referencedTable;
 
-    public List<ColumnReferenceModel> getColumns() {
-        return columns;
-    }
+  public List<ColumnReferenceModel> getColumns() {
+    return columns;
+  }
 
-    public TableReferenceModel getReferencedTable() {
-        return referencedTable;
-    }
+  public TableReferenceModel getReferencedTable() {
+    return referencedTable;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/constraints/_fkDefinition.ftl";
-    }
-    
-    public static FkDefinitionModel create(List<ColumnReferenceModel> columns, TableReferenceModel table){
-        FkDefinitionModel model = new FkDefinitionModel();
-        model.columns = columns;
-        model.referencedTable = table;
-        return model;
-    }
-    
+  @Override
+  public String getTemplatePath() {
+    return "/constraints/_fkDefinition.ftl";
+  }
+
+  public static FkDefinitionModel create(List<ColumnReferenceModel> columns, TableReferenceModel table) {
+    FkDefinitionModel model = new FkDefinitionModel();
+    model.columns = columns;
+    model.referencedTable = table;
+    return model;
+  }
+
 }

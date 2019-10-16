@@ -7,8 +7,8 @@ import ar.com.kfgodel.asql.impl.model.AgnosticModel;
  * Created by kfgodel on 11/07/15.
  */
 public interface AgnosticStatement extends AgnosticConstruct {
-    /**
-     * @return The information node that captures this statement configuration state
-     */
-    AgnosticModel parseModel();
+  /**
+   * @return The information node that captures this statement configuration state
+   */
+  AgnosticModel parseModel();
 }

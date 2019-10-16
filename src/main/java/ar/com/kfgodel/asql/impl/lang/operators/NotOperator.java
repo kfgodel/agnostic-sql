@@ -13,20 +13,20 @@ import java.util.function.Function;
  */
 public class NotOperator<T extends AgnosticConstruct> implements AgnosticConstruct, NullabilityConstraint {
 
-    private T negatedConstruct;
-    private Function<AgnosticModel, NullabilityModel> positionerFunction;
-    
-    @Override
-    public NullabilityModel parseModel() {
-        AgnosticModel negatedModel = negatedConstruct.parseModel();
-        return positionerFunction.apply(negatedModel);
-    }
+  private T negatedConstruct;
+  private Function<AgnosticModel, NullabilityModel> positionerFunction;
 
-    public static <T extends AgnosticConstruct> NotOperator<T> create(T negated, Function<AgnosticModel, NullabilityModel> positioner) {
-        NotOperator operator = new NotOperator();
-        operator.negatedConstruct = negated;
-        operator.positionerFunction = positioner;
-        return operator;
-    }
+  @Override
+  public NullabilityModel parseModel() {
+    AgnosticModel negatedModel = negatedConstruct.parseModel();
+    return positionerFunction.apply(negatedModel);
+  }
+
+  public static <T extends AgnosticConstruct> NotOperator<T> create(T negated, Function<AgnosticModel, NullabilityModel> positioner) {
+    NotOperator operator = new NotOperator();
+    operator.negatedConstruct = negated;
+    operator.positionerFunction = positioner;
+    return operator;
+  }
 
 }

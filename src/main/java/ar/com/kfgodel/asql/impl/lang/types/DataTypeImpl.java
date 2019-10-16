@@ -13,32 +13,32 @@ import java.util.stream.Collectors;
  */
 public class DataTypeImpl implements DataType {
 
-    private String name;
-    private List<AgnosticConstruct> arguments;
+  private String name;
+  private List<AgnosticConstruct> arguments;
 
-    public List<AgnosticConstruct> getArguments() {
-        return arguments;
-    }
+  public List<AgnosticConstruct> getArguments() {
+    return arguments;
+  }
 
-    public String getAgnosticName() {
-        return name;
-    }
+  public String getAgnosticName() {
+    return name;
+  }
 
-    public static DataTypeImpl create(String name, List<AgnosticConstruct> arguments) {
-        DataTypeImpl type = new DataTypeImpl();
-        type.name = name;
-        type.arguments = arguments;
-        return type;
-    }
+  public static DataTypeImpl create(String name, List<AgnosticConstruct> arguments) {
+    DataTypeImpl type = new DataTypeImpl();
+    type.name = name;
+    type.arguments = arguments;
+    return type;
+  }
 
-    @Override
-    public DataTypeModel parseModel() {
-        return DataTypeModel.create(getAgnosticName(), parseArgumentModels());
-    }
+  @Override
+  public DataTypeModel parseModel() {
+    return DataTypeModel.create(getAgnosticName(), parseArgumentModels());
+  }
 
-    private List<AgnosticModel> parseArgumentModels() {
-        return getArguments().stream()
-                .map(AgnosticConstruct::parseModel)
-                .collect(Collectors.toList());
-    }
+  private List<AgnosticModel> parseArgumentModels() {
+    return getArguments().stream()
+      .map(AgnosticConstruct::parseModel)
+      .collect(Collectors.toList());
+  }
 }

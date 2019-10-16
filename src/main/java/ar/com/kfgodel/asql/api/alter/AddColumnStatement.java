@@ -9,6 +9,6 @@ import ar.com.kfgodel.asql.impl.model.alter.AddColumnModel;
  */
 public interface AddColumnStatement extends AgnosticStatement {
 
-    @Override
-    AddColumnModel parseModel();
+  @Override
+  AddColumnModel parseModel();
 }

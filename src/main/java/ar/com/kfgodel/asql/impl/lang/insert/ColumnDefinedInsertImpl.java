@@ -18,39 +18,39 @@ import java.util.stream.Collectors;
  */
 public class ColumnDefinedInsertImpl implements ColumnDefinedInsert {
 
-    private TableDefinedInsertImpl previousNode;
-    private List<ColumnReference> columns;
+  private TableDefinedInsertImpl previousNode;
+  private List<ColumnReference> columns;
 
-    public TableReference getTable(){
-        return previousNode.getTable();
-    }
+  public TableReference getTable() {
+    return previousNode.getTable();
+  }
 
-    @Override
-    public InsertStatement to(Object... values) {
-        List<Object> columnValues = Arrays.asList(values);
-        int columnCount = columns.size();
-        if(columnCount != columnValues.size()){
-            // sanity/misuse check
-            throw new IllegalArgumentException("The column and value count don't match: " + columns + " " + columnValues);
-        }
-        return InsertWithValueList.create(this, InsertValueListReference.create(Internal.asConstructs(values)));
+  @Override
+  public InsertStatement to(Object... values) {
+    List<Object> columnValues = Arrays.asList(values);
+    int columnCount = columns.size();
+    if (columnCount != columnValues.size()) {
+      // sanity/misuse check
+      throw new IllegalArgumentException("The column and value count don't match: " + columns + " " + columnValues);
     }
+    return InsertWithValueList.create(this, InsertValueListReference.create(Internal.asConstructs(values)));
+  }
 
-    @Override
-    public InsertStatement to(SelectStatement subquery) {
-        return InsertWithSuquery.create(this, Internal.asSubquery(subquery));
-    }
+  @Override
+  public InsertStatement to(SelectStatement subquery) {
+    return InsertWithSuquery.create(this, Internal.asSubquery(subquery));
+  }
 
-    public static ColumnDefinedInsertImpl create(TableDefinedInsertImpl previousNode, List<ColumnReference> columns) {
-        ColumnDefinedInsertImpl insert = new ColumnDefinedInsertImpl();
-        insert.previousNode = previousNode;
-        insert.columns = columns;
-        return insert;
-    }
+  public static ColumnDefinedInsertImpl create(TableDefinedInsertImpl previousNode, List<ColumnReference> columns) {
+    ColumnDefinedInsertImpl insert = new ColumnDefinedInsertImpl();
+    insert.previousNode = previousNode;
+    insert.columns = columns;
+    return insert;
+  }
 
-    public List<ColumnReferenceModel> getParsedColumnModels() {
-        return columns.stream()
-                .map(ColumnReference::parseModel)
-                .collect(Collectors.toList());
-    }
+  public List<ColumnReferenceModel> getParsedColumnModels() {
+    return columns.stream()
+      .map(ColumnReference::parseModel)
+      .collect(Collectors.toList());
+  }
 }

@@ -16,31 +16,31 @@ import java.util.stream.Collectors;
  */
 public class TableDefinedSelectImpl implements TableDefinedSelect {
 
-    private ProjectionDefinedSelectImpl previousNode;
-    private List<TableReference> tables;
+  private ProjectionDefinedSelectImpl previousNode;
+  private List<TableReference> tables;
 
-    @Override
-    public SelectModel parseModel() {
-        SelectModel selectModel = previousNode.parseModel();
-        selectModel.setFromClause(FromModel.create(parseTableModels()));
-        return selectModel;
-    }
+  @Override
+  public SelectModel parseModel() {
+    SelectModel selectModel = previousNode.parseModel();
+    selectModel.setFromClause(FromModel.create(parseTableModels()));
+    return selectModel;
+  }
 
-    private List<TableReferenceModel> parseTableModels() {
-        return tables.stream()
-                .map(TableReference::parseModel)
-                .collect(Collectors.toList());
-    }
+  private List<TableReferenceModel> parseTableModels() {
+    return tables.stream()
+      .map(TableReference::parseModel)
+      .collect(Collectors.toList());
+  }
 
-    public static TableDefinedSelectImpl create(ProjectionDefinedSelectImpl previousNode, List<TableReference> tables){
-        TableDefinedSelectImpl select = new TableDefinedSelectImpl();
-        select.previousNode = previousNode;
-        select.tables = tables;
-        return select;
-    }
+  public static TableDefinedSelectImpl create(ProjectionDefinedSelectImpl previousNode, List<TableReference> tables) {
+    TableDefinedSelectImpl select = new TableDefinedSelectImpl();
+    select.previousNode = previousNode;
+    select.tables = tables;
+    return select;
+  }
 
-    @Override
-    public RestrictedSelect where(Object condition) {
-        return RestrictedSelectImpl.create(this, Internal.asConstruct(condition));
-    }
+  @Override
+  public RestrictedSelect where(Object condition) {
+    return RestrictedSelectImpl.create(this, Internal.asConstruct(condition));
+  }
 }

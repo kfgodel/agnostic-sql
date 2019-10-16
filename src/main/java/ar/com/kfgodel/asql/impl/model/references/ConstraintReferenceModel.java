@@ -7,20 +7,20 @@ import ar.com.kfgodel.asql.impl.model.AgnosticModel;
  */
 public class ConstraintReferenceModel implements AgnosticModel {
 
-    private String name;
+  private String name;
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public static ConstraintReferenceModel create(String constraintName){
-        ConstraintReferenceModel reference = new ConstraintReferenceModel();
-        reference.name = constraintName;
-        return reference;
-    }
+  public static ConstraintReferenceModel create(String constraintName) {
+    ConstraintReferenceModel reference = new ConstraintReferenceModel();
+    reference.name = constraintName;
+    return reference;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/references/_constraint.ftl";
-    }
+  @Override
+  public String getTemplatePath() {
+    return "/references/_constraint.ftl";
+  }
 }

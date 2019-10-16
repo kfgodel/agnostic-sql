@@ -9,13 +9,13 @@ import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
  */
 public abstract class TableCenteredModel implements AgnosticModel {
 
-    private TableReferenceModel table;
+  private TableReferenceModel table;
 
-    public TableReferenceModel getTable() {
-        return table;
-    }
+  public TableReferenceModel getTable() {
+    return table;
+  }
 
-    public void setTable(TableReferenceModel table) {
-        this.table = table;
-    }
+  public void setTable(TableReferenceModel table) {
+    this.table = table;
+  }
 }

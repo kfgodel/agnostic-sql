@@ -9,20 +9,20 @@ import ar.com.kfgodel.asql.impl.model.value.ValueListModel;
  */
 public class InsertValueListModel implements AgnosticModel {
 
-    private ValueListModel values;
+  private ValueListModel values;
 
-    public ValueListModel getValues() {
-        return values;
-    }
+  public ValueListModel getValues() {
+    return values;
+  }
 
-    public static InsertValueListModel create(ValueListModel values){
-        InsertValueListModel listModel = new InsertValueListModel();
-        listModel.values = values;
-        return listModel;
-    }
+  public static InsertValueListModel create(ValueListModel values) {
+    InsertValueListModel listModel = new InsertValueListModel();
+    listModel.values = values;
+    return listModel;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/insert/_valueList.ftl";
-    }
+  @Override
+  public String getTemplatePath() {
+    return "/insert/_valueList.ftl";
+  }
 }

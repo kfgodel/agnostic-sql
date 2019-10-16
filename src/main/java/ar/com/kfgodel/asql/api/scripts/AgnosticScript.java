@@ -11,5 +11,5 @@ import java.util.List;
  */
 public interface AgnosticScript extends AgnosticConstruct {
 
-    List<AgnosticStatement> getStatements();
+  List<AgnosticStatement> getStatements();
 }

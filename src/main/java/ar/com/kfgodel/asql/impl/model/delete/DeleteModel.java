@@ -11,22 +11,22 @@ import ar.com.kfgodel.asql.impl.model.where.WhereModel;
  */
 public class DeleteModel extends TableCenteredModel implements WhereConstrainedModel {
 
-    private WhereModel whereClause;
+  private WhereModel whereClause;
 
-    public static DeleteModel create(TableReferenceModel table) {
-        DeleteModel model = new DeleteModel();
-        model.setTable(table);
-        model.whereClause = WhereModel.create();
-        return model;
-    }
+  public static DeleteModel create(TableReferenceModel table) {
+    DeleteModel model = new DeleteModel();
+    model.setTable(table);
+    model.whereClause = WhereModel.create();
+    return model;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/delete/delete.ftl";
-    }
+  @Override
+  public String getTemplatePath() {
+    return "/delete/delete.ftl";
+  }
 
-    @Override
-    public WhereModel getWhereClause() {
-        return whereClause;
-    }
+  @Override
+  public WhereModel getWhereClause() {
+    return whereClause;
+  }
 }

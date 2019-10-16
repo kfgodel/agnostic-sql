@@ -9,21 +9,21 @@ import java.util.List;
  */
 public class UniqueDefinitionModel implements ConstraintDefinitionModel {
 
-    private List<ColumnReferenceModel> columns;
+  private List<ColumnReferenceModel> columns;
 
-    public List<ColumnReferenceModel> getColumns() {
-        return columns;
-    }
-    
-    public static UniqueDefinitionModel create(List<ColumnReferenceModel> columns){
-        UniqueDefinitionModel model = new UniqueDefinitionModel();
-        model.columns = columns;
-        return model;
-    }
-    
+  public List<ColumnReferenceModel> getColumns() {
+    return columns;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/constraints/_uniqueDefinition.ftl";
-    }
+  public static UniqueDefinitionModel create(List<ColumnReferenceModel> columns) {
+    UniqueDefinitionModel model = new UniqueDefinitionModel();
+    model.columns = columns;
+    return model;
+  }
+
+
+  @Override
+  public String getTemplatePath() {
+    return "/constraints/_uniqueDefinition.ftl";
+  }
 }

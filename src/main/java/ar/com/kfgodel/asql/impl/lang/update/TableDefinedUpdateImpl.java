@@ -14,19 +14,19 @@ import java.util.List;
  */
 public class TableDefinedUpdateImpl extends TableCenteredStatement implements TableDefinedUpdate {
 
-    public static TableDefinedUpdateImpl create(TableReference table) {
-        TableDefinedUpdateImpl update = new TableDefinedUpdateImpl();
-        update.setTable(table);
-        return update;
-    }
+  public static TableDefinedUpdateImpl create(TableReference table) {
+    TableDefinedUpdateImpl update = new TableDefinedUpdateImpl();
+    update.setTable(table);
+    return update;
+  }
 
-    @Override
-    public UnrestrictedUpdate setting(ColumnAssignment... assignments) {
-        if(assignments == null || assignments.length == 0){
-            throw new IllegalArgumentException("At least one assignment needed");
-        }
-        List<ColumnAssignment> list = Lists.newArrayList(assignments);
-        return UnrestrictedUpdateImpl.create(this, list);
+  @Override
+  public UnrestrictedUpdate setting(ColumnAssignment... assignments) {
+    if (assignments == null || assignments.length == 0) {
+      throw new IllegalArgumentException("At least one assignment needed");
     }
+    List<ColumnAssignment> list = Lists.newArrayList(assignments);
+    return UnrestrictedUpdateImpl.create(this, list);
+  }
 
 }

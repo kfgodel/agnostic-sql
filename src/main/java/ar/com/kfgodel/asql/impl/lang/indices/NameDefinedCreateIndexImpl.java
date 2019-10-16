@@ -11,21 +11,21 @@ import ar.com.kfgodel.asql.impl.lang.references.IndexReference;
 public class NameDefinedCreateIndexImpl implements NameDefinedCreateIndex {
 
 
-    private IndexReference index;
+  private IndexReference index;
 
-    public IndexReference getIndex() {
-        return index;
-    }
+  public IndexReference getIndex() {
+    return index;
+  }
 
-    @Override
-    public TableDefinedCreateIndex on(String tableName) {
-        return TableDefinedCreateIndexImpl.create(this, Internal.table(tableName));
-    }
-    
-    public static NameDefinedCreateIndexImpl create(IndexReference index){
-        NameDefinedCreateIndexImpl createIndex = new NameDefinedCreateIndexImpl();
-        createIndex.index = index;
-        return createIndex;
-    }
-    
+  @Override
+  public TableDefinedCreateIndex on(String tableName) {
+    return TableDefinedCreateIndexImpl.create(this, Internal.table(tableName));
+  }
+
+  public static NameDefinedCreateIndexImpl create(IndexReference index) {
+    NameDefinedCreateIndexImpl createIndex = new NameDefinedCreateIndexImpl();
+    createIndex.index = index;
+    return createIndex;
+  }
+
 }

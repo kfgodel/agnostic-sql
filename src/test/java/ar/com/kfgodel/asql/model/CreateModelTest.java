@@ -26,62 +26,62 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(JavaSpecRunner.class)
 public class CreateModelTest extends JavaSpec<AsqlTestContext> {
-    @Override
-    public void define() {
-        describe("an agnostic create statement model", () -> {
+  @Override
+  public void define() {
+    describe("an agnostic create statement model", () -> {
 
-            context().createModel(()->{
-                CreateModel createModel = CreateModel.create(TableReferenceModel.create("POSA_ESTADO_DE_LIQUIDACION"));
-                createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("id"),DataType.pk().parseModel()));
-                createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("momentoDeCreacion"),DataType.timestamp().parseModel()));
-                createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("momentoDeUltimaModificacion"),DataType.timestamp().parseModel()));
-                createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("persistenceVersion"), DataType.bigInteger().parseModel()));
-                createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("diasPorLiquidar"), DataType.integer().parseModel()).withNullability(NotOperatorModel.createPlacedBefore(Internal.nullRef().parseModel())));
-                createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("cantidad"), DataType.integer().parseModel()).withNullability(NotOperatorModel.createPlacedBefore(Internal.nullRef().parseModel())).withDefaultValue(ExplicitValueModel.create(0)));
-                createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("otra_id"), DataType.fk().parseModel()));
-                createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("estado"), DataType.shortString().parseModel()));
-                createModel.addConstraint(ConstraintDeclarationModel.create(PkDefinitionModel.create(Lists.newArrayList(ColumnReferenceModel.create("id")))));
-                return createModel;
-            });
+      context().createModel(() -> {
+        CreateModel createModel = CreateModel.create(TableReferenceModel.create("POSA_ESTADO_DE_LIQUIDACION"));
+        createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("id"), DataType.pk().parseModel()));
+        createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("momentoDeCreacion"), DataType.timestamp().parseModel()));
+        createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("momentoDeUltimaModificacion"), DataType.timestamp().parseModel()));
+        createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("persistenceVersion"), DataType.bigInteger().parseModel()));
+        createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("diasPorLiquidar"), DataType.integer().parseModel()).withNullability(NotOperatorModel.createPlacedBefore(Internal.nullRef().parseModel())));
+        createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("cantidad"), DataType.integer().parseModel()).withNullability(NotOperatorModel.createPlacedBefore(Internal.nullRef().parseModel())).withDefaultValue(ExplicitValueModel.create(0)));
+        createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("otra_id"), DataType.fk().parseModel()));
+        createModel.addDeclaration(ColumnDeclarationModel.create(ColumnReferenceModel.create("estado"), DataType.shortString().parseModel()));
+        createModel.addConstraint(ConstraintDeclarationModel.create(PkDefinitionModel.create(Lists.newArrayList(ColumnReferenceModel.create("id")))));
+        return createModel;
+      });
 
-            it("can be translated to a vendor specific statement", () -> {
+      it("can be translated to a vendor specific statement", () -> {
 
-                VendorInterpreter interpreter = Vendor.ansi().getInterpreter();
+        VendorInterpreter interpreter = Vendor.ansi().getInterpreter();
 
-                String translatedSql = interpreter.translate(context().createModel());
+        String translatedSql = interpreter.translate(context().createModel());
 
-                assertThat(translatedSql).isEqualTo("CREATE TABLE POSA_ESTADO_DE_LIQUIDACION (\n" +
-                        "id BIGINT PRIMARY KEY NOT NULL, \n" +
-                        "momentoDeCreacion TIMESTAMP, \n" +
-                        "momentoDeUltimaModificacion TIMESTAMP, \n" +
-                        "persistenceVersion BIGINT, \n" +
-                        "diasPorLiquidar INTEGER NOT NULL, \n" +
-                        "cantidad INTEGER NOT NULL DEFAULT 0, \n" +
-                        "otra_id BIGINT, \n" +
-                        "estado VARCHAR(255), \n" +
-                        "PRIMARY KEY ( id )\n" +
-                        ")");
-            });
-            
-            it("can be translated to another vendor specific statement",()->{
-                VendorInterpreter interpreter = Vendor.sqlserver().getInterpreter();
+        assertThat(translatedSql).isEqualTo("CREATE TABLE POSA_ESTADO_DE_LIQUIDACION (\n" +
+          "id BIGINT PRIMARY KEY NOT NULL, \n" +
+          "momentoDeCreacion TIMESTAMP, \n" +
+          "momentoDeUltimaModificacion TIMESTAMP, \n" +
+          "persistenceVersion BIGINT, \n" +
+          "diasPorLiquidar INTEGER NOT NULL, \n" +
+          "cantidad INTEGER NOT NULL DEFAULT 0, \n" +
+          "otra_id BIGINT, \n" +
+          "estado VARCHAR(255), \n" +
+          "PRIMARY KEY ( id )\n" +
+          ")");
+      });
 
-                String translatedSql = interpreter.translate(context().createModel());
+      it("can be translated to another vendor specific statement", () -> {
+        VendorInterpreter interpreter = Vendor.sqlserver().getInterpreter();
 
-                assertThat(translatedSql).isEqualTo("CREATE TABLE POSA_ESTADO_DE_LIQUIDACION (\n" +
-                        "id BIGINT PRIMARY KEY NOT NULL, \n" +
-                        "momentoDeCreacion DATETIME2, \n" +
-                        "momentoDeUltimaModificacion DATETIME2, \n" +
-                        "persistenceVersion BIGINT, \n" +
-                        "diasPorLiquidar INT NOT NULL, \n" +
-                        "cantidad INT NOT NULL DEFAULT 0, \n" +
-                        "otra_id BIGINT, \n" +
-                        "estado VARCHAR(255), \n" +
-                        "PRIMARY KEY ( id )\n" +
-                        ")");
-            });   
+        String translatedSql = interpreter.translate(context().createModel());
 
-        });
+        assertThat(translatedSql).isEqualTo("CREATE TABLE POSA_ESTADO_DE_LIQUIDACION (\n" +
+          "id BIGINT PRIMARY KEY NOT NULL, \n" +
+          "momentoDeCreacion DATETIME2, \n" +
+          "momentoDeUltimaModificacion DATETIME2, \n" +
+          "persistenceVersion BIGINT, \n" +
+          "diasPorLiquidar INT NOT NULL, \n" +
+          "cantidad INT NOT NULL DEFAULT 0, \n" +
+          "otra_id BIGINT, \n" +
+          "estado VARCHAR(255), \n" +
+          "PRIMARY KEY ( id )\n" +
+          ")");
+      });
 
-    }
+    });
+
+  }
 }

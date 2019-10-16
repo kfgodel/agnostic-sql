@@ -8,13 +8,13 @@ import ar.com.kfgodel.asql.api.AsqlException;
  */
 public interface TemplateEngine {
 
-    /**
-     * According to the model type it selects a template to apply using the model state.<br>
-     *     It generates a text based on the model state.
-     *
-     * @param templateModel The model whose state is used with the template, and whose type is used to select the template
-     * @return The generated text
-     * @throws AsqlException If the engine found an error processing the template
-     */
-    String process(TemplateModel templateModel) throws AsqlException;
+  /**
+   * According to the model type it selects a template to apply using the model state.<br>
+   * It generates a text based on the model state.
+   *
+   * @param templateModel The model whose state is used with the template, and whose type is used to select the template
+   * @return The generated text
+   * @throws AsqlException If the engine found an error processing the template
+   */
+  String process(TemplateModel templateModel) throws AsqlException;
 }

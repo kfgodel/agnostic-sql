@@ -9,6 +9,6 @@ import ar.com.kfgodel.asql.impl.model.alter.RemoveColumnModel;
  */
 public interface RemoveColumnStatement extends AgnosticStatement {
 
-    @Override
-    RemoveColumnModel parseModel();
+  @Override
+  RemoveColumnModel parseModel();
 }

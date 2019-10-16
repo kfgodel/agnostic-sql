@@ -13,6 +13,7 @@ public interface Sequence {
   /**
    * Creates a construct that asks for next value on a given sequence, to be used
    * as part of a statement
+   *
    * @param sequenceName The name of the sequence to increment
    * @return The construct to use on a statement
    */
@@ -22,6 +23,7 @@ public interface Sequence {
 
   /**
    * Creates a construct specific to hibernate mapped db using a sequence for ids.
+   *
    * @return The construct that asks for next id on the sequence
    */
   static AgnosticConstruct nextHibernateId() {

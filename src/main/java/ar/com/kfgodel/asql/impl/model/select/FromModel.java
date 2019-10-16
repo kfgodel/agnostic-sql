@@ -11,20 +11,20 @@ import java.util.List;
  */
 public class FromModel implements AgnosticModel {
 
-    private List<TableReferenceModel> tableReferences;
+  private List<TableReferenceModel> tableReferences;
 
-    public List<TableReferenceModel> getTableReferences() {
-        return tableReferences;
-    }
+  public List<TableReferenceModel> getTableReferences() {
+    return tableReferences;
+  }
 
-    public static FromModel create(List<TableReferenceModel> tableReferences){
-        FromModel model = new FromModel();
-        model.tableReferences = tableReferences;
-        return model;
-    }
+  public static FromModel create(List<TableReferenceModel> tableReferences) {
+    FromModel model = new FromModel();
+    model.tableReferences = tableReferences;
+    return model;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/select/_fromClause.ftl";
-    }
+  @Override
+  public String getTemplatePath() {
+    return "/select/_fromClause.ftl";
+  }
 }

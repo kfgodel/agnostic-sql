@@ -11,31 +11,31 @@ import ar.com.kfgodel.asql.impl.lang.references.ConstraintReference;
  */
 public class NamedConstraintImpl implements NamedConstraint {
 
-    private ConstraintReference constraint;
+  private ConstraintReference constraint;
 
-    public ConstraintReference getConstraintReference() {
-        return constraint;
-    }
+  public ConstraintReference getConstraintReference() {
+    return constraint;
+  }
 
-    @Override
-    public ColumnDefinedFk fkFrom(String... columnNames) {
-        return ColumnDefinedFkImpl.create(this, Internal.columns(columnNames));
-    }
+  @Override
+  public ColumnDefinedFk fkFrom(String... columnNames) {
+    return ColumnDefinedFkImpl.create(this, Internal.columns(columnNames));
+  }
 
-    @Override
-    public ConstraintDeclaration uniqueFor(String... columnNames) {
-        return ColumnDefinedUniqueImpl.create(this, Internal.columns(columnNames));
-    }
+  @Override
+  public ConstraintDeclaration uniqueFor(String... columnNames) {
+    return ColumnDefinedUniqueImpl.create(this, Internal.columns(columnNames));
+  }
 
-    @Override
-    public ConstraintDeclaration pkFor(String... columnNames) {
-        return ColumnDefinedPkImpl.create(this, Internal.columns(columnNames));
-    }
+  @Override
+  public ConstraintDeclaration pkFor(String... columnNames) {
+    return ColumnDefinedPkImpl.create(this, Internal.columns(columnNames));
+  }
 
-    public static NamedConstraintImpl create(ConstraintReference constraint) {
-        NamedConstraintImpl named = new NamedConstraintImpl();
-        named.constraint = constraint;
-        return named;
-    }
+  public static NamedConstraintImpl create(ConstraintReference constraint) {
+    NamedConstraintImpl named = new NamedConstraintImpl();
+    named.constraint = constraint;
+    return named;
+  }
 
 }

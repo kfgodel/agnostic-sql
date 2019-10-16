@@ -56,6 +56,7 @@ public interface Asql {
 
   /**
    * Declares a piece of vendro sql that cannot be translated and should be used as is
+   *
    * @param translatedSql The piece of sql to add in the query
    * @return The piece construct to use on statements
    */

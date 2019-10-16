@@ -10,33 +10,33 @@ import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
  */
 public class RenameColumnModel implements AgnosticModel {
 
-    private TableReferenceModel table;
-    private ColumnReferenceModel renamedColumn;
-    private String newName;
+  private TableReferenceModel table;
+  private ColumnReferenceModel renamedColumn;
+  private String newName;
 
-    public TableReferenceModel getTable() {
-        return table;
-    }
+  public TableReferenceModel getTable() {
+    return table;
+  }
 
-    public ColumnReferenceModel getRenamedColumn() {
-        return renamedColumn;
-    }
+  public ColumnReferenceModel getRenamedColumn() {
+    return renamedColumn;
+  }
 
-    public String getNewName() {
-        return newName;
-    }
+  public String getNewName() {
+    return newName;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/alter/rename_column.ftl";
-    }
-    
-    public static RenameColumnModel create(TableReferenceModel table, ColumnReferenceModel column, String newName){
-        RenameColumnModel model = new RenameColumnModel();
-        model.table = table;
-        model.renamedColumn = column;
-        model.newName = newName;
-        return model;
-    }
-    
+  @Override
+  public String getTemplatePath() {
+    return "/alter/rename_column.ftl";
+  }
+
+  public static RenameColumnModel create(TableReferenceModel table, ColumnReferenceModel column, String newName) {
+    RenameColumnModel model = new RenameColumnModel();
+    model.table = table;
+    model.renamedColumn = column;
+    model.newName = newName;
+    return model;
+  }
+
 }

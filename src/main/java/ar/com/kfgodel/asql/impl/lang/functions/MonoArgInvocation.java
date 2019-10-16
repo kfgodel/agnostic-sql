@@ -11,19 +11,19 @@ import ar.com.kfgodel.asql.impl.model.functions.MonoArgInvocationModel;
  */
 public class MonoArgInvocation implements FunctionInvocation {
 
-    private String functionName;
-    private AgnosticConstruct value;
+  private String functionName;
+  private AgnosticConstruct value;
 
-    @Override
-    public AgnosticModel parseModel() {
-        return MonoArgInvocationModel.create(functionName, value.parseModel());
-    }
-    
-    public static MonoArgInvocation create(String name, AgnosticConstruct value){
-        MonoArgInvocation invocation = new MonoArgInvocation();
-        invocation.functionName = name;
-        invocation.value = value;
-        return invocation;
-    }
-    
+  @Override
+  public AgnosticModel parseModel() {
+    return MonoArgInvocationModel.create(functionName, value.parseModel());
+  }
+
+  public static MonoArgInvocation create(String name, AgnosticConstruct value) {
+    MonoArgInvocation invocation = new MonoArgInvocation();
+    invocation.functionName = name;
+    invocation.value = value;
+    return invocation;
+  }
+
 }

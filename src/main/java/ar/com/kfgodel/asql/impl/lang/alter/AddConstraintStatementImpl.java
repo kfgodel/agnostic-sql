@@ -9,19 +9,19 @@ import ar.com.kfgodel.asql.impl.model.alter.AddConstraintModel;
  */
 public class AddConstraintStatementImpl implements AddConstraintStatement {
 
-    private ConstraintDeclaration constraintDeclaration;
-    private TableDefinedAlterImpl previousNode;
+  private ConstraintDeclaration constraintDeclaration;
+  private TableDefinedAlterImpl previousNode;
 
-    @Override
-    public AddConstraintModel parseModel() {
-        return AddConstraintModel.create(previousNode.getTable().parseModel(), constraintDeclaration.parseModel());
-    }
+  @Override
+  public AddConstraintModel parseModel() {
+    return AddConstraintModel.create(previousNode.getTable().parseModel(), constraintDeclaration.parseModel());
+  }
 
-    public static AddConstraintStatementImpl create(TableDefinedAlterImpl previousNode, ConstraintDeclaration constraintDeclaration) {
-        AddConstraintStatementImpl statement = new AddConstraintStatementImpl();
-        statement.previousNode = previousNode;
-        statement.constraintDeclaration = constraintDeclaration;
-        return statement;
-    }
+  public static AddConstraintStatementImpl create(TableDefinedAlterImpl previousNode, ConstraintDeclaration constraintDeclaration) {
+    AddConstraintStatementImpl statement = new AddConstraintStatementImpl();
+    statement.previousNode = previousNode;
+    statement.constraintDeclaration = constraintDeclaration;
+    return statement;
+  }
 
 }

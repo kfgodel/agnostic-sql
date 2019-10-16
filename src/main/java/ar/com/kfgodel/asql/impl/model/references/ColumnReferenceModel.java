@@ -8,20 +8,20 @@ import ar.com.kfgodel.asql.impl.model.AgnosticModel;
  */
 public class ColumnReferenceModel implements AgnosticModel {
 
-    private String columnName;
+  private String columnName;
 
-    public String getColumnName() {
-        return columnName;
-    }
+  public String getColumnName() {
+    return columnName;
+  }
 
-    public static ColumnReferenceModel create(String columnName) {
-        ColumnReferenceModel reference = new ColumnReferenceModel();
-        reference.columnName = columnName;
-        return reference;
-    }
+  public static ColumnReferenceModel create(String columnName) {
+    ColumnReferenceModel reference = new ColumnReferenceModel();
+    reference.columnName = columnName;
+    return reference;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/references/_column.ftl";
-    }
+  @Override
+  public String getTemplatePath() {
+    return "/references/_column.ftl";
+  }
 }

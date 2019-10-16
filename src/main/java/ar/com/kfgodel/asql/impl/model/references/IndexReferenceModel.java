@@ -8,21 +8,21 @@ import ar.com.kfgodel.asql.impl.model.AgnosticModel;
  */
 public class IndexReferenceModel implements AgnosticModel {
 
-    private String name;
+  private String name;
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/references/_index.ftl";
-    }
+  @Override
+  public String getTemplatePath() {
+    return "/references/_index.ftl";
+  }
 
-    public static IndexReferenceModel create(String name){
-        IndexReferenceModel model = new IndexReferenceModel();
-        model.name = name;
-        return model;
-    }
+  public static IndexReferenceModel create(String name) {
+    IndexReferenceModel model = new IndexReferenceModel();
+    model.name = name;
+    return model;
+  }
 
 }

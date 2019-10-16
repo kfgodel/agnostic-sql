@@ -9,34 +9,34 @@ import ar.com.kfgodel.asql.impl.model.references.ColumnReferenceModel;
  */
 public class ColumnAssignmentModel implements AgnosticModel {
 
-    private ColumnReferenceModel column;
-    private AgnosticModel assignedValue;
+  private ColumnReferenceModel column;
+  private AgnosticModel assignedValue;
 
-    public ColumnReferenceModel getColumn() {
-        return column;
-    }
+  public ColumnReferenceModel getColumn() {
+    return column;
+  }
 
-    public void setColumn(ColumnReferenceModel column) {
-        this.column = column;
-    }
+  public void setColumn(ColumnReferenceModel column) {
+    this.column = column;
+  }
 
-    public AgnosticModel getAssignedValue() {
-        return assignedValue;
-    }
+  public AgnosticModel getAssignedValue() {
+    return assignedValue;
+  }
 
-    public void setAssignedValue(AgnosticModel assignedValue) {
-        this.assignedValue = assignedValue;
-    }
+  public void setAssignedValue(AgnosticModel assignedValue) {
+    this.assignedValue = assignedValue;
+  }
 
-    public static ColumnAssignmentModel create(ColumnReferenceModel column, AgnosticModel value) {
-        ColumnAssignmentModel assignmentNode = new ColumnAssignmentModel();
-        assignmentNode.column = column;
-        assignmentNode.assignedValue = value;
-        return assignmentNode;
-    }
+  public static ColumnAssignmentModel create(ColumnReferenceModel column, AgnosticModel value) {
+    ColumnAssignmentModel assignmentNode = new ColumnAssignmentModel();
+    assignmentNode.column = column;
+    assignmentNode.assignedValue = value;
+    return assignmentNode;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/columns/_columnAssignment.ftl";
-    }
+  @Override
+  public String getTemplatePath() {
+    return "/columns/_columnAssignment.ftl";
+  }
 }

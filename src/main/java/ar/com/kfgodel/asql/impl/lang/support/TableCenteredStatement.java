@@ -8,13 +8,13 @@ import ar.com.kfgodel.asql.impl.lang.references.TableReference;
  */
 public abstract class TableCenteredStatement {
 
-    private TableReference table;
+  private TableReference table;
 
-    public TableReference getTable() {
-        return table;
-    }
+  public TableReference getTable() {
+    return table;
+  }
 
-    public void setTable(TableReference table) {
-        this.table = table;
-    }
+  public void setTable(TableReference table) {
+    this.table = table;
+  }
 }

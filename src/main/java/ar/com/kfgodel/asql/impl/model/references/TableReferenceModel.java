@@ -8,21 +8,21 @@ import ar.com.kfgodel.asql.impl.model.AgnosticModel;
  */
 public class TableReferenceModel implements AgnosticModel {
 
-    private String tableName;
+  private String tableName;
 
-    public String getTableName() {
-        return tableName;
-    }
+  public String getTableName() {
+    return tableName;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/references/_table.ftl";
-    }
-    
-    public static TableReferenceModel create(String tableName){
-        TableReferenceModel model = new TableReferenceModel();
-        model.tableName = tableName;
-        return model;
-    }
-    
+  @Override
+  public String getTemplatePath() {
+    return "/references/_table.ftl";
+  }
+
+  public static TableReferenceModel create(String tableName) {
+    TableReferenceModel model = new TableReferenceModel();
+    model.tableName = tableName;
+    return model;
+  }
+
 }

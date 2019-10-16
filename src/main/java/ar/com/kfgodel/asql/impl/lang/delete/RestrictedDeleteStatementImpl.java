@@ -9,21 +9,21 @@ import ar.com.kfgodel.asql.impl.model.delete.DeleteModel;
  */
 public class RestrictedDeleteStatementImpl implements RestrictedDeleteStatement {
 
-    private UnrestrictedDeleteStatementImpl previousNode;
-    private AgnosticConstruct condition;
+  private UnrestrictedDeleteStatementImpl previousNode;
+  private AgnosticConstruct condition;
 
-    @Override
-    public DeleteModel parseModel() {
-        DeleteModel model = previousNode.parseModel();
-        model.getWhereClause().setPredicate(condition.parseModel());
-        return model;
-    }
+  @Override
+  public DeleteModel parseModel() {
+    DeleteModel model = previousNode.parseModel();
+    model.getWhereClause().setPredicate(condition.parseModel());
+    return model;
+  }
 
-    public static RestrictedDeleteStatementImpl create(UnrestrictedDeleteStatementImpl previousNode, AgnosticConstruct condition) {
-        RestrictedDeleteStatementImpl statement = new RestrictedDeleteStatementImpl();
-        statement.previousNode = previousNode;
-        statement.condition = condition;
-        return statement;
-    }
+  public static RestrictedDeleteStatementImpl create(UnrestrictedDeleteStatementImpl previousNode, AgnosticConstruct condition) {
+    RestrictedDeleteStatementImpl statement = new RestrictedDeleteStatementImpl();
+    statement.previousNode = previousNode;
+    statement.condition = condition;
+    return statement;
+  }
 
 }

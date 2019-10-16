@@ -12,34 +12,34 @@ import java.util.List;
  */
 public class InsertModel extends TableCenteredModel implements AgnosticModel {
 
-    private AgnosticModel valueDefinition;
-    private List<ColumnReferenceModel> columnList;
+  private AgnosticModel valueDefinition;
+  private List<ColumnReferenceModel> columnList;
 
-    public boolean getHasColumnList(){
-        return columnList != null;
-    }
+  public boolean getHasColumnList() {
+    return columnList != null;
+  }
 
-    public List<ColumnReferenceModel> getColumnList() {
-        return columnList;
-    }
+  public List<ColumnReferenceModel> getColumnList() {
+    return columnList;
+  }
 
-    public void setColumnList(List<ColumnReferenceModel> columnList) {
-        this.columnList = columnList;
-    }
+  public void setColumnList(List<ColumnReferenceModel> columnList) {
+    this.columnList = columnList;
+  }
 
-    public AgnosticModel getValueDefinition() {
-        return valueDefinition;
-    }
+  public AgnosticModel getValueDefinition() {
+    return valueDefinition;
+  }
 
-    public static InsertModel create(TableReferenceModel table, AgnosticModel valueDefinition) {
-        InsertModel model = new InsertModel();
-        model.setTable(table);
-        model.valueDefinition = valueDefinition;
-        return model;
-    }
+  public static InsertModel create(TableReferenceModel table, AgnosticModel valueDefinition) {
+    InsertModel model = new InsertModel();
+    model.setTable(table);
+    model.valueDefinition = valueDefinition;
+    return model;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/insert/insert.ftl";
-    }
+  @Override
+  public String getTemplatePath() {
+    return "/insert/insert.ftl";
+  }
 }

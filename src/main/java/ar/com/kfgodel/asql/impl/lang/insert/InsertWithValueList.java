@@ -10,21 +10,21 @@ import ar.com.kfgodel.asql.impl.model.insert.InsertModel;
  */
 public class InsertWithValueList implements InsertStatement {
 
-    private ColumnDefinedInsertImpl previousNode;
-    private InsertValueListReference valueList;
+  private ColumnDefinedInsertImpl previousNode;
+  private InsertValueListReference valueList;
 
-    @Override
-    public InsertModel parseModel() {
-        InsertModel insertModel = InsertModel.create(previousNode.getTable().parseModel(), valueList.parseModel());
-        insertModel.setColumnList(previousNode.getParsedColumnModels());
-        return insertModel;
-    }
-    
-    public static InsertWithValueList create(ColumnDefinedInsertImpl previousNode, InsertValueListReference valueList){
-        InsertWithValueList insert = new InsertWithValueList();
-        insert.previousNode = previousNode;
-        insert.valueList = valueList;
-        return insert;
-    }
-    
+  @Override
+  public InsertModel parseModel() {
+    InsertModel insertModel = InsertModel.create(previousNode.getTable().parseModel(), valueList.parseModel());
+    insertModel.setColumnList(previousNode.getParsedColumnModels());
+    return insertModel;
+  }
+
+  public static InsertWithValueList create(ColumnDefinedInsertImpl previousNode, InsertValueListReference valueList) {
+    InsertWithValueList insert = new InsertWithValueList();
+    insert.previousNode = previousNode;
+    insert.valueList = valueList;
+    return insert;
+  }
+
 }

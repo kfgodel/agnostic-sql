@@ -13,25 +13,25 @@ import java.util.stream.Collectors;
  */
 public class MultiArgInvocation implements FunctionInvocation {
 
-    private String functionName;
-    private List<AgnosticConstruct> values;
+  private String functionName;
+  private List<AgnosticConstruct> values;
 
-    @Override
-    public AgnosticModel parseModel() {
-        return MultiArgInvocationModel.create(functionName, parseValueModels());
-    }
+  @Override
+  public AgnosticModel parseModel() {
+    return MultiArgInvocationModel.create(functionName, parseValueModels());
+  }
 
-    private List<AgnosticModel> parseValueModels() {
-        return values.stream()
-                .map(AgnosticConstruct::parseModel)
-                .collect(Collectors.toList());
-    }
+  private List<AgnosticModel> parseValueModels() {
+    return values.stream()
+      .map(AgnosticConstruct::parseModel)
+      .collect(Collectors.toList());
+  }
 
-    public static MultiArgInvocation create(String functionName, List<AgnosticConstruct> values){
-        MultiArgInvocation invocation = new MultiArgInvocation();
-        invocation.functionName = functionName;
-        invocation.values = values;
-        return invocation;
-    }
-    
+  public static MultiArgInvocation create(String functionName, List<AgnosticConstruct> values) {
+    MultiArgInvocation invocation = new MultiArgInvocation();
+    invocation.functionName = functionName;
+    invocation.values = values;
+    return invocation;
+  }
+
 }

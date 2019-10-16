@@ -9,17 +9,17 @@ import ar.com.kfgodel.asql.impl.model.value.ExplicitValueModel;
  */
 public class LiteralReference implements AgnosticConstruct {
 
-    private Object value;
+  private Object value;
 
-    @Override
-    public ExplicitValueModel parseModel() {
-        return ExplicitValueModel.create(value);
-    }
+  @Override
+  public ExplicitValueModel parseModel() {
+    return ExplicitValueModel.create(value);
+  }
 
-    public static LiteralReference create(Object value){
-        LiteralReference literalReference = new LiteralReference();
-        literalReference.value = value;
-        return literalReference;
-    }
+  public static LiteralReference create(Object value) {
+    LiteralReference literalReference = new LiteralReference();
+    literalReference.value = value;
+    return literalReference;
+  }
 
 }

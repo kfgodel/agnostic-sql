@@ -9,19 +9,19 @@ import ar.com.kfgodel.asql.impl.model.alter.RenameColumnModel;
  */
 public class RenameColumnStatementImpl implements RenameColumnStatement {
 
-    private ColumnDefinedRenameImpl previousNode;
-    private String newColumnName;
+  private ColumnDefinedRenameImpl previousNode;
+  private String newColumnName;
 
-    @Override
-    public AgnosticModel parseModel() {
-        return RenameColumnModel.create(previousNode.getTable().parseModel(), previousNode.getRenamedColumn().parseModel(), newColumnName);
-    }
-    
-    public static RenameColumnStatementImpl create(ColumnDefinedRenameImpl previousNode, String newName){
-        RenameColumnStatementImpl statement = new RenameColumnStatementImpl();
-        statement.previousNode = previousNode;
-        statement.newColumnName = newName;
-        return statement;
-    }
-    
+  @Override
+  public AgnosticModel parseModel() {
+    return RenameColumnModel.create(previousNode.getTable().parseModel(), previousNode.getRenamedColumn().parseModel(), newColumnName);
+  }
+
+  public static RenameColumnStatementImpl create(ColumnDefinedRenameImpl previousNode, String newName) {
+    RenameColumnStatementImpl statement = new RenameColumnStatementImpl();
+    statement.previousNode = previousNode;
+    statement.newColumnName = newName;
+    return statement;
+  }
+
 }

@@ -9,20 +9,20 @@ import ar.com.kfgodel.asql.impl.model.references.ConstraintReferenceModel;
  */
 public class ConstraintReference implements AgnosticConstruct {
 
-    private String name;
+  private String name;
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public static ConstraintReference create(String constraintName){
-        ConstraintReference reference = new ConstraintReference();
-        reference.name = constraintName;
-        return reference;
-    }
+  public static ConstraintReference create(String constraintName) {
+    ConstraintReference reference = new ConstraintReference();
+    reference.name = constraintName;
+    return reference;
+  }
 
-    @Override
-    public ConstraintReferenceModel parseModel() {
-        return ConstraintReferenceModel.create(name);
-    }
+  @Override
+  public ConstraintReferenceModel parseModel() {
+    return ConstraintReferenceModel.create(name);
+  }
 }

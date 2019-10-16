@@ -9,21 +9,21 @@ import ar.com.kfgodel.asql.impl.model.references.TableReferenceModel;
  */
 public class TableReference implements AgnosticConstruct {
 
-    private String tableName;
+  private String tableName;
 
-    public String getTableName() {
-        return tableName;
-    }
+  public String getTableName() {
+    return tableName;
+  }
 
-    @Override
-    public TableReferenceModel parseModel() {
-        return TableReferenceModel.create(tableName);
-    }
-    
-    public static TableReference create(String tableName){
-        TableReference reference = new TableReference();
-        reference.tableName = tableName;
-        return reference;
-    }
-    
+  @Override
+  public TableReferenceModel parseModel() {
+    return TableReferenceModel.create(tableName);
+  }
+
+  public static TableReference create(String tableName) {
+    TableReference reference = new TableReference();
+    reference.tableName = tableName;
+    return reference;
+  }
+
 }

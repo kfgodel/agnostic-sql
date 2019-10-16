@@ -9,17 +9,17 @@ import ar.com.kfgodel.asql.impl.model.references.SymbolModel;
  */
 public class OperatorReference implements AgnosticConstruct {
 
-    private String agnosticName;
+  private String agnosticName;
 
-    @Override
-    public AgnosticModel parseModel() {
-        return SymbolModel.create("/operators/_" + agnosticName + ".ftl");
-    }
-    
-    public static OperatorReference create(String name){
-        OperatorReference reference = new OperatorReference();
-        reference.agnosticName = name;
-        return reference;
-    }
-    
+  @Override
+  public AgnosticModel parseModel() {
+    return SymbolModel.create("/operators/_" + agnosticName + ".ftl");
+  }
+
+  public static OperatorReference create(String name) {
+    OperatorReference reference = new OperatorReference();
+    reference.agnosticName = name;
+    return reference;
+  }
+
 }

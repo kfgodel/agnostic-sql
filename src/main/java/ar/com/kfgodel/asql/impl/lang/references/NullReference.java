@@ -11,13 +11,13 @@ import ar.com.kfgodel.asql.impl.model.references.SymbolModel;
  */
 public class NullReference implements AgnosticConstruct, NullabilityConstraint {
 
-    @Override
-    public NullabilityModel parseModel() {
-        return SymbolModel.create("/references/_null.ftl");
-    }
-    
-    public static NullReference create(){
-        NullReference reference = new NullReference();
-        return reference;
-    }
+  @Override
+  public NullabilityModel parseModel() {
+    return SymbolModel.create("/references/_null.ftl");
+  }
+
+  public static NullReference create() {
+    NullReference reference = new NullReference();
+    return reference;
+  }
 }

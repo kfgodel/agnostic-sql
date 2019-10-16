@@ -16,21 +16,21 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(JavaSpecRunner.class)
 public class DropModelTest extends JavaSpec<AsqlTestContext> {
-    @Override
-    public void define() {
-        describe("an agnostic drop table statement", () -> {
+  @Override
+  public void define() {
+    describe("an agnostic drop table statement", () -> {
 
-            context().model(() -> DropModel.create(TableReferenceModel.create("tableName")));
+      context().model(() -> DropModel.create(TableReferenceModel.create("tableName")));
 
-            it("can be translated to another vendor specific statement", () -> {
-                VendorInterpreter interpreter = Vendor.ansi().getInterpreter();
+      it("can be translated to another vendor specific statement", () -> {
+        VendorInterpreter interpreter = Vendor.ansi().getInterpreter();
 
-                String translatedSql = interpreter.translate(context().model());
+        String translatedSql = interpreter.translate(context().model());
 
-                assertThat(translatedSql).isEqualTo("DROP TABLE tableName");
-            });
+        assertThat(translatedSql).isEqualTo("DROP TABLE tableName");
+      });
 
-        });
+    });
 
-    }
+  }
 }

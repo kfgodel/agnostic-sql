@@ -8,24 +8,24 @@ import java.util.List;
  */
 public class ScriptModel implements AgnosticModel {
 
-    private List<AgnosticModel> statements;
+  private List<AgnosticModel> statements;
 
-    public List<AgnosticModel> getStatements() {
-        return statements;
-    }
+  public List<AgnosticModel> getStatements() {
+    return statements;
+  }
 
-    public static ScriptModel create(List<AgnosticModel> statements) {
-        ScriptModel node = new ScriptModel();
-        node.statements = statements;
-        return node;
-    }
+  public static ScriptModel create(List<AgnosticModel> statements) {
+    ScriptModel node = new ScriptModel();
+    node.statements = statements;
+    return node;
+  }
 
-    public void addStatement(AgnosticModel newStatement) {
-        this.getStatements().add(newStatement);
-    }
+  public void addStatement(AgnosticModel newStatement) {
+    this.getStatements().add(newStatement);
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/script/script.ftl";
-    }
+  @Override
+  public String getTemplatePath() {
+    return "/script/script.ftl";
+  }
 }

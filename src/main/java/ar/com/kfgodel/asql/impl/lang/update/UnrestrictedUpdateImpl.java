@@ -15,31 +15,31 @@ import java.util.stream.Collectors;
  */
 public class UnrestrictedUpdateImpl implements UnrestrictedUpdate {
 
-    private TableDefinedUpdateImpl tableUpdate;
-    private List<ColumnAssignment> assignments;
+  private TableDefinedUpdateImpl tableUpdate;
+  private List<ColumnAssignment> assignments;
 
-    @Override
-    public RestrictedUpdate where(Object condition) {
-        return RestrictedUpdateImpl.create(this, Internal.asConstruct(condition));
-    }
+  @Override
+  public RestrictedUpdate where(Object condition) {
+    return RestrictedUpdateImpl.create(this, Internal.asConstruct(condition));
+  }
 
-    @Override
-    public UpdateModel parseModel() {
-        return UpdateModel.create(tableUpdate.getTable().parseModel(), parseColumnAssignmentModels());
-    }
+  @Override
+  public UpdateModel parseModel() {
+    return UpdateModel.create(tableUpdate.getTable().parseModel(), parseColumnAssignmentModels());
+  }
 
-    private List<ColumnAssignmentModel> parseColumnAssignmentModels() {
-        List<ColumnAssignmentModel> parsedAssignments = assignments.stream()
-                .map(ColumnAssignment::parseModel)
-                .collect(Collectors.toList());
-        return parsedAssignments;
-    }
+  private List<ColumnAssignmentModel> parseColumnAssignmentModels() {
+    List<ColumnAssignmentModel> parsedAssignments = assignments.stream()
+      .map(ColumnAssignment::parseModel)
+      .collect(Collectors.toList());
+    return parsedAssignments;
+  }
 
-    public static UnrestrictedUpdateImpl create(TableDefinedUpdateImpl tableUpdate, List<ColumnAssignment> assignments) {
-        UnrestrictedUpdateImpl unconditionedUpdate = new UnrestrictedUpdateImpl();
-        unconditionedUpdate.tableUpdate = tableUpdate;
-        unconditionedUpdate.assignments = assignments;
-        return unconditionedUpdate;
-    }
+  public static UnrestrictedUpdateImpl create(TableDefinedUpdateImpl tableUpdate, List<ColumnAssignment> assignments) {
+    UnrestrictedUpdateImpl unconditionedUpdate = new UnrestrictedUpdateImpl();
+    unconditionedUpdate.tableUpdate = tableUpdate;
+    unconditionedUpdate.assignments = assignments;
+    return unconditionedUpdate;
+  }
 
 }

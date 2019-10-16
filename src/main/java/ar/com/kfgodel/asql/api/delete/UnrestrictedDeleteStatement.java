@@ -9,8 +9,8 @@ import ar.com.kfgodel.asql.impl.model.delete.DeleteModel;
  */
 public interface UnrestrictedDeleteStatement extends AgnosticStatement {
 
-    @Override
-    DeleteModel parseModel();
+  @Override
+  DeleteModel parseModel();
 
-    RestrictedDeleteStatement where(Object condition);
+  RestrictedDeleteStatement where(Object condition);
 }

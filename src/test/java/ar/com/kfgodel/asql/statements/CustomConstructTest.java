@@ -21,22 +21,22 @@ public class CustomConstructTest extends JavaSpec<AsqlTestContext> {
     Asql asql = AsqlBuilder.create();
 
     describe("an agnostic custom construct", () -> {
-      context().customConstruct(()-> asql.customSql("any sql you want"));
+      context().customConstruct(() -> asql.customSql("any sql you want"));
 
-      context().translated(()-> Vendor.ansi().translate(context().statement()));
+      context().translated(() -> Vendor.ansi().translate(context().statement()));
 
-      it("can be used on a projection",()->{
-        context().statement(()-> asql.select(context().customConstruct()));
+      it("can be used on a projection", () -> {
+        context().statement(() -> asql.select(context().customConstruct()));
         assertThat(context().translated()).isEqualTo("SELECT any sql you want");
       });
 
-      it("can be used on an typical insertion",()->{
-        context().statement(()-> asql.insertInto("tabla").set("columna").to(context().customConstruct()));
+      it("can be used on an typical insertion", () -> {
+        context().statement(() -> asql.insertInto("tabla").set("columna").to(context().customConstruct()));
         assertThat(context().translated()).isEqualTo("INSERT INTO tabla ( columna ) VALUES ( any sql you want )");
       });
 
-      it("can be used on an improved insertion",()->{
-        context().statement(()-> asql.insertInto("tabla").setting(asql.column("columna").to(context().customConstruct())));
+      it("can be used on an improved insertion", () -> {
+        context().statement(() -> asql.insertInto("tabla").setting(asql.column("columna").to(context().customConstruct())));
         assertThat(context().translated()).isEqualTo("INSERT INTO tabla ( columna ) VALUES ( any sql you want )");
       });
 

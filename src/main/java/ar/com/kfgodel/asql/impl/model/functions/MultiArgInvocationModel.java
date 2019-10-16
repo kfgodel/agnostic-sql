@@ -9,23 +9,23 @@ import java.util.List;
  */
 public class MultiArgInvocationModel implements AgnosticModel {
 
-    private String functionName;
-    private List<AgnosticModel> values;
+  private String functionName;
+  private List<AgnosticModel> values;
 
-    public List<AgnosticModel> getValues() {
-        return values;
-    }
+  public List<AgnosticModel> getValues() {
+    return values;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/functions/" +functionName + ".ftl";
-    }
-    
-    public static MultiArgInvocationModel create(String functionName, List<AgnosticModel> values){
-        MultiArgInvocationModel model = new MultiArgInvocationModel();
-        model.functionName = functionName;
-        model.values = values;
-        return model;
-    }
-    
+  @Override
+  public String getTemplatePath() {
+    return "/functions/" + functionName + ".ftl";
+  }
+
+  public static MultiArgInvocationModel create(String functionName, List<AgnosticModel> values) {
+    MultiArgInvocationModel model = new MultiArgInvocationModel();
+    model.functionName = functionName;
+    model.values = values;
+    return model;
+  }
+
 }

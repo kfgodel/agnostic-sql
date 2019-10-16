@@ -6,9 +6,9 @@ package ar.com.kfgodel.asql.impl.lang.internal;
  */
 public interface PatternHelper {
 
-    String contains(String substring);
+  String contains(String substring);
 
-    String endsWith(String suffix);
+  String endsWith(String suffix);
 
-    String startsWith(String prefix);
+  String startsWith(String prefix);
 }

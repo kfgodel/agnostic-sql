@@ -8,6 +8,6 @@ import ar.com.kfgodel.asql.impl.model.constraints.ConstraintDeclarationModel;
  */
 public interface ConstraintDeclaration extends AgnosticConstruct {
 
-    @Override
-    ConstraintDeclarationModel parseModel();
+  @Override
+  ConstraintDeclarationModel parseModel();
 }

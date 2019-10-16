@@ -11,29 +11,29 @@ import ar.com.kfgodel.asql.impl.model.create.CreateModel;
  */
 public class ColumnDefinedCreateImpl implements ColumnDefinedCreate {
 
-    private CreateStatement previousDefinition;
-    private ColumnDeclaration[] columns;
+  private CreateStatement previousDefinition;
+  private ColumnDeclaration[] columns;
 
-    @Override
-    public ColumnDefinedCreate adding(ColumnDeclaration... declarations) {
-        return ColumnDefinedCreateImpl.create(this, declarations);
-    }
+  @Override
+  public ColumnDefinedCreate adding(ColumnDeclaration... declarations) {
+    return ColumnDefinedCreateImpl.create(this, declarations);
+  }
 
-    @Override
-    public CreateModel parseModel() {
-        CreateModel createModel = previousDefinition.parseModel();
-        for (ColumnDeclaration column : columns) {
-            ColumnDeclarationModel columnModel = column.parseModel();
-            createModel.addDeclaration(columnModel);
-        }
-        return createModel;
+  @Override
+  public CreateModel parseModel() {
+    CreateModel createModel = previousDefinition.parseModel();
+    for (ColumnDeclaration column : columns) {
+      ColumnDeclarationModel columnModel = column.parseModel();
+      createModel.addDeclaration(columnModel);
     }
+    return createModel;
+  }
 
-    public static ColumnDefinedCreateImpl create(CreateStatement previousDefinition, ColumnDeclaration...declarations) {
-        ColumnDefinedCreateImpl columnDefinedCreateImpl = new ColumnDefinedCreateImpl();
-        columnDefinedCreateImpl.previousDefinition = previousDefinition;
-        columnDefinedCreateImpl.columns = declarations;
-        return columnDefinedCreateImpl;
-    }
+  public static ColumnDefinedCreateImpl create(CreateStatement previousDefinition, ColumnDeclaration... declarations) {
+    ColumnDefinedCreateImpl columnDefinedCreateImpl = new ColumnDefinedCreateImpl();
+    columnDefinedCreateImpl.previousDefinition = previousDefinition;
+    columnDefinedCreateImpl.columns = declarations;
+    return columnDefinedCreateImpl;
+  }
 
 }

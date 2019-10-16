@@ -24,85 +24,85 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(JavaSpecRunner.class)
 public class CreateStatementTest extends JavaSpec<AsqlTestContext> {
-    @Override
-    public void define() {
-        describe("an agnostic create statement", () -> {
+  @Override
+  public void define() {
+    describe("an agnostic create statement", () -> {
 
-            context().asql(AsqlBuilder::create);
+      context().asql(AsqlBuilder::create);
 
-            it("can generate the simplest create model", () -> {
+      it("can generate the simplest create model", () -> {
 
-                CreateStatement create = context().asql().createTable("tableName");
+        CreateStatement create = context().asql().createTable("tableName");
 
-                CreateModel createModel = create.parseModel();
+        CreateModel createModel = create.parseModel();
 
-                assertThat(createModel.getTable().getTableName()).isEqualTo("tableName");
-            });
+        assertThat(createModel.getTable().getTableName()).isEqualTo("tableName");
+      });
 
-            it("can declare an id column used as pk",()->{
-                CreateStatement create = context().asql().createTable("tableName")
-                        .withIdPk();
+      it("can declare an id column used as pk", () -> {
+        CreateStatement create = context().asql().createTable("tableName")
+          .withIdPk();
 
-                CreateModel createModel = create.parseModel();
-                ColumnDeclarationModel columnModel = createModel.getColumnDeclarations().get(0);
+        CreateModel createModel = create.parseModel();
+        ColumnDeclarationModel columnModel = createModel.getColumnDeclarations().get(0);
 
-                assertThat(columnModel.getColumn().getColumnName()).isEqualTo("id");
-                assertThat(columnModel.getColumnType()).isEqualTo(DataType.pk().parseModel());
+        assertThat(columnModel.getColumn().getColumnName()).isEqualTo("id");
+        assertThat(columnModel.getColumnType()).isEqualTo(DataType.pk().parseModel());
 
-                ConstraintDeclarationModel contraint = createModel.getTableConstraints().get(0);
-                assertThat(contraint.getDefinition()).isInstanceOf(PkDefinitionModel.class);
-                PkDefinitionModel definition = (PkDefinitionModel) contraint.getDefinition();
-                assertThat(definition.getColumns().get(0).getColumnName()).isEqualTo("id");
-            });
+        ConstraintDeclarationModel contraint = createModel.getTableConstraints().get(0);
+        assertThat(contraint.getDefinition()).isInstanceOf(PkDefinitionModel.class);
+        PkDefinitionModel definition = (PkDefinitionModel) contraint.getDefinition();
+        assertThat(definition.getColumns().get(0).getColumnName()).isEqualTo("id");
+      });
 
-            describe("for extra columns", () -> {
+      describe("for extra columns", () -> {
 
-                it("can declare the column type",()->{
-                    Asql asql = context().asql();
-                    CreateStatement create = asql
-                            .createTable("tableName")
-                            .with(asql.column("columnName").typed(DataType.bigInteger()));
+        it("can declare the column type", () -> {
+          Asql asql = context().asql();
+          CreateStatement create = asql
+            .createTable("tableName")
+            .with(asql.column("columnName").typed(DataType.bigInteger()));
 
-                    CreateModel createModel = create.parseModel();
-                    ColumnDeclarationModel columnModel = createModel.getColumnDeclarations().get(0);
+          CreateModel createModel = create.parseModel();
+          ColumnDeclarationModel columnModel = createModel.getColumnDeclarations().get(0);
 
-                    assertThat(columnModel.getColumn().getColumnName()).isEqualTo("columnName");
-                    assertThat(columnModel.getColumnType()).isEqualTo(DataType.bigInteger().parseModel());
-                });
-
-                it("can declare a column nullability", () -> {
-                    Asql asql = context().asql();
-                    CreateStatement create = asql
-                            .createTable("tableName")
-                            .with(asql.column("column1").typed(DataType.bigInteger()).nonNullable(),
-                                    asql.column("column2").typed(DataType.shortString()).nullable());
-
-                    CreateModel createModel = create.parseModel();
-
-                    ColumnDeclarationModel column1Model = createModel.getColumnDeclarations().get(0);
-                    assertThat(column1Model.getNullability()).isEqualTo(NotOperatorModel.createPlacedBefore(Internal.nullRef().parseModel()));
-
-                    ColumnDeclarationModel column2Model = createModel.getColumnDeclarations().get(1);
-                    assertThat(column2Model.getNullability()).isEqualTo(Internal.nullRef().parseModel());
-                });
-
-                it("can declare a column default value",()->{
-                    Asql asql = context().asql();
-                    CreateStatement create = asql
-                            .createTable("tableName")
-                            .with(asql.column("columnName").typed(DataType.bigInteger()).defaultedTo(4));
-
-                    CreateModel createModel = create.parseModel();
-                    ColumnDeclarationModel columnModel = createModel.getColumnDeclarations().get(0);
-
-                    ExplicitValueModel definedValue = (ExplicitValueModel) columnModel.getDefaultValue();
-                    assertThat(definedValue.getValue()).isEqualTo(4);
-                });
-
-            });
-
-
+          assertThat(columnModel.getColumn().getColumnName()).isEqualTo("columnName");
+          assertThat(columnModel.getColumnType()).isEqualTo(DataType.bigInteger().parseModel());
         });
 
-    }
+        it("can declare a column nullability", () -> {
+          Asql asql = context().asql();
+          CreateStatement create = asql
+            .createTable("tableName")
+            .with(asql.column("column1").typed(DataType.bigInteger()).nonNullable(),
+              asql.column("column2").typed(DataType.shortString()).nullable());
+
+          CreateModel createModel = create.parseModel();
+
+          ColumnDeclarationModel column1Model = createModel.getColumnDeclarations().get(0);
+          assertThat(column1Model.getNullability()).isEqualTo(NotOperatorModel.createPlacedBefore(Internal.nullRef().parseModel()));
+
+          ColumnDeclarationModel column2Model = createModel.getColumnDeclarations().get(1);
+          assertThat(column2Model.getNullability()).isEqualTo(Internal.nullRef().parseModel());
+        });
+
+        it("can declare a column default value", () -> {
+          Asql asql = context().asql();
+          CreateStatement create = asql
+            .createTable("tableName")
+            .with(asql.column("columnName").typed(DataType.bigInteger()).defaultedTo(4));
+
+          CreateModel createModel = create.parseModel();
+          ColumnDeclarationModel columnModel = createModel.getColumnDeclarations().get(0);
+
+          ExplicitValueModel definedValue = (ExplicitValueModel) columnModel.getDefaultValue();
+          assertThat(definedValue.getValue()).isEqualTo(4);
+        });
+
+      });
+
+
+    });
+
+  }
 }

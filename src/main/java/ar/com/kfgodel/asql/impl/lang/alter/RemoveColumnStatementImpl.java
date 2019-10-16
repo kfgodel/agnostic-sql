@@ -9,19 +9,19 @@ import ar.com.kfgodel.asql.impl.model.alter.RemoveColumnModel;
  */
 public class RemoveColumnStatementImpl implements RemoveColumnStatement {
 
-    private TableDefinedAlterImpl previousNode;
-    private ColumnReference column;
+  private TableDefinedAlterImpl previousNode;
+  private ColumnReference column;
 
-    @Override
-    public RemoveColumnModel parseModel() {
-        return RemoveColumnModel.create(previousNode.getTable().parseModel(), column.parseModel());
-    }
+  @Override
+  public RemoveColumnModel parseModel() {
+    return RemoveColumnModel.create(previousNode.getTable().parseModel(), column.parseModel());
+  }
 
-    public static RemoveColumnStatementImpl create(TableDefinedAlterImpl previous, ColumnReference column) {
-        RemoveColumnStatementImpl statement = new RemoveColumnStatementImpl();
-        statement.previousNode = previous;
-        statement.column = column;
-        return statement;
-    }
+  public static RemoveColumnStatementImpl create(TableDefinedAlterImpl previous, ColumnReference column) {
+    RemoveColumnStatementImpl statement = new RemoveColumnStatementImpl();
+    statement.previousNode = previous;
+    statement.column = column;
+    return statement;
+  }
 
 }

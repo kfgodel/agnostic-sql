@@ -9,19 +9,19 @@ import ar.com.kfgodel.asql.impl.model.indices.DropIndexModel;
  */
 public class DropIndexStatementImpl implements DropIndexStatement {
 
-    private NameDefinedDropIndexImpl previousNode;
-    private TableReference table;
+  private NameDefinedDropIndexImpl previousNode;
+  private TableReference table;
 
-    @Override
-    public DropIndexModel parseModel() {
-        return DropIndexModel.create(previousNode.getIndex().parseModel(), table.parseModel());
-    }
-    
-    public static DropIndexStatementImpl create(NameDefinedDropIndexImpl previousNode, TableReference table){
-        DropIndexStatementImpl drop = new DropIndexStatementImpl();
-        drop.previousNode = previousNode;
-        drop.table = table;
-        return drop;
-    }
-    
+  @Override
+  public DropIndexModel parseModel() {
+    return DropIndexModel.create(previousNode.getIndex().parseModel(), table.parseModel());
+  }
+
+  public static DropIndexStatementImpl create(NameDefinedDropIndexImpl previousNode, TableReference table) {
+    DropIndexStatementImpl drop = new DropIndexStatementImpl();
+    drop.previousNode = previousNode;
+    drop.table = table;
+    return drop;
+  }
+
 }

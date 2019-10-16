@@ -15,38 +15,39 @@ import java.util.List;
  */
 public class UpdateModel extends TableCenteredModel implements WhereConstrainedModel {
 
-    private List<ColumnAssignmentModel> columnAssignments;
+  private List<ColumnAssignmentModel> columnAssignments;
 
-    private WhereModel whereClause;
+  private WhereModel whereClause;
 
-    public List<ColumnAssignmentModel> getColumnAssignments() {
-        if (columnAssignments == null) {
-            columnAssignments = new ArrayList<ColumnAssignmentModel>();
-        }
-        return columnAssignments;
+  public List<ColumnAssignmentModel> getColumnAssignments() {
+    if (columnAssignments == null) {
+      columnAssignments = new ArrayList<ColumnAssignmentModel>();
     }
+    return columnAssignments;
+  }
 
-    public void setColumnAssignments(List<ColumnAssignmentModel> columnAssignments) {
-        this.columnAssignments = columnAssignments;
-    }
-    public static UpdateModel create(TableReferenceModel table, List<ColumnAssignmentModel> columnAssignments) {
-        if(columnAssignments.isEmpty()){
-            throw new IllegalArgumentException("At least one assignment needed");
-        }
-        UpdateModel updateModel = new UpdateModel();
-        updateModel.whereClause = WhereModel.create();
-        updateModel.setTable(table);
-        updateModel.setColumnAssignments(columnAssignments);
-        return updateModel;
-    }
+  public void setColumnAssignments(List<ColumnAssignmentModel> columnAssignments) {
+    this.columnAssignments = columnAssignments;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/update/update.ftl";
+  public static UpdateModel create(TableReferenceModel table, List<ColumnAssignmentModel> columnAssignments) {
+    if (columnAssignments.isEmpty()) {
+      throw new IllegalArgumentException("At least one assignment needed");
     }
+    UpdateModel updateModel = new UpdateModel();
+    updateModel.whereClause = WhereModel.create();
+    updateModel.setTable(table);
+    updateModel.setColumnAssignments(columnAssignments);
+    return updateModel;
+  }
 
-    public WhereModel getWhereClause() {
-        return whereClause;
-    }
+  @Override
+  public String getTemplatePath() {
+    return "/update/update.ftl";
+  }
+
+  public WhereModel getWhereClause() {
+    return whereClause;
+  }
 
 }

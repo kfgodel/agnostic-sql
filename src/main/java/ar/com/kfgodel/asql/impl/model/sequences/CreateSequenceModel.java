@@ -25,19 +25,19 @@ public class CreateSequenceModel implements AgnosticModel {
 
   public Long getStartingValue() {
     return startingValue
-      .orElseThrow(()-> new IllegalStateException("sequence start value is not defined"));
+      .orElseThrow(() -> new IllegalStateException("sequence start value is not defined"));
   }
 
   public Long getIncrementValue() {
     return incrementValue
-      .orElseThrow(()-> new IllegalStateException("sequence increment value is not defined"));
+      .orElseThrow(() -> new IllegalStateException("sequence increment value is not defined"));
   }
 
-  public boolean getUsesStartValue(){
+  public boolean getUsesStartValue() {
     return startingValue.isPresent();
   }
 
-  public boolean getUsesIncrementValue(){
+  public boolean getUsesIncrementValue() {
     return incrementValue.isPresent();
   }
 
@@ -49,12 +49,12 @@ public class CreateSequenceModel implements AgnosticModel {
     return model;
   }
 
-  public CreateSequenceModel withStartingValue(Long value){
+  public CreateSequenceModel withStartingValue(Long value) {
     this.startingValue = Optional.of(value);
     return this;
   }
 
-  public CreateSequenceModel withIncrementValue(Long value){
+  public CreateSequenceModel withIncrementValue(Long value) {
     this.incrementValue = Optional.of(value);
     return this;
   }

@@ -10,29 +10,29 @@ import ar.com.kfgodel.asql.impl.model.columns.ColumnAssignmentModel;
  */
 public class ColumnAssignmentImpl implements ColumnAssignment {
 
-    private ColumnReference column;
-    private AgnosticConstruct columnValue;
+  private ColumnReference column;
+  private AgnosticConstruct columnValue;
 
-    @Override
-    public ColumnAssignmentModel parseModel() {
-        return ColumnAssignmentModel.create(column.parseModel(), columnValue.parseModel());
-    }
+  @Override
+  public ColumnAssignmentModel parseModel() {
+    return ColumnAssignmentModel.create(column.parseModel(), columnValue.parseModel());
+  }
 
-    @Override
-    public AgnosticConstruct getValue() {
-        return columnValue;
-    }
+  @Override
+  public AgnosticConstruct getValue() {
+    return columnValue;
+  }
 
-    @Override
-    public ColumnReference getColumn() {
-        return column;
-    }
+  @Override
+  public ColumnReference getColumn() {
+    return column;
+  }
 
-    public static ColumnAssignmentImpl create(ColumnReference column, AgnosticConstruct columnValue) {
-        ColumnAssignmentImpl assignment = new ColumnAssignmentImpl();
-        assignment.column = column;
-        assignment.columnValue = columnValue;
-        return assignment;
-    }
+  public static ColumnAssignmentImpl create(ColumnReference column, AgnosticConstruct columnValue) {
+    ColumnAssignmentImpl assignment = new ColumnAssignmentImpl();
+    assignment.column = column;
+    assignment.columnValue = columnValue;
+    return assignment;
+  }
 
 }

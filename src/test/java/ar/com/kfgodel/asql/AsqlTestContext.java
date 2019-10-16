@@ -22,42 +22,55 @@ import java.util.function.Supplier;
 public interface AsqlTestContext extends TestContext {
 
   AgnosticStatement statement();
+
   void statement(Supplier<AgnosticStatement> definition);
 
   UpdateModel updateModel();
+
   void updateModel(Supplier<UpdateModel> definition);
 
   Vendor vendor();
+
   void vendor(Supplier<Vendor> definition);
 
   CreateModel createModel();
+
   void createModel(Supplier<CreateModel> definition);
 
   Asql asql();
+
   void asql(Supplier<Asql> definition);
 
   AddColumnModel addModel();
+
   void addModel(Supplier<AddColumnModel> definition);
 
   RemoveColumnModel removeModel();
+
   void removeModel(Supplier<RemoveColumnModel> definition);
 
   AgnosticModel model();
+
   void model(Supplier<AgnosticModel> definition);
 
   QueryCondition condition();
+
   void condition(Supplier<QueryCondition> definition);
 
   String translated();
+
   void translated(Supplier<String> definition);
 
   String expectedTranslation();
+
   void expectedTranslation(Supplier<String> definition);
 
   CustomConstruct customConstruct();
+
   void customConstruct(Supplier<CustomConstruct> definition);
 
   AgnosticConstruct construct();
+
   void construct(Supplier<AgnosticConstruct> definition);
 
 }

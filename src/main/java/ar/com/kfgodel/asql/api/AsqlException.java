@@ -6,15 +6,15 @@ package ar.com.kfgodel.asql.api;
  */
 public class AsqlException extends RuntimeException {
 
-    public AsqlException(String message) {
-        super(message);
-    }
+  public AsqlException(String message) {
+    super(message);
+  }
 
-    public AsqlException(String message, Throwable cause) {
-        super(message, cause);
-    }
+  public AsqlException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-    public AsqlException(Throwable cause) {
-        super(cause);
-    }
+  public AsqlException(Throwable cause) {
+    super(cause);
+  }
 }

@@ -8,14 +8,14 @@ import ar.com.kfgodel.asql.impl.model.support.TableCenteredModel;
  */
 public class DropModel extends TableCenteredModel {
 
-    public static DropModel create(TableReferenceModel table) {
-        DropModel model = new DropModel();
-        model.setTable(table);
-        return model;
-    }
+  public static DropModel create(TableReferenceModel table) {
+    DropModel model = new DropModel();
+    model.setTable(table);
+    return model;
+  }
 
-    @Override
-    public String getTemplatePath() {
-        return "/drop/drop.ftl";
-    }
+  @Override
+  public String getTemplatePath() {
+    return "/drop/drop.ftl";
+  }
 }

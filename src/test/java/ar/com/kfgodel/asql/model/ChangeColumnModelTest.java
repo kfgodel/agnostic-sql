@@ -19,20 +19,20 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(JavaSpecRunner.class)
 public class ChangeColumnModelTest extends JavaSpec<AsqlTestContext> {
-    @Override
-    public void define() {
-        describe("an agnostic change column type model", () -> {
-            context().model(() -> ChangeColumnModel.create(TableReferenceModel.create("tableName"), ColumnDeclarationModel.create(ColumnReferenceModel.create("columnName"), DataType.integer().parseModel())));
+  @Override
+  public void define() {
+    describe("an agnostic change column type model", () -> {
+      context().model(() -> ChangeColumnModel.create(TableReferenceModel.create("tableName"), ColumnDeclarationModel.create(ColumnReferenceModel.create("columnName"), DataType.integer().parseModel())));
 
-            it("can be translated to a vendor specific statement", () -> {
-                VendorInterpreter interpreter = Vendor.ansi().getInterpreter();
+      it("can be translated to a vendor specific statement", () -> {
+        VendorInterpreter interpreter = Vendor.ansi().getInterpreter();
 
-                String translatedSql = interpreter.translate(context().model());
+        String translatedSql = interpreter.translate(context().model());
 
-                assertThat(translatedSql).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INTEGER");
-            });
+        assertThat(translatedSql).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INTEGER");
+      });
 
-        });
+    });
 
-    }
+  }
 }

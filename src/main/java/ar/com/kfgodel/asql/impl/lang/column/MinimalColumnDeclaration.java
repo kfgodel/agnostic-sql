@@ -13,35 +13,35 @@ import static ar.com.kfgodel.asql.impl.lang.column.NullabilityDeclaration.makeNu
  */
 public class MinimalColumnDeclaration implements ColumnDeclaration {
 
-    private NamedColumnImpl namedColumn;
-    private DataType columnType;
+  private NamedColumnImpl namedColumn;
+  private DataType columnType;
 
-    @Override
-    public ColumnDeclaration nonNullable() {
-        return makeNonNullable(this);
-    }
+  @Override
+  public ColumnDeclaration nonNullable() {
+    return makeNonNullable(this);
+  }
 
-    @Override
-    public ColumnDeclaration nullable() {
-        return makeNullable(this);
-    }
+  @Override
+  public ColumnDeclaration nullable() {
+    return makeNullable(this);
+  }
 
-    @Override
-    public ColumnDeclaration defaultedTo(Object columnValue) {
-        return DefaultedColumnDeclaration.create(this, columnValue);
-    }
+  @Override
+  public ColumnDeclaration defaultedTo(Object columnValue) {
+    return DefaultedColumnDeclaration.create(this, columnValue);
+  }
 
 
-    @Override
-    public ColumnDeclarationModel parseModel() {
-        return ColumnDeclarationModel.create(namedColumn.parseModel(), columnType.parseModel());
-    }
+  @Override
+  public ColumnDeclarationModel parseModel() {
+    return ColumnDeclarationModel.create(namedColumn.parseModel(), columnType.parseModel());
+  }
 
-    public static MinimalColumnDeclaration create(NamedColumnImpl namedColumn, DataType columnType) {
-        MinimalColumnDeclaration columnDeclaration = new MinimalColumnDeclaration();
-        columnDeclaration.namedColumn = namedColumn;
-        columnDeclaration.columnType = columnType;
-        return columnDeclaration;
-    }
+  public static MinimalColumnDeclaration create(NamedColumnImpl namedColumn, DataType columnType) {
+    MinimalColumnDeclaration columnDeclaration = new MinimalColumnDeclaration();
+    columnDeclaration.namedColumn = namedColumn;
+    columnDeclaration.columnType = columnType;
+    return columnDeclaration;
+  }
 
 }

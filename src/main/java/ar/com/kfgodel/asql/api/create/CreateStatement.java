@@ -8,7 +8,7 @@ import ar.com.kfgodel.asql.impl.model.create.CreateModel;
  */
 public interface CreateStatement extends AgnosticStatement {
 
-    @Override
-    CreateModel parseModel();
+  @Override
+  CreateModel parseModel();
 
 }

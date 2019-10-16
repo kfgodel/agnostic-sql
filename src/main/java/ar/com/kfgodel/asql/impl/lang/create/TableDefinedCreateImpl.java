@@ -12,25 +12,25 @@ import ar.com.kfgodel.asql.impl.model.create.CreateModel;
  */
 public class TableDefinedCreateImpl extends TableCenteredStatement implements TableDefinedCreate {
 
-    @Override
-    public ColumnDefinedCreate with(ColumnDeclaration... declarations) {
-        return ColumnDefinedCreateImpl.create(this, declarations);
-    }
+  @Override
+  public ColumnDefinedCreate with(ColumnDeclaration... declarations) {
+    return ColumnDefinedCreateImpl.create(this, declarations);
+  }
 
-    @Override
-    public ColumnDefinedCreate withIdPk() {
-        return PkDefinedCreateImpl.create(this);
-    }
+  @Override
+  public ColumnDefinedCreate withIdPk() {
+    return PkDefinedCreateImpl.create(this);
+  }
 
-    @Override
-    public CreateModel parseModel() {
-        return CreateModel.create(getTable().parseModel());
-    }
+  @Override
+  public CreateModel parseModel() {
+    return CreateModel.create(getTable().parseModel());
+  }
 
-    public static TableDefinedCreateImpl create(TableReference table) {
-        TableDefinedCreateImpl create = new TableDefinedCreateImpl();
-        create.setTable(table);
-        return create;
-    }
+  public static TableDefinedCreateImpl create(TableReference table) {
+    TableDefinedCreateImpl create = new TableDefinedCreateImpl();
+    create.setTable(table);
+    return create;
+  }
 
 }

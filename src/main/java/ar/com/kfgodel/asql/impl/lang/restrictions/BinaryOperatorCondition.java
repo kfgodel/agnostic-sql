@@ -11,21 +11,21 @@ import ar.com.kfgodel.asql.impl.model.restrictions.PredicateModel;
  */
 public class BinaryOperatorCondition implements QueryCondition {
 
-    private AgnosticConstruct leftOperand;
-    private AgnosticConstruct operator;
-    private AgnosticConstruct rightOperand;
+  private AgnosticConstruct leftOperand;
+  private AgnosticConstruct operator;
+  private AgnosticConstruct rightOperand;
 
-    @Override
-    public PredicateModel parseModel() {
-        return PredicateModel.create(leftOperand.parseModel(), operator.parseModel(), rightOperand.parseModel());
-    }
+  @Override
+  public PredicateModel parseModel() {
+    return PredicateModel.create(leftOperand.parseModel(), operator.parseModel(), rightOperand.parseModel());
+  }
 
-    public static BinaryOperatorCondition create(AgnosticConstruct leftOperand, AgnosticConstruct operator, AgnosticConstruct rightOperand){
-        BinaryOperatorCondition lessCondition = new BinaryOperatorCondition();
-        lessCondition.leftOperand = leftOperand;
-        lessCondition.operator = operator;
-        lessCondition.rightOperand = rightOperand;
-        return lessCondition;
-    }
-    
+  public static BinaryOperatorCondition create(AgnosticConstruct leftOperand, AgnosticConstruct operator, AgnosticConstruct rightOperand) {
+    BinaryOperatorCondition lessCondition = new BinaryOperatorCondition();
+    lessCondition.leftOperand = leftOperand;
+    lessCondition.operator = operator;
+    lessCondition.rightOperand = rightOperand;
+    return lessCondition;
+  }
+
 }
