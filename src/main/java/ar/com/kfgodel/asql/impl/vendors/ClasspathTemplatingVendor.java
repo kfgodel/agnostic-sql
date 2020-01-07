@@ -15,7 +15,7 @@ public class ClasspathTemplatingVendor implements Vendor {
   private String[] priorityOrderedTemplateLocations;
 
   public Nary<String> getTemplateLocationInClasspath() {
-    return Nary.create(priorityOrderedTemplateLocations);
+    return Nary.from(priorityOrderedTemplateLocations);
   }
 
   public static ClasspathTemplatingVendor create(String... priorityOrderedTemplateLocations) {

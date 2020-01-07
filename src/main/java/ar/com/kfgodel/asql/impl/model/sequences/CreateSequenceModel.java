@@ -2,7 +2,8 @@ package ar.com.kfgodel.asql.impl.model.sequences;
 
 import ar.com.kfgodel.asql.impl.model.AgnosticModel;
 import ar.com.kfgodel.asql.impl.model.references.SequenceReferenceModel;
-import ar.com.kfgodel.nary.api.optionals.Optional;
+import ar.com.kfgodel.nary.api.Nary;
+import ar.com.kfgodel.nary.api.Unary;
 
 /**
  * Esta clase representa el modelo de una sentencia para crear una secuencia
@@ -11,8 +12,8 @@ import ar.com.kfgodel.nary.api.optionals.Optional;
 public class CreateSequenceModel implements AgnosticModel {
 
   private SequenceReferenceModel sequence;
-  private Optional<Long> startingValue;
-  private Optional<Long> incrementValue;
+  private Unary<Long> startingValue;
+  private Unary<Long> incrementValue;
 
   @Override
   public String getTemplatePath() {
@@ -44,18 +45,18 @@ public class CreateSequenceModel implements AgnosticModel {
   public static CreateSequenceModel create(SequenceReferenceModel sequenceReference) {
     CreateSequenceModel model = new CreateSequenceModel();
     model.sequence = sequenceReference;
-    model.incrementValue = Optional.empty();
-    model.startingValue = Optional.empty();
+    model.incrementValue = Nary.empty();
+    model.startingValue = Nary.empty();
     return model;
   }
 
   public CreateSequenceModel withStartingValue(Long value) {
-    this.startingValue = Optional.of(value);
+    this.startingValue = Nary.of(value);
     return this;
   }
 
   public CreateSequenceModel withIncrementValue(Long value) {
-    this.incrementValue = Optional.of(value);
+    this.incrementValue = Nary.of(value);
     return this;
   }
 
