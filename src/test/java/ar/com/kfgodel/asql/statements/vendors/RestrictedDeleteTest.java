@@ -47,6 +47,11 @@ public class RestrictedDeleteTest extends JavaSpec<AsqlTestContext> {
           context().expectedTranslation(() -> "DELETE FROM P10_GRUPOS_P10_ROLES WHERE ROLES_ID IN ( SELECT 'ID' FROM P10_ROLES WHERE NOMBRE = 'Administrador de temas relacionados a beneficios y vouchers' )");
           verifyTranslationsIsAsExpected();
         });
+        it("generates a postgresql specific statement when vendor is postgresql", () -> {
+          context().vendor(Vendor::postgresql);
+          context().expectedTranslation(() -> "DELETE FROM P10_GRUPOS_P10_ROLES WHERE ROLES_ID IN ( SELECT 'ID' FROM P10_ROLES WHERE NOMBRE = 'Administrador de temas relacionados a beneficios y vouchers' )");
+          verifyTranslationsIsAsExpected();
+        });
       });
 
     });

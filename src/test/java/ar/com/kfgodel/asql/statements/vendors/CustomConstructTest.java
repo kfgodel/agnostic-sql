@@ -41,6 +41,13 @@ public class CustomConstructTest extends JavaSpec<AsqlTestContext> {
           context().expectedTranslation(() -> "I'm custom made");
           verifyTranslationsIsAsExpected();
         });
+
+        it("generates a postgresql specific statement when vendor is postgresql", () -> {
+          context().vendor(Vendor::postgresql);
+          context().expectedTranslation(() -> "I'm custom made");
+          verifyTranslationsIsAsExpected();
+        });
+
       });
 
     });

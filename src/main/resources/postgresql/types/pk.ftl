@@ -1,0 +1,1 @@
+<#include "bigint.ftl"/> PRIMARY KEY

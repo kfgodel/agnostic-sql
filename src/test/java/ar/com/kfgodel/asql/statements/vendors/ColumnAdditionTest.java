@@ -42,6 +42,12 @@ public class ColumnAdditionTest extends JavaSpec<AsqlTestContext> {
           context().expectedTranslation(() -> "ALTER TABLE tabla ADD columna BIT NOT NULL DEFAULT false");
           verifyTranslationsIsAsExpected();
         });
+
+        it("generates a postgresql specific statement when vendor is postgresql", () -> {
+          context().vendor(Vendor::postgresql);
+          context().expectedTranslation(() -> "ALTER TABLE tabla ADD columna BOOLEAN NOT NULL DEFAULT false");
+          verifyTranslationsIsAsExpected();
+        });
       });
 
     });

@@ -42,6 +42,12 @@ public class ChangeColumnNullabilityTest extends JavaSpec<AsqlTestContext> {
           context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna BIGINT NULL");
           verifyTranslationsIsAsExpected();
         });
+
+        it("generates a postgresql specific statement when vendor is postgresql", () -> {
+          context().vendor(Vendor::postgresql);
+          context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna BIGINT NULL");
+          verifyTranslationsIsAsExpected();
+        });
       });
 
       describe("for a column made non nullable", () -> {
@@ -61,6 +67,12 @@ public class ChangeColumnNullabilityTest extends JavaSpec<AsqlTestContext> {
 
         it("generates a sqlserver specific statement when vendor is sqlserver", () -> {
           context().vendor(Vendor::sqlserver);
+          context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna BIGINT NOT NULL");
+          verifyTranslationsIsAsExpected();
+        });
+
+        it("generates a postgresql specific statement when vendor is postgresql", () -> {
+          context().vendor(Vendor::postgresql);
           context().expectedTranslation(() -> "ALTER TABLE tabla ALTER COLUMN columna BIGINT NOT NULL");
           verifyTranslationsIsAsExpected();
         });
