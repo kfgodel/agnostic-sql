@@ -52,8 +52,8 @@ public class FreemarkerEngine implements TemplateEngine {
 
   private TemplateLoader[] createLoadersFrom(Nary<String> templateLocations) {
     return templateLocations
-      .map(templateLocation -> "/" + templateLocation + "/")
-      .map(classpathLocation -> new ClassTemplateLoader(getClass(), classpathLocation))
+      .mapNary(templateLocation -> "/" + templateLocation + "/")
+      .mapNary(classpathLocation -> new ClassTemplateLoader(getClass(), classpathLocation))
       .collect(Collectors.toList()).toArray(new TemplateLoader[0]);
   }
 
