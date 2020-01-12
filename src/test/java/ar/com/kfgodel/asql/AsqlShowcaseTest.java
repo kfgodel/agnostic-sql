@@ -99,12 +99,6 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
 
           assertThat(translated).isEqualTo("ALTER TABLE tableName RENAME previousName TO newName");
         });
-
-        it("is translated to standard sql for postgresql", () -> {
-          String translated = Vendor.postgresql().translate(context().statement());
-
-          assertThat(translated).isEqualTo("ALTER TABLE tableName RENAME previousName TO newName");
-        });
       });
 
       describe("select", () -> {
