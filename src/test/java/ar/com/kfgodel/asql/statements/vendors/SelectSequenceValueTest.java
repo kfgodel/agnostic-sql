@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Esta clase verifica que en los diferentes vendors, el select una secuenca se traduzca correctamente
+ * Esta clase verifica que en los diferentes vendors, el select una secuencia se traduzca correctamente
  * Created by dario.garcia on 19/04/17.
  */
 @RunWith(JavaSpecRunner.class)
@@ -40,6 +40,12 @@ public class SelectSequenceValueTest extends JavaSpec<AsqlTestContext> {
         it("generates a sqlserver specific statement when vendor is sqlserver", () -> {
           context().vendor(Vendor::sqlserver);
           context().expectedTranslation(() -> "NEXT VALUE FOR secuencia");
+          verifyTranslationsIsAsExpected();
+        });
+
+        it("generates an postgresql specific statement when vendor is postgresql", () -> {
+          context().vendor(Vendor::postgresql);
+          context().expectedTranslation(() -> "nextval(secuencia)");
           verifyTranslationsIsAsExpected();
         });
       });

@@ -48,6 +48,14 @@ public class CreationWithNullabilityTest extends JavaSpec<AsqlTestContext> {
             ")");
           verifyTranslationsIsAsExpected();
         });
+
+        it("generates a postgresql specific statement when vendor is postgresql", () -> {
+          context().vendor(Vendor::postgresql);
+          context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
+            "columna BIGINT NULL\n" +
+            ")");
+          verifyTranslationsIsAsExpected();
+        });
       });
 
       describe("for a table creation with a non null column", () -> {
@@ -71,6 +79,14 @@ public class CreationWithNullabilityTest extends JavaSpec<AsqlTestContext> {
 
         it("generates a sqlserver specific statement when vendor is sqlserver", () -> {
           context().vendor(Vendor::sqlserver);
+          context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
+            "columna BIGINT NOT NULL\n" +
+            ")");
+          verifyTranslationsIsAsExpected();
+        });
+
+        it("generates a postgresql specific statement when vendor is postgresql", () -> {
+          context().vendor(Vendor::postgresql);
           context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
             "columna BIGINT NOT NULL\n" +
             ")");

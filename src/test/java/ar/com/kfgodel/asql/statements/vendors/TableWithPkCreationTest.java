@@ -48,6 +48,15 @@ public class TableWithPkCreationTest extends JavaSpec<AsqlTestContext> {
             ")");
           verifyTranslationsIsAsExpected();
         });
+
+        it("generates an postgresql specific statement when vendor is postgresql", () -> {
+          context().vendor(Vendor::postgresql);
+          context().expectedTranslation(() -> "CREATE TABLE tabla (\n" +
+            "columna BIGINT PRIMARY KEY\n" +
+            ")");
+          verifyTranslationsIsAsExpected();
+        });
+
       });
 
     });

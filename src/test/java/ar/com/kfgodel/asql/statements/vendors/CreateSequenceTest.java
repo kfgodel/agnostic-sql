@@ -40,6 +40,12 @@ public class CreateSequenceTest extends JavaSpec<AsqlTestContext> {
           context().expectedTranslation(() -> "CREATE SEQUENCE hibernate_sequence START WITH 20 INCREMENT BY 1");
           verifyTranslationsIsAsExpected();
         });
+
+        it("generates a postgresql specific statement when vendor is postgresql", () -> {
+          context().vendor(Vendor::ansi);
+          context().expectedTranslation(() -> "CREATE SEQUENCE hibernate_sequence START WITH 20 INCREMENT BY 1");
+          verifyTranslationsIsAsExpected();
+        });
       });
 
     });

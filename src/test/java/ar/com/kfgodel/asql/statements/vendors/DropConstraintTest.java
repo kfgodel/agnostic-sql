@@ -41,6 +41,12 @@ public class DropConstraintTest extends JavaSpec<AsqlTestContext> {
           context().expectedTranslation(() -> "ALTER TABLE tabla DROP CONSTRAINT constrenida");
           verifyTranslationsIsAsExpected();
         });
+
+        it("generates a postgresql specific statement when vendor is postgresql", () -> {
+          context().vendor(Vendor::postgresql);
+          context().expectedTranslation(() -> "ALTER TABLE tabla DROP CONSTRAINT constrenida");
+          verifyTranslationsIsAsExpected();
+        });
       });
 
     });

@@ -91,6 +91,31 @@ public class DataTypeTest extends JavaSpec<AsqlTestContext> {
         assertThat(hsqldb.translate(DataType.blob())).isEqualTo("BLOB");
         assertThat(hsqldb.translate(DataType.clob())).isEqualTo("CLOB");
       });
+
+      it("have postgresql translations", () -> {
+        Vendor postgresql = Vendor.postgresql();
+
+        assertThat(postgresql.translate(DataType.bigInteger())).isEqualTo("BIGINT");
+        assertThat(postgresql.translate(DataType.integer())).isEqualTo("INTEGER");
+
+        assertThat(postgresql.translate(DataType.decimal())).isEqualTo("NUMERIC");
+        assertThat(postgresql.translate(DataType.doublenic())).isEqualTo("DOUBLE PRECISION");
+
+        assertThat(postgresql.translate(DataType.shortString())).isEqualTo("VARCHAR(255)");
+        assertThat(postgresql.translate(DataType.largeText())).isEqualTo("TEXT");
+        assertThat(postgresql.translate(DataType.limitedText(1024))).isEqualTo("VARCHAR(1024)");
+
+        assertThat(postgresql.translate(DataType.timestamp())).isEqualTo("TIMESTAMP");
+        assertThat(postgresql.translate(DataType.time())).isEqualTo("TIME");
+        assertThat(postgresql.translate(DataType.date())).isEqualTo("DATE");
+
+        assertThat(postgresql.translate(DataType.pk())).isEqualTo("BIGINT PRIMARY KEY");
+        assertThat(postgresql.translate(DataType.fk())).isEqualTo("BIGINT");
+
+        assertThat(postgresql.translate(DataType.booleanic())).isEqualTo("BOOLEAN");
+        assertThat(postgresql.translate(DataType.blob())).isEqualTo("bytea");
+        assertThat(postgresql.translate(DataType.clob())).isEqualTo("TEXT");
+      });
     });
 
 

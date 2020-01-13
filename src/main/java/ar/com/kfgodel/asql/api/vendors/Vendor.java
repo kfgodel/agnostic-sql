@@ -23,6 +23,10 @@ public interface Vendor {
     return ClasspathTemplatingVendor.create("hsqldb", "ansi");
   }
 
+  static Vendor postgresql() {
+    return ClasspathTemplatingVendor.create("postgresql", "ansi");
+  }
+
   /**
    * Translates the given agnostic statement into this vendor specific sql
    *
