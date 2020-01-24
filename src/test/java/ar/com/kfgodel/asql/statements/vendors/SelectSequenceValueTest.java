@@ -45,7 +45,7 @@ public class SelectSequenceValueTest extends JavaSpec<AsqlTestContext> {
 
         it("generates an postgresql specific statement when vendor is postgresql", () -> {
           context().vendor(Vendor::postgresql);
-          context().expectedTranslation(() -> "nextval(secuencia)");
+          context().expectedTranslation(() -> "nextval('secuencia')");
           verifyTranslationsIsAsExpected();
         });
       });
