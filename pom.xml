@@ -11,7 +11,7 @@
 
   <groupId>info.kfgodel</groupId>
   <artifactId>agnostic-sql</artifactId>
-  <version>0.1.20</version>
+  <version>0.1.21-SNAPSHOT</version>
 
   <name>AgnosticSql</name>
   <description>Java project to generate sql for different vendors using an unified DSL</description>
