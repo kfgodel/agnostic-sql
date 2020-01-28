@@ -32,6 +32,14 @@ public class ChangeColumnModelTest extends JavaSpec<AsqlTestContext> {
         assertThat(translatedSql).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INTEGER");
       });
 
+      it("can be translated to a vendor specific statement", () -> {
+        VendorInterpreter interpreter = Vendor.postgresql().getInterpreter();
+
+        String translatedSql = interpreter.translate(context().model());
+
+        assertThat(translatedSql).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName TYPE INTEGER USING (columnName::integer)");
+      });
+
     });
 
   }

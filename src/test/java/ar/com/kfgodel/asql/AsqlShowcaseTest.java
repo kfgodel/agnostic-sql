@@ -125,13 +125,16 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
       });
 
       describe("alter column", () -> {
+        ChangeColumnStatement statement = asql.alter("tableName").changing(asql.column("columnName").typed(DataType.integer()));
+
         it("is basically ansi for all vendors", () -> {
-          ChangeColumnStatement statement = asql.alter("tableName").changing(asql.column("columnName").typed(DataType.integer()));
 
           assertThat(Vendor.ansi().translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INTEGER");
           assertThat(Vendor.sqlserver().translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INT");
           assertThat(Vendor.hsqldb().translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INTEGER");
-          assertThat(Vendor.postgresql().translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INTEGER");
+        });
+        it("for postgresql", () -> {
+          assertThat(Vendor.postgresql().translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName TYPE INTEGER USING (columnName::integer)");
         });
       });
 
