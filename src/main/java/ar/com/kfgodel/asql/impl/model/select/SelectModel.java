@@ -13,6 +13,7 @@ public class SelectModel implements AgnosticModel {
   private List<AgnosticModel> projections;
   private FromModel fromClause;
   private WhereModel whereClause;
+  private Integer limit;
 
   public WhereModel getWhereClause() {
     return whereClause;
@@ -42,4 +43,11 @@ public class SelectModel implements AgnosticModel {
     return selectModel;
   }
 
+  public void setLimit(int limit) {
+    this.limit = limit;
+  }
+
+  public Integer getLimit() {
+    return limit;
+  }
 }

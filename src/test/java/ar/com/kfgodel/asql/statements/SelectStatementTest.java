@@ -123,5 +123,102 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
 
       });
     });
+
+    describe("limit clause", () -> {
+
+      describe("simple select", () -> {
+        AgnosticStatement select = asql.select(asql.column("column1")).from("table1").limit(1);
+
+        it("has a top clause in the beginning in ansi", () -> {
+          context().vendor(Vendor::ansi);
+
+          String translated = context().vendor().translate(select);
+
+          assertThat(translated).isEqualTo("SELECT TOP 1 column1 FROM table1");
+        });
+
+        it("has a top clause in the end of the statement in postgreslq", () -> {
+          context().vendor(Vendor::postgresql);
+
+          String translated = context().vendor().translate(select);
+
+          assertThat(translated).isEqualTo("SELECT column1 FROM table1 limit 1");
+        });
+      });
+
+      describe("select with where", () -> {
+        AgnosticStatement select = asql.select(asql.column("column1"))
+          .from("table1")
+          .where(asql.column("column1").isEqualTo(2))
+          .limit(1);
+
+        it("has a top clause in the beginning in ansi", () -> {
+          context().vendor(Vendor::ansi);
+
+          String translated = context().vendor().translate(select);
+
+          assertThat(translated).isEqualTo("SELECT TOP 1 column1 FROM table1 WHERE column1 = 2");
+        });
+
+        it("has a top clause in the end of the statement in postgreslq", () -> {
+          context().vendor(Vendor::postgresql);
+
+          String translated = context().vendor().translate(select);
+
+          assertThat(translated).isEqualTo("SELECT column1 FROM table1 WHERE column1 = 2 limit 1");
+        });
+
+      });
+
+      describe("projection select", () -> {
+        AgnosticStatement select = asql.select(asql.column("column1"), asql.column("column2")).from("table1").limit(1);
+
+        it("has a top clause in the beginning in ansi", () -> {
+          context().vendor(Vendor::ansi);
+
+          String translated = context().vendor().translate(select);
+
+          assertThat(translated).isEqualTo("SELECT TOP 1 column1, column2 FROM table1");
+        });
+
+        it("has a top clause in the end of the statement in postgreslq", () -> {
+          context().vendor(Vendor::postgresql);
+
+          String translated = context().vendor().translate(select);
+
+          assertThat(translated).isEqualTo("SELECT column1, column2 FROM table1 limit 1");
+        });
+      });
+
+      describe("limit inside subquery", () -> {
+        AgnosticStatement select = asql.update("tabla1").setting(
+          asql.column("columna1").to(
+            asql.select("columna2")
+              .from("tabla2")
+              .where(asql.column("columna2")
+                .isEqualTo(asql.column("columna1")))
+              .limit(1)
+          ));
+
+        it("in ansi", () -> {
+          context().vendor(Vendor::ansi);
+
+          String translated = context().vendor().translate(select);
+
+          assertThat(translated)
+            .isEqualTo("UPDATE tabla1 SET columna1 = ( SELECT TOP 1 'columna2' FROM tabla2 WHERE columna2 = columna1 )");
+        });
+
+        it("in postgresql", () -> {
+          context().vendor(Vendor::postgresql);
+
+          String translated = context().vendor().translate(select);
+
+          assertThat(translated)
+            .isEqualTo("UPDATE tabla1 SET columna1 = ( SELECT 'columna2' FROM tabla2 WHERE columna2 = columna1 limit 1 )");
+        });
+
+      });
+    });
   }
 }
