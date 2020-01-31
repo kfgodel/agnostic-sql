@@ -9,20 +9,17 @@ import ar.com.kfgodel.asql.impl.model.AgnosticModel;
  */
 public class BooleanReference implements QueryCondition {
 
-  private boolean value;
-
-  public boolean isValue() {
-    return value;
-  }
+  private BooleanModel value;
 
   @Override
   public AgnosticModel parseModel() {
-    return SymbolModel.create("/references/_" + value + ".ftl");
+//    return SymbolModel.create("/references/_" + value + ".ftl");
+    return value;
   }
 
   public static BooleanReference create(boolean value) {
     BooleanReference reference = new BooleanReference();
-    reference.value = value;
+    reference.value = BooleanModel.create(value);
     return reference;
   }
 
