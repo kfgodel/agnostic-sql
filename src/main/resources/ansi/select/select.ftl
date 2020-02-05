@@ -2,7 +2,7 @@
 <@compress single_line=true>
 SELECT
 <#if model.limit??>
-    ${" "} TOP ${model.limit}
+    ${" "} TOP ${model.limit} ${" "}
 </#if>
     <#list model.projections as projection><@renderAsModel model=projection/><#sep>, </#sep></#list>
 <#if model.fromClause??>

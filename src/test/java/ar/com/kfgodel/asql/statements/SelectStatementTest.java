@@ -200,7 +200,7 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
               .limit(1)
           ));
 
-        it("in ansi", () -> {
+        it("in ansi uses top", () -> {
           context().vendor(Vendor::ansi);
 
           String translated = context().vendor().translate(select);
@@ -209,7 +209,7 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
             .isEqualTo("UPDATE tabla1 SET columna1 = ( SELECT TOP 1 'columna2' FROM tabla2 WHERE columna2 = columna1 )");
         });
 
-        it("in postgresql", () -> {
+        it("in postgresql uses limit", () -> {
           context().vendor(Vendor::postgresql);
 
           String translated = context().vendor().translate(select);

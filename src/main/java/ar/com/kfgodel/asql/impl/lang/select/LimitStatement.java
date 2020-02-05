@@ -1,6 +1,7 @@
 package ar.com.kfgodel.asql.impl.lang.select;
 
 import ar.com.kfgodel.asql.api.AgnosticStatement;
+import ar.com.kfgodel.asql.api.AsqlException;
 import ar.com.kfgodel.asql.api.select.SelectStatement;
 import ar.com.kfgodel.asql.impl.model.select.SelectModel;
 
@@ -20,7 +21,7 @@ public class LimitStatement implements SelectStatement {
 
   @Override
   public AgnosticStatement limit(int limit) {
-    throw new RuntimeException();
+    throw new AsqlException("No se pueden poner dos limit en una misma consulta.");
   }
 
   @Override

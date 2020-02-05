@@ -24,7 +24,7 @@ public class ColumnAdditionTest extends JavaSpec<AsqlTestContext> {
       context().translated(() -> context().vendor().translate(context().statement()));
 
       describe("for a colunm addition ", () -> {
-        context().statement(() -> asql.alter("tabla").adding(asql.column("columna").typed(DataType.booleanic()).defaultedTo(BooleanReference.create(false)).nonNullable()));
+        context().statement(() -> asql.alter("tabla").adding(asql.column("columna").typed(DataType.booleanic()).defaultedTo(false).nonNullable()));
 
         it("generates a standard statement when vendor is ansi", () -> {
           context().vendor(Vendor::ansi);
