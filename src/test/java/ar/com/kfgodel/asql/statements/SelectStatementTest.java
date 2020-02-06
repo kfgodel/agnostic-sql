@@ -129,12 +129,12 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
       describe("simple select", () -> {
         AgnosticStatement select = asql.select(asql.column("column1")).from("table1").limit(1);
 
-        it("has a top clause in the beginning in ansi", () -> {
+        it("in ansi, the limit clause is in the end", () -> {
           context().vendor(Vendor::ansi);
 
           String translated = context().vendor().translate(select);
 
-          assertThat(translated).isEqualTo("SELECT TOP 1 column1 FROM table1");
+          assertThat(translated).isEqualTo("SELECT column1 FROM table1 FETCH FIRST 1 ROWS ONLY");
         });
 
         it("has a top clause in the end of the statement in postgreslq", () -> {
@@ -152,8 +152,16 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
           .where(asql.column("column1").isEqualTo(2))
           .limit(1);
 
-        it("has a top clause in the beginning in ansi", () -> {
+        it("in ansi, the limit clause is in the end", () -> {
           context().vendor(Vendor::ansi);
+
+          String translated = context().vendor().translate(select);
+
+          assertThat(translated).isEqualTo("SELECT column1 FROM table1 WHERE column1 = 2 FETCH FIRST 1 ROWS ONLY");
+        });
+
+        it("in sqlserver, the limit clause is in the beginning and is TOP", () -> {
+          context().vendor(Vendor::sqlserver);
 
           String translated = context().vendor().translate(select);
 
@@ -175,6 +183,14 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
 
         it("has a top clause in the beginning in ansi", () -> {
           context().vendor(Vendor::ansi);
+
+          String translated = context().vendor().translate(select);
+
+          assertThat(translated).isEqualTo("SELECT column1, column2 FROM table1 FETCH FIRST 1 ROWS ONLY");
+        });
+
+        it("in sqlserver, the limit clause is in the beginning and is TOP", () -> {
+          context().vendor(Vendor::sqlserver);
 
           String translated = context().vendor().translate(select);
 
@@ -200,8 +216,17 @@ public class SelectStatementTest extends JavaSpec<AsqlTestContext> {
               .limit(1)
           ));
 
-        it("in ansi uses top", () -> {
+        it("ansi syntax is fetch a number rows", () -> {
           context().vendor(Vendor::ansi);
+
+          String translated = context().vendor().translate(select);
+
+          assertThat(translated)
+            .isEqualTo("UPDATE tabla1 SET columna1 = ( SELECT 'columna2' FROM tabla2 WHERE columna2 = columna1 FETCH FIRST 1 ROWS ONLY )");
+        });
+
+        it("in sqlserver, the limit clause is in the beginning and is TOP", () -> {
+          context().vendor(Vendor::sqlserver);
 
           String translated = context().vendor().translate(select);
 
