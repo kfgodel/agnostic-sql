@@ -41,7 +41,7 @@ public class DefaultedColumnDeclaration implements ColumnDeclaration {
   public static DefaultedColumnDeclaration create(ColumnDeclaration previousNode, Object value) {
     DefaultedColumnDeclaration declaration = new DefaultedColumnDeclaration();
     declaration.previousNode = previousNode;
-    declaration.defaultValue = Internal.literal(value);
+    declaration.defaultValue = Internal.asConstruct(value);
     return declaration;
   }
 

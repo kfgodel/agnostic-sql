@@ -2,7 +2,6 @@ package ar.com.kfgodel.asql;
 
 import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.Asql;
-import ar.com.kfgodel.asql.api.alter.ChangeColumnStatement;
 import ar.com.kfgodel.asql.api.alter.RemoveColumnStatement;
 import ar.com.kfgodel.asql.api.delete.RestrictedDeleteStatement;
 import ar.com.kfgodel.asql.api.drop.DropStatement;
@@ -125,19 +124,36 @@ public class AsqlShowcaseTest extends JavaSpec<AsqlTestContext> {
       });
 
       describe("alter column", () -> {
-        it("is basically ansi for all vendors", () -> {
-          ChangeColumnStatement statement = asql.alter("tableName").changing(asql.column("columnName").typed(DataType.integer()));
+        context().statement(()-> asql.alter("tableName").changing(asql.column("columnName").typed(DataType.integer())));
 
-          assertThat(Vendor.ansi().translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INTEGER");
-          assertThat(Vendor.sqlserver().translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INT");
-          assertThat(Vendor.hsqldb().translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INTEGER");
-          assertThat(Vendor.postgresql().translate(statement)).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INTEGER");
+        describe("when translated", () -> {
+          context().translated(()-> context().vendor().translate(context().statement()));
+
+          it("is basically ansi when ansi vendor is used", () -> {
+            context().vendor(Vendor::ansi);
+            assertThat(context().translated()).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INTEGER");
+          });
+
+          it("is close to ansi for sql server ", () -> {
+            context().vendor(Vendor::sqlserver);
+            assertThat(context().translated()).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INT");
+          });
+
+          it("is close to ansi for hsqldb", () -> {
+            context().vendor(Vendor::hsqldb);
+            assertThat(context().translated()).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INTEGER");
+          });
+
+          it("includes data casting for postgresql", () -> {
+            context().vendor(Vendor::postgresql);
+            assertThat(context().translated()).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName TYPE INTEGER USING (columnName::integer)");
+          });
         });
       });
 
       describe("create table", () -> {
 
-        context().vendor(() -> Vendor.ansi());
+        context().vendor(Vendor::ansi);
 
         context().statement(() -> asql.createTable("tableName")
           .withIdPk()

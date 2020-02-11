@@ -4,6 +4,7 @@ import ar.com.kfgodel.asql.AsqlTestContext;
 import ar.com.kfgodel.asql.api.types.DataType;
 import ar.com.kfgodel.asql.api.vendors.Vendor;
 import ar.com.kfgodel.asql.impl.AsqlBuilder;
+import ar.com.kfgodel.asql.impl.model.references.BooleanReference;
 import info.kfgodel.jspek.api.JavaSpec;
 import info.kfgodel.jspek.api.JavaSpecRunner;
 import org.junit.runner.RunWith;
@@ -27,25 +28,25 @@ public class ColumnAdditionTest extends JavaSpec<AsqlTestContext> {
 
         it("generates a standard statement when vendor is ansi", () -> {
           context().vendor(Vendor::ansi);
-          context().expectedTranslation(() -> "ALTER TABLE tabla ADD columna BOOLEAN NOT NULL DEFAULT false");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ADD columna BOOLEAN NOT NULL DEFAULT FALSE");
           verifyTranslationsIsAsExpected();
         });
 
         it("generates an hsqldb specific statement when vendor is hsqldb", () -> {
           context().vendor(Vendor::hsqldb);
-          context().expectedTranslation(() -> "ALTER TABLE tabla ADD columna BOOLEAN DEFAULT false NOT NULL");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ADD columna BOOLEAN DEFAULT FALSE NOT NULL");
           verifyTranslationsIsAsExpected();
         });
 
         it("generates a sqlserver specific statement when vendor is sqlserver", () -> {
           context().vendor(Vendor::sqlserver);
-          context().expectedTranslation(() -> "ALTER TABLE tabla ADD columna BIT NOT NULL DEFAULT false");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ADD columna BIT NOT NULL DEFAULT FALSE");
           verifyTranslationsIsAsExpected();
         });
 
         it("generates a postgresql specific statement when vendor is postgresql", () -> {
           context().vendor(Vendor::postgresql);
-          context().expectedTranslation(() -> "ALTER TABLE tabla ADD columna BOOLEAN NOT NULL DEFAULT false");
+          context().expectedTranslation(() -> "ALTER TABLE tabla ADD columna BOOLEAN NOT NULL DEFAULT FALSE");
           verifyTranslationsIsAsExpected();
         });
       });

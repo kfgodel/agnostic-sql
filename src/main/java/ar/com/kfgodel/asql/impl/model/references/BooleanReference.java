@@ -11,10 +11,6 @@ public class BooleanReference implements QueryCondition {
 
   private boolean value;
 
-  public boolean isValue() {
-    return value;
-  }
-
   @Override
   public AgnosticModel parseModel() {
     return SymbolModel.create("/references/_" + value + ".ftl");

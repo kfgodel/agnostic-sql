@@ -25,5 +25,4 @@ public class RestrictedSelectImpl implements RestrictedSelect {
     select.condition = condition;
     return select;
   }
-
 }

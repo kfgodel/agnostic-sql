@@ -9,6 +9,6 @@ ${" "}<@renderAsModel model=model.fromClause />
 ${" "}<@renderAsModel model=model.whereClause/>
 </#if>
 <#if model.limit??>
-${" "}FETCH FIRST ${model.limit} ROWS ONLY
+${" "}LIMIT ${model.limit}
 </#if>
 </@compress>

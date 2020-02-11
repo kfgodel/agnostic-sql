@@ -24,12 +24,20 @@ public class ChangeColumnModelTest extends JavaSpec<AsqlTestContext> {
     describe("an agnostic change column type model", () -> {
       context().model(() -> ChangeColumnModel.create(TableReferenceModel.create("tableName"), ColumnDeclarationModel.create(ColumnReferenceModel.create("columnName"), DataType.integer().parseModel())));
 
-      it("can be translated to a vendor specific statement", () -> {
+      it("can be translated in ansi to a vendor specific statement", () -> {
         VendorInterpreter interpreter = Vendor.ansi().getInterpreter();
 
         String translatedSql = interpreter.translate(context().model());
 
         assertThat(translatedSql).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName INTEGER");
+      });
+
+      it("can be translated in postgresql to a vendor specific statement", () -> {
+        VendorInterpreter interpreter = Vendor.postgresql().getInterpreter();
+
+        String translatedSql = interpreter.translate(context().model());
+
+        assertThat(translatedSql).isEqualTo("ALTER TABLE tableName ALTER COLUMN columnName TYPE INTEGER USING (columnName::integer)");
       });
 
     });
