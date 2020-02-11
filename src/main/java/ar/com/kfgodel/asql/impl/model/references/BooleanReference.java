@@ -13,7 +13,7 @@ public class BooleanReference implements QueryCondition {
 
   @Override
   public AgnosticModel parseModel() {
-    return BooleanModel.create(value);
+    return SymbolModel.create("/references/_" + value + ".ftl");
   }
 
   public static BooleanReference create(boolean value) {

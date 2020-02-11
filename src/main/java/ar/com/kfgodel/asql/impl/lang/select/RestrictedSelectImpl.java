@@ -1,7 +1,6 @@
 package ar.com.kfgodel.asql.impl.lang.select;
 
 import ar.com.kfgodel.asql.api.AgnosticConstruct;
-import ar.com.kfgodel.asql.api.AgnosticStatement;
 import ar.com.kfgodel.asql.api.select.RestrictedSelect;
 import ar.com.kfgodel.asql.impl.model.select.SelectModel;
 

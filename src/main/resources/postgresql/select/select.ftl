@@ -8,6 +8,6 @@ ${" "}<@renderAsModel model=model.fromClause />
 ${" "}<@renderAsModel model=model.whereClause/>
 </#if>
 <#if model.limit??>
-    ${" "} limit ${model.limit}
+${" "}LIMIT ${model.limit}
 </#if>
 </@compress>
